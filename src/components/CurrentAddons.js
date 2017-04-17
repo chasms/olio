@@ -38,6 +38,7 @@ class CurrentAddons extends React.Component {
           zIndex={this.props.zIndex}
           >
             <span className="box" id={'img-' + image.id}>
+              <div className="img-mask"></div>
               <img className='img' src={image.url} />
             </span>
           </Rnd>
