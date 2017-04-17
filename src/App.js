@@ -4,6 +4,9 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { addAddon, getAddons } from './actions/addons'
 import CurrentAddons from './components/CurrentAddons'
+import Photo from './components/Photo'
+
+
 
 
 class App extends Component {
@@ -33,6 +36,7 @@ class App extends Component {
           <button onClick={this.handleClick}>Add Mustache</button>
           <button onClick={this.handleSteven}>STEVEN ME</button>
           <CurrentAddons zIndex={this.state.zIndex} />
+          <Photo />
         </div>
       );
     }
