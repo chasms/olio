@@ -3,16 +3,8 @@ import Rnd from 'react-rnd';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { addAddon, getAddons } from './actions/addons'
-const style = {
-  textAlign: 'center',
-  padding: '40px',
-  border: 'solid 3px #fff',
-  borderRadius: '5px',
-  color: '#fff',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-};
+import CurrentAddons from './components/CurrentAddons'
+
 
 class App extends Component {
   constructor(props) {
@@ -26,30 +18,7 @@ class App extends Component {
   handleClick() {
     this.props.addAddon(this.props.allAddons[Math.floor(Math.random() * this.props.allAddons.length)])
   }
-  renderAddons() {
-    return this.props.usedAddons.map((image, index) => {
-      return (
-        <Rnd
-          ref={c => { this.rnd = c; }}
-          initial={{
-            x: window.innerWidth / 2 - 200,
-            y: window.innerHeight / 2 - 80,
-            width: image.w,
-            height: image.h,
-          }}
-          style={style}
 
-
-          bounds={'parent'}
-          zIndex={this.state.zIndex}
-          >
-            <span className="box" id={'img-' + index}>
-              <img className='img' src={image.url} />
-            </span>
-          </Rnd>
-        )
-      })
-    }
 
     render() {
       const divStyle = {
@@ -58,7 +27,7 @@ class App extends Component {
       return (
         <div style={divStyle}>
           <button onClick={this.handleClick}>Add Mustache</button>
-          {this.renderAddons()}
+          <CurrentAddons zIndex={this.state.zIndex} />
         </div>
       );
     }
