@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux'
-import Addon from './Addon.js'
-import AddonLibrary from './AddonLibrary'
+import Addon from './AddonReducer'
+import AddonLibrary from './AddonLibraryReducer'
+import Drawers from './DrawersReducer'
 
 
 export default combineReducers({
   Addon,
-  AddonLibrary
+  AddonLibrary,
+  Drawers
 })

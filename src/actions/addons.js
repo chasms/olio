@@ -1,6 +1,5 @@
 import axios from 'axios'
 
-
 export const getAddons = () => {
   return (dispatch) => {
     axios({
