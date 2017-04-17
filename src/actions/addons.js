@@ -1,12 +1,18 @@
 import axios from 'axios'
 
-export const addAddon = (id) => ({
+
+export const getAddons = () => {
   return (dispatch) => {
     axios({
       method:'get',
-      url:'http://localhost:3001/addons/' + id,
+      url:'http://localhost:3001/addons/'
     }).then(resp => {
-      dispatch({type: 'ADD_ADDON', payload: resp.data})
+      dispatch({type: 'GET_ADDONS', payload: resp.data})
     })
   }
+}
+
+export const addAddon = (addon) => ({
+  type: 'ADD_ADDON',
+  payload: addon
 })
