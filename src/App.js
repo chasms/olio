@@ -3,6 +3,8 @@ import Rnd from 'react-rnd';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { addAddon, getAddons } from './actions/addons'
+import Webcam from "../components/webcam"
+
 const style = {
   textAlign: 'center',
   padding: '40px',
