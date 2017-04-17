@@ -9,6 +9,7 @@
     "react-redux": "^5.0.4",
     "react-rnd": "^4.2.2",
     "react-toolbox": "^2.0.0-beta.8",
+    "react-webcam": "0.0.14",
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0"
   },
