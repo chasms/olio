@@ -15,7 +15,9 @@
         min-height: 100%;
         margin:0;
         padding:0;
+
         background: green;
+
         background-size: cover;
         overflow: hidden;
    }
@@ -30,7 +32,7 @@
        width: 100%;
        font-family: 'Pacifico', cursive;
        font-size: 32px;
-
+       z-index: 101;
 
    }
    .img {
@@ -39,17 +41,27 @@
      width: 100%;
    }
 
+
    .photobox {
     position: fixed;
     top: 0;
    }
    
+
+   .img-mask {
+
+     position: absolute;
+     height: 90%;
+     width: 90%;
+     z-index: 100;
+   }
+
   </style>
 </head>
 
 <body>
     <div id="content"></div>
-   
+
   <script src="dist/bundle.js"></script>
 </body>
 
