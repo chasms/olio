@@ -3,6 +3,6 @@ import Webcam from 'react-user-media';
 
 export default class Webcam extends React.Component {
   render() {
-    return <Webcam ref="webcam"/>;
+    return <Webcam ref="webcam"git p/>;
   }
 }

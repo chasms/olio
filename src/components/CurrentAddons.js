@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import Rnd from 'react-rnd';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { addAddon, getAddons } from './actions/addons'
-import Webcam from "../components/webcam"
+import { addAddon, getAddons } from '../actions/addons'
 
 const style = {
   textAlign: 'center',
@@ -16,20 +15,15 @@ const style = {
   justifyContent: 'center',
 };
 
-class App extends Component {
+
+class CurrentAddons extends React.Component {
+
   constructor(props) {
-    super(props);
-    this.state = { zIndex: 99, images: [0, 1, 2, 3, 4]};
-    setTimeout(() => this.setState({ zIndex: 1000 }), 5000);
-    this.handleClick = this.handleClick.bind(this)
-    this.props.getAddons()
+    super(props)
   }
 
-  handleClick() {
-    this.props.addAddon(this.props.allAddons[Math.floor(Math.random() * this.props.allAddons.length)])
-  }
   renderAddons() {
-    return this.props.usedAddons.map((image, index) => {
+    return this.props.usedAddons.map((image) => {
       return (
         <Rnd
           ref={c => { this.rnd = c; }}
@@ -40,12 +34,10 @@ class App extends Component {
             height: image.h,
           }}
           style={style}
-
-
           bounds={'parent'}
-          zIndex={this.state.zIndex}
+          zIndex={this.props.zIndex}
           >
-            <span className="box" id={'img-' + index}>
+            <span className="box" id={'img-' + image.id}>
               <img className='img' src={image.url} />
             </span>
           </Rnd>
@@ -54,15 +46,11 @@ class App extends Component {
     }
 
     render() {
-      const divStyle = {
-        height: '1000px'
-      }
       return (
-        <div style={divStyle}>
-          <button onClick={this.handleClick}>Add Mustache</button>
+        <div style={{height: '1000px'}}>
           {this.renderAddons()}
         </div>
-      );
+      )
     }
   }
 
@@ -82,4 +70,4 @@ class App extends Component {
 
 
 
-  export default connect(mapStateToProps, mapDispatchToProps)(App)
+  export default connect(mapStateToProps, mapDispatchToProps)(CurrentAddons)
