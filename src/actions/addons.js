@@ -1,4 +1,18 @@
-export const addAddon = () => ({
+import axios from 'axios'
+
+
+export const getAddons = () => {
+  return (dispatch) => {
+    axios({
+      method:'get',
+      url:'http://localhost:3001/addons/'
+    }).then(resp => {
+      dispatch({type: 'GET_ADDONS', payload: resp.data})
+    })
+  }
+}
+
+export const addAddon = (addon) => ({
   type: 'ADD_ADDON',
-  payload: {x: 0, y: 0, w: 200, h: 150, url: 'https://vignette2.wikia.nocookie.net/iiiiiii/images/9/92/Mustache.svg'}
+  payload: addon
 })
