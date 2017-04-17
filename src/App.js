@@ -12,10 +12,11 @@ import Photo from './components/Photo'
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { zIndex: 99, images: [0, 1, 2, 3, 4]};
+    this.state = { zIndex: 99, webcamActive: false};
     setTimeout(() => this.setState({ zIndex: 1000 }), 5000);
     this.handleClick = this.handleClick.bind(this)
     this.handleSteven = this.handleSteven.bind(this)
+    this.toggleWebcam = this.toggleWebcam.bind(this)
     this.props.getAddons()
   }
 
@@ -24,6 +25,12 @@ class App extends Component {
   }
   handleSteven() {
     this.props.addAddon(this.props.allAddons[12])
+  }
+
+  toggleWebcam(){
+    this.setState({
+      webcamActive: !this.state.webcamActive
+    })
   }
 
 
@@ -35,8 +42,10 @@ class App extends Component {
         <div style={divStyle}>
           <button onClick={this.handleClick}>Add Mustache</button>
           <button onClick={this.handleSteven}>STEVEN ME</button>
+          <button onClick={this.toggleWebcam}>WEBCAM ON OR OFF</button>
           <CurrentAddons zIndex={this.state.zIndex} />
-          <Photo />
+
+          {this.state.webcamActive ? <Photo /> : null}
         </div>
       );
     }
