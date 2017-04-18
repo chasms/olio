@@ -6,20 +6,37 @@ import { getDrawers } from '../actions/drawers'
 import Drawer from './Drawer'
 
 class Drawers extends React.Component {
-  componentWillMount() {
 
+  constructor() {
+    super()
+    this.handleDrawer = this.handleDrawer.bind(this)
+  }
+
+  handleDrawer(event) {
+    event.preventDefault()
+    debugger
+
+  }
+
+  componentWillMount() {
+    this.props.getDrawers()
   }
 
   render() {
     return (
       <div className="drawers">
-        {this.props.drawers.map((drawer) => {
-          <Drawer key={drawer.id} id={drawer.name + 'drawer'} drawer={drawer}/>
+        {this.props.drawers.map( drawer => {
+          return<div className="drawer-wrapper">
+              <a className="drawer-handle" id={'drawer-handle-' + drawer.id} href="#"
+                onClick={this.handleDrawer}>
+                  {drawer.name}
+              </a>
+              <Drawer key={drawer.id} id={drawer.name + '-drawer'} drawer={drawer}/>
+          </div>
         })}
       </div>
     )
   }
-
 }
 
 const mapStateToProps = (state) => {

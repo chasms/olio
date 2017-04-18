@@ -39,10 +39,10 @@ class App extends Component {
   render() {
     return (
       <div className="workspace">
-        <button onClick={this.handleClick}>Add Mustache</button>
+        {/* <button onClick={this.handleClick}>Add Mustache</button>
         <button onClick={this.handleSteven}>STEVEN ME</button>
         <button onClick={this.toggleWebcam}>WEBCAM ON OR OFF</button>
-        <button onClick={this.handleEmoji}>Add Emoji</button>
+        <button onClick={this.handleEmoji}>Add Emoji</button> */}
         <CurrentAddons zIndex={this.state.zIndex} />
         <Drawers />
         {this.state.webcamActive ? <Photo /> : null}
