@@ -7,15 +7,14 @@ import DrawerItem from './DrawerItem'
 
 class Drawer extends React.Component {
 
-  componentWillMount() {
-    debugger
-    this.props.getAddonsByCategory(this.props.drawer.name)
-  }
-
   renderDrawerItems() {
-    return this.props.drawerItems.map(item => {
-      return <DrawerItem key={item.id} item={item}/>
-    })
+    if (this.props.library.length === 0) {
+      return <p className={"loading"}>Loading...</p>
+    } else {
+      return this.props.library[this.props.drawer.id - 1].addons.map(item => {
+        return <DrawerItem key={item.id} item={item}/>
+      })
+    }
   }
 
   render() {
@@ -29,7 +28,7 @@ class Drawer extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    drawerItems: state.AddonLibrary
+    library: state.AddonLibrary
   }
 }
 

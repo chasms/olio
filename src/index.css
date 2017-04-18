@@ -42,7 +42,6 @@ body {
   font-family: 'Pacifico', cursive;
   font-size: 32px;
   z-index: 101;
-
 }
 .rnd {
   text-align: center;
@@ -130,6 +129,7 @@ body {
   position: absolute;
   height: 250px;
   width: 100%;
+  padding: 15px;
   overflow-y: scroll;
   z-index: 999;
 }
@@ -138,4 +138,7 @@ body {
 }
 .inactive-drawer {
   z-index: 999;
+}
+.drawer-item {
+  
 }

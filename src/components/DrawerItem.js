@@ -8,7 +8,8 @@ class DrawerItem extends React.Component {
 
   render() {
     return (
-      <div className="stuff">
+      <div className="drawer-item">
+        1
       </div>
     )
   }
