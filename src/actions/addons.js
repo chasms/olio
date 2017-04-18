@@ -20,3 +20,8 @@ export const removeAddon = (id) => ({
   type: 'REMOVE_ADDON',
   payload: {id: id}
 })
+
+export const saveAddonLocation = (id, coordinates) => ({
+  type: 'STORE_LOCATION',
+  payload: { id, coordinates }
+})
