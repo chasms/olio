@@ -12,6 +12,11 @@ body {
   background-size: cover;
   overflow: hidden;
 }
+.btn-bar {
+  width: 200px;
+  position: absolute;
+  right: 0;
+}
 .workspace {
   height: 100%;
 }
