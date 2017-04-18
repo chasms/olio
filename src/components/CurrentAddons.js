@@ -107,7 +107,7 @@ class CurrentAddons extends React.Component {
 
   renderAddons() {
 
-    return this.props.usedAddons.map((image) => {
+    return this.props.usedAddons.map((image, index) => {
       let active = ''
       this.state.activeId === image.id ? active = 'active-addon' : null
 
@@ -118,7 +118,7 @@ class CurrentAddons extends React.Component {
           initial={{x: image.x, y: image.y, width: image.w, height: image.h}}
           className='rnd'
           bounds={'parent'}
-          zIndex={6000}>
+          >
             <span className="box"
               onMouseDown={this.handleActive.bind(null, image.id)}
               onMouseOut={this.handleMouseUp.bind(null, image.id)}>
@@ -153,7 +153,7 @@ class CurrentAddons extends React.Component {
                   </Textarea>
                   <button onClick={this.handleTextDelete.bind(null, text.id)} style={deleteStyle}>[x]</button>
                 </div>
-                
+
           </Draggable>
           )
         })

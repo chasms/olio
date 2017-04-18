@@ -22,17 +22,18 @@ class App extends React.Component {
     this.toggleWebcam = this.toggleWebcam.bind(this)
     this.handleEmoji = this.handleEmoji.bind(this)
     this.handleText = this.handleText.bind(this)
+    this.handleToggle = this.handleToggle.bind(this)
     this.props.getAddons()
   }
 
   handleClick() {
-    this.props.addAddon(this.props.allAddons[Math.floor(Math.random() * this.props.allAddons.length - 1)])
+    this.props.addAddon(this.props.addonLibrary[0].addons[Math.floor(Math.random() * this.props.addonLibrary[0].addons.length - 1)])
   }
   handleSteven() {
-    this.props.addAddon(this.props.allAddons[12])
+    this.props.addAddon(this.props.addonLibrary[2].addons[0])
   }
   handleEmoji() {
-    this.props.addAddon(this.props.allAddons[Math.floor(Math.random() * this.props.allAddons.length - 1)])
+    this.props.addAddon(this.props.addonLibrary[1].addons[Math.floor(Math.random() * this.props.addonLibrary[0].addons.length)])
   }
   handleText() {
     this.props.addText()
@@ -41,6 +42,12 @@ class App extends React.Component {
   toggleWebcam(){
     this.setState({
       webcamActive: !this.state.webcamActive
+    })
+  }
+
+  handleToggle() {
+    this.setState({
+      webcamActive: false
     })
   }
 
@@ -59,7 +66,7 @@ class App extends React.Component {
         </div>
         <Drawers />
         <CurrentAddons zIndex={this.state.zIndex} />
-        {this.state.webcamActive ? <Photo /> : null}
+        {this.state.webcamActive ? <Photo handleToggle={this.handleToggle} /> : null}
       </div>
     );
   }
@@ -68,7 +75,7 @@ class App extends React.Component {
 const mapStateToProps = (state) => {
   return {
     usedAddons: state.Addon,
-    allAddons: state.AddonLibrary
+    addonLibrary: state.AddonLibrary
   }
 }
 
