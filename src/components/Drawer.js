@@ -6,23 +6,30 @@ import { getAddonsByCategory } from '../actions/addons'
 import DrawerItem from './DrawerItem'
 
 class Drawer extends React.Component {
-  render() {
-    let draweritems = getAddonsByCategory()
-    return (
-      <div className="drawer">
-        <label>{this.props.drawer.name}</label>
-        {this.props.draweritems.map((item) => {
-          <DrawerItem key={item.id} item={item}/>
-        })}
-      </div>
 
+  componentWillMount() {
+    debugger
+    this.props.getAddonsByCategory(this.props.drawer.name)
+  }
+
+  renderDrawerItems() {
+    return this.props.drawerItems.map(item => {
+      return <DrawerItem key={item.id} item={item}/>
+    })
+  }
+
+  render() {
+    return (
+      <div className={"drawer " + "drawer-" + this.props.drawer.id + ' ' + this.props.active}>
+        {this.renderDrawerItems()}
+      </div>
     )
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    drawers: state.Drawers
+    drawerItems: state.AddonLibrary
   }
 }
 

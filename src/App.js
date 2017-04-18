@@ -51,12 +51,14 @@ class App extends React.Component {
       height: '10000px'
     }
     return (
-      <div style={divStyle}>
-        <button onClick={this.handleClick}>Add Mustache</button>
-        <button onClick={this.handleSteven}>STEVEN ME</button>
-        <button onClick={this.toggleWebcam}>WEBCAM ON OR OFF</button>
-        <button onClick={this.handleEmoji}>Add Emoji</button>
-        <button onClick={this.handleText}>Add Text</button>
+      <div className="workspace">
+        <div className="btn-bar">
+          <button className="btn" onClick={this.handleClick}>Add Mustache</button>
+          <button className="btn" onClick={this.handleSteven}>STEVEN ME</button>
+          <button className="btn" onClick={this.toggleWebcam}>WEBCAM ON OR OFF</button>
+          <button className="btn" onClick={this.handleEmoji}>Add Emoji</button>
+          <button className="btn" onClick={this.handleText}>Add Text</button>
+        </div>
         <CurrentAddons zIndex={this.state.zIndex} />
         {this.state.webcamActive ? <Photo /> : null}
       </div>
