@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-
+import { getDrawers } from '../actions/drawers'
 import { getAddonsByCategory } from '../actions/addons'
 import DrawerItem from './DrawerItem'
 

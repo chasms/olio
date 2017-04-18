@@ -58,6 +58,7 @@ body {
   right: -20px;
   bottom: -20px;
   position: absolute;
+  cursor: 'pointer' !important;
 }
 .img-addon {
   position: inherit;
