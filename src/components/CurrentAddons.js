@@ -4,6 +4,21 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { addAddon, getAddons, removeAddon, saveAddonLocation } from '../actions/addons'
 
+const style = {
+  textAlign: 'center',
+  padding: '0px',
+  border: 'solid 3px #fff',
+  borderRadius: '5px',
+  color: '#fff',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  position: 'fixed',
+  top: 0,
+  left: 0
+
+};
+
 class CurrentAddons extends React.Component {
 
   constructor(props) {
@@ -70,11 +85,42 @@ class CurrentAddons extends React.Component {
         )
       })
     }
+    renderText() {
+      const deleteStyle = {
+        zIndex: 10000000
+      }
+
+      return this.props.usedText.map((text) => {
+
+        return (
+          <Rnd
+            key={text.id}
+            ref={c => { this.rnd = c; }}
+            initial={{
+              x: 0,
+              y: 0,
+              width: text.w,
+              height: text.h,
+            }}
+            style={style}
+            bounds={'parent'}
+            zIndex={1000000}
+            >
+              <span className="textbox" style={{margin: '10px', color: 'red'}}>
+                <div id={text.id} className="outerText" ></div>
+                	HELLO
+              </span>
+              <button onClick={this.handleDelete.bind(null, text.id)} style={deleteStyle}>[x]</button>
+            </Rnd>
+          )
+        })
+      }
 
   render() {
     return (
       <div className="workspace" onDoubleClick={this.handleBlur}>
         {this.renderAddons()}
+        {this.renderText()}
       </div>
     )
   }
@@ -84,7 +130,8 @@ class CurrentAddons extends React.Component {
 const mapStateToProps = (state) => {
   return {
     usedAddons: state.Addon,
-    allAddons: state.AddonLibrary
+    allAddons: state.AddonLibrary,
+    usedText: state.Text
   }
 }
 

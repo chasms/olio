@@ -1,22 +1,31 @@
-import React, { Component } from 'react'
+
+import React from 'react';
+import Rnd from 'react-rnd';
+
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import { addAddon, getAddons } from './actions/addons'
+import { addText } from './actions/texts'
 import CurrentAddons from './components/CurrentAddons'
 import Photo from './components/Photo'
 import Drawers from './components/Drawers'
 
-class App extends Component {
+import CurrentText from './components/CurrentText'
 
+
+
+
+class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { zIndex: 99, webcamActive: false};
+    this.state = { zIndex: 99, webcamActive: false };
     setTimeout(() => this.setState({ zIndex: 1000 }), 5000);
     this.handleClick = this.handleClick.bind(this)
     this.handleSteven = this.handleSteven.bind(this)
     this.toggleWebcam = this.toggleWebcam.bind(this)
     this.handleEmoji = this.handleEmoji.bind(this)
+    this.handleText = this.handleText.bind(this)
     this.props.getAddons()
   }
 
@@ -29,6 +38,9 @@ class App extends Component {
   handleEmoji() {
     this.props.addAddon(this.props.allAddons[Math.floor(Math.random() * this.props.allAddons.length - 1)])
   }
+  handleText() {
+    this.props.addText()
+  }
 
   toggleWebcam(){
     this.setState({
@@ -36,20 +48,25 @@ class App extends Component {
     })
   }
 
+
+
   render() {
+    const divStyle = {
+      height: '10000px'
+    }
     return (
-      <div className="workspace">
+      <div style={divStyle}>
         <button onClick={this.handleClick}>Add Mustache</button>
         <button onClick={this.handleSteven}>STEVEN ME</button>
         <button onClick={this.toggleWebcam}>WEBCAM ON OR OFF</button>
         <button onClick={this.handleEmoji}>Add Emoji</button>
+        <button onClick={this.handleText}>Add Text</button>
         <CurrentAddons zIndex={this.state.zIndex} />
-        <Drawers />
+        <CurrentText zIndex={this.state.zIndex} />
         {this.state.webcamActive ? <Photo /> : null}
       </div>
     );
   }
-
 }
 
 const mapStateToProps = (state) => {
@@ -62,8 +79,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     addAddon: addAddon,
-    getAddons: getAddons
+    getAddons: getAddons,
+    addText: addText
   }, dispatch);
-};
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
