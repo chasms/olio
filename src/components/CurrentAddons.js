@@ -4,18 +4,6 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { addAddon, getAddons, removeAddon, saveAddonLocation } from '../actions/addons'
 
-const style = {
-  textAlign: 'center',
-  padding: '0px',
-  border: 'solid 3px #fff',
-  borderRadius: '5px',
-  color: '#fff',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-};
-
-
 class CurrentAddons extends React.Component {
 
   constructor(props) {
@@ -50,6 +38,7 @@ class CurrentAddons extends React.Component {
             height: image.h,
           }}
           style={style}
+          className='rnd'
           bounds={'parent'}
           zIndex={this.props.zIndex}
           >
@@ -63,31 +52,30 @@ class CurrentAddons extends React.Component {
       })
     }
 
-    render() {
-      return (
-        <div style={{height: '1000px'}}>
-          {this.renderAddons()}
-        </div>
-      )
-    }
+  render() {
+    return (
+      <div style={{height: '1000px'}}>
+        {this.renderAddons()}
+      </div>
+    )
   }
 
-  const mapStateToProps = (state) => {
-    return {
-      usedAddons: state.Addon,
-      allAddons: state.AddonLibrary
-    }
+}
+
+const mapStateToProps = (state) => {
+  return {
+    usedAddons: state.Addon,
+    allAddons: state.AddonLibrary
   }
+}
 
-  const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({
-      addAddon: addAddon,
-      getAddons: getAddons,
-      removeAddon: removeAddon,
-      saveAddonLocation: saveAddonLocation
-    }, dispatch);
-  };
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    addAddon: addAddon,
+    getAddons: getAddons,
+    removeAddon: removeAddon,
+    saveAddonLocation: saveAddonLocation
+  }, dispatch);
+};
 
-
-
-  export default connect(mapStateToProps, mapDispatchToProps)(CurrentAddons)
+export default connect(mapStateToProps, mapDispatchToProps)(CurrentAddons)

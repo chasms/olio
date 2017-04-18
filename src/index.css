@@ -1,4 +1,4 @@
-html, body, #content{
+html, body, #content {
   min-height: 100%;
   height: 100%;
 }
@@ -12,12 +12,15 @@ body {
   background-size: cover;
   overflow: hidden;
 }
-.handle{
+.workspace {
+  /*height: 10000px*/
+}
+.handle {
   width: 100px;
   height: 100px;
   background: #333;
 }
-span.box{
+.box {
   text-align: center;
   display: inline-block;
   width: 100%;
@@ -25,7 +28,16 @@ span.box{
   font-size: 32px;
   z-index: 101;
   /*padding: -20px*/
-
+}
+.rnd {
+  text-align: center;
+  padding: 0;
+  border: solid 3px #fff;
+  border-radius: 5px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .img {
   position: inherit;
