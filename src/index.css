@@ -13,12 +13,20 @@ body {
   overflow: hidden;
 }
 .btn-bar {
-  width: 200px;
+  width: 100%;
+  padding: 0px;
+  background-color: black;
+  text-align: center;
   position: absolute;
   right: 0;
+  z-index: 2;
+}
+.btn {
+  margin: 10px;
 }
 .workspace {
   height: 100%;
+  z-index: -1;
 }
 .handle {
   width: 100px;
@@ -46,7 +54,7 @@ body {
   border-radius: 5px;
 }
 .delete {
-  z-index: 10000000;
+  z-index: 102;
   color: black;
   right: -20px;
   bottom: -20px;
@@ -76,26 +84,26 @@ body {
 }
 .drawers {
   position: fixed;
-  top: 0;
+  bottom: 0;
   left: 0;
-  height: 100%;
+  height: 0px;
   width: 100%;
-  z-index: -1;
+  z-index: 1;
   /*background-color: red;*/
 }
 .drawer-wrapper {
+  position: inherit;
   width: 100%;
   height: 250px;
   bottom: 0;
   left: 0;
-  position: absolute;
 }
 .drawer-handle-wrapper {
+  position: inherit;
   width: 100%;
   height: 25px;
   bottom: 250px;
   left: 0;
-  position: absolute;
 }
 .drawer-handle {
   cursor: pointer;
@@ -106,7 +114,7 @@ body {
   display: inline-block;
   border-top-left-radius: 50px;
   border-top-right-radius: 50px;
-  z-index: 1002;
+  z-index: 102;
   /*border: 2px solid black;*/
 }
 .drawer-1 {
