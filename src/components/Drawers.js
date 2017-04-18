@@ -30,6 +30,7 @@ class Drawers extends React.Component {
     return this.props.drawers.map( drawer => {
       return (
         <div
+          key={drawer.id}
           className={"drawer-handle " + "drawer-" + drawer.id}
           onClick={this.handleDrawer.bind(null, drawer.id)}>
             {drawer.name}
