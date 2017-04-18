@@ -17,6 +17,7 @@ class App extends Component {
     this.handleClick = this.handleClick.bind(this)
     this.handleSteven = this.handleSteven.bind(this)
     this.toggleWebcam = this.toggleWebcam.bind(this)
+    this.handleEmoji = this.handleEmoji.bind(this)
     this.props.getAddons()
   }
 
@@ -25,6 +26,9 @@ class App extends Component {
   }
   handleSteven() {
     this.props.addAddon(this.props.allAddons[12])
+  }
+  handleEmoji() {
+    this.props.addAddon(this.props.allAddons[Math.floor(Math.random() * this.props.allAddons.length - 1)])
   }
 
   toggleWebcam(){
@@ -43,6 +47,7 @@ class App extends Component {
           <button onClick={this.handleClick}>Add Mustache</button>
           <button onClick={this.handleSteven}>STEVEN ME</button>
           <button onClick={this.toggleWebcam}>WEBCAM ON OR OFF</button>
+          <button onClick={this.handleEmoji}>Add Emoji</button>
           <CurrentAddons zIndex={this.state.zIndex} />
 
           {this.state.webcamActive ? <Photo /> : null}
