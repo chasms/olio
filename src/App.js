@@ -60,7 +60,7 @@ class App extends React.Component {
         <div className="btn-bar">
           <button className="btn" onClick={this.handleClick}>Add Mustache</button>
           <button className="btn" onClick={this.handleSteven}>STEVEN ME</button>
-          <button className="btn" onClick={this.toggleWebcam}>WEBCAM ON OR OFF</button>
+          <button className="btn" onClick={this.toggleWebcam}>WEBCAM {this.state.webcamActive ? 'OFF' : 'ON' }</button>
           <button className="btn" onClick={this.handleEmoji}>Add Emoji</button>
           <button className="btn" onClick={this.handleText}>Add Text</button>
         </div>
