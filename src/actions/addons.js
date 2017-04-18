@@ -16,3 +16,8 @@ export const addAddon = (addon) => ({
   type: 'ADD_ADDON',
   payload: addon
 })
+
+export const removeAddon = (id) => ({
+  type: 'REMOVE_ADDON',
+  payload: {id: id}
+})

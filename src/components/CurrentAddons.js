@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import Rnd from 'react-rnd';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { addAddon, getAddons } from '../actions/addons'
+import { addAddon, getAddons, removeAddon } from '../actions/addons'
 
 const style = {
   textAlign: 'center',
-  padding: '40px',
+  padding: '0px',
   border: 'solid 3px #fff',
   borderRadius: '5px',
   color: '#fff',
@@ -20,9 +20,18 @@ class CurrentAddons extends React.Component {
 
   constructor(props) {
     super(props)
+    this.handleDelete = this.handleDelete.bind(this)
+  }
+
+  handleDelete(id) {
+    this.props.removeAddon(id)
   }
 
   renderAddons() {
+    const deleteStyle = {
+      zIndex: 10000000
+    }
+
     return this.props.usedAddons.map((image) => {
       return (
         <Rnd
@@ -41,6 +50,7 @@ class CurrentAddons extends React.Component {
               <div className="img-mask"></div>
               <img className='img' src={image.url} />
             </span>
+            <button onClick={this.handleDelete.bind(null, image.id)} style={deleteStyle}>[x]</button>
           </Rnd>
         )
       })
@@ -65,7 +75,8 @@ class CurrentAddons extends React.Component {
   const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
       addAddon: addAddon,
-      getAddons: getAddons
+      getAddons: getAddons,
+      removeAddon: removeAddon
     }, dispatch);
   };
 
