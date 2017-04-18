@@ -15,10 +15,7 @@
         min-height: 100%;
         margin:0;
         padding:0;
-
-        background:  -webkit-linear-gradient(rgba(135, 60, 255, 0.4), rgba(135, 60, 255, 0.0) 80%),
-              -webkit-linear-gradient(-45deg, rgba(120, 155, 255, 0.9) 25%, rgba(255, 160, 65, 0.9) 75%);;
-
+        background: url('bg.png') rgba(0,0,0,0.3);
         background-size: cover;
         overflow: hidden;
    }
@@ -34,6 +31,7 @@
        font-family: 'Pacifico', cursive;
        font-size: 32px;
        z-index: 101;
+       /*padding: -20px*/
 
    }
    .img {
@@ -41,28 +39,24 @@
      height: 100%;
      width: 100%;
    }
-
-
-   .photobox {
-    position: fixed;
-    top: 30px;
-   }
-   
-
    .img-mask {
-
      position: absolute;
-     height: 90%;
-     width: 90%;
+     top: 0;
+     left: 0;
+     height: 100%;
+     width: 100%;
      z-index: 100;
    }
 
+   .photobox {
+     position: fixed;
+     top: 20px;
+   }
   </style>
 </head>
 
 <body>
     <div id="content"></div>
-
   <script src="dist/bundle.js"></script>
 </body>
 
