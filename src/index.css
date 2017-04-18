@@ -21,24 +21,24 @@ body {
   background: #333;
 }
 .box {
+  overflow: hidden;
   text-align: center;
   display: inline-block;
   width: 100%;
+  height: 100%;
   font-family: 'Pacifico', cursive;
   font-size: 32px;
   z-index: 101;
-  margin: 3px;
-  /*padding: -20px*/
+
 }
 .rnd {
   text-align: center;
   padding: 0;
-  border: solid 3px #fff;
-  border-radius: 5px;
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 5px;
 }
 .delete {
   z-index: 10000000;
@@ -51,7 +51,6 @@ body {
   position: inherit;
   height: 100%;
   width: 100%;
-  box-sizing: border-box;
 }
 .img-mask {
   position: absolute;
@@ -68,5 +67,5 @@ body {
 }
 
 .active {
-  outline: 3px solid white
+  outline: 3px solid white;
 }

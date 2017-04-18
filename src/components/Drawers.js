@@ -1,12 +1,11 @@
 import React from 'react'
-import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import getDrawers from '../actions/Drawers'
+import { getDrawers } from '../actions/drawers'
 import Drawer from './Drawer'
 
-export default class Drawers extends React.Component {
+class Drawers extends React.Component {
   componentWillMount() {
 
   }
@@ -14,7 +13,7 @@ export default class Drawers extends React.Component {
   render() {
     return (
       <div className="drawers">
-        {state.props.drawers.map((drawer) => {
+        {this.props.drawers.map((drawer) => {
           <Drawer key={drawer.id} id={drawer.name + 'drawer'} drawer={drawer}/>
         })}
       </div>

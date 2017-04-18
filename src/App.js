@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import Rnd from 'react-rnd'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import { addAddon, getAddons } from './actions/addons'
 import CurrentAddons from './components/CurrentAddons'
 import Photo from './components/Photo'
+import Drawers from './components/Drawers'
 
 class App extends Component {
 
