@@ -77,7 +77,10 @@ body {
 .photobox {
   position: fixed;
   top: 20px;
+  left: 300px;
+  z-index: 100;
 }
+
 
 .active-addon {
   outline: 3px solid white;
