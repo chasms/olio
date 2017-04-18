@@ -24,6 +24,7 @@ span.box{
   font-family: 'Pacifico', cursive;
   font-size: 32px;
   z-index: 101;
+
   /*padding: -20px*/
 
 }
@@ -31,6 +32,7 @@ span.box{
   position: inherit;
   height: 100%;
   width: 100%;
+  box-sizing: border-box;
 }
 .img-mask {
   position: absolute;
@@ -44,4 +46,8 @@ span.box{
 .photobox {
   position: fixed;
   top: 20px;
+}
+
+.active {
+  outline: 3px solid white
 }
