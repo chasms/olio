@@ -20,8 +20,13 @@ class CurrentAddons extends React.Component {
 
   constructor(props) {
     super(props)
+    this.state = {
+      activeId: null
+    }
     this.handleDelete = this.handleDelete.bind(this)
     this.handleMouseUp = this.handleMouseUp.bind(this)
+    this.handleActive = this.handleActive.bind(this)
+    this.handleBlur = this.handleBlur.bind(this)
   }
 
   handleDelete(id) {
@@ -33,12 +38,42 @@ class CurrentAddons extends React.Component {
     this.props.saveAddonLocation(id, coordinates)
   }
 
-  renderAddons() {
-    const deleteStyle = {
-      zIndex: 10000000
-    }
+  handleActive(id, event) {
+    this.setState({
+      activeId: id
+    })
+  }
 
+  handleBlur(event) {
+
+    this.setState({
+      activeId: null
+    })
+    // event.stopPropagation()
+  }
+
+  renderAddons() {
+
+    let deleteStyle = {
+      zIndex: 10000000,
+      color: 'black',
+      right: '-20px',
+      bottom: '-20px',
+      position: 'absolute'
+    }
     return this.props.usedAddons.map((image) => {
+      let style = {
+        textAlign: 'center',
+        padding: '0px',
+        color: '#fff',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      };
+      let spanStyle = {}
+      let active = ''
+      this.state.activeId === image.id ? active = 'active' : null
+
       return (
         <Rnd
           key={image.id}
@@ -51,13 +86,15 @@ class CurrentAddons extends React.Component {
           }}
           style={style}
           bounds={'parent'}
-          zIndex={this.props.zIndex}
+          zIndex={6000}
           >
-            <span className="box" onMouseOut={this.handleMouseUp.bind(null, image.id)} style={{margin: '10px'}}>
-              <div id={image.id} className="img-mask" ></div>
-              <img className='img' src={image.url} />
+            <span onMouseDown={this.handleActive.bind(null, image.id)}  className="box" onMouseOut={this.handleMouseUp.bind(null, image.id)} style={{margin: '3px'}}>
+              <div id={image.id} className={"img-mask " + active} ></div>
+              <img className={'img'} src={image.url} />
             </span>
-            <button onClick={this.handleDelete.bind(null, image.id)} style={deleteStyle}>[x]</button>
+            {this.state.activeId === image.id ? (
+            <span onClick={this.handleDelete.bind(null, image.id)} style={deleteStyle}>[x]</span>
+          ) : null }
           </Rnd>
         )
       })
@@ -65,7 +102,7 @@ class CurrentAddons extends React.Component {
 
     render() {
       return (
-        <div style={{height: '1000px'}}>
+        <div style={{height: '1000px', zIndex: 1}} onDoubleClick={this.handleBlur}>
           {this.renderAddons()}
         </div>
       )
