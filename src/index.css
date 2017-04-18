@@ -150,3 +150,7 @@ body {
   height: 75px;
   width: 75px;
 }
+.drawer-item img {
+  height: 100%;
+  width: 100%;
+}
