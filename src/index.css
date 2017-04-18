@@ -1,5 +1,47 @@
+html, body, #content{
+  min-height: 100%;
+  height: 100%;
+}
 body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+  width:100%;
+  height:100%;
+  min-height: 100%;
+  margin:0;
+  padding:0;
+  background: green;
+  background-size: cover;
+  overflow: hidden;
+}
+.handle{
+  width: 100px;
+  height: 100px;
+  background: #333;
+}
+span.box{
+  text-align: center;
+  display: inline-block;
+  width: 100%;
+  font-family: 'Pacifico', cursive;
+  font-size: 32px;
+  z-index: 101;
+  /*padding: -20px*/
+
+}
+.img {
+  position: inherit;
+  height: 100%;
+  width: 100%;
+}
+.img-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 100;
+}
+
+.photobox {
+  position: fixed;
+  top: 20px;
 }

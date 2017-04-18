@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Rnd from 'react-rnd';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { addAddon, getAddons, removeAddon } from '../actions/addons'
+import { addAddon, getAddons, removeAddon, saveAddonLocation } from '../actions/addons'
 
 const style = {
   textAlign: 'center',
@@ -21,10 +21,16 @@ class CurrentAddons extends React.Component {
   constructor(props) {
     super(props)
     this.handleDelete = this.handleDelete.bind(this)
+    this.handleMouseUp = this.handleMouseUp.bind(this)
   }
 
   handleDelete(id) {
     this.props.removeAddon(id)
+  }
+
+  handleMouseUp(id) {
+    let coordinates = document.getElementById(id).getBoundingClientRect();
+    this.props.saveAddonLocation(id, coordinates)
   }
 
   renderAddons() {
@@ -35,10 +41,11 @@ class CurrentAddons extends React.Component {
     return this.props.usedAddons.map((image) => {
       return (
         <Rnd
+          key={image.id}
           ref={c => { this.rnd = c; }}
           initial={{
-            x: window.innerWidth / 2 - 200,
-            y: window.innerHeight / 2 - 80,
+            x: image.x,
+            y: image.y,
             width: image.w,
             height: image.h,
           }}
@@ -46,8 +53,8 @@ class CurrentAddons extends React.Component {
           bounds={'parent'}
           zIndex={this.props.zIndex}
           >
-            <span className="box" id={'img-' + image.id}>
-              <div className="img-mask"></div>
+            <span className="box" onMouseOut={this.handleMouseUp.bind(null, image.id)} style={{margin: '10px'}}>
+              <div id={image.id} className="img-mask" ></div>
               <img className='img' src={image.url} />
             </span>
             <button onClick={this.handleDelete.bind(null, image.id)} style={deleteStyle}>[x]</button>
@@ -76,7 +83,8 @@ class CurrentAddons extends React.Component {
     return bindActionCreators({
       addAddon: addAddon,
       getAddons: getAddons,
-      removeAddon: removeAddon
+      removeAddon: removeAddon,
+      saveAddonLocation: saveAddonLocation
     }, dispatch);
   };
 
