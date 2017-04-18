@@ -10,7 +10,7 @@ class Drawer extends React.Component {
   render() {
     let draweritems = getAddonsByCategory(this.props.drawer.name)
     return (
-      <div className="drawer" id={this.props.id}>
+      <div className={"drawer " + "drawer-" + this.props.drawer.id + ' ' + this.props.active}>
         {/* {this.props.draweritems.map(item => {
           return <div key={item.id} item={item}/>
         })} */}

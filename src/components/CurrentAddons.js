@@ -44,7 +44,7 @@ class CurrentAddons extends React.Component {
 
     return this.props.usedAddons.map((image) => {
       let active = ''
-      this.state.activeId === image.id ? active = 'active' : null
+      this.state.activeId === image.id ? active = 'active-addon' : null
 
       return (
         <Rnd

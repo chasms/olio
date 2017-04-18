@@ -9,31 +9,56 @@ class Drawers extends React.Component {
 
   constructor() {
     super()
+    this.state = {
+      activeId: 1
+    }
     this.handleDrawer = this.handleDrawer.bind(this)
   }
 
-  handleDrawer(event) {
+  handleDrawer(id, event) {
     event.preventDefault()
-    debugger
-    
+    this.setState({
+      activeId: id
+    })
   }
 
   componentWillMount() {
     this.props.getDrawers()
   }
 
+  renderDrawerHandles() {
+    return this.props.drawers.map( drawer => {
+      return (
+        <div
+          className={"drawer-handle " + "drawer-" + drawer.id}
+          onClick={this.handleDrawer.bind(null, drawer.id)}>
+            {drawer.name}
+        </div>
+      )
+    })
+  }
+
+  renderDrawers() {
+    return this.props.drawers.map( drawer => {
+      return (
+        <Drawer
+          active={this.state.activeId === drawer.id ? 'active-drawer' : 'inactive-drawer'}
+          key={drawer.id}
+          drawer={drawer}
+        />
+      )
+    })
+  }
+
   render() {
     return (
       <div className="drawers">
-        {this.props.drawers.map( drawer => {
-          return<div className="drawer-wrapper">
-              <a className="drawer-handle" id={'drawer-handle-' + drawer.id} href="#"
-                onClick={this.handleDrawer}>
-                  {drawer.name}
-              </a>
-              <Drawer key={drawer.id} id={drawer.name + '-drawer'} drawer={drawer}/>
-          </div>
-        })}
+        <div className="drawer-handle-wrapper">
+          {this.renderDrawerHandles()}
+        </div>
+        <div className="drawer-wrapper">
+          {this.renderDrawers()}
+        </div>
       </div>
     )
   }

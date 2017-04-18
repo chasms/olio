@@ -71,7 +71,7 @@ body {
   top: 20px;
 }
 
-.active {
+.active-addon {
   outline: 3px solid white;
 }
 .drawers {
@@ -85,33 +85,49 @@ body {
 }
 .drawer-wrapper {
   width: 100%;
-  height: 275x;
+  height: 250px;
   bottom: 0;
   left: 0;
   position: absolute;
 }
+.drawer-handle-wrapper {
+  width: 100%;
+  height: 25px;
+  bottom: 250px;
+  left: 0;
+  position: absolute;
+}
 .drawer-handle {
+  cursor: pointer;
   width: 200px;
   height: 25px;
   padding-top: 5px;
   text-align: center;
-  display: block;
-  background-color: skyblue;
+  display: inline-block;
   border-top-left-radius: 50px;
   border-top-right-radius: 50px;
+  z-index: 1002;
   /*border: 2px solid black;*/
 }
-#drawer-handle-2 {
-  margin-left: 200px;
+.drawer-1 {
+  background-color: skyblue;
+}
+.drawer-2 {
   background-color: aquamarine;
 }
-#drawer-handle-3 {
-  margin-left: 400px;
+.drawer-3 {
   background-color: moccasin;
 }
 .drawer {
+  position: absolute;
   height: 250px;
   width: 100%;
-  background-color: skyblue;
   overflow-y: scroll;
+  z-index: 999;
+}
+.active-drawer {
+  z-index: 1000 !important;
+}
+.inactive-drawer {
+  z-index: 999;
 }
