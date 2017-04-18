@@ -130,7 +130,7 @@ body {
   position: absolute;
   height: 250px;
   width: 100%;
-  padding: 15px;
+  padding: 25px;
   overflow-y: scroll;
   z-index: 999;
 }
@@ -141,5 +141,9 @@ body {
   z-index: 999;
 }
 .drawer-item {
-  
+  display: inline-grid;
+  cursor: pointer;
+  margin: 15px;
+  height: 75px;
+  width: 75px;
 }
