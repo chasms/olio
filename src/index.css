@@ -84,24 +84,34 @@ body {
   z-index: 10000;
 }
 .drawer-wrapper {
-  height: 100%;
-  width: 310px;
+  width: 100%;
+  height: 275x;
+  bottom: 0;
+  left: 0;
+  position: absolute;
 }
 .drawer-handle {
-  float: right;
-  transform: rotate(90deg);
-  -webkit-transform: rotate(90deg);
-  -moz-transform: rotate(90deg);
-  -ms-transform: rotate(90deg);
-  -o-transform: rotate(90deg);
-  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
-  z-index: 10000000000;
+  width: 200px;
+  height: 25px;
+  padding-top: 5px;
+  text-align: center;
+  display: block;
+  background-color: skyblue;
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
+  /*border: 2px solid black;*/
+}
+#drawer-handle-2 {
+  margin-left: 200px;
+  background-color: aquamarine;
+}
+#drawer-handle-3 {
+  margin-left: 400px;
+  background-color: moccasin;
 }
 .drawer {
-  height: 100%;
-  width: 250px;
-  position: fixed;
-  display: none;
+  height: 250px;
+  width: 100%;
   background-color: skyblue;
   overflow-y: scroll;
 }
