@@ -44,8 +44,6 @@ class App extends React.Component {
     })
   }
 
-
-
   render() {
     const divStyle = {
       height: '10000px'
@@ -59,6 +57,7 @@ class App extends React.Component {
           <button className="btn" onClick={this.handleEmoji}>Add Emoji</button>
           <button className="btn" onClick={this.handleText}>Add Text</button>
         </div>
+        <Drawers />
         <CurrentAddons zIndex={this.state.zIndex} />
         {this.state.webcamActive ? <Photo /> : null}
       </div>
