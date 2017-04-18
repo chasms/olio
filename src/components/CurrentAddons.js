@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import Rnd from 'react-rnd';
+import Textarea from 'react-autosize-textarea';
+import Draggable from 'react-draggable';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { addAddon, getAddons, removeAddon, saveAddonLocation } from '../actions/addons'
+import { addText, removeText } from '../actions/texts'
 
 const style = {
   textAlign: 'center',
@@ -19,17 +22,44 @@ const style = {
 
 };
 
+const textStyle = {
+  outline: "none",
+  background: 'green',
+  border: "none",
+  paddingLeft: 10,
+}
+
 class CurrentAddons extends React.Component {
 
   constructor(props) {
     super(props)
     this.state = {
-      activeId: null
+      activeId: null,
+      activeDrags: 0,
+      deltaPosition: {
+        x: 0, y: 0
+      },
+      controlledPosition: {
+        x: -400, y: 200
+      }
     }
     this.handleDelete = this.handleDelete.bind(this)
     this.handleMouseUp = this.handleMouseUp.bind(this)
     this.handleActive = this.handleActive.bind(this)
     this.handleBlur = this.handleBlur.bind(this)
+    this.handleTextDelete = this.handleTextDelete.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this.handleDrag = this.handleDrag.bind(this)
+  }
+
+
+  handleTextDelete(id) {
+    this.props.removeText(id)
+  }
+
+  handleChange(id, font, value) {
+    let coordinates = document.getElementById(id).getBoundingClientRect();
+    this.props.saveTextValue(id, coordinates, value)
   }
 
   handleDelete(id) {
@@ -54,6 +84,26 @@ class CurrentAddons extends React.Component {
     })
     // event.stopPropagation()
   }
+
+  handleDrag(e, ui) {
+    const {x, y} = this.state.deltaPosition;
+    this.setState({
+      deltaPosition: {
+        x: x + ui.deltaX,
+        y: y + ui.deltaY,
+      }
+    });
+  }
+
+  onStart() {
+    this.setState({activeDrags: ++this.state.activeDrags});
+  }
+
+  onStop() {
+    this.setState({activeDrags: --this.state.activeDrags});
+  }
+
+
 
   renderAddons() {
 
@@ -86,32 +136,25 @@ class CurrentAddons extends React.Component {
       })
     }
     renderText() {
+      const dragHandlers = {onStart: this.onStart.bind(this), onStop: this.onStop.bind(this)};
+      const {deltaPosition, controlledPosition} = this.state;
       const deleteStyle = {
         zIndex: 10000000
       }
 
       return this.props.usedText.map((text) => {
-
         return (
-          <Rnd
-            key={text.id}
-            ref={c => { this.rnd = c; }}
-            initial={{
-              x: 0,
-              y: 0,
-              width: text.w,
-              height: text.h,
-            }}
-            style={style}
-            bounds={'parent'}
-            zIndex={1000000}
-            >
-              <span className="textbox" style={{margin: '10px', color: 'red'}}>
-                <div id={text.id} className="outerText" ></div>
-                	HELLO
-              </span>
-              <button onClick={this.handleDelete.bind(null, text.id)} style={deleteStyle}>[x]</button>
-            </Rnd>
+          <Draggable
+            zIndex={1000}
+            {...dragHandlers}>
+                <div className="textbox">
+                	<Textarea
+                    type="text">
+                  </Textarea>
+                  <button onClick={this.handleTextDelete.bind(null, text.id)} style={deleteStyle}>[x]</button>
+                </div>
+                
+          </Draggable>
           )
         })
       }
@@ -140,7 +183,8 @@ const mapDispatchToProps = (dispatch) => {
     addAddon: addAddon,
     getAddons: getAddons,
     removeAddon: removeAddon,
-    saveAddonLocation: saveAddonLocation
+    saveAddonLocation: saveAddonLocation,
+    removeText: removeText
   }, dispatch);
 };
 

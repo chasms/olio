@@ -1,17 +1,13 @@
 
 import React from 'react';
 import Rnd from 'react-rnd';
-
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-
 import { addAddon, getAddons } from './actions/addons'
 import { addText } from './actions/texts'
 import CurrentAddons from './components/CurrentAddons'
 import Photo from './components/Photo'
 import Drawers from './components/Drawers'
-
-import CurrentText from './components/CurrentText'
 
 
 
@@ -62,7 +58,6 @@ class App extends React.Component {
         <button onClick={this.handleEmoji}>Add Emoji</button>
         <button onClick={this.handleText}>Add Text</button>
         <CurrentAddons zIndex={this.state.zIndex} />
-        <CurrentText zIndex={this.state.zIndex} />
         {this.state.webcamActive ? <Photo /> : null}
       </div>
     );
