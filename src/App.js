@@ -8,6 +8,7 @@ import { addText } from './actions/texts'
 import CurrentAddons from './components/CurrentAddons'
 import Photo from './components/Photo'
 import Drawers from './components/Drawers'
+import CurrentText from './components/CurrentText'
 
 
 
@@ -15,7 +16,7 @@ import Drawers from './components/Drawers'
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { zIndex: 99, webcamActive: false };
+    this.state = { webcamActive: false };
     setTimeout(() => this.setState({ zIndex: 1000 }), 5000);
     this.handleClick = this.handleClick.bind(this)
     this.handleSteven = this.handleSteven.bind(this)
@@ -65,7 +66,8 @@ class App extends React.Component {
           <button className="btn" onClick={this.handleText}>Add Text</button>
         </div>
         <Drawers />
-        <CurrentAddons zIndex={this.state.zIndex} />
+        <CurrentText />
+        <CurrentAddons />
         {this.state.webcamActive ? <Photo handleToggle={this.handleToggle} /> : null}
       </div>
     );
