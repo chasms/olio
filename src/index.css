@@ -26,6 +26,17 @@ body {
 }
 .workspace {
   height: 100%;
+  width: 100%;
+  z-index: -1;
+}
+.addon-container {
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+}
+.text-container {
+  height: 100%;
+  width: 100%;
   z-index: -1;
 }
 .handle {

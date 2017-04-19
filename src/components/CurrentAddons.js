@@ -81,7 +81,7 @@ class CurrentAddons extends React.Component {
 
   render() {
     return (
-      <div className="addon-container" onDoubleClick={this.handleBlur}>
+      <div className="workspace" onDoubleClick={this.handleBlur}>
         {this.renderAddons()}
       </div>
     )

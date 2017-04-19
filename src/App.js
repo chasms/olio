@@ -66,7 +66,7 @@ class App extends React.Component {
           <button className="btn" onClick={this.handleText}>Add Text</button>
         </div>
         <Drawers />
-        <CurrentText />
+        {/* <CurrentText /> */}
         <CurrentAddons />
         {this.state.webcamActive ? <Photo handleToggle={this.handleToggle} /> : null}
       </div>
