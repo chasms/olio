@@ -8,6 +8,7 @@ import { addText } from './actions/texts'
 import CurrentAddons from './components/CurrentAddons'
 import Photo from './components/Photo'
 import Drawers from './components/Drawers'
+import CurrentText from './components/CurrentText'
 
 
 
@@ -66,6 +67,7 @@ class App extends React.Component {
         </div>
         <Drawers />
         <CurrentAddons zIndex={this.state.zIndex} />
+        <CurrentText zIndex={this.state.zIndex} />
         {this.state.webcamActive ? <Photo handleToggle={this.handleToggle} /> : null}
       </div>
     );

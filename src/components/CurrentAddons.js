@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import Rnd from 'react-rnd';
-import Textarea from 'react-autosize-textarea';
-import Draggable from 'react-draggable';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { addAddon, getAddons, removeAddon, saveAddonLocation } from '../actions/addons'
-import { addText, removeText } from '../actions/texts'
+
 
 const style = {
   textAlign: 'center',
@@ -22,37 +20,22 @@ const style = {
 
 };
 
-const textStyle = {
-  outline: "none",
-  background: 'green',
-  border: "none",
-  paddingLeft: 10,
-}
-
 class CurrentAddons extends React.Component {
 
   constructor(props) {
     super(props)
     this.state = {
       activeId: null,
-      activeMoves: 0,
-      textPosition: {
-        x: 0, y: 0
-      },
+  
     }
     this.handleDelete = this.handleDelete.bind(this)
     this.handleMouseUp = this.handleMouseUp.bind(this)
     this.handleActive = this.handleActive.bind(this)
     this.handleBlur = this.handleBlur.bind(this)
-    this.handleTextDelete = this.handleTextDelete.bind(this)
     this.handleChange = this.handleChange.bind(this)
-    this.handleDrag = this.handleDrag.bind(this)
   }
 
 
-  handleTextDelete(id) {
-    this.props.removeText(id)
-  }
 
   handleChange(id, font, value) {
     let coordinates = document.getElementById(id).getBoundingClientRect();
@@ -80,24 +63,6 @@ class CurrentAddons extends React.Component {
       activeId: null
     })
     // event.stopPropagation()
-  }
-
-  handleDrag(e, ui) {
-    const {x, y} = this.state.textPosition;
-    this.setState({
-      textPosition: {
-        x: x + ui.textX,
-        y: y + ui.textY,
-      }
-    });
-  }
-
-  onStart() {
-    this.setState({activeMoves: ++this.state.activeMoves});
-  }
-
-  onStop() {
-    this.setState({activeMoves: --this.state.activeMoves});
   }
 
 
@@ -132,34 +97,11 @@ class CurrentAddons extends React.Component {
         )
       })
     }
-    renderText() {
-      const dragHandlers = {onStart: this.onStart.bind(this), onStop: this.onStop.bind(this)};
-      const {textPosition} = this.state;
-      const deleteStyle = {
-        zIndex: 10000000
-      }
-
-      return this.props.usedText.map((text) => {
-        return (
-          <Draggable
-            zIndex={1000}
-            {...dragHandlers}>
-                <div className="textbox">
-                	<Textarea className="textarea" type="text" s>
-                  </Textarea>
-                  <button onClick={this.handleTextDelete.bind(null, text.id)} style={deleteStyle}>[x]</button>
-                </div>
-
-          </Draggable>
-          )
-        })
-      }
 
   render() {
     return (
       <div className="workspace" onDoubleClick={this.handleBlur}>
         {this.renderAddons()}
-        {this.renderText()}
       </div>
     )
   }
@@ -170,7 +112,6 @@ const mapStateToProps = (state) => {
   return {
     usedAddons: state.Addon,
     allAddons: state.AddonLibrary,
-    usedText: state.Text
   }
 }
 
@@ -180,7 +121,6 @@ const mapDispatchToProps = (dispatch) => {
     getAddons: getAddons,
     removeAddon: removeAddon,
     saveAddonLocation: saveAddonLocation,
-    removeText: removeText
   }, dispatch);
 };
 
