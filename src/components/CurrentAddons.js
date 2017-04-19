@@ -35,13 +35,10 @@ class CurrentAddons extends React.Component {
     super(props)
     this.state = {
       activeId: null,
-      activeDrags: 0,
-      deltaPosition: {
+      activeMoves: 0,
+      textPosition: {
         x: 0, y: 0
       },
-      controlledPosition: {
-        x: -400, y: 200
-      }
     }
     this.handleDelete = this.handleDelete.bind(this)
     this.handleMouseUp = this.handleMouseUp.bind(this)
@@ -86,21 +83,21 @@ class CurrentAddons extends React.Component {
   }
 
   handleDrag(e, ui) {
-    const {x, y} = this.state.deltaPosition;
+    const {x, y} = this.state.textPosition;
     this.setState({
-      deltaPosition: {
-        x: x + ui.deltaX,
-        y: y + ui.deltaY,
+      textPosition: {
+        x: x + ui.textX,
+        y: y + ui.textY,
       }
     });
   }
 
   onStart() {
-    this.setState({activeDrags: ++this.state.activeDrags});
+    this.setState({activeMoves: ++this.state.activeMoves});
   }
 
   onStop() {
-    this.setState({activeDrags: --this.state.activeDrags});
+    this.setState({activeMoves: --this.state.activeMoves});
   }
 
 
@@ -137,7 +134,7 @@ class CurrentAddons extends React.Component {
     }
     renderText() {
       const dragHandlers = {onStart: this.onStart.bind(this), onStop: this.onStop.bind(this)};
-      const {deltaPosition, controlledPosition} = this.state;
+      const {textPosition} = this.state;
       const deleteStyle = {
         zIndex: 10000000
       }
@@ -148,8 +145,7 @@ class CurrentAddons extends React.Component {
             zIndex={1000}
             {...dragHandlers}>
                 <div className="textbox">
-                	<Textarea
-                    type="text">
+                	<Textarea className="textarea" type="text" s>
                   </Textarea>
                   <button onClick={this.handleTextDelete.bind(null, text.id)} style={deleteStyle}>[x]</button>
                 </div>

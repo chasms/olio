@@ -140,3 +140,12 @@ body {
 .inactive-drawer {
   z-index: 999;
 }
+
+.textbox {
+  height: 200px;
+  width: 200px;
+}
+
+.textarea {
+  overflow: auto;
+}
