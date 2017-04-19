@@ -15,12 +15,6 @@ class CurrentAddons extends React.Component {
     this.handleMouseUp = this.handleMouseUp.bind(this)
     this.handleActive = this.handleActive.bind(this)
     this.handleBlur = this.handleBlur.bind(this)
-    this.handleChange = this.handleChange.bind(this)
-  }
-
-  handleChange(id, font, value) {
-    let coordinates = document.getElementById(id).getBoundingClientRect();
-    this.props.saveTextValue(id, coordinates, value)
   }
 
   handleDelete(id) {
@@ -46,32 +40,6 @@ class CurrentAddons extends React.Component {
     // event.stopPropagation()
   }
 
-  // renderTextAreas() {
-  //   return this.props.text.map( text => {
-  //     <Rnd
-  //       key={text.id}
-  //       id={text.id}
-  //       ref={c => { this.rnd = c; }}
-  //       initial={{x: 0, y: 0, width: 200, height: 100}}
-  //       className='rnd'
-  //     >
-  //       <span className="box"
-  //         onMouseDown={this.handleActive.bind(null, text.id)}
-  //         onMouseOut={this.handleMouseUp.bind(null, text.id)}>
-  //         <textarea
-  //           className={'text-addon'}
-  //           onChange={this.handleChange.bind()}>
-  //         </textarea>
-  //       </span>
-  //       {this.state.activeId === image.id ?
-  //         (<span className="delete"
-  //           onClick={this.handleDelete.bind(null, text.id)}>
-  //           [x]
-  //         </span>)
-  //         : null }
-  //   })
-  // }
-
   renderAddons() {
     return this.props.usedAddons.map((addon, index) => {
 
@@ -90,9 +58,23 @@ class CurrentAddons extends React.Component {
             <span className="box"
               onMouseDown={this.handleActive.bind(null, addon.id)}
               onMouseOut={this.handleMouseUp.bind(null, addon.id)}>
-              <div id={addon.id} className={"img-mask " + active} ></div>
-              <img className={'img-addon'} src={addon.url} />
+
+              {addon.category !== 'text' ?
+              <div id={addon.id} className={"img-mask " + active} ></div> :
+
+              null}
+
+              {addon.category === 'text' ? 
+                (<textarea
+                  id={addon.id}
+                  className={'text-addon'}>
+                </textarea>) :
+
+                
+                (<img className={'img-addon'} src={addon.url}></img>) }
+
             </span>
+
             {this.state.activeId === addon.id ?
               (<span className="delete"
                 onClick={this.handleDelete.bind(null, addon.id)}>
