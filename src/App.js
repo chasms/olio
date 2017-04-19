@@ -1,14 +1,16 @@
-
+// std library imports
 import React from 'react';
-import Rnd from 'react-rnd';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+
+// node_modules imports
+import Rnd from 'react-rnd';
+
+// app imports
 import { addAddon, getAddons } from './actions/addons'
-import { addText } from './actions/texts'
 import CurrentAddons from './components/CurrentAddons'
 import Photo from './components/Photo'
 import Drawers from './components/Drawers'
-import CurrentText from './components/CurrentText'
 
 class App extends React.Component {
 
