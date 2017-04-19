@@ -4,29 +4,12 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { addAddon, getAddons, removeAddon, saveAddonLocation } from '../actions/addons'
 
-
-const style = {
-  textAlign: 'center',
-  padding: '0px',
-  border: 'solid 3px #fff',
-  borderRadius: '5px',
-  color: '#fff',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  position: 'fixed',
-  top: 0,
-  left: 0
-
-};
-
 class CurrentAddons extends React.Component {
 
   constructor(props) {
     super(props)
     this.state = {
       activeId: null,
-  
     }
     this.handleDelete = this.handleDelete.bind(this)
     this.handleMouseUp = this.handleMouseUp.bind(this)
@@ -34,8 +17,6 @@ class CurrentAddons extends React.Component {
     this.handleBlur = this.handleBlur.bind(this)
     this.handleChange = this.handleChange.bind(this)
   }
-
-
 
   handleChange(id, font, value) {
     let coordinates = document.getElementById(id).getBoundingClientRect();
@@ -100,7 +81,7 @@ class CurrentAddons extends React.Component {
 
   render() {
     return (
-      <div className="workspace" onDoubleClick={this.handleBlur}>
+      <div className="addon-container" onDoubleClick={this.handleBlur}>
         {this.renderAddons()}
       </div>
     )

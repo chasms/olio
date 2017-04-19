@@ -16,7 +16,7 @@ import CurrentText from './components/CurrentText'
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { zIndex: 99, webcamActive: false };
+    this.state = { webcamActive: false };
     setTimeout(() => this.setState({ zIndex: 1000 }), 5000);
     this.handleClick = this.handleClick.bind(this)
     this.handleSteven = this.handleSteven.bind(this)
@@ -66,8 +66,8 @@ class App extends React.Component {
           <button className="btn" onClick={this.handleText}>Add Text</button>
         </div>
         <Drawers />
-        <CurrentAddons zIndex={this.state.zIndex} />
-        <CurrentText zIndex={this.state.zIndex} />
+        <CurrentText />
+        <CurrentAddons />
         {this.state.webcamActive ? <Photo handleToggle={this.handleToggle} /> : null}
       </div>
     );

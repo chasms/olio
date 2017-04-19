@@ -50,7 +50,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 5px;
 }
 .delete {
   z-index: 102;
@@ -143,17 +142,13 @@ body {
 .inactive-drawer {
   z-index: 999;
 }
-
-
 .textbox {
   height: 200px;
   width: 200px;
 }
-
 .textarea {
   overflow: auto;
 }
-
 .drawer-item {
   display: inline-grid;
   cursor: pointer;
@@ -161,4 +156,3 @@ body {
   height: 75px;
   width: 75px;
 }
-
