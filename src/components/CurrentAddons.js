@@ -63,7 +63,7 @@ class CurrentAddons extends React.Component {
               <div id={addon.id} className={"img-mask " + active} ></div> :
 
               null}
-
+              <h2>{addon.category}</h2>
               {addon.category === 'text' ? 
                 (<textarea
                   id={addon.id}
