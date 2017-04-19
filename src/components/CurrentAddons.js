@@ -46,31 +46,56 @@ class CurrentAddons extends React.Component {
     // event.stopPropagation()
   }
 
-
+  // renderTextAreas() {
+  //   return this.props.text.map( text => {
+  //     <Rnd
+  //       key={text.id}
+  //       id={text.id}
+  //       ref={c => { this.rnd = c; }}
+  //       initial={{x: 0, y: 0, width: 200, height: 100}}
+  //       className='rnd'
+  //     >
+  //       <span className="box"
+  //         onMouseDown={this.handleActive.bind(null, text.id)}
+  //         onMouseOut={this.handleMouseUp.bind(null, text.id)}>
+  //         <textarea
+  //           className={'text-addon'}
+  //           onChange={this.handleChange.bind()}>
+  //         </textarea>
+  //       </span>
+  //       {this.state.activeId === image.id ?
+  //         (<span className="delete"
+  //           onClick={this.handleDelete.bind(null, text.id)}>
+  //           [x]
+  //         </span>)
+  //         : null }
+  //   })
+  // }
 
   renderAddons() {
+    return this.props.usedAddons.map((addon, index) => {
 
-    return this.props.usedAddons.map((image, index) => {
       let active = ''
-      this.state.activeId === image.id ? active = 'active-addon' : null
+      this.state.activeId === addon.id ? active = 'active-addon' : null
 
       return (
         <Rnd
-          key={image.id}
+          key={addon.id}
+          id={addon.id}
           ref={c => { this.rnd = c; }}
-          initial={{x: image.x, y: image.y, width: image.w, height: image.h}}
+          initial={{x: addon.x, y: addon.y, width: addon.w, height: addon.h}}
           className='rnd'
           bounds={'parent'}
           >
             <span className="box"
-              onMouseDown={this.handleActive.bind(null, image.id)}
-              onMouseOut={this.handleMouseUp.bind(null, image.id)}>
-              <div id={image.id} className={"img-mask " + active} ></div>
-              <img className={'img-addon'} src={image.url} />
+              onMouseDown={this.handleActive.bind(null, addon.id)}
+              onMouseOut={this.handleMouseUp.bind(null, addon.id)}>
+              <div id={addon.id} className={"img-mask " + active} ></div>
+              <img className={'img-addon'} src={addon.url} />
             </span>
-            {this.state.activeId === image.id ?
+            {this.state.activeId === addon.id ?
               (<span className="delete"
-                onClick={this.handleDelete.bind(null, image.id)}>
+                onClick={this.handleDelete.bind(null, addon.id)}>
                 [x]
               </span>)
               : null }
@@ -92,7 +117,7 @@ class CurrentAddons extends React.Component {
 const mapStateToProps = (state) => {
   return {
     usedAddons: state.Addon,
-    allAddons: state.AddonLibrary,
+    allAddons: state.AddonLibrary
   }
 }
 

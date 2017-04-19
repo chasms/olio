@@ -10,10 +10,8 @@ import Photo from './components/Photo'
 import Drawers from './components/Drawers'
 import CurrentText from './components/CurrentText'
 
-
-
-
 class App extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = { webcamActive: false };
@@ -30,14 +28,22 @@ class App extends React.Component {
   handleClick() {
     this.props.addAddon(this.props.addonLibrary[0].addons[Math.floor(Math.random() * this.props.addonLibrary[0].addons.length - 1)])
   }
+
   handleSteven() {
     this.props.addAddon(this.props.addonLibrary[2].addons[0])
   }
+
   handleEmoji() {
     this.props.addAddon(this.props.addonLibrary[1].addons[Math.floor(Math.random() * this.props.addonLibrary[0].addons.length)])
   }
+
   handleText() {
-    this.props.addText()
+    this.props.addAddon({
+      initial_height: 100,
+      initial_width: 200,
+      url: "https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-ultralight-webfont.woff",
+      category: 'text'
+    })
   }
 
   toggleWebcam(){
@@ -57,7 +63,7 @@ class App extends React.Component {
       height: '10000px'
     }
     return (
-      <div className="workspace">
+      <div className="app">
         <div className="btn-bar">
           <button className="btn" onClick={this.handleClick}>Add Mustache</button>
           <button className="btn" onClick={this.handleSteven}>STEVEN ME</button>
@@ -66,7 +72,6 @@ class App extends React.Component {
           <button className="btn" onClick={this.handleText}>Add Text</button>
         </div>
         <Drawers />
-        {/* <CurrentText /> */}
         <CurrentAddons />
         {this.state.webcamActive ? <Photo handleToggle={this.handleToggle} /> : null}
       </div>
@@ -84,8 +89,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     addAddon: addAddon,
-    getAddons: getAddons,
-    addText: addText
+    getAddons: getAddons
   }, dispatch);
 }
 
