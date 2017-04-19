@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { addAddon, getAddons, removeAddon, saveAddonLocation } from '../actions/addons'
 
-class CurrentAddons extends React.Component {
+class CurrentAddons extends Component {
 
   constructor(props) {
     super(props)
@@ -33,18 +33,45 @@ class CurrentAddons extends React.Component {
   }
 
   handleBlur(event) {
-
     this.setState({
       activeId: null
     })
     // event.stopPropagation()
   }
 
+  renderImg(addon) {
+    // debugger
+    return (
+      <img
+        className={'img-addon'}
+        src={addon.url}>
+      </img>
+    )
+  }
+
+  renderText(addon) {
+    // debugger
+    return (
+      <textarea
+        id={addon.id}
+        className={'text-addon'}>
+      </textarea>
+    )
+  }
+
+  renderMask(addon) {
+    let active = ''
+    this.state.activeId === addon.id ? active = 'active-addon' : null
+    return (
+      <div
+        id={addon.id}
+        className={"img-mask " + active}>
+      </div>
+    )
+  }
+
   renderAddons() {
     return this.props.usedAddons.map((addon, index) => {
-
-      let active = ''
-      this.state.activeId === addon.id ? active = 'active-addon' : null
 
       return (
         <Rnd
@@ -58,21 +85,9 @@ class CurrentAddons extends React.Component {
             <span className="box"
               onMouseDown={this.handleActive.bind(null, addon.id)}
               onMouseOut={this.handleMouseUp.bind(null, addon.id)}>
-
-              {addon.category !== 'text' ?
-              <div id={addon.id} className={"img-mask " + active} ></div> :
-
-              null}
-              <h2>{addon.category}</h2>
-              {addon.category === 'text' ? 
-                (<textarea
-                  id={addon.id}
-                  className={'text-addon'}>
-                </textarea>) :
-
-                
-                (<img className={'img-addon'} src={addon.url}></img>) }
-
+              {this.renderMask(addon)}
+              {addon.category === 'text' ?
+                (this.renderText(addon)) : (this.renderImg(addon)) }
             </span>
 
             {this.state.activeId === addon.id ?

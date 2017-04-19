@@ -56,7 +56,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  position: ;
 }
 .delete {
   z-index: 102;
@@ -70,6 +69,13 @@ body {
   position: inherit;
   height: 100%;
   width: 100%;
+  z-index: 99;
+}
+.text-addon {
+  position: inherit;
+  height: 100%;
+  width: 100%;
+  z-index: 101;
 }
 .img-mask {
   position: absolute;
