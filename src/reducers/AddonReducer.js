@@ -16,8 +16,12 @@ export default function Addon(state = [], action){
         url: found.url,
         y: action.payload.coordinates.top,
         x: action.payload.coordinates.left,
-        h: action.payload.coordinates.height,
-        w: action.payload.coordinates.width,
+        h: found.category === 'text' ? (
+          action.payload.coordinates.height - 6)
+          : (action.payload.coordinates.height),
+        w: found.category === 'text' ? (
+          action.payload.coordinates.width - 6)
+          : (action.payload.coordinates.width),
         category: found.category,
       }
       return [...rest, newLocation]

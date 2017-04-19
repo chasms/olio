@@ -50,24 +50,31 @@ class CurrentAddons extends Component {
   }
 
   renderText(addon) {
-    // debugger
+    let active = this.isActive(addon)
     return (
       <textarea
         id={addon.id}
-        className={'text-addon'}>
+        className={'text-addon ' + active}>
       </textarea>
     )
   }
 
   renderMask(addon) {
-    let active = ''
-    this.state.activeId === addon.id ? active = 'active-addon' : null
-    return (
-      <div
-        id={addon.id}
-        className={"img-mask " + active}>
-      </div>
-    )
+    let active = this.isActive(addon)
+    if (addon.category !== 'text') {
+      return (
+        <div
+          id={addon.id}
+          className={"img-mask " + active}>
+        </div>
+      )
+    } else {
+      return
+    }
+  }
+
+  isActive(addon) {
+    return this.state.activeId === addon.id ? 'active-addon' : null
   }
 
   renderAddons() {
@@ -81,10 +88,11 @@ class CurrentAddons extends Component {
           initial={{x: addon.x, y: addon.y, width: addon.w, height: addon.h}}
           className='rnd'
           bounds={'parent'}
-          >
+        >
             <span className="box"
               onMouseDown={this.handleActive.bind(null, addon.id)}
-              onMouseOut={this.handleMouseUp.bind(null, addon.id)}>
+              onMouseOut={this.handleMouseUp.bind(null, addon.id)}
+              >
               {this.renderMask(addon)}
               {addon.category === 'text' ?
                 (this.renderText(addon)) : (this.renderImg(addon)) }
