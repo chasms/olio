@@ -73,15 +73,12 @@ body {
   width: 100%;
   z-index: 100;
 }
-
 .photobox {
   position: fixed;
   top: 20px;
   left: 300px;
   z-index: 100;
 }
-
-
 .active-addon {
   outline: 3px solid white;
 }
@@ -143,17 +140,13 @@ body {
 .inactive-drawer {
   z-index: 999;
 }
-
-
 .textbox {
   height: 200px;
   width: 200px;
 }
-
 .textarea {
   overflow: auto;
 }
-
 .drawer-item {
   display: inline-grid;
   cursor: pointer;
@@ -162,3 +155,7 @@ body {
   width: 75px;
 }
 
+.drawer-item img {
+  height: 100%;
+  width: 100%;
+}
