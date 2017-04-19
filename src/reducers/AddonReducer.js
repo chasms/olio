@@ -11,7 +11,7 @@ export default function Addon(state = [], action){
     case 'STORE_LOCATION':
       let found = state.filter(addon => addon.id === action.payload.id)[0]
       let rest = state.filter(addon => addon.id !== action.payload.id)
-      let newLocation = {id: found.id, url: found.url, y: action.payload.coordinates.top, x: action.payload.coordinates.left, h: action.payload.coordinates.height, w: action.payload.coordinates.width}
+      let newLocation = {id: found.id, url: found.url, y: action.payload.coordinates.top, x: action.payload.coordinates.left, h: action.payload.coordinates.height, w: action.payload.coordinates.width, category: found.category}
       return [...rest, newLocation]
     default:
       return state
