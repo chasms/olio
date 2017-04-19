@@ -42,7 +42,6 @@ body {
   font-family: 'Pacifico', cursive;
   font-size: 32px;
   z-index: 101;
-
 }
 .rnd {
   text-align: center;
@@ -59,7 +58,7 @@ body {
   right: -20px;
   bottom: -20px;
   position: absolute;
-  cursor: 'pointer' !important;
+  cursor: pointer !important;
 }
 .img-addon {
   position: inherit;
@@ -78,7 +77,10 @@ body {
 .photobox {
   position: fixed;
   top: 20px;
+  left: 300px;
+  z-index: 100;
 }
+
 
 .active-addon {
   outline: 3px solid white;
@@ -131,6 +133,7 @@ body {
   position: absolute;
   height: 250px;
   width: 100%;
+  padding: 25px;
   overflow-y: scroll;
   z-index: 999;
 }
@@ -141,6 +144,7 @@ body {
   z-index: 999;
 }
 
+
 .textbox {
   height: 200px;
   width: 200px;
@@ -149,3 +153,12 @@ body {
 .textarea {
   overflow: auto;
 }
+
+.drawer-item {
+  display: inline-grid;
+  cursor: pointer;
+  margin: 15px;
+  height: 75px;
+  width: 75px;
+}
+

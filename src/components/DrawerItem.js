@@ -2,13 +2,25 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { getAddonsByCategory } from '../actions/addons'
+import { addAddon } from '../actions/addons'
 
 class DrawerItem extends React.Component {
 
+  constructor() {
+    super()
+    this.handleClick = this.handleClick.bind(this)
+  }
+
+  handleClick() {
+    this.props.addAddon(this.props.item)
+  }
+
   render() {
     return (
-      <div className="stuff">
+      <div className="drawer-item">
+        <img onClick={this.handleClick}
+          data-id={this.props.item.id}
+          src={this.props.item.url}/>
       </div>
     )
   }
@@ -16,7 +28,7 @@ class DrawerItem extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    getAddonsByCategory: getAddonsByCategory,
+    addAddon: addAddon,
   }, dispatch);
 };
 
