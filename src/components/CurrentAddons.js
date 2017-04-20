@@ -53,10 +53,10 @@ class CurrentAddons extends Component {
     let active = this.isActive(addon)
     debugger
     return (
-      <textarea
-        id={addon.id}
-        className={'text-addon ' + active}>
-      </textarea>
+        <textarea
+          id={addon.id}
+          className={'text-addon ' + active}>
+        </textarea>
     )
   }
 

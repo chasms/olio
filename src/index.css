@@ -206,8 +206,15 @@ body {
   height: 200px;
   width: 200px;
 }
-.textarea {
+textarea {
   overflow: auto;
+  outline: none;
+  background: none;
+  border: none;
+  color: #1D0F29;
+  padding-left: 10;
+  font-weight: bold;
+  font font-size: 40px;
 }
 .drawer-item {
   display: inline-grid;
