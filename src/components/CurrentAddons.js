@@ -102,7 +102,7 @@ class CurrentAddons extends Component {
             {this.state.activeId === addon.id ?
               (<span className="delete"
                 onClick={this.handleDelete.bind(null, addon.id)}>
-                <div className="button"></div>
+                <div className="button">x</div>
               </span>)
               : null }
           </Rnd>
