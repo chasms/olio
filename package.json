@@ -8,6 +8,7 @@
     "react": "^15.5.4",
     "react-autosize-textarea": "^0.4.2",
     "react-dom": "^15.5.4",
+    "react-inline-css": "^2.3.0",
     "react-redux": "^5.0.4",
     "react-rnd": "^4.2.2",
     "react-textarea-autosize": "^4.0.5",

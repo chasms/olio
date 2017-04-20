@@ -40,7 +40,6 @@ body {
   background: #333;
 }
 .box {
-  overflow: hidden;
   text-align: center;
   display: inline-block;
   width: 100%;
@@ -72,6 +71,11 @@ body {
   z-index: 99;
 }
 .text-addon {
+  background: transparent;
+  border: 0 none;
+  font-size: 1em;
+  color: black;
+  resize: none;
   position: inherit;
   height: 100%;
   width: 100%;
@@ -93,6 +97,7 @@ body {
 }
 .active-addon {
   outline: 3px solid white;
+  z-index: 100;
 }
 .drawers {
   position: fixed;
