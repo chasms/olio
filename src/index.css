@@ -108,6 +108,13 @@ p {
   z-index: 99;
 }
 
+.screenshot {
+  position: inherit;
+  height: 100%;
+  width: 100%;
+  z-index: 2;
+}
+
 .text-addon {
   background: transparent;
   border: 0 none;
