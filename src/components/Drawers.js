@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { getDrawers } from '../actions/drawers'
 import Drawer from './Drawer'
 
 class Drawers extends React.Component {
@@ -10,20 +9,28 @@ class Drawers extends React.Component {
   constructor() {
     super()
     this.state = {
-      activeId: 1
+      activeId: 0,
+      isActive: false
     }
     this.handleDrawer = this.handleDrawer.bind(this)
   }
 
   handleDrawer(id, event) {
     event.preventDefault()
-    this.setState({
-      activeId: id
-    })
-  }
-
-  componentWillMount() {
-    this.props.getDrawers()
+    if (!this.state.isActive) {
+      this.setState({
+        activeId: id,
+        isActive: true
+      })
+    } else if (this.state.activeId === id) {
+      this.setState({
+        isActive: false
+      })
+    } else {
+      this.setState({
+        activeId: id
+      })
+    }
   }
 
   renderDrawerHandles() {
@@ -31,7 +38,7 @@ class Drawers extends React.Component {
       return (
         <div
           key={drawer.id}
-          className={"drawer-handle " + "drawer-" + drawer.id}
+          className={"drawer-handles " + "drawer-" + drawer.id}
           onClick={this.handleDrawer.bind(null, drawer.id)}>
             {drawer.name}
         </div>
@@ -54,11 +61,11 @@ class Drawers extends React.Component {
   render() {
     return (
       <div className="drawers">
-        <div className="drawer-handle-wrapper">
-          {this.renderDrawerHandles()}
-        </div>
-        <div className="drawer-wrapper">
+        <div className={"drawer-wrapper " + (this.state.isActive ? "active-drawer-wrapper" : null) }>
           {this.renderDrawers()}
+        </div>
+        <div className="drawer-handles-wrapper">
+          {this.renderDrawerHandles()}
         </div>
       </div>
     )
@@ -71,10 +78,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({
-    getDrawers: getDrawers,
-  }, dispatch);
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Drawers)
+export default connect(mapStateToProps)(Drawers)
