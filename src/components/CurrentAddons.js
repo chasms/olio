@@ -89,59 +89,66 @@ class CurrentAddons extends Component {
           <div className="delete-button flash-hover">x</div>
         </span>)
         : null
-    }
+      }
 
 
-    renderAddons() {
-      return this.props.usedAddons.map((addon, index) => {
+      renderAddons() {
 
-        return (
-          <Rnd
-            key={addon.id}
-            id={addon.id}
-            ref={c => { this.rnd = c; }}
-            initial={{x: addon.x, y: addon.y, width: addon.w, height: addon.h}}
-            className='rnd'
-            bounds={'parent'}
-            >
-              {this.renderDelete(addon)}
-              <span className="box"
-                onMouseDown={this.handleActive.bind(null, addon.id)}
-                onMouseOut={this.handleMouseUp.bind(null, addon.id)}
-                >
-                  {this.renderMask(addon)}
-                  {addon.category === 'text' ?
-                  (this.renderText(addon)) : (this.renderImg(addon)) }
-                </span>
-              </Rnd>
-            )
-          })
-        }
-
-        render() {
+        return this.props.usedAddons.map((addon, index) => {
+          let screenShotStyle = {}
+          if (addon.category === 'photo') {
+            screenShotStyle = {
+              zIndex: -1
+            }
+          }
           return (
-            <div className="workspace" onDoubleClick={this.handleBlur}>
-              {this.renderAddons()}
-            </div>
-          )
+            <Rnd
+              key={addon.id}
+              id={addon.id}
+              ref={c => { this.rnd = c; }}
+              initial={{x: addon.x, y: addon.y, width: addon.w, height: addon.h}}
+              className='rnd'
+              bounds={'parent'}
+              >
+                {this.renderDelete(addon)}
+                <span className="box"
+                  style={screenShotStyle}
+                  onMouseDown={this.handleActive.bind(null, addon.id)}
+                  onMouseOut={this.handleMouseUp.bind(null, addon.id)}
+                  >
+                    {this.renderMask(addon)}
+                    {addon.category === 'text' ?
+                    (this.renderText(addon)) : (this.renderImg(addon)) }
+                  </span>
+                </Rnd>
+              )
+            })
+          }
+
+          render() {
+            return (
+              <div className="workspace" onDoubleClick={this.handleBlur}>
+                {this.renderAddons()}
+              </div>
+            )
+          }
         }
-      }
 
 
-      const mapStateToProps = (state) => {
-        return {
-          usedAddons: state.Addon,
-          allAddons: state.AddonLibrary
+        const mapStateToProps = (state) => {
+          return {
+            usedAddons: state.Addon,
+            allAddons: state.AddonLibrary
+          }
         }
-      }
 
-      const mapDispatchToProps = (dispatch) => {
-        return bindActionCreators({
-          addAddon: addAddon,
-          getAddons: getAddons,
-          removeAddon: removeAddon,
-          saveAddonLocation: saveAddonLocation,
-        }, dispatch);
-      };
+        const mapDispatchToProps = (dispatch) => {
+          return bindActionCreators({
+            addAddon: addAddon,
+            getAddons: getAddons,
+            removeAddon: removeAddon,
+            saveAddonLocation: saveAddonLocation,
+          }, dispatch);
+        };
 
-      export default connect(mapStateToProps, mapDispatchToProps)(CurrentAddons)
+        export default connect(mapStateToProps, mapDispatchToProps)(CurrentAddons)
