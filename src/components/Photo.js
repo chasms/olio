@@ -17,7 +17,8 @@ class Photo extends React.Component {
     this.props.addAddon({
       url: this.refs.webcam.getScreenshot(),
       initial_height: 300,
-      initial_width: 400
+      initial_width: 400,
+      category: 'photo'
     })
     this.props.handleToggle()
   }
