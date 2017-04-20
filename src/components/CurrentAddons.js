@@ -57,7 +57,7 @@ class CurrentAddons extends Component {
       <textarea
         id={addon.id}
         className={'text-addon ' + active}
-        placeholder="Text!"
+        placeholder="Drag Me Anywhere!"
         >
       </textarea>
     )
