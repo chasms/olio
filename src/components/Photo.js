@@ -30,9 +30,6 @@ class Photo extends React.Component {
         <div className="photobox">
           <button onClick={this.handleScreenshot}>TAKE SCREENSHOT</button>
           <Webcam ref="webcam" height={"400"} width={"400"}/>
-          <div className="screenshot">
-            <img id='screenshot' src={this.state.screenshot} />
-          </div>
         </div>
       </div>
 
