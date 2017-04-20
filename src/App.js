@@ -8,6 +8,7 @@ import Rnd from 'react-rnd';
 
 // app imports
 import { addAddon, getAddons } from './actions/addons'
+import { saveCreation } from './actions/creations'
 import CurrentAddons from './components/CurrentAddons'
 import Photo from './components/Photo'
 import Drawers from './components/Drawers'
@@ -24,7 +25,13 @@ class App extends React.Component {
     this.handleEmoji = this.handleEmoji.bind(this)
     this.handleText = this.handleText.bind(this)
     this.handleToggle = this.handleToggle.bind(this)
+    this.handleSave = this.handleSave.bind(this)
     this.props.getAddons()
+  }
+
+  handleSave() {
+    debugger
+    this.props.saveCreation(this.state.currentAddons, this.state.Account.token)
   }
 
   handleClick() {
@@ -67,6 +74,7 @@ class App extends React.Component {
     return (
       <div className="app">
         <div className="btn-bar">
+          <button className="btn" onClick={this.handleSave}>Save Creation</button>
           <button className="btn" onClick={this.handleClick}>Add Mustache</button>
           <button className="btn" onClick={this.handleSteven}>STEVEN ME</button>
           <button className="btn" onClick={this.toggleWebcam}>WEBCAM {this.state.webcamActive ? 'OFF' : 'ON' }</button>
@@ -83,6 +91,7 @@ class App extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
+    token: state.Account,
     usedAddons: state.Addon,
     addonLibrary: state.AddonLibrary
   }
@@ -90,6 +99,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
+    saveCreation: saveCreation,
     addAddon: addAddon,
     getAddons: getAddons
   }, dispatch);
