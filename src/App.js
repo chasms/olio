@@ -5,18 +5,25 @@ import { bindActionCreators } from 'redux'
 
 // node_modules imports
 import Rnd from 'react-rnd';
+import Modal from 'react-modal';
 
 // app imports
 import { addAddon, getAddons } from './actions/addons'
+import { saveCreation } from './actions/creations'
 import { getDrawers } from './actions/drawers'
 import CurrentAddons from './components/CurrentAddons'
 import Photo from './components/Photo'
 import Drawers from './components/Drawers'
+import Signup from './components/Signup'
 
 class App extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      webcamActive: false,
+      signupModalOpen: false
+    };
     this.state = { webcamActive: false };
     this.props.getDrawers()
     this.props.getAddons()
@@ -26,6 +33,13 @@ class App extends React.Component {
     this.handleEmoji = this.handleEmoji.bind(this)
     this.handleText = this.handleText.bind(this)
     this.handleToggle = this.handleToggle.bind(this)
+    this.handleSave = this.handleSave.bind(this)
+    this.toggleSignupModel = this.toggleSignupModel.bind(this)
+    this.props.getAddons()
+  }
+
+  handleSave() {
+    this.props.saveCreation(this.props.usedAddons, this.props.token)
   }
 
   handleClick() {
@@ -55,6 +69,12 @@ class App extends React.Component {
     })
   }
 
+  toggleSignupModel(){
+    this.setState({
+      signupModalOpen: !this.state.signupModalOpen
+    })
+  }
+
   handleToggle() {
     this.setState({
       webcamActive: false
@@ -68,33 +88,46 @@ class App extends React.Component {
     return (
       <div className="app">
         <div className="btn-bar">
+          <button className="btn" onClick={this.handleSave}>Save Creation</button>
           <button className="btn" onClick={this.handleClick}>Add Mustache</button>
           <button className="btn" onClick={this.handleSteven}>STEVEN ME</button>
           <button className="btn" onClick={this.toggleWebcam}>WEBCAM {this.state.webcamActive ? 'OFF' : 'ON' }</button>
           <button className="btn" onClick={this.handleEmoji}>Add Emoji</button>
           <button className="btn" onClick={this.handleText}>Add Text</button>
+          <button className="btn" onClick={this.toggleSignupModel}>Sign Up</button>
+
         </div>
-        <Drawers />
-        <CurrentAddons />
-        {this.state.webcamActive ? <Photo handleToggle={this.handleToggle} /> : null}
-      </div>
-    );
+        <Modal
+          isOpen={this.state.signupModalOpen}
+          contentLabel="Sign Up"
+          >
+            <Signup />
+          </Modal>
+          <Drawers />
+          <CurrentAddons />
+          {this.state.webcamActive ? <Photo handleToggle={this.handleToggle} /> : null}
+        </div>
+      );
+    }
   }
-}
 
-const mapStateToProps = (state) => {
-  return {
-    usedAddons: state.Addon,
-    addonLibrary: state.AddonLibrary
+  const mapStateToProps = (state) => {
+    return {
+      token: state.Accounts.token,
+      usedAddons: state.Addon,
+      addonLibrary: state.AddonLibrary
+    }
   }
-}
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({
-    addAddon: addAddon,
-    getAddons: getAddons,
-    getDrawers: getDrawers
-  }, dispatch);
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+  const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({
+      saveCreation: saveCreation,
+      addAddon: addAddon,
+      getAddons: getAddons,
+      getDrawers: getDrawers
+    }, dispatch);
+  }
+
+
+  export default connect(mapStateToProps, mapDispatchToProps)(App)

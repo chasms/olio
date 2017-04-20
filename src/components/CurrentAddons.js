@@ -15,6 +15,7 @@ class CurrentAddons extends Component {
     this.handleMouseUp = this.handleMouseUp.bind(this)
     this.handleActive = this.handleActive.bind(this)
     this.handleBlur = this.handleBlur.bind(this)
+
   }
 
   handleDelete(id) {
@@ -38,6 +39,8 @@ class CurrentAddons extends Component {
     })
     // event.stopPropagation()
   }
+
+
 
   renderImg(addon) {
     return (
@@ -87,6 +90,7 @@ class CurrentAddons extends Component {
         </span>)
         : null
     }
+
 
     renderAddons() {
       return this.props.usedAddons.map((addon, index) => {
