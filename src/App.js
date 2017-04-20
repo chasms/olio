@@ -100,10 +100,7 @@ class App extends React.Component {
       <div className="app">
         <div className="btn-bar">
           <button className="btn" onClick={this.handleSave}>Save Creation</button>
-          <button className="btn" onClick={this.handleClick}>Add Mustache</button>
-          <button className="btn" onClick={this.handleSteven}>STEVEN ME</button>
           <button className="btn" onClick={this.toggleWebcam}>WEBCAM {this.state.webcamActive ? 'OFF' : 'ON' }</button>
-          <button className="btn" onClick={this.handleEmoji}>Add Emoji</button>
           <button className="btn" onClick={this.handleText}>Add Text</button>
           <button className="btn" onClick={this.toggleSignupModel}>Sign Up</button>
 
