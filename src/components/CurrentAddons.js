@@ -70,7 +70,7 @@ class CurrentAddons extends Component {
         return (
           <div
             id={addon.id}
-            className={(addon.category === 'photo' ? 'screenshot-mask ' : 'img-mask ') + active}>
+            className={addon.category === 'photo' ? "screenshot-mask " + active : "img-mask " + active}>
           </div>
         )
       } else {
@@ -104,6 +104,7 @@ class CurrentAddons extends Component {
               initial={{x: addon.x, y: addon.y, width: addon.w, height: addon.h}}
               className='rnd'
               bounds={'parent'}
+              zIndex={addon.category === "photo" ? 2 : 100}
               >
                 {this.renderDelete(addon)}
                 <span className="box"

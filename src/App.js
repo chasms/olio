@@ -8,8 +8,8 @@ import Rnd from 'react-rnd';
 import Modal from 'react-modal';
 
 // app imports
-import { addAddon, getAddons } from './actions/addons'
-import { saveCreation } from './actions/creations'
+import { addAddon, getAddons, } from './actions/addons'
+import { saveCreation, restoreCreation } from './actions/creations'
 import { getDrawers } from './actions/drawers'
 import CurrentAddons from './components/CurrentAddons'
 import Photo from './components/Photo'
@@ -22,7 +22,8 @@ class App extends React.Component {
     super(props);
     this.state = {
       webcamActive: false,
-      signupModalOpen: false
+      signupModalOpen: false,
+      restoreId: 1
     };
     this.state = { webcamActive: false };
     this.props.getDrawers()
@@ -32,7 +33,9 @@ class App extends React.Component {
     this.handleText = this.handleText.bind(this)
     this.handleToggle = this.handleToggle.bind(this)
     this.handleSave = this.handleSave.bind(this)
+    this.handleRestore = this.handleRestore.bind(this)
     this.toggleSignupModel = this.toggleSignupModel.bind(this)
+    this.handleIdChange = this.handleIdChange.bind(this)
     this.props.getAddons()
   }
 
@@ -71,6 +74,16 @@ class App extends React.Component {
     })
   }
 
+  handleRestore() {
+    this.props.restoreCreation(this.state.restoreId, this.props.token)
+  }
+
+  handleIdChange(e) {
+    this.setState({
+      restoreId: parseInt(e.target.value, 10)
+    })
+  }
+
   render() {
     const divStyle = {
       height: '10000px'
@@ -93,6 +106,8 @@ class App extends React.Component {
           <button className="btn" onClick={this.toggleWebcam}>WEBCAM {this.state.webcamActive ? 'OFF' : 'ON' }</button>
           <button className="btn" onClick={this.handleText}>Add Text</button>
           <button className="btn" onClick={this.toggleSignupModel}>Sign Up</button>
+          <button className="btn" onClick={this.handleRestore}>Restore</button>
+          <input type='number' onChange={this.handleIdChange} value={this.state.restoreId} />
 
         </div>
         <Modal
@@ -124,7 +139,8 @@ class App extends React.Component {
       saveCreation: saveCreation,
       addAddon: addAddon,
       getAddons: getAddons,
-      getDrawers: getDrawers
+      getDrawers: getDrawers,
+      restoreCreation: restoreCreation
     }, dispatch);
   }
 
