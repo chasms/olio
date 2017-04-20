@@ -28,9 +28,7 @@ class App extends React.Component {
     this.props.getDrawers()
     this.props.getAddons()
     this.handleClick = this.handleClick.bind(this)
-    this.handleSteven = this.handleSteven.bind(this)
     this.toggleWebcam = this.toggleWebcam.bind(this)
-    this.handleEmoji = this.handleEmoji.bind(this)
     this.handleText = this.handleText.bind(this)
     this.handleToggle = this.handleToggle.bind(this)
     this.handleSave = this.handleSave.bind(this)
@@ -44,14 +42,6 @@ class App extends React.Component {
 
   handleClick() {
     this.props.addAddon(this.props.addonLibrary[0].addons[Math.floor(Math.random() * this.props.addonLibrary[0].addons.length - 1)])
-  }
-
-  handleSteven() {
-    this.props.addAddon(this.props.addonLibrary[2].addons[0])
-  }
-
-  handleEmoji() {
-    this.props.addAddon(this.props.addonLibrary[1].addons[Math.floor(Math.random() * this.props.addonLibrary[0].addons.length)])
   }
 
   handleText() {
