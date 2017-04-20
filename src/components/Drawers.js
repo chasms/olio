@@ -38,7 +38,7 @@ class Drawers extends React.Component {
       return (
         <div
           key={drawer.id}
-          className={"drawer-handles " + "drawer-" + drawer.id}
+          className={"drawer-handles flash-hover " + "drawer-" + drawer.id}
           onClick={this.handleDrawer.bind(null, drawer.id)}>
             {drawer.name}
         </div>
