@@ -40,9 +40,9 @@ class CurrentAddons extends Component {
   }
 
   renderImg(addon) {
-    // debugger
     return (
       <img
+        id={addon.id}
         className={'img-addon'}
         src={addon.url}>
       </img>
@@ -51,6 +51,7 @@ class CurrentAddons extends Component {
 
   renderText(addon) {
     let active = this.isActive(addon)
+    debugger
     return (
       <textarea
         id={addon.id}
@@ -103,7 +104,7 @@ class CurrentAddons extends Component {
             {this.state.activeId === addon.id ?
               (<span className="delete"
                 onClick={this.handleDelete.bind(null, addon.id)}>
-                [x]
+                <div className="button">x</div>
               </span>)
               : null }
           </Rnd>
