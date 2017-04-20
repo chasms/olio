@@ -1,8 +1,8 @@
-export default function Account(state = [ localStorage.getItem('token') ], action){
+export default function Account(state = {token: localStorage.getItem('token')}, action){
   switch (action.type) {
     case 'SET_TOKEN':
     debugger
-      return [ action.payload.token ]
+      return { token: action.payload.token }
     default:
       return state
   }

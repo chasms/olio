@@ -37,7 +37,6 @@ class Signup extends React.Component {
           <input type='password' onChange={this.handleChange} name='password' />
           <input type='password' onChange={this.handleChange} name='password_confirmation' />
           <input type='submit' />
-          {localStorage.getItem('token')}
         </form>
       </div>
     )
