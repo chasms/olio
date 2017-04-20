@@ -22,6 +22,7 @@ export const restoreCreation = (id, token) => {
       method: 'get',
       headers: { 'AUTHORIZATION': `Bearer ${token}`},
     }).then(resp => {
+      dispatch({type: 'DELETE_ADDONS'})
       dispatch({type: 'RESTORE_CREATION', payload: resp.data})
     })
   }

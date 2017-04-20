@@ -22,7 +22,8 @@ class App extends React.Component {
     super(props);
     this.state = {
       webcamActive: false,
-      signupModalOpen: false
+      signupModalOpen: false,
+      restoreId: 1
     };
     this.state = { webcamActive: false };
     this.props.getDrawers()
@@ -34,6 +35,7 @@ class App extends React.Component {
     this.handleSave = this.handleSave.bind(this)
     this.handleRestore = this.handleRestore.bind(this)
     this.toggleSignupModel = this.toggleSignupModel.bind(this)
+    this.handleIdChange = this.handleIdChange.bind(this)
     this.props.getAddons()
   }
 
@@ -73,7 +75,13 @@ class App extends React.Component {
   }
 
   handleRestore() {
-    this.props.restoreCreation(6, this.props.token)
+    this.props.restoreCreation(this.state.restoreId, this.props.token)
+  }
+
+  handleIdChange(e) {
+    this.setState({
+      restoreId: parseInt(e.target.value, 10)
+    })
   }
 
   render() {
@@ -99,6 +107,7 @@ class App extends React.Component {
           <button className="btn" onClick={this.handleText}>Add Text</button>
           <button className="btn" onClick={this.toggleSignupModel}>Sign Up</button>
           <button className="btn" onClick={this.handleRestore}>Restore</button>
+          <input type='number' onChange={this.handleIdChange} value={this.state.restoreId} />
 
         </div>
         <Modal
