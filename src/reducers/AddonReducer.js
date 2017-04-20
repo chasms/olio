@@ -17,10 +17,10 @@ export default function Addon(state = [], action){
         y: action.payload.coordinates.top,
         x: action.payload.coordinates.left,
         h: found.category === 'text' ? (
-          action.payload.coordinates.height - 6)
+          action.payload.coordinates.height - 4)
           : (action.payload.coordinates.height),
         w: found.category === 'text' ? (
-          action.payload.coordinates.width - 6)
+          action.payload.coordinates.width - 4)
           : (action.payload.coordinates.width),
         category: found.category,
       }

@@ -8,6 +8,7 @@ import Rnd from 'react-rnd';
 
 // app imports
 import { addAddon, getAddons } from './actions/addons'
+import { getDrawers } from './actions/drawers'
 import CurrentAddons from './components/CurrentAddons'
 import Photo from './components/Photo'
 import Drawers from './components/Drawers'
@@ -17,14 +18,14 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { webcamActive: false };
-    setTimeout(() => this.setState({ zIndex: 1000 }), 5000);
+    this.props.getDrawers()
+    this.props.getAddons()
     this.handleClick = this.handleClick.bind(this)
     this.handleSteven = this.handleSteven.bind(this)
     this.toggleWebcam = this.toggleWebcam.bind(this)
     this.handleEmoji = this.handleEmoji.bind(this)
     this.handleText = this.handleText.bind(this)
     this.handleToggle = this.handleToggle.bind(this)
-    this.props.getAddons()
   }
 
   handleClick() {
@@ -91,7 +92,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     addAddon: addAddon,
-    getAddons: getAddons
+    getAddons: getAddons,
+    getDrawers: getDrawers
   }, dispatch);
 }
 
