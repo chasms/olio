@@ -51,93 +51,93 @@ class CurrentAddons extends Component {
 
   renderText(addon) {
     let active = this.isActive(addon)
-    debugger
     return (
-
       <textarea
         id={addon.id}
         className={'text-addon ' + active}
         placeholder="Drag Me Anywhere!"
         >
-      </textarea>
-    )
-  }
-
-  renderMask(addon) {
-    let active = this.isActive(addon)
-    if (addon.category !== 'text') {
-      return (
-        <div
-          id={addon.id}
-          className={"img-mask " + active}>
-        </div>
+        </textarea>
       )
-    } else {
-      return
     }
-  }
 
-  isActive(addon) {
-    return this.state.activeId === addon.id ? 'active-addon' : null
-  }
-
-  renderAddons() {
-    return this.props.usedAddons.map((addon, index) => {
-
-      return (
-        <Rnd
-          key={addon.id}
-          id={addon.id}
-          ref={c => { this.rnd = c; }}
-          initial={{x: addon.x, y: addon.y, width: addon.w, height: addon.h}}
-          className='rnd'
-          bounds={'parent'}
-        >
-            <span className="box"
-              onMouseDown={this.handleActive.bind(null, addon.id)}
-              onMouseOut={this.handleMouseUp.bind(null, addon.id)}
-              >
-              {this.renderMask(addon)}
-              {addon.category === 'text' ?
-                (this.renderText(addon)) : (this.renderImg(addon)) }
-            </span>
-
-            {this.state.activeId === addon.id ?
-              (<span className="delete"
-                onClick={this.handleDelete.bind(null, addon.id)}>
-                <div className="button">x</div>
-              </span>)
-              : null }
-          </Rnd>
+    renderMask(addon) {
+      let active = this.isActive(addon)
+      if (addon.category !== 'text') {
+        return (
+          <div
+            id={addon.id}
+            className={"img-mask " + active}>
+          </div>
         )
-      })
+      } else {
+        return
+      }
     }
 
-  render() {
-    return (
-      <div className="workspace" onDoubleClick={this.handleBlur}>
-        {this.renderAddons()}
-        
-      </div>
-    )
-  }
-}
+    isActive(addon) {
+      return this.state.activeId === addon.id ? 'active-addon' : null
+    }
+
+    renderDelete(addon) {
+      return this.state.activeId === addon.id ?(
+        <span className="delete"
+          onClick={this.handleDelete.bind(null, addon.id)}>
+          <div className="delete-button flash-hover">x</div>
+        </span>)
+        : null
+    }
+
+    renderAddons() {
+      return this.props.usedAddons.map((addon, index) => {
+
+        return (
+          <Rnd
+            key={addon.id}
+            id={addon.id}
+            ref={c => { this.rnd = c; }}
+            initial={{x: addon.x, y: addon.y, width: addon.w, height: addon.h}}
+            className='rnd'
+            bounds={'parent'}
+            >
+              {this.renderDelete(addon)}
+              <span className="box"
+                onMouseDown={this.handleActive.bind(null, addon.id)}
+                onMouseOut={this.handleMouseUp.bind(null, addon.id)}
+                >
+                  {this.renderMask(addon)}
+                  {addon.category === 'text' ?
+                  (this.renderText(addon)) : (this.renderImg(addon)) }
+                </span>
+              </Rnd>
+            )
+          })
+        }
+
+        render() {
+          return (
+            <div className="workspace" onDoubleClick={this.handleBlur}>
+              {this.renderAddons()}
+            </div>
+          )
+        }
+      }
 
 
-const mapStateToProps = (state) => {
-  return {
-    usedAddons: state.Addon,
-    allAddons: state.AddonLibrary
-  }
-}
+      const mapStateToProps = (state) => {
+        return {
+          usedAddons: state.Addon,
+          allAddons: state.AddonLibrary
+        }
+      }
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({
-    addAddon: addAddon,
-    getAddons: getAddons,
-    removeAddon: removeAddon,
-    saveAddonLocation: saveAddonLocation,
-  }, dispatch);
-};
+      const mapDispatchToProps = (dispatch) => {
+        return bindActionCreators({
+          addAddon: addAddon,
+          getAddons: getAddons,
+          removeAddon: removeAddon,
+          saveAddonLocation: saveAddonLocation,
+        }, dispatch);
+      };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CurrentAddons)
+      export default connect(mapStateToProps, mapDispatchToProps)(CurrentAddons)
