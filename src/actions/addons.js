@@ -11,17 +11,6 @@ export const getAddons = () => {
   }
 }
 
-export const getAddonsByCategory = (category_name) => {
-  return (dispatch) => {
-    axios({
-      method:'get',
-      url:'http://localhost:3001/categories/${category_name}/'
-    }).then(resp => {
-      dispatch({type: 'GET_ADDONS', payload: resp.data})
-    })
-  }
-}
-
 export const addAddon = (addon) => ({
   type: 'ADD_ADDON',
   payload: addon

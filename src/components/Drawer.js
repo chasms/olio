@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { getDrawers } from '../actions/drawers'
-import { getAddonsByCategory } from '../actions/addons'
 import DrawerItem from './DrawerItem'
 
 class Drawer extends React.Component {
@@ -32,10 +31,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({
-    getAddonsByCategory: getAddonsByCategory,
-  }, dispatch);
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Drawer)
+export default connect(mapStateToProps)(Drawer)

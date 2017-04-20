@@ -79,7 +79,7 @@ class CurrentAddons extends Component {
     }
 
     isActive(addon) {
-      return this.state.activeId === addon.id ? 'active-addon' : null
+      return this.state.activeId === addon.id ? 'active-addon' : ''
     }
 
     renderDelete(addon) {
@@ -95,6 +95,7 @@ class CurrentAddons extends Component {
       renderAddons() {
 
         return this.props.usedAddons.map((addon, index) => {
+
           return (
             <Rnd
               key={addon.id}
@@ -128,21 +129,20 @@ class CurrentAddons extends Component {
           }
         }
 
+  const mapStateToProps = (state) => {
+    return {
+      usedAddons: state.Addon,
+      allAddons: state.AddonLibrary
+    }
+  }
 
-        const mapStateToProps = (state) => {
-          return {
-            usedAddons: state.Addon,
-            allAddons: state.AddonLibrary
-          }
-        }
+  const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({
+      addAddon: addAddon,
+      getAddons: getAddons,
+      removeAddon: removeAddon,
+      saveAddonLocation: saveAddonLocation,
+    }, dispatch);
+  };
 
-        const mapDispatchToProps = (dispatch) => {
-          return bindActionCreators({
-            addAddon: addAddon,
-            getAddons: getAddons,
-            removeAddon: removeAddon,
-            saveAddonLocation: saveAddonLocation,
-          }, dispatch);
-        };
-
-        export default connect(mapStateToProps, mapDispatchToProps)(CurrentAddons)
+  export default connect(mapStateToProps, mapDispatchToProps)(CurrentAddons)
