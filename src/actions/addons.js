@@ -4,18 +4,7 @@ export const getAddons = () => {
   return (dispatch) => {
     axios({
       method:'get',
-      url:'http://localhost:3001/categories/'
-    }).then(resp => {
-      dispatch({type: 'GET_ADDONS', payload: resp.data})
-    })
-  }
-}
-
-export const getAddonsByCategory = (category_name) => {
-  return (dispatch) => {
-    axios({
-      method:'get',
-      url:'http://localhost:3001/categories/${category_name}/'
+      url:'http://localhost:3001/addons/'
     }).then(resp => {
       dispatch({type: 'GET_ADDONS', payload: resp.data})
     })

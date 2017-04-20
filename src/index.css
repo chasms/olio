@@ -226,17 +226,11 @@ p {
   overflow-y: scroll;
   z-index: 999;
 }
-/*.drawer-1 {
-  background-color: rgb(100, 100, 100);
-}
-.drawer-2 {
-  background-color: rgb(120, 120, 120);
-}
-.drawer-3 {
-  background-color: rgb(0, 140, 140);
-}*/
 .active-drawer {
   z-index: 1000 !important;
+}
+.active-drawer-handle {
+  background-color: whitesmoke;
 }
 .inactive-drawer {
   z-index: 999;
@@ -250,10 +244,10 @@ textarea {
   outline: none;
   background: none;
   border: none;
-  color: #1D0F29;
+  color: white;
   padding-left: 10;
   font-weight: bold;
-  font font-size: 40px;
+  font-size: 40px;
 }
 .drawer-item {
   display: inline-grid;
