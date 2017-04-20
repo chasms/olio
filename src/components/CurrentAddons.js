@@ -46,7 +46,7 @@ class CurrentAddons extends Component {
     return (
       <img
         id={addon.id}
-        className={'img-addon'}
+        className={addon.category === 'photo' ? 'screenshot' : 'img-addon'}
         src={addon.url}>
       </img>
     )
@@ -79,7 +79,7 @@ class CurrentAddons extends Component {
     }
 
     isActive(addon) {
-      return this.state.activeId === addon.id ? 'active-addon' : null
+      return this.state.activeId === addon.id ? 'active-addon' : ''
     }
 
     renderDelete(addon) {
@@ -95,12 +95,7 @@ class CurrentAddons extends Component {
       renderAddons() {
 
         return this.props.usedAddons.map((addon, index) => {
-          let screenShotStyle = {}
-          if (addon.category === 'photo') {
-            screenShotStyle = {
-              zIndex: -1
-            }
-          }
+
           return (
             <Rnd
               key={addon.id}
@@ -112,7 +107,6 @@ class CurrentAddons extends Component {
               >
                 {this.renderDelete(addon)}
                 <span className="box"
-                  style={screenShotStyle}
                   onMouseDown={this.handleActive.bind(null, addon.id)}
                   onMouseOut={this.handleMouseUp.bind(null, addon.id)}
                   >
@@ -134,21 +128,20 @@ class CurrentAddons extends Component {
           }
         }
 
+  const mapStateToProps = (state) => {
+    return {
+      usedAddons: state.Addon,
+      allAddons: state.AddonLibrary
+    }
+  }
 
-        const mapStateToProps = (state) => {
-          return {
-            usedAddons: state.Addon,
-            allAddons: state.AddonLibrary
-          }
-        }
+  const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({
+      addAddon: addAddon,
+      getAddons: getAddons,
+      removeAddon: removeAddon,
+      saveAddonLocation: saveAddonLocation,
+    }, dispatch);
+  };
 
-        const mapDispatchToProps = (dispatch) => {
-          return bindActionCreators({
-            addAddon: addAddon,
-            getAddons: getAddons,
-            removeAddon: removeAddon,
-            saveAddonLocation: saveAddonLocation,
-          }, dispatch);
-        };
-
-        export default connect(mapStateToProps, mapDispatchToProps)(CurrentAddons)
+  export default connect(mapStateToProps, mapDispatchToProps)(CurrentAddons)
