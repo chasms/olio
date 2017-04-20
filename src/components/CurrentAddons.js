@@ -46,7 +46,7 @@ class CurrentAddons extends Component {
     return (
       <img
         id={addon.id}
-        className={'img-addon'}
+        className={addon.category === 'photo' ? 'screenshot' : 'img-addon'}
         src={addon.url}>
       </img>
     )
@@ -70,7 +70,7 @@ class CurrentAddons extends Component {
         return (
           <div
             id={addon.id}
-            className={"img-mask " + active}>
+            className={addon.category === 'photo' ? "screenshot-mask " + active : "img-mask " + active}>
           </div>
         )
       } else {
@@ -95,12 +95,6 @@ class CurrentAddons extends Component {
       renderAddons() {
 
         return this.props.usedAddons.map((addon, index) => {
-          let screenShotStyle = {}
-          if (addon.category === 'photo') {
-            screenShotStyle = {
-              zIndex: -1
-            }
-          }
           return (
             <Rnd
               key={addon.id}
@@ -109,10 +103,10 @@ class CurrentAddons extends Component {
               initial={{x: addon.x, y: addon.y, width: addon.w, height: addon.h}}
               className='rnd'
               bounds={'parent'}
+              zIndex={addon.category === "photo" ? 2 : 100}
               >
                 {this.renderDelete(addon)}
                 <span className="box"
-                  style={screenShotStyle}
                   onMouseDown={this.handleActive.bind(null, addon.id)}
                   onMouseOut={this.handleMouseUp.bind(null, addon.id)}
                   >

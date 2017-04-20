@@ -128,6 +128,9 @@ p {
   width: 100%;
   z-index: 99;
 }
+.screenshot {
+  z-index: 2;
+}
 .text-addon {
   background: transparent;
   border: 0 none;
@@ -146,6 +149,14 @@ p {
   height: 100%;
   width: 100%;
   z-index: 100;
+}
+.screenshot-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  height: 100%;
+  width: 100%;
 }
 .photobox {
   position: fixed;
