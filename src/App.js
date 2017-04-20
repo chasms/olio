@@ -85,6 +85,17 @@ class App extends React.Component {
     const divStyle = {
       height: '10000px'
     }
+
+    const customStyles = {
+      content : {
+        top                   : '50%',
+        left                  : '50%',
+        right                 : 'auto',
+        bottom                : 'auto',
+        marginRight           : '-50%',
+        transform             : 'translate(-50%, -50%)'
+      }
+    };
     return (
       <div className="app">
         <div className="btn-bar">
@@ -100,6 +111,7 @@ class App extends React.Component {
         <Modal
           isOpen={this.state.signupModalOpen}
           contentLabel="Sign Up"
+          style={customStyles}
           >
             <Signup />
           </Modal>
