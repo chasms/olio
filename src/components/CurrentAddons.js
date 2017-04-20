@@ -51,9 +51,7 @@ class CurrentAddons extends Component {
 
   renderText(addon) {
     let active = this.isActive(addon)
-    debugger
     return (
-
       <textarea
         id={addon.id}
         className={'text-addon ' + active}
@@ -120,7 +118,6 @@ class CurrentAddons extends Component {
           return (
             <div className="workspace" onDoubleClick={this.handleBlur}>
               {this.renderAddons()}
-
             </div>
           )
         }
