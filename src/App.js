@@ -10,6 +10,7 @@ import Modal from 'react-modal';
 // app imports
 import { addAddon, getAddons } from './actions/addons'
 import { saveCreation } from './actions/creations'
+import { getDrawers } from './actions/drawers'
 import CurrentAddons from './components/CurrentAddons'
 import Photo from './components/Photo'
 import Drawers from './components/Drawers'
@@ -23,6 +24,9 @@ class App extends React.Component {
       webcamActive: false,
       signupModalOpen: false
     };
+    this.state = { webcamActive: false };
+    this.props.getDrawers()
+    this.props.getAddons()
     this.handleClick = this.handleClick.bind(this)
     this.handleSteven = this.handleSteven.bind(this)
     this.toggleWebcam = this.toggleWebcam.bind(this)
@@ -115,12 +119,15 @@ class App extends React.Component {
     }
   }
 
+
   const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
       saveCreation: saveCreation,
       addAddon: addAddon,
-      getAddons: getAddons
+      getAddons: getAddons,
+      getDrawers: getDrawers
     }, dispatch);
   }
+
 
   export default connect(mapStateToProps, mapDispatchToProps)(App)
