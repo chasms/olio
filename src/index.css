@@ -183,10 +183,10 @@ p {
   -ms-transition: bottom .5s ease-in-out;
 }
 .active-drawer-wrapper{
-  bottom: 50px !important;
+  bottom: 25px !important;
 }
 .drawer-handles-wrapper {
-  background-color: lightgrey;
+  /*background-color: lightgrey;*/
   position: inherit;
   width: 100%;
   height: 25px;
@@ -230,7 +230,7 @@ p {
   z-index: 1000 !important;
 }
 .active-drawer-handle {
-  background-color: whitesmoke;
+  background-color: transparent;
 }
 .inactive-drawer {
   z-index: 999;
