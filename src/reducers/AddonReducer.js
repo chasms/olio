@@ -25,6 +25,10 @@ export default function Addon(state = [], action){
         category: found.category,
       }
       return [...rest, newLocation]
+
+    case 'RESTORE_CREATION':
+      debugger
+      return action.payload.composition
     default:
       return state
   }

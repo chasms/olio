@@ -8,8 +8,8 @@ import Rnd from 'react-rnd';
 import Modal from 'react-modal';
 
 // app imports
-import { addAddon, getAddons } from './actions/addons'
-import { saveCreation } from './actions/creations'
+import { addAddon, getAddons, } from './actions/addons'
+import { saveCreation, restoreCreation } from './actions/creations'
 import { getDrawers } from './actions/drawers'
 import CurrentAddons from './components/CurrentAddons'
 import Photo from './components/Photo'
@@ -32,6 +32,7 @@ class App extends React.Component {
     this.handleText = this.handleText.bind(this)
     this.handleToggle = this.handleToggle.bind(this)
     this.handleSave = this.handleSave.bind(this)
+    this.handleRestore = this.handleRestore.bind(this)
     this.toggleSignupModel = this.toggleSignupModel.bind(this)
     this.props.getAddons()
   }
@@ -71,6 +72,10 @@ class App extends React.Component {
     })
   }
 
+  handleRestore() {
+    this.props.restoreCreation(6, this.props.token)
+  }
+
   render() {
     const divStyle = {
       height: '10000px'
@@ -93,6 +98,7 @@ class App extends React.Component {
           <button className="btn" onClick={this.toggleWebcam}>WEBCAM {this.state.webcamActive ? 'OFF' : 'ON' }</button>
           <button className="btn" onClick={this.handleText}>Add Text</button>
           <button className="btn" onClick={this.toggleSignupModel}>Sign Up</button>
+          <button className="btn" onClick={this.handleRestore}>Restore</button>
 
         </div>
         <Modal
@@ -124,7 +130,8 @@ class App extends React.Component {
       saveCreation: saveCreation,
       addAddon: addAddon,
       getAddons: getAddons,
-      getDrawers: getDrawers
+      getDrawers: getDrawers,
+      restoreCreation: restoreCreation
     }, dispatch);
   }
 
