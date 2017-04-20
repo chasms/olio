@@ -70,7 +70,7 @@ class CurrentAddons extends Component {
         return (
           <div
             id={addon.id}
-            className={"img-mask " + active}>
+            className={(addon.category === 'photo' ? 'screenshot-mask ' : 'img-mask ') + active}>
           </div>
         )
       } else {
