@@ -40,8 +40,6 @@ class CurrentAddons extends Component {
     // event.stopPropagation()
   }
 
-
-
   renderImg(addon) {
     return (
       <img

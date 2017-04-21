@@ -117,16 +117,12 @@ class App extends React.Component {
     console.log(e)
     if (e.ctrlKey && e.which == 87) {
       this.toggleWebcam()
-      alert('webcam shortcut is connected')
     } else if (e.ctrlKey && e.which == 82) {
       this.handleRestore()
-      alert('restore shortcut is connected')
     } else if (e.ctrlKey && e.which == 84) {
       this.handleText()
-      alert('text shortcut')
     } else if (e.ctrlKey & e.which == 83) {
       this.handleSave()
-      alert('save shortcut')
     } 
   }
 
