@@ -20,18 +20,6 @@ p {
   width: 100%;
   z-index: -1;
 }
-.btn-bar {
-  width: 100%;
-  padding: 0px;
-  background-color: lightgrey;
-  text-align: center;
-  position: absolute;
-  right: 0;
-  z-index: 2;
-}
-.btn {
-  margin: 10px;
-}
 .workspace {
   height: 100%;
   width: 100%;
@@ -44,11 +32,89 @@ p {
   -o-user-select: none;
   user-select: none;
 }
-.handle {
-  width: 100px;
-  height: 100px;
-  background: #333;
+
+/*	Button Bar
+==================================================*/
+.btn-bar {
+  width: 100%;
+  padding: 0px;
+  background-color: lightgrey;
+  text-align: center;
+  position: absolute;
+  right: 0;
+  z-index: 2;
 }
+.btn {
+  margin: 10px;
+}
+.keyboard-img {
+  height: 45px;
+  width: 55px;
+  display: inline-block;
+  float: left;
+  margin-left: 35px;
+}
+
+/*	Signup/Login
+==================================================*/
+.signup {
+  width: 100%;
+  height: 100%;
+  margin: 5px;
+  text-align: center;
+}
+.form-item {
+  margin: 15px;
+  display: block;
+  height: 25px;
+  width: 200px;
+  transition: all .5s;
+  -webkit-transition: all .5s;
+  -moz-transition: all .5s;
+  -o-transition: all .5s;
+  -ms-transition: all .5s;
+}
+.form-input {
+  border: none;
+  border-bottom: 1px solid silver;
+  outline: none;
+  background-color: whitesmoke;
+}
+.form-input:hover {
+  border: none;
+  border-bottom: 1px solid black;
+}
+.form-submit {
+  background-color: transparent;
+  border: 1px solid silver;
+  border-style: solid;
+  border-width: thin;
+  border-radius: 5px;
+  margin-top: 25px;
+  cursor: pointer;
+  color: silver;
+}
+.form-submit:hover {
+  border-color: black;
+  color: dimgrey;
+}
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    silver;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    silver;
+   opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    silver;
+   opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color:    silver;
+}
+
+/*	Rnd Containers
+==================================================*/
 .box {
   text-align: center;
   display: inline-block;
@@ -66,6 +132,9 @@ p {
   align-items: center;
   justify-content: center;
 }
+
+/*	Delete Button
+==================================================*/
 .delete-button {
   font-family: helvetica;
   font-weight: 300;
@@ -108,12 +177,9 @@ p {
 .delete {
   margin-bottom:50px;
 }
-.img-addon {
-  position: inherit;
-  height: 100%;
-  width: 100%;
-  z-index: 99;
-}
+
+/*	Addons
+==================================================*/
 .non-selectable {
   -webkit-user-select: none; /* Chrome/Safari */
   -moz-user-select: none; /* Firefox */
@@ -122,6 +188,12 @@ p {
   /* Rules below not implemented in browsers yet */
   -o-user-select: none;
   user-select: none;
+}
+.img-addon {
+  position: inherit;
+  height: 100%;
+  width: 100%;
+  z-index: 99;
 }
 .screenshot {
   position: inherit;
@@ -171,6 +243,37 @@ p {
   outline: 1px solid silver;
   z-index: 100;
 }
+.textbox {
+  height: 200px;
+  width: 200px;
+}
+textarea {
+  overflow: auto;
+  outline: none;
+  background: none;
+  border: none;
+  color: lightgrey;
+  padding-left: 10;
+  font-weight: bold;
+  font-size: 40px;
+}
+textarea::-webkit-input-placeholder {
+  color: whitesmoke;
+}
+textarea:-moz-placeholder {
+  color:    whitesmoke;
+  opacity:  1;
+}
+textarea::-moz-placeholder {
+  color:    whitesmoke;
+  opacity:  1;
+}
+textarea:-ms-input-placeholder {
+  color:    whitesmoke;
+}
+
+/*	Drawers
+==================================================*/
 .drawers {
   position: fixed;
   bottom: 0;
@@ -201,6 +304,9 @@ p {
   height: 25px;
   bottom: 0;
   left: 0;
+}
+.active-drawer-handle {
+  background-color: transparent;
 }
 .drawer-handles {
   background-color: lightgrey;
@@ -238,39 +344,8 @@ p {
 .active-drawer {
   z-index: 1000 !important;
 }
-.active-drawer-handle {
-  background-color: transparent;
-}
 .inactive-drawer {
   z-index: 999;
-}
-.textbox {
-  height: 200px;
-  width: 200px;
-}
-textarea {
-  overflow: auto;
-  outline: none;
-  background: none;
-  border: none;
-  color: lightgrey;
-  padding-left: 10;
-  font-weight: bold;
-  font-size: 40px;
-}
-textarea::-webkit-input-placeholder {
-  color: whitesmoke;
-}
-textarea:-moz-placeholder {
-  color:    whitesmoke;
-  opacity:  1;
-}
-textarea::-moz-placeholder {
-  color:    whitesmoke;
-  opacity:  1;
-}
-textarea:-ms-input-placeholder {
-  color:    whitesmoke;
 }
 .drawer-item {
   display: inline-grid;
@@ -282,12 +357,4 @@ textarea:-ms-input-placeholder {
 .drawer-item img {
   height: 100%;
   width: 100%;
-}
-
-.keyboard-img {
-  height: 45px;
-  width: 55px;
-  display: inline-block;
-  float: left;
-  margin-left: 35px;
 }
