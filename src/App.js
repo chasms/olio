@@ -124,25 +124,23 @@ class App extends React.Component {
         transform             : 'translate(-50%, -50%)'
       }
     }
-    if (!this.props.token)
-    return (
-      <Modal
-        isOpen={this.state.signupModalOpen}
-        contentLabel="Sign Up"
-        style={customStyles}
-        >
-          <Signup />
-        </Modal>
-      )
+    if (!this.props.token) {
+      return (
+        <Modal
+          isOpen={this.state.signupModalOpen}
+          contentLabel="Sign Up"
+          style={customStyles}
+          >
+            <Signup />
+          </Modal>
+        )
+      }
     }
-
-
 
     render() {
       const divStyle = {
         height: '10000px'
       }
-
 
       return (
         <div className="app">
@@ -154,9 +152,6 @@ class App extends React.Component {
             {this.renderRestore()}
             {this.renderRestoreInput()}
             {this.renderLogout()}
-
-
-
           </div>
           {this.renderSignInModal()}
           <Drawers />
@@ -176,7 +171,6 @@ class App extends React.Component {
     }
   }
 
-
   const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
       deleteAllAddons: deleteAllAddons,
@@ -189,6 +183,5 @@ class App extends React.Component {
       restoreCreation: restoreCreation
     }, dispatch);
   }
-
 
   export default connect(mapStateToProps, mapDispatchToProps)(App)
