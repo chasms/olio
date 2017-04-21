@@ -8,6 +8,7 @@ import Rnd from 'react-rnd';
 
 // app imports
 import { addAddon, getAddons, removeAddon, saveAddonLocation } from '../actions/addons'
+import Delete from './Delete'
 
 class CurrentAddons extends Component {
 
@@ -100,10 +101,10 @@ class CurrentAddons extends Component {
 
     renderDelete(addon) {
       return this.state.activeId === addon.id ?(
-        <span className="delete"
-          onClick={this.handleDelete.bind(null, addon.id)}>
-          <div className="delete-button flash-hover">x</div>
-        </span>)
+        <Delete
+          addon={addon}
+          onClick={this.handleDelete.bind(null, addon.id)}
+        />)
         : null
       }
 
