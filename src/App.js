@@ -42,7 +42,12 @@ class App extends React.Component {
     this.toggleSignupModel = this.toggleSignupModel.bind(this)
     this.handleIdChange = this.handleIdChange.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
+
     this.closeModal = this.closeModal.bind(this)
+
+    this.renderRestoreInput = this.renderRestoreInput.bind(this)
+    this.handleKeyDown = this.handleKeyDown.bind(this)
+
   }
 
   handleSave() {
@@ -133,6 +138,25 @@ class App extends React.Component {
     return !this.props.token ? <button className="btn" onClick={this.toggleSignupModel}>Sign Up</button> : null
   }
 
+  handleKeyDown(e) {
+    console.log(e)
+    if (e.ctrlKey && e.which == 87) {
+      this.toggleWebcam()
+    } else if (e.ctrlKey && e.which == 82) {
+      this.handleRestore()
+    } else if (e.ctrlKey && e.which == 84) {
+      this.handleText()
+    } else if (e.ctrlKey & e.which == 83) {
+      this.handleSave()
+    } 
+  }
+
+   componentWillMount(){
+    document.addEventListener("keydown", this.handleKeyDown.bind(this));
+  }
+
+
+
   renderSignInModal() {
 
     const customStyles = {
@@ -166,7 +190,7 @@ class App extends React.Component {
 
 
       return (
-        <div className="app">
+        <div className="app" onKeyDown={this.handleKeyDown}>
           <div className="btn-bar">
             {this.renderSaveButton()}
             <button className="btn" onClick={this.toggleWebcam}>WEBCAM {this.state.webcamActive ? 'OFF' : 'ON' }</button>
