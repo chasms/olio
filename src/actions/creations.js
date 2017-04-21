@@ -9,7 +9,7 @@ export const saveCreation = (addons, token) => {
       headers: { 'AUTHORIZATION': `Bearer ${token}`},
       data: { addons: addons }
     }).then(resp => {
-      return
+      dispatch({type: 'GET_CREATIONS', payload: resp.data})
     })
   }
 }
@@ -24,6 +24,20 @@ export const restoreCreation = (id, token) => {
     }).then(resp => {
       dispatch({type: 'DELETE_ADDONS'})
       dispatch({type: 'RESTORE_CREATION', payload: resp.data})
+    })
+  }
+}
+
+export const getCreations = (token) => {
+
+  return (dispatch) => {
+
+    axios({
+      url: 'http://localhost:3001/creations/',
+      method: 'get',
+      headers: { 'AUTHORIZATION': `Bearer ${token}`},
+    }).then(resp => {
+      dispatch({type: 'GET_CREATIONS', payload: resp.data})
     })
   }
 }

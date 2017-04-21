@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux'
 // node_modules imports
 import Rnd from 'react-rnd';
 import Modal from 'react-modal';
+import Sidebar from 'react-sidebar'
 
 // app imports
 import { addAddon, getAddons, deleteAllAddons } from './actions/addons'
@@ -16,6 +17,7 @@ import CurrentAddons from './components/CurrentAddons'
 import Photo from './components/Photo'
 import Drawers from './components/Drawers'
 import Signup from './components/Signup'
+import Tooltip from './components/Tooltip'
 
 class App extends React.Component {
 
@@ -23,22 +25,25 @@ class App extends React.Component {
     super(props);
     this.state = {
       webcamActive: false,
-      signupModalOpen: true,
+      signupModalOpen: false,
+      sidebarOpen: false,
       restoreId: ''
     };
+    this.props.getCreations(this.props.token)
     this.props.getDrawers()
     this.props.getAddons()
     this.props.checkIfLoggedIn()
+    this.handleRestoreCreation = this.handleRestoreCreation.bind(this)
     this.handleClick = this.handleClick.bind(this)
     this.toggleWebcam = this.toggleWebcam.bind(this)
     this.handleText = this.handleText.bind(this)
-    this.handleToggle = this.handleToggle.bind(this)
     this.handleSave = this.handleSave.bind(this)
-    this.handleRestore = this.handleRestore.bind(this)
+    this.handleSidebar = this.handleSidebar.bind(this)
     this.toggleSignupModel = this.toggleSignupModel.bind(this)
     this.handleIdChange = this.handleIdChange.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
-    this.renderRestoreInput = this.renderRestoreInput.bind(this)
+    this.closeModal = this.closeModal.bind(this)
+    this.handleKeyDown = this.handleKeyDown.bind(this)
   }
 
   handleSave() {
@@ -58,9 +63,16 @@ class App extends React.Component {
     })
   }
 
+  closeModal() {
+    this.setState({
+      signupModalOpen: false
+    })
+  }
+
   toggleWebcam(){
     this.setState({
-      webcamActive: !this.state.webcamActive
+      webcamActive: !this.state.webcamActive,
+      signupModalOpen: false
     })
   }
 
@@ -70,14 +82,11 @@ class App extends React.Component {
     })
   }
 
-  handleToggle() {
+  handleSidebar() {
     this.setState({
-      webcamActive: false
+      sidebarOpen: !this.state.sidebarOpen
     })
-  }
-
-  handleRestore() {
-    this.props.restoreCreation(this.state.restoreId, this.props.token)
+    // this.props.restoreCreation(this.state.restoreId, this.props.token)
   }
 
   handleIdChange(e) {
@@ -92,16 +101,23 @@ class App extends React.Component {
     this.props.deleteAllAddons()
   }
 
+  handleRestoreCreation(id, token) {
+    this.handleSidebar()
+    this.props.restoreCreation(id, token)
+  }
+
+  renderCreationList() {
+    return this.props.creations.map((creation) => {
+      return <p onClick={this.handleRestoreCreation.bind(null, creation.id, this.props.token)}>Creation #{creation.id}</p>
+    })
+  }
+
   renderSaveButton() {
     return this.props.token ? <button className="btn" onClick={this.handleSave}>Save Creation</button> : null
   }
 
   renderRestore() {
-    return this.props.token ? <button className="btn" onClick={this.handleRestore}>Restore</button> : null
-  }
-
-  renderRestoreInput() {
-    return this.props.token ? <input type='number' onChange={this.handleIdChange} value={this.state.restoreId}/> : null
+    return this.props.token ? <button className="btn" onClick={this.handleSidebar}>Restore</button> : null
   }
 
   renderLogout() {
@@ -110,6 +126,23 @@ class App extends React.Component {
 
   renderSignup() {
     return !this.props.token ? <button className="btn" onClick={this.toggleSignupModel}>Sign Up</button> : null
+  }
+
+  handleKeyDown(e) {
+    console.log(e)
+    if (e.ctrlKey && e.which == 87) {
+      this.toggleWebcam()
+    } else if (e.ctrlKey && e.which == 82) {
+      this.handleRestore()
+    } else if (e.ctrlKey && e.which == 84) {
+      this.handleText()
+    } else if (e.ctrlKey & e.which == 83) {
+      this.handleSave()
+    }
+  }
+
+   componentWillMount(){
+    document.addEventListener("keydown", this.handleKeyDown.bind(this));
   }
 
   renderSignInModal() {
@@ -124,17 +157,16 @@ class App extends React.Component {
         transform             : 'translate(-50%, -50%)'
       }
     }
-    if (!this.props.token) {
-      return (
-        <Modal
-          isOpen={this.state.signupModalOpen}
-          contentLabel="Sign Up"
-          style={customStyles}
-          >
-            <Signup />
-          </Modal>
-        )
-      }
+    if (!this.props.token)
+    return (
+      <Modal
+        isOpen={this.state.signupModalOpen}
+        contentLabel="Sign Up"
+        style={customStyles}
+        >
+          <Signup closeModal={this.closeModal} />
+        </Modal>
+      )
     }
 
     render() {
@@ -143,20 +175,28 @@ class App extends React.Component {
       }
 
       return (
-        <div className="app">
+        <div className="app" onKeyDown={this.handleKeyDown}>
           <div className="btn-bar">
+            <Tooltip />
             {this.renderSaveButton()}
             <button className="btn" onClick={this.toggleWebcam}>WEBCAM {this.state.webcamActive ? 'OFF' : 'ON' }</button>
             <button className="btn" onClick={this.handleText}>Add Text</button>
             {this.renderSignup()}
             {this.renderRestore()}
-            {this.renderRestoreInput()}
             {this.renderLogout()}
           </div>
           {this.renderSignInModal()}
           <Drawers />
           <CurrentAddons />
-          {this.state.webcamActive ? <Photo handleToggle={this.handleToggle} /> : null}
+          <Sidebar sidebar={this.renderCreationList()}
+            open={this.state.sidebarOpen}
+            onSetOpen={this.onSetSidebarOpen}
+            pullRight
+            overlayClassName=''
+            >
+
+          </Sidebar>
+          {this.state.webcamActive ? <Photo handleToggle={this.toggleWebcam} /> : null}
         </div>
       );
     }
@@ -173,6 +213,7 @@ class App extends React.Component {
 
   const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
+      getCreations: getCreations,
       deleteAllAddons: deleteAllAddons,
       checkIfLoggedIn: checkIfLoggedIn,
       logout: logout,

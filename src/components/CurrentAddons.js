@@ -15,6 +15,7 @@ class CurrentAddons extends Component {
     this.handleMouseUp = this.handleMouseUp.bind(this)
     this.handleActive = this.handleActive.bind(this)
     this.handleBlur = this.handleBlur.bind(this)
+    this.handleKeyDown = this.handleKeyDown.bind(this)
 
   }
 
@@ -40,7 +41,16 @@ class CurrentAddons extends Component {
     // event.stopPropagation()
   }
 
+  handleKeyDown(e){
+    if (e.ctrlKey && e.which == 68) {
+      this.handleDelete(this.state.activeId)
+      alert('delete')
+    }
+  }
 
+  componentWillMount(){
+    document.addEventListener("keydown", this.handleKeyDown.bind(this))
+  }
 
   renderImg(addon) {
     return (
@@ -122,7 +132,7 @@ class CurrentAddons extends Component {
 
           render() {
             return (
-              <div className="workspace" onDoubleClick={this.handleBlur}>
+              <div className="workspace" onDoubleClick={this.handleBlur} onKeyDown={this.handleKeyDown}>
                 {this.renderAddons()}
               </div>
             )
