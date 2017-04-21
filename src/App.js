@@ -27,12 +27,12 @@ class App extends React.Component {
     this.state = {
       sidebarOpen: false
     };
+    this.handleRestoreCreation = this.handleRestoreCreation.bind(this)
     this.props.getCreations(this.props.token)
     this.props.getDrawers()
     this.props.getAddons()
     this.props.checkIfLoggedIn()
     this.handleSidebar = this.handleSidebar.bind(this)
-    this.handleKeyDown = this.handleKeyDown.bind(this)
   }
 
   handleSidebar() {
@@ -47,21 +47,10 @@ class App extends React.Component {
     })
   }
 
-  handleKeyDown(e) {
-    console.log(e)
-    if (e.ctrlKey && e.which == 87) {
-      this.toggleWebcam()
-    } else if (e.ctrlKey && e.which == 84) {
-      this.handleText()
-    } else if (e.ctrlKey & e.which == 83) {
-      this.handleSave()
-    }
-  }
-
-   componentWillMount(){
-    document.addEventListener("keydown", this.handleKeyDown.bind(this));
-  }
-
+  handleRestoreCreation(id, token) {
+    this.handleSidebar()
+    this.props.restoreCreation(id, token)
+}
     render() {
       const divStyle = {
         height: '10000px'
@@ -69,7 +58,7 @@ class App extends React.Component {
 
       return (
         <div className="app" onKeyDown={this.handleKeyDown}>
-          <NavBar />
+          <NavBar handleSidebar={this.handleSidebar}/>
           <Drawers />
           <CurrentAddons />
           <Sidebar sidebar={this.renderCreationList()}
