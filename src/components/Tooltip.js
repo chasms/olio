@@ -1,4 +1,7 @@
+// std library imports
 import React, { Component } from 'react'
+
+// node_modules imports
 import ReactTooltip from 'react-tooltip'
 
 

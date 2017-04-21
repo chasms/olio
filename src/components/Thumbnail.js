@@ -1,7 +1,12 @@
+// std library imports
 import React, { Component } from 'react';
-import Rnd from 'react-rnd';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+
+// node_modules imports
+import Rnd from 'react-rnd';
+
+// app imports
 import { addAddon, getAddons, removeAddon, saveAddonLocation } from '../actions/addons'
 
 class Thumbnail extends Component {

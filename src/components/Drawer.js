@@ -1,6 +1,9 @@
+// std library imports
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+
+// app imports
 import { getDrawers } from '../actions/drawers'
 import DrawerItem from './DrawerItem'
 

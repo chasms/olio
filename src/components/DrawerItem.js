@@ -1,7 +1,9 @@
+// std library imports
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
+// app imports
 import { addAddon } from '../actions/addons'
 
 class DrawerItem extends React.Component {

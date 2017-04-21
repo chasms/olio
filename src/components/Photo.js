@@ -1,8 +1,11 @@
+// std library imports
 import React from 'react'
-import Webcam from 'react-webcam';
 import { addAddon } from '../actions/addons'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+
+// node_modules imports
+import Webcam from 'react-webcam';
 
 class Photo extends React.Component {
   constructor() {
