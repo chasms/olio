@@ -1,7 +1,12 @@
+// std library imports
 import React, { Component } from 'react';
-import Rnd from 'react-rnd';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+
+// node_modules imports
+import Rnd from 'react-rnd';
+
+// app imports
 import { addAddon, getAddons, removeAddon, saveAddonLocation } from '../actions/addons'
 
 class CurrentAddons extends Component {
@@ -25,7 +30,8 @@ class CurrentAddons extends Component {
 
   handleMouseUp(id) {
     let coordinates = document.getElementById(id).getBoundingClientRect();
-    this.props.saveAddonLocation(id, coordinates)
+    let value = document.getElementById(id).value
+    this.props.saveAddonLocation(id, coordinates, value)
   }
 
   handleActive(id, event) {
@@ -38,7 +44,6 @@ class CurrentAddons extends Component {
     this.setState({
       activeId: null
     })
-    // event.stopPropagation()
   }
 
   handleKeyDown(e){
@@ -69,6 +74,7 @@ class CurrentAddons extends Component {
         id={addon.id}
         className={'text-addon non-selectable ' + active}
         placeholder="Drag Me Anywhere!"
+        defaultValue={addon.value}
         >
         </textarea>
       )

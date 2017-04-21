@@ -358,3 +358,11 @@ textarea:-ms-input-placeholder {
   height: 100%;
   width: 100%;
 }
+
+.keyboard-img {
+  height: 45px;
+  width: 55px;
+  display: inline-block;
+  float: left;
+  margin-left: 75px;
+}
