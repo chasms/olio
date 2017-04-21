@@ -10,13 +10,12 @@ export default class Tooltip extends Component {
 
 				<img data-tip className="keyboard-img" src="http://chas.ms/olio/keyboard.png" />
 					<ReactTooltip place="bottom" type="dark" effect="float">
-						<p>Webcam: ctrl + w</p> 
+						<p>Webcam: ctrl + w</p>
 						<p>Take picture: space</p>
-						<p>Add text: ctrl + t</p> 
+						<p>Add text: ctrl + t</p>
 						<p>Save: ctrl + s</p>
-						<p>Restore: ctrl + r</p> 
 						<p>Delete: ctrl + d</p>
-					</ReactTooltip>	
+					</ReactTooltip>
 			</div>
 		)
 	}

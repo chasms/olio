@@ -25,7 +25,8 @@ class CurrentAddons extends Component {
 
   handleMouseUp(id) {
     let coordinates = document.getElementById(id).getBoundingClientRect();
-    this.props.saveAddonLocation(id, coordinates)
+    let value = document.getElementById(id).value
+    this.props.saveAddonLocation(id, coordinates, value)
   }
 
   handleActive(id, event) {
@@ -69,6 +70,7 @@ class CurrentAddons extends Component {
         id={addon.id}
         className={'text-addon non-selectable ' + active}
         placeholder="Drag Me Anywhere!"
+        defaultValue={addon.value}
         >
         </textarea>
       )
