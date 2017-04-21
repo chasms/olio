@@ -8,3 +8,15 @@ export const signup = (details) => {
     })
   }
 }
+
+export const logout = () => ({
+  type: 'REMOVE_TOKEN'
+})
+
+export const checkIfLoggedIn = () => {
+  
+  return {
+    type: 'SET_TOKEN',
+    payload: {token: localStorage.getItem('token')}
+  }
+}
