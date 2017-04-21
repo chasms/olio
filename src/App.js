@@ -17,6 +17,7 @@ import CurrentAddons from './components/CurrentAddons'
 import Photo from './components/Photo'
 import Drawers from './components/Drawers'
 import Signup from './components/Signup'
+import Tooltip from './components/Tooltip'
 
 class App extends React.Component {
 
@@ -189,6 +190,7 @@ class App extends React.Component {
       return (
         <div className="app" onKeyDown={this.handleKeyDown}>
           <div className="btn-bar">
+            <Tooltip />
             {this.renderSaveButton()}
             <button className="btn" onClick={this.toggleWebcam}>WEBCAM {this.state.webcamActive ? 'OFF' : 'ON' }</button>
             <button className="btn" onClick={this.handleText}>Add Text</button>
