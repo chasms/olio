@@ -1,7 +1,8 @@
 export default function Creations(state = [], action){
   switch (action.type) {
     case 'GET_CREATIONS':
-      return action.payload
+
+      return [].concat(action.payload)
     default:
       return state
   }

@@ -9,7 +9,7 @@ export const saveCreation = (addons, token) => {
       headers: { 'AUTHORIZATION': `Bearer ${token}`},
       data: { addons: addons }
     }).then(resp => {
-      return
+      dispatch({type: 'GET_CREATIONS', payload: resp.data})
     })
   }
 }
@@ -28,8 +28,10 @@ export const restoreCreation = (id, token) => {
   }
 }
 
-export const getCreations = (id, token) => {
+export const getCreations = (token) => {
+
   return (dispatch) => {
+
     axios({
       url: 'http://localhost:3001/creations/',
       method: 'get',

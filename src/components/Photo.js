@@ -15,6 +15,7 @@ class Photo extends React.Component {
   }
 
   handleScreenshot() {
+
     this.props.addAddon({
       url: this.refs.webcam.getScreenshot(),
       initial_height: 300,
@@ -22,6 +23,7 @@ class Photo extends React.Component {
       category: 'photo'
     })
     this.props.handleToggle()
+
   }
 
   handleKeyDown(e){
@@ -39,11 +41,8 @@ class Photo extends React.Component {
   render() {
     return (
       <div>
-
-
-
-        <div className="photobox" onKeyDown={this.handleKeyDown}>
-        <h3>Press the space bar to take a picture</h3>
+        <div className="photobox">
+          <h3>Press the space bar to take a picture</h3>
           <Webcam ref="webcam" height={"400"} width={"400"}/>
         </div>
       </div>

@@ -28,7 +28,7 @@ class App extends React.Component {
       sidebarOpen: false,
       restoreId: ''
     };
-    this.props.getCreations()
+    this.props.getCreations(this.props.token)
     this.props.getDrawers()
     this.props.getAddons()
     this.props.checkIfLoggedIn()
@@ -36,7 +36,6 @@ class App extends React.Component {
     this.handleClick = this.handleClick.bind(this)
     this.toggleWebcam = this.toggleWebcam.bind(this)
     this.handleText = this.handleText.bind(this)
-    this.handleToggle = this.handleToggle.bind(this)
     this.handleSave = this.handleSave.bind(this)
     this.handleSidebar = this.handleSidebar.bind(this)
     this.toggleSignupModel = this.toggleSignupModel.bind(this)
@@ -80,12 +79,6 @@ class App extends React.Component {
   toggleSignupModel(){
     this.setState({
       signupModalOpen: !this.state.signupModalOpen
-    })
-  }
-
-  handleToggle() {
-    this.setState({
-      webcamActive: false
     })
   }
 
@@ -207,7 +200,7 @@ class App extends React.Component {
             >
 
           </Sidebar>
-          {this.state.webcamActive ? <Photo handleToggle={this.handleToggle} /> : null}
+          {this.state.webcamActive ? <Photo handleToggle={this.toggleWebcam} /> : null}
         </div>
       );
     }
