@@ -27,7 +27,6 @@ class App extends React.Component {
       webcamActive: false,
       signupModalOpen: false,
       sidebarOpen: false,
-      restoreId: ''
     };
     this.props.getCreations(this.props.token)
     this.props.getDrawers()
@@ -133,8 +132,6 @@ class App extends React.Component {
     console.log(e)
     if (e.ctrlKey && e.which == 87) {
       this.toggleWebcam()
-    } else if (e.ctrlKey && e.which == 82) {
-      this.handleRestore()
     } else if (e.ctrlKey && e.which == 84) {
       this.handleText()
     } else if (e.ctrlKey & e.which == 83) {
