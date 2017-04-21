@@ -42,10 +42,7 @@ class App extends React.Component {
     this.toggleSignupModel = this.toggleSignupModel.bind(this)
     this.handleIdChange = this.handleIdChange.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
-
     this.closeModal = this.closeModal.bind(this)
-
-    this.renderRestoreInput = this.renderRestoreInput.bind(this)
     this.handleKeyDown = this.handleKeyDown.bind(this)
 
   }
@@ -148,7 +145,7 @@ class App extends React.Component {
       this.handleText()
     } else if (e.ctrlKey & e.which == 83) {
       this.handleSave()
-    } 
+    }
   }
 
    componentWillMount(){
