@@ -103,6 +103,7 @@ p {
   margin-top: 25px;
   cursor: pointer;
   color: silver;
+  outline: none;
 }
 .form-submit:hover {
   border-color: black;
