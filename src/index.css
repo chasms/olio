@@ -36,6 +36,13 @@ p {
   height: 100%;
   width: 100%;
   z-index: -1;
+  -webkit-user-select: none; /* Chrome/Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
+
+  /* Rules below not implemented in browsers yet */
+  -o-user-select: none;
+  user-select: none;
 }
 .handle {
   width: 100px;
@@ -107,14 +114,21 @@ p {
   width: 100%;
   z-index: 99;
 }
+.non-selectable {
+  -webkit-user-select: none; /* Chrome/Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
 
+  /* Rules below not implemented in browsers yet */
+  -o-user-select: none;
+  user-select: none;
+}
 .screenshot {
   position: inherit;
   height: 100%;
   width: 100%;
   z-index: 2;
 }
-
 .text-addon {
   background: transparent;
   border: 0 none;
@@ -248,15 +262,15 @@ textarea::-webkit-input-placeholder {
   color: whitesmoke;
 }
 textarea:-moz-placeholder {
-   color:    whitesmoke;
-   opacity:  1;
+  color:    whitesmoke;
+  opacity:  1;
 }
 textarea::-moz-placeholder {
-   color:    whitesmoke;
-   opacity:  1;
+  color:    whitesmoke;
+  opacity:  1;
 }
 textarea:-ms-input-placeholder {
-   color:    whitesmoke;
+  color:    whitesmoke;
 }
 .drawer-item {
   display: inline-grid;

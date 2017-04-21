@@ -46,7 +46,7 @@ class CurrentAddons extends Component {
     return (
       <img
         id={addon.id}
-        className={addon.category === 'photo' ? 'screenshot' : 'img-addon'}
+        className={addon.category === 'photo' ? 'non-selectable screenshot' : 'non-selectable img-addon'}
         src={addon.url}>
       </img>
     )
@@ -57,7 +57,7 @@ class CurrentAddons extends Component {
     return (
       <textarea
         id={addon.id}
-        className={'text-addon ' + active}
+        className={'text-addon non-selectable ' + active}
         placeholder="Drag Me Anywhere!"
         >
         </textarea>
@@ -70,7 +70,7 @@ class CurrentAddons extends Component {
         return (
           <div
             id={addon.id}
-            className={addon.category === 'photo' ? "screenshot-mask " + active : "img-mask " + active}>
+            className={addon.category === 'photo' ? "screenshot-mask non-selectable " + active : "img-mask non-selectable " + active}>
           </div>
         )
       } else {
