@@ -25,7 +25,7 @@ class Photo extends React.Component {
   }
 
   handleKeyDown(e){
-    if (e.which == 32){
+    if (e.which == 32) {
       this.handleScreenshot()
     }
   }
