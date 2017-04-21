@@ -9,12 +9,13 @@ import Modal from 'react-modal';
 
 // app imports
 import { addAddon, getAddons, } from './actions/addons'
-import { saveCreation, restoreCreation } from './actions/creations'
+import { saveCreation, restoreCreation, getCreations } from './actions/creations'
 import { getDrawers } from './actions/drawers'
 import CurrentAddons from './components/CurrentAddons'
 import Photo from './components/Photo'
 import Drawers from './components/Drawers'
 import Signup from './components/Signup'
+import Thumbnail from './components/Thumbnail'
 
 class App extends React.Component {
 
@@ -23,11 +24,13 @@ class App extends React.Component {
     this.state = {
       webcamActive: false,
       signupModalOpen: false,
-      restoreId: 1
+      restoreId: null
     };
     this.state = { webcamActive: false };
+
     this.props.getDrawers()
     this.props.getAddons()
+    this.props.getCreations()
     this.handleClick = this.handleClick.bind(this)
     this.toggleWebcam = this.toggleWebcam.bind(this)
     this.handleText = this.handleText.bind(this)
@@ -80,8 +83,16 @@ class App extends React.Component {
 
   handleIdChange(e) {
     this.setState({
-      restoreId: parseInt(e.target.value, 10)
+      restoreId: e.target.value
     })
+  }
+
+  renderThumbnail() {
+
+
+    if (this.props.creations.length !== 0) {
+      return <Thumbnail addons={this.props.creations[7].composition} />
+    }
   }
 
   render() {
@@ -108,6 +119,7 @@ class App extends React.Component {
           <button className="btn" onClick={this.toggleSignupModel}>Sign Up</button>
           <button className="btn" onClick={this.handleRestore}>Restore</button>
           <input type='number' onChange={this.handleIdChange} value={this.state.restoreId} />
+          {this.renderThumbnail()}
 
         </div>
         <Modal
@@ -129,13 +141,15 @@ class App extends React.Component {
     return {
       token: state.Accounts.token,
       usedAddons: state.Addon,
-      addonLibrary: state.AddonLibrary
+      addonLibrary: state.AddonLibrary,
+      creations: state.Creations
     }
   }
 
 
   const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
+      getCreations: getCreations,
       saveCreation: saveCreation,
       addAddon: addAddon,
       getAddons: getAddons,

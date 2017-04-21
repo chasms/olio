@@ -69,7 +69,7 @@ class CurrentAddons extends Component {
       if (addon.category !== 'text') {
         return (
           <div
-            id={addon.id}
+            id={addon.id + ' mask'}
             className={addon.category === 'photo' ? "screenshot-mask " + active : "img-mask " + active}>
           </div>
         )
@@ -107,7 +107,9 @@ class CurrentAddons extends Component {
               zIndex={addon.category === "photo" ? 2 : 100}
               >
                 {this.renderDelete(addon)}
-                <span className="box"
+                <span
+                  id={'box-' + addon.id}
+                  className="box"
                   onMouseDown={this.handleActive.bind(null, addon.id)}
                   onMouseOut={this.handleMouseUp.bind(null, addon.id)}
                   >
