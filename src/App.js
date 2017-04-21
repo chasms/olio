@@ -112,14 +112,7 @@ class App extends React.Component {
     return !this.props.token ? <button className="btn" onClick={this.toggleSignupModel}>Sign Up</button> : null
   }
 
-  componentWillMount() {
-    this.props.token ? this.setState({ signupModalOpen: false }) : null
-  }
-
-  render() {
-    const divStyle = {
-      height: '10000px'
-    }
+  renderSignInModal() {
 
     const customStyles = {
       content : {
@@ -130,28 +123,42 @@ class App extends React.Component {
         marginRight           : '-50%',
         transform             : 'translate(-50%, -50%)'
       }
-    };
+    }
+    if (!this.props.token)
     return (
-      <div className="app">
-        <div className="btn-bar">
-          {this.renderSaveButton()}
-          <button className="btn" onClick={this.toggleWebcam}>WEBCAM {this.state.webcamActive ? 'OFF' : 'ON' }</button>
-          <button className="btn" onClick={this.handleText}>Add Text</button>
-          {this.renderSignup()}
-          {this.renderRestore()}
-          {this.renderRestoreInput()}
-          {this.renderLogout()}
+      <Modal
+        isOpen={this.state.signupModalOpen}
+        contentLabel="Sign Up"
+        style={customStyles}
+        >
+          <Signup />
+        </Modal>
+      )
+    }
 
 
 
-        </div>
-        <Modal
-          isOpen={this.state.signupModalOpen}
-          contentLabel="Sign Up"
-          style={customStyles}
-          >
-            <Signup />
-          </Modal>
+    render() {
+      const divStyle = {
+        height: '10000px'
+      }
+
+
+      return (
+        <div className="app">
+          <div className="btn-bar">
+            {this.renderSaveButton()}
+            <button className="btn" onClick={this.toggleWebcam}>WEBCAM {this.state.webcamActive ? 'OFF' : 'ON' }</button>
+            <button className="btn" onClick={this.handleText}>Add Text</button>
+            {this.renderSignup()}
+            {this.renderRestore()}
+            {this.renderRestoreInput()}
+            {this.renderLogout()}
+
+
+
+          </div>
+          {this.renderSignInModal()}
           <Drawers />
           <CurrentAddons />
           {this.state.webcamActive ? <Photo handleToggle={this.handleToggle} /> : null}
