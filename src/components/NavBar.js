@@ -23,14 +23,13 @@ class NavBar extends Component {
 			webcamActive: false,
       		signupModalOpen: false
 		};
-		debugger
-		this.handleRestoreCreation = this.handleRestoreCreation.bind(this)
 	    this.toggleWebcam = this.toggleWebcam.bind(this)
 	    this.handleSave = this.handleSave.bind(this)
 	    this.toggleSignupModal = this.toggleSignupModal.bind(this)
 	    this.handleLogout = this.handleLogout.bind(this)
 	    this.closeModal = this.closeModal.bind(this)
 	    this.handleText = this.handleText.bind(this)
+	    this.handleKeyDown = this.handleKeyDown.bind(this)
 	}
 
 renderSaveButton() {
@@ -38,7 +37,7 @@ renderSaveButton() {
 }
 
 renderRestore() {
-    return this.props.token ? <button className="btn" onClick={this.handleSidebar}>Restore</button> : null
+    return this.props.token ? <button className="btn" onClick={this.props.handleSidebar}>Restore</button> : null
 }
 
 renderLogout() {
@@ -63,7 +62,6 @@ toggleWebcam(){
     })
   }
 toggleSignupModal(){
-	debugger
     this.setState({
       signupModalOpen: !this.state.signupModalOpen
     })
@@ -81,11 +79,20 @@ handleText() {
       category: 'text'
     })
   }
+handleKeyDown(e) {
+    console.log(e)
+    if (e.ctrlKey && e.which == 87) {
+      this.toggleWebcam()
+    } else if (e.ctrlKey && e.which == 84) {
+      this.handleText()
+    } else if (e.ctrlKey & e.which == 83) {
+      this.handleSave()
+    }
+  }
 
-handleRestoreCreation(id, token) {
-    this.handleSidebar()
-    this.props.restoreCreation(id, token)
-}
+componentWillMount(){
+    document.addEventListener("keydown", this.handleKeyDown.bind(this));
+  }
 renderSignInModal() {
 
     const customStyles = {
