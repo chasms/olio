@@ -27,3 +27,15 @@ export const restoreCreation = (id, token) => {
     })
   }
 }
+
+export const getCreations = (id, token) => {
+  return (dispatch) => {
+    axios({
+      url: 'http://localhost:3001/creations/',
+      method: 'get',
+      headers: { 'AUTHORIZATION': `Bearer ${token}`},
+    }).then(resp => {
+      dispatch({type: 'GET_CREATIONS', payload: resp.data})
+    })
+  }
+}

@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux'
 // node_modules imports
 import Rnd from 'react-rnd';
 import Modal from 'react-modal';
+import Sidebar from 'react-sidebar'
 
 // app imports
 import { addAddon, getAddons, deleteAllAddons } from './actions/addons'
@@ -23,23 +24,30 @@ class App extends React.Component {
     super(props);
     this.state = {
       webcamActive: false,
-      signupModalOpen: true,
+      signupModalOpen: false,
+      sidebarOpen: false,
       restoreId: ''
     };
+    this.props.getCreations()
     this.props.getDrawers()
     this.props.getAddons()
     this.props.checkIfLoggedIn()
+    this.handleRestoreCreation = this.handleRestoreCreation.bind(this)
     this.handleClick = this.handleClick.bind(this)
     this.toggleWebcam = this.toggleWebcam.bind(this)
     this.handleText = this.handleText.bind(this)
     this.handleToggle = this.handleToggle.bind(this)
     this.handleSave = this.handleSave.bind(this)
-    this.handleRestore = this.handleRestore.bind(this)
+    this.handleSidebar = this.handleSidebar.bind(this)
     this.toggleSignupModel = this.toggleSignupModel.bind(this)
     this.handleIdChange = this.handleIdChange.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
+
+    this.closeModal = this.closeModal.bind(this)
+
     this.renderRestoreInput = this.renderRestoreInput.bind(this)
     this.handleKeyDown = this.handleKeyDown.bind(this)
+
   }
 
   handleSave() {
@@ -59,9 +67,16 @@ class App extends React.Component {
     })
   }
 
+  closeModal() {
+    this.setState({
+      signupModalOpen: false
+    })
+  }
+
   toggleWebcam(){
     this.setState({
-      webcamActive: !this.state.webcamActive
+      webcamActive: !this.state.webcamActive,
+      signupModalOpen: false
     })
   }
 
@@ -77,8 +92,11 @@ class App extends React.Component {
     })
   }
 
-  handleRestore() {
-    this.props.restoreCreation(this.state.restoreId, this.props.token)
+  handleSidebar() {
+    this.setState({
+      sidebarOpen: !this.state.sidebarOpen
+    })
+    // this.props.restoreCreation(this.state.restoreId, this.props.token)
   }
 
   handleIdChange(e) {
@@ -93,16 +111,23 @@ class App extends React.Component {
     this.props.deleteAllAddons()
   }
 
+  handleRestoreCreation(id, token) {
+    this.handleSidebar()
+    this.props.restoreCreation(id, token)
+  }
+
+  renderCreationList() {
+    return this.props.creations.map((creation) => {
+      return <p onClick={this.handleRestoreCreation.bind(null, creation.id, this.props.token)}>Creation #{creation.id}</p>
+    })
+  }
+
   renderSaveButton() {
     return this.props.token ? <button className="btn" onClick={this.handleSave}>Save Creation</button> : null
   }
 
   renderRestore() {
-    return this.props.token ? <button className="btn" onClick={this.handleRestore}>Restore</button> : null
-  }
-
-  renderRestoreInput() {
-    return this.props.token ? <input type='number' onChange={this.handleIdChange} value={this.state.restoreId}/> : null
+    return this.props.token ? <button className="btn" onClick={this.handleSidebar}>Restore</button> : null
   }
 
   renderLogout() {
@@ -151,7 +176,7 @@ class App extends React.Component {
         contentLabel="Sign Up"
         style={customStyles}
         >
-          <Signup />
+          <Signup closeModal={this.closeModal} />
         </Modal>
       )
     }
@@ -172,15 +197,19 @@ class App extends React.Component {
             <button className="btn" onClick={this.handleText}>Add Text</button>
             {this.renderSignup()}
             {this.renderRestore()}
-            {this.renderRestoreInput()}
             {this.renderLogout()}
-
-
-
           </div>
           {this.renderSignInModal()}
           <Drawers />
           <CurrentAddons />
+          <Sidebar sidebar={this.renderCreationList()}
+            open={this.state.sidebarOpen}
+            onSetOpen={this.onSetSidebarOpen}
+            pullRight
+            overlayClassName=''
+            >
+
+          </Sidebar>
           {this.state.webcamActive ? <Photo handleToggle={this.handleToggle} /> : null}
         </div>
       );
@@ -199,6 +228,7 @@ class App extends React.Component {
 
   const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
+      getCreations: getCreations,
       deleteAllAddons: deleteAllAddons,
       checkIfLoggedIn: checkIfLoggedIn,
       logout: logout,
