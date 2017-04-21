@@ -15,17 +15,20 @@ import CurrentAddons from './CurrentAddons'
 import Photo from './Photo'
 import Tooltip from './Tooltip'
 import Signup from './Signup'
+import Login from './Login'
 
 class NavBar extends Component {
 	constructor(props){
 		super(props)
 		this.state = {
 			webcamActive: false,
-			signupModalOpen: false
+			signupModalOpen: false,
+			loginModalOpen: false
 		};
 		this.toggleWebcam = this.toggleWebcam.bind(this)
 		this.handleSave = this.handleSave.bind(this)
 		this.toggleSignupModal = this.toggleSignupModal.bind(this)
+		this.toggleLoginModal = this.toggleLoginModal.bind(this)
 		this.handleLogout = this.handleLogout.bind(this)
 		this.closeModal = this.closeModal.bind(this)
 		this.handleText = this.handleText.bind(this)
@@ -47,26 +50,50 @@ class NavBar extends Component {
 	renderSignup() {
 		return !this.props.token ? <button className="btn" onClick={this.toggleSignupModal}>Sign Up</button> : null
 	}
+
+	renderLogin() {
+		return !this.props.token ? <button className="btn" onClick={this.toggleLoginModal}>Login</button> : null
+	}
+
 	handleSave() {
 		this.props.saveCreation(this.props.usedAddons, this.props.token)
 	}
+
 	closeModal() {
 		this.setState({
 			signupModalOpen: false
 		})
 	}
+
 	toggleWebcam(){
 		this.setState({
 			webcamActive: !this.state.webcamActive,
 			signupModalOpen: false
 		})
 	}
+
 	toggleSignupModal(){
-		debugger
+		if (this.state.loginModalOpen) {
+			this.setState({
+				loginModalOpen: false
+			})
+		}
 		this.setState({
 			signupModalOpen: !this.state.signupModalOpen
 		})
 	}
+
+	toggleLoginModal(){
+		if (this.state.signupModalOpen) {
+			this.setState({
+				signupModalOpen: false
+			})
+		}
+		this.setState({
+			loginModalOpen: !this.state.loginModalOpen
+		})
+	}
+
 	handleLogout() {
 		this.props.logout()
 		this.props.deleteAllAddons()
@@ -81,14 +108,13 @@ class NavBar extends Component {
 		})
 	}
 
-
 	handleKeyDown(e) {
 		console.log(e)
-		if (e.ctrlKey && e.which == 87) {
+		if (e.ctrlKey && e.which === 87) {
 			this.toggleWebcam()
-		} else if (e.ctrlKey && e.which == 84) {
+		} else if (e.ctrlKey && e.which === 84) {
 			this.handleText()
-		} else if (e.ctrlKey & e.which == 83) {
+		} else if (e.ctrlKey & e.which === 83) {
 			this.handleSave()
 		}
 	}
@@ -97,9 +123,9 @@ class NavBar extends Component {
 		document.addEventListener("keydown", this.handleKeyDown.bind(this));
 	}
 
-	renderSignInModal() {
+	renderSignupModal() {
 
-		const customStyles = {
+		let customStyles = {
 			content : {
 				top                   : '50%',
 				left                  : '50%',
@@ -122,6 +148,31 @@ class NavBar extends Component {
 			)
 		}
 
+		renderLoginModal() {
+
+			let customStyles = {
+				content : {
+					top                   : '50%',
+					left                  : '50%',
+					right                 : 'auto',
+					bottom                : 'auto',
+					marginRight           : '-50%',
+					transform             : 'translate(-50%, -50%)',
+					backgroundColor       : 'whitesmoke'
+				}
+			}
+			if (!this.props.token)
+			return (
+				<Modal
+					isOpen={this.state.loginModalOpen}
+					contentLabel="Sign Up"
+					style={customStyles}
+					>
+						<Login closeModal={this.closeModal} />
+					</Modal>
+				)
+			}
+
 		render(){
 			return(
 				<div>
@@ -131,11 +182,13 @@ class NavBar extends Component {
 						<button className="btn" onClick={this.toggleWebcam}>WEBCAM {this.state.webcamActive ? 'OFF' : 'ON' }</button>
 						<button className="btn" onClick={this.handleText}>Add Text</button>
 						{this.renderSignup()}
+						{this.renderLogin()}
 						{this.renderRestore()}
 						{this.renderLogout()}
 						{this.state.webcamActive ? <Photo handleToggle={this.toggleWebcam} /> : null}
 					</div>
-					{this.renderSignInModal()}
+					{this.renderSignupModal()}
+					{this.renderLoginModal()}
 				</div>
 			)
 		}

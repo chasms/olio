@@ -90,6 +90,10 @@ p {
   border: none;
   border-bottom: 1px solid black;
 }
+.form-input:active {
+  border: none;
+  border-bottom: 1px solid black;
+}
 .form-submit {
   background-color: transparent;
   border: 1px solid silver;

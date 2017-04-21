@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { login } from '../actions/accounts'
 
-class Signup extends React.Component {
+class Login extends React.Component {
 
   constructor() {
     super()
@@ -33,7 +33,7 @@ class Signup extends React.Component {
         <form className onSubmit={this.handleSubmit}>
           <input className="form-input form-item" placeholder="Create a Username" type='text' onChange={this.handleChange} name='username' />
           <input className="form-input form-item" placeholder="Create a Password" type='password' onChange={this.handleChange} name='password' />
-          <input className="form-submit form-item" type='submit' value="Create Your Account" />
+          <input className="form-submit form-item" type='submit' value="Login to Your Account" />
         </form>
       </div>
     )
