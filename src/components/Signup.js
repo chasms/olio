@@ -33,9 +33,13 @@ class Signup extends React.Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
+          <label>username</label>
           <input type='text' onChange={this.handleChange} name='username' />
+          <label>email</label>
           <input type='text' onChange={this.handleChange} name='email' />
+          <label>password</label>
           <input type='password' onChange={this.handleChange} name='password' />
+          <label>password confirmation</label>
           <input type='password' onChange={this.handleChange} name='password_confirmation' />
           <input type='submit' />
         </form>
