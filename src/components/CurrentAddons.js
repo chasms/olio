@@ -39,7 +39,6 @@ class CurrentAddons extends Component {
     this.setState({
       activeId: null
     })
-    // event.stopPropagation()
   }
 
   handleKeyDown(e){
