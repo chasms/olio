@@ -8,9 +8,10 @@ import Rnd from 'react-rnd';
 import Modal from 'react-modal';
 
 // app imports
-import { addAddon, getAddons, } from './actions/addons'
-import { saveCreation, restoreCreation } from './actions/creations'
+import { addAddon, getAddons, deleteAllAddons } from './actions/addons'
+import { saveCreation, restoreCreation, getCreations } from './actions/creations'
 import { getDrawers } from './actions/drawers'
+import { checkIfLoggedIn, logout } from './actions/accounts'
 import CurrentAddons from './components/CurrentAddons'
 import Photo from './components/Photo'
 import Drawers from './components/Drawers'
@@ -22,12 +23,12 @@ class App extends React.Component {
     super(props);
     this.state = {
       webcamActive: false,
-      signupModalOpen: false,
-      restoreId: 1
+      signupModalOpen: true,
+      restoreId: ''
     };
-    this.state = { webcamActive: false };
     this.props.getDrawers()
     this.props.getAddons()
+    this.props.checkIfLoggedIn()
     this.handleClick = this.handleClick.bind(this)
     this.toggleWebcam = this.toggleWebcam.bind(this)
     this.handleText = this.handleText.bind(this)
@@ -36,7 +37,8 @@ class App extends React.Component {
     this.handleRestore = this.handleRestore.bind(this)
     this.toggleSignupModel = this.toggleSignupModel.bind(this)
     this.handleIdChange = this.handleIdChange.bind(this)
-    this.props.getAddons()
+    this.handleLogout = this.handleLogout.bind(this)
+    this.renderRestoreInput = this.renderRestoreInput.bind(this)
   }
 
   handleSave() {
@@ -79,9 +81,39 @@ class App extends React.Component {
   }
 
   handleIdChange(e) {
+    let int = parseInt(e.target.value, 10)
     this.setState({
-      restoreId: parseInt(e.target.value, 10)
+      restoreId: e.target.value
     })
+  }
+
+  handleLogout() {
+    this.props.logout()
+    this.props.deleteAllAddons()
+  }
+
+  renderSaveButton() {
+    return this.props.token ? <button className="btn" onClick={this.handleSave}>Save Creation</button> : null
+  }
+
+  renderRestore() {
+    return this.props.token ? <button className="btn" onClick={this.handleRestore}>Restore</button> : null
+  }
+
+  renderRestoreInput() {
+    return this.props.token ? <input type='number' onChange={this.handleIdChange} value={this.state.restoreId}/> : null
+  }
+
+  renderLogout() {
+    return this.props.token ? <button className="btn" onClick={this.handleLogout}>Log Out</button> : null
+  }
+
+  renderSignup() {
+    return !this.props.token ? <button className="btn" onClick={this.toggleSignupModel}>Sign Up</button> : null
+  }
+
+  componentWillMount() {
+    this.props.token ? this.setState({ signupModalOpen: false }) : null
   }
 
   render() {
@@ -102,12 +134,15 @@ class App extends React.Component {
     return (
       <div className="app">
         <div className="btn-bar">
-          <button className="btn" onClick={this.handleSave}>Save Creation</button>
+          {this.renderSaveButton()}
           <button className="btn" onClick={this.toggleWebcam}>WEBCAM {this.state.webcamActive ? 'OFF' : 'ON' }</button>
           <button className="btn" onClick={this.handleText}>Add Text</button>
-          <button className="btn" onClick={this.toggleSignupModel}>Sign Up</button>
-          <button className="btn" onClick={this.handleRestore}>Restore</button>
-          <input type='number' onChange={this.handleIdChange} value={this.state.restoreId} />
+          {this.renderSignup()}
+          {this.renderRestore()}
+          {this.renderRestoreInput()}
+          {this.renderLogout()}
+
+
 
         </div>
         <Modal
@@ -129,13 +164,17 @@ class App extends React.Component {
     return {
       token: state.Accounts.token,
       usedAddons: state.Addon,
-      addonLibrary: state.AddonLibrary
+      addonLibrary: state.AddonLibrary,
+      creations: state.Creations
     }
   }
 
 
   const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
+      deleteAllAddons: deleteAllAddons,
+      checkIfLoggedIn: checkIfLoggedIn,
+      logout: logout,
       saveCreation: saveCreation,
       addAddon: addAddon,
       getAddons: getAddons,
