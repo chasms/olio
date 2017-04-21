@@ -1,10 +1,13 @@
+// std library imports
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
+// node_modules imports
 import Modal from 'react-modal';
 import Webcam from 'react-webcam';
 
+// app imports
 import { addAddon, deleteAllAddons } from '../actions/addons'
 import { saveCreation, restoreCreation } from '../actions/creations'
 import { logout } from '../actions/accounts'
