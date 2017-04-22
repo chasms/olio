@@ -4,8 +4,6 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 // node_modules imports
-import Rnd from 'react-rnd';
-import Modal from 'react-modal';
 import Sidebar from 'react-sidebar'
 
 // app imports
@@ -14,10 +12,7 @@ import { saveCreation, restoreCreation, getCreations } from './actions/creations
 import { getDrawers } from './actions/drawers'
 import { checkIfLoggedIn, logout } from './actions/accounts'
 import CurrentAddons from './components/CurrentAddons'
-import Photo from './components/Photo'
 import Drawers from './components/Drawers'
-import Signup from './components/Signup'
-import Tooltip from './components/Tooltip'
 import NavBar from './components/NavBar'
 
 class App extends React.Component {
@@ -45,7 +40,7 @@ class App extends React.Component {
   }
   renderCreationList() {
     return this.props.creations.map((creation) => {
-      return <p onClick={this.handleRestoreCreation.bind(null, creation.id, this.props.token)}>Creation #{creation.id}</p>
+      return <p key={creation.id} onClick={this.handleRestoreCreation.bind(null, creation.id, this.props.token)}>Creation #{creation.id}</p>
     })
   }
 
@@ -54,9 +49,6 @@ class App extends React.Component {
     this.props.restoreCreation(id, token)
 }
     render() {
-      const divStyle = {
-        height: '10000px'
-      }
 
       return (
         <div className="app" onKeyDown={this.handleKeyDown}>
@@ -66,9 +58,11 @@ class App extends React.Component {
           <Sidebar sidebar={this.renderCreationList()}
             open={this.state.sidebarOpen}
             onSetOpen={this.onSetSidebarOpen}
+            children=''
             pullRight
             overlayClassName=''
             >
+              {}
           </Sidebar>
         </div>
       );
