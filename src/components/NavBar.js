@@ -71,6 +71,7 @@ class NavBar extends Component {
 			webcamActive: !this.state.webcamActive,
 			signupModalOpen: false
 		})
+		document.getElementsByClassName("workspace")[0].focus()
 	}
 
 	toggleSignupModal(){
@@ -113,6 +114,7 @@ class NavBar extends Component {
 		console.log(e)
 		if (e.ctrlKey && e.which === 87) {
 			this.toggleWebcam()
+
 		} else if (e.ctrlKey && e.which === 84) {
 			this.handleText()
 		} else if (e.ctrlKey & e.which === 83) {

@@ -28,10 +28,12 @@ class App extends React.Component {
       sidebarOpen: false
     };
     this.handleRestoreCreation = this.handleRestoreCreation.bind(this)
-    this.props.getCreations(this.props.token)
+
+
     this.props.getDrawers()
     this.props.getAddons()
     this.props.checkIfLoggedIn()
+    this.props.token ? this.props.getCreations(this.props.token) : null
     this.handleSidebar = this.handleSidebar.bind(this)
   }
 
