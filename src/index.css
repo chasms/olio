@@ -393,6 +393,7 @@ textarea:-ms-input-placeholder {
 
 .photobox {
   display: inline-block;
-  margin-left: 200px; 
+  margin-left: auto; 
+  margin-right: auto;
   margin-top: 200px;
 }
