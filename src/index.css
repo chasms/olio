@@ -387,3 +387,12 @@ textarea:-ms-input-placeholder {
   float: left;
   margin-left: 75px;
 }
+
+/*  Webcam
+==================================================*/
+
+.photobox {
+  display: inline-block;
+  margin-left: 200px; 
+  margin-top: 200px;
+}
