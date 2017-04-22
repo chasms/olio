@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux'
 import Modal from 'react-modal';
 
 // app imports
-import { addAddon } from '../actions/addons'
+import { addAddon, deleteAllAddons } from '../actions/addons'
 import { saveCreation, restoreCreation } from '../actions/creations'
 import { logout } from '../actions/accounts'
 import Photo from './Photo'
@@ -56,6 +56,7 @@ class NavBar extends Component {
 	handleSave() {
 		this.props.saveCreation(this.props.usedAddons, this.props.token)
 	}
+
 
 	closeModal() {
 		this.setState({
@@ -203,6 +204,7 @@ class NavBar extends Component {
 
 	const mapDispatchToProps = (dispatch) => {
 		return bindActionCreators({
+			deleteAllAddons: deleteAllAddons,
 			logout: logout,
 			saveCreation: saveCreation,
 			addAddon: addAddon,

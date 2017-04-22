@@ -8,7 +8,7 @@ import Sidebar from 'react-sidebar'
 
 // app imports
 import { addAddon, getAddons, deleteAllAddons } from './actions/addons'
-import { saveCreation, restoreCreation, getCreations } from './actions/creations'
+import { saveCreation, restoreCreation, getCreations, deleteCreation } from './actions/creations'
 import { getDrawers } from './actions/drawers'
 import { checkIfLoggedIn, logout } from './actions/accounts'
 import CurrentAddons from './components/CurrentAddons'
@@ -40,29 +40,38 @@ class App extends React.Component {
   }
   renderCreationList() {
     return this.props.creations.map((creation) => {
-      return <p key={creation.id} onClick={this.handleRestoreCreation.bind(null, creation.id, this.props.token)}>Creation #{creation.id}</p>
+      return (
+        <p key={creation.id}>
+          <span onClick={this.props.deleteCreation.bind(null, creation.id, this.props.token)}>
+            [x]
+          </span>
+          <span onClick={this.handleRestoreCreation.bind(null, creation.id, this.props.token)} >
+            Creation #{creation.id}
+          </span>
+        </p>
+      )
     })
   }
 
   handleRestoreCreation(id, token) {
     this.handleSidebar()
     this.props.restoreCreation(id, token)
-}
-    render() {
+  }
+  render() {
 
-      return (
-        <div className="app" onKeyDown={this.handleKeyDown}>
-          <NavBar handleSidebar={this.handleSidebar}/>
-          <Drawers />
-          <CurrentAddons />
-          <Sidebar sidebar={this.renderCreationList()}
-            open={this.state.sidebarOpen}
-            onSetOpen={this.onSetSidebarOpen}
-            children=''
-            pullRight
-            overlayClassName=''
-            >
-              {}
+    return (
+      <div className="app" onKeyDown={this.handleKeyDown}>
+        <NavBar handleSidebar={this.handleSidebar}/>
+        <Drawers />
+        <CurrentAddons />
+        <Sidebar sidebar={this.renderCreationList()}
+          open={this.state.sidebarOpen}
+          onSetOpen={this.onSetSidebarOpen}
+          children=''
+          pullRight
+          overlayClassName=''
+          >
+            {}
           </Sidebar>
         </div>
       );
@@ -81,6 +90,7 @@ class App extends React.Component {
   const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
       getCreations: getCreations,
+      deleteCreation: deleteCreation,
       deleteAllAddons: deleteAllAddons,
       checkIfLoggedIn: checkIfLoggedIn,
       logout: logout,
