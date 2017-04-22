@@ -18,7 +18,7 @@ class Photo extends React.Component {
   }
 
   handleScreenshot() {
-
+    document.getElementsByClassName("workspace")[0].focus()
     this.props.addAddon({
       url: this.refs.webcam.getScreenshot(),
       initial_height: 300,
@@ -31,12 +31,17 @@ class Photo extends React.Component {
 
   handleKeyDown(e){
     if (e.which == 32) {
+      e.preventDefault()
       this.handleScreenshot()
     }
   }
 
   componentWillMount(){
-    document.addEventListener("keydown", this.handleKeyDown.bind(this));
+    document.addEventListener("keydown", this.handleKeyDown);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("keydown", this.handleKeyDown);
   }
 
 
