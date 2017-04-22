@@ -12,6 +12,7 @@ export const signup = (details) => {
 export const login = (details) => {
   return (dispatch) => {
     axios.post('http://localhost:3001/login/', details).then(resp => {
+      debugger
       localStorage.setItem('token', resp.data.token)
       dispatch({type: 'SET_TOKEN', payload: resp.data})
     })
