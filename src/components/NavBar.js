@@ -195,7 +195,8 @@ class NavBar extends Component {
 	}
 	const mapStateToProps = (state) => {
 		return {
-			token: state.Accounts.token
+			token: state.Accounts.token,
+			usedAddons: state.Addon
 		}
 	}
 
