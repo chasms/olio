@@ -11,7 +11,7 @@ export default class Tooltip extends Component {
 		return(
 			<div className="tooltip">
 
-				<img data-tip className="keyboard-img" src="http://chas.ms/olio/keyboard.png" />
+				<img data-tip className="keyboard-img" src="http://chas.ms/olio/keyboard.png" alt='keyboard shortcuts' />
 					<ReactTooltip place="bottom" type="dark" effect="float">
 						<p>Webcam: ctrl + w</p>
 						<p>Take picture: space</p>

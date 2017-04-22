@@ -1,10 +1,8 @@
 // std library imports
 import React from 'react'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 
 // app imports
-import { getDrawers } from '../actions/drawers'
 import DrawerItem from './DrawerItem'
 
 class Drawer extends React.Component {
@@ -21,7 +19,7 @@ class Drawer extends React.Component {
 
   render() {
     return (
-      <div className={"drawer " + "drawer-" + this.props.drawer.id + ' ' + this.props.active}>
+      <div className={"drawer drawer-" + this.props.drawer.id + ' ' + this.props.active}>
         {this.renderDrawerItems()}
       </div>
     )

@@ -5,13 +5,11 @@ import { bindActionCreators } from 'redux'
 
 // node_modules imports
 import Modal from 'react-modal';
-import Webcam from 'react-webcam';
 
 // app imports
-import { addAddon, deleteAllAddons } from '../actions/addons'
+import { addAddon } from '../actions/addons'
 import { saveCreation, restoreCreation } from '../actions/creations'
 import { logout } from '../actions/accounts'
-import CurrentAddons from './CurrentAddons'
 import Photo from './Photo'
 import Tooltip from './Tooltip'
 import Signup from './Signup'
@@ -71,7 +69,6 @@ class NavBar extends Component {
 			webcamActive: !this.state.webcamActive,
 			signupModalOpen: false
 		})
-		document.getElementsByClassName("workspace")[0].focus()
 	}
 
 	toggleSignupModal(){
@@ -111,7 +108,7 @@ class NavBar extends Component {
 	}
 
 	handleKeyDown(e) {
-		e.preventDefault()
+
 		if (e.ctrlKey && e.which === 87) {
 			this.toggleWebcam()
 

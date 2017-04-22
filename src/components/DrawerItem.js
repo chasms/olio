@@ -22,7 +22,9 @@ class DrawerItem extends React.Component {
       <div className="drawer-item">
         <img onClick={this.handleClick}
           data-id={this.props.item.id}
-          src={this.props.item.url}/>
+          src={this.props.item.url}
+          alt=''
+        />
       </div>
     )
   }

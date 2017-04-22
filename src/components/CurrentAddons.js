@@ -47,7 +47,7 @@ class CurrentAddons extends Component {
   }
 
   handleKeyDown(e){
-    if (e.ctrlKey && e.which == 68) {
+    if (e.ctrlKey && e.which === 68) {
       this.handleDelete(this.state.activeId)
     }
   }
@@ -61,7 +61,9 @@ class CurrentAddons extends Component {
       <img
         id={addon.id}
         className={addon.category === 'photo' ? 'non-selectable screenshot' : 'non-selectable img-addon'}
-        src={addon.url}>
+        src={addon.url}
+        alt={'img' + addon.id}
+        >
       </img>
     )
   }
@@ -108,7 +110,6 @@ class CurrentAddons extends Component {
 
 
       renderAddons() {
-
         return this.props.usedAddons.map((addon, index) => {
 
           return (
