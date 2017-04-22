@@ -111,7 +111,7 @@ class NavBar extends Component {
 	}
 
 	handleKeyDown(e) {
-		console.log(e)
+		e.preventDefault()
 		if (e.ctrlKey && e.which === 87) {
 			this.toggleWebcam()
 
