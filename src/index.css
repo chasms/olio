@@ -43,9 +43,14 @@ p {
   position: absolute;
   right: 0;
   z-index: 2;
+
 }
+
+button:focus {outline:0;}
+
 .btn {
-  float: right; 
+
+  float: right;
   margin: 10px;
   font-family: monospace;
   background-color: #E1E0E1;
@@ -116,18 +121,18 @@ p {
   color: dimgrey;
 }
 ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-    color:    silver;
+  color:    silver;
 }
 :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-   color:    silver;
-   opacity:  1;
+  color:    silver;
+  opacity:  1;
 }
 ::-moz-placeholder { /* Mozilla Firefox 19+ */
-   color:    silver;
-   opacity:  1;
+  color:    silver;
+  opacity:  1;
 }
 :-ms-input-placeholder { /* Internet Explorer 10-11 */
-   color:    silver;
+  color:    silver;
 }
 
 /*	Rnd Containers
