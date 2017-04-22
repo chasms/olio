@@ -1,8 +1,9 @@
 import axios from 'axios'
+import { api } from './api'
 
 export const signup = (details) => {
   return (dispatch) => {
-    axios.post('http://localhost:3001/signup/', details).then(resp => {
+    axios.post(api() + '/signup/', details).then(resp => {
       localStorage.setItem('token', resp.data.token)
       dispatch({type: 'SET_TOKEN', payload: resp.data})
     })
@@ -11,7 +12,7 @@ export const signup = (details) => {
 
 export const login = (details) => {
   return (dispatch) => {
-    axios.post('http://localhost:3001/login/', details).then(resp => {
+    axios.post(api() + '/login/', details).then(resp => {
       debugger
       localStorage.setItem('token', resp.data.token)
       dispatch({type: 'SET_TOKEN', payload: resp.data})

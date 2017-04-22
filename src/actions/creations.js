@@ -1,10 +1,11 @@
 import axios from 'axios'
+import { api } from './api'
 
 export const saveCreation = (addons, token) => {
   return (dispatch) => {
 
     axios({
-      url: 'http://localhost:3001/creations/',
+      url: api() + '/creations/',
       method: 'post',
       headers: { 'AUTHORIZATION': `Bearer ${token}`},
       data: { addons: addons }
@@ -18,7 +19,7 @@ export const restoreCreation = (id, token) => {
   return (dispatch) => {
 
     axios({
-      url: 'http://localhost:3001/creations/' + id,
+      url: api() + '/creations/' + id,
       method: 'get',
       headers: { 'AUTHORIZATION': `Bearer ${token}`},
     }).then(resp => {
@@ -33,7 +34,7 @@ export const getCreations = (token) => {
   return (dispatch) => {
 
     axios({
-      url: 'http://localhost:3001/creations/',
+      url: api() + '/creations/',
       method: 'get',
       headers: { 'AUTHORIZATION': `Bearer ${token}`},
     }).then(resp => {
