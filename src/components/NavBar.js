@@ -108,6 +108,7 @@ class NavBar extends Component {
 	}
 
 	handleKeyDown(e) {
+
 		if (e.ctrlKey && e.which === 87) {
 			this.toggleWebcam()
 

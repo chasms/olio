@@ -49,7 +49,6 @@ class CurrentAddons extends Component {
   handleKeyDown(e){
     if (e.ctrlKey && e.which === 68) {
       this.handleDelete(this.state.activeId)
-      alert('delete')
     }
   }
 

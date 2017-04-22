@@ -51,6 +51,7 @@ class Photo extends React.Component {
       <div>
         <div className="photobox">
           <Webcam className="webcam" ref="webcam" width={"400"} height={"400"}/>
+          <p>Hit the spacebar to take a picture</p>
         </div>
       </div>
 
