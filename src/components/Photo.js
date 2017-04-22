@@ -45,7 +45,7 @@ class Photo extends React.Component {
     return (
       <div>
         <div className="photobox">
-          <Webcam ref="webcam" height={"400"} width={"400"}/>
+          <Webcam className="webcam" ref="webcam" width={"400"} height={"400"}/>
         </div>
       </div>
 
