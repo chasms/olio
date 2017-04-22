@@ -178,13 +178,13 @@ class NavBar extends Component {
 				<div>
 					<div className="btn-bar">
 						<Tooltip />
-						{this.renderSaveButton()}
-						<button className="btn" onClick={this.toggleWebcam}>WEBCAM {this.state.webcamActive ? 'OFF' : 'ON' }</button>
-						<button className="btn" onClick={this.handleText}>Add Text</button>
-						{this.renderSignup()}
-						{this.renderLogin()}
-						{this.renderRestore()}
-						{this.renderLogout()}
+							{this.renderSaveButton()}
+							<button className="btn" onClick={this.toggleWebcam}>WEBCAM {this.state.webcamActive ? 'OFF' : 'ON' }</button>
+							<button className="btn" onClick={this.handleText}>Add Text</button>
+							{this.renderSignup()}
+							{this.renderLogin()}
+							{this.renderRestore()}
+							{this.renderLogout()}
 						{this.state.webcamActive ? <Photo handleToggle={this.toggleWebcam} /> : null}
 					</div>
 					{this.renderSignupModal()}
