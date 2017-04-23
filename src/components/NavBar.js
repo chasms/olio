@@ -33,8 +33,7 @@ class NavBar extends Component {
 		this.toggleSignupModal = this.toggleSignupModal.bind(this)
 		this.toggleLoginModal = this.toggleLoginModal.bind(this)
 		this.handleLogout = this.handleLogout.bind(this)
-		this.closeSignupModal = this.closeSignupModal.bind(this)
-		this.closeLoginModal = this.closeLoginModal.bind(this)
+		this.closeModal = this.closeModal.bind(this)
 		this.handleText = this.handleText.bind(this)
 		this.handleKeyDown = this.handleKeyDown.bind(this)
 		this.addNotification = this.addNotification.bind(this)
@@ -91,18 +90,13 @@ class NavBar extends Component {
 	}
 
 
-	closeSignupModal() {
+	closeModal() {
 		this.setState({
 			signupModalOpen: false,
 			loginModalOpen: false
 		})
 	}
 
-	closeLoginModal() {
-		this.setState({
-			loginModalOpen: false
-		})
-	}
 
 	toggleWebcam(){
 		this.setState({
@@ -182,7 +176,7 @@ class NavBar extends Component {
 				style={customStyles}
 				>
 					<Signup closeModal={this.closeSignupModal} />
-					<button className="closeModal" onClick={this.closeSignupModal}>close</button>
+					<button className="closeModal" onClick={this.closeModal}>close</button>
 				</Modal>
 			)
 		}

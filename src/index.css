@@ -46,7 +46,7 @@ p {
   text-align: center;
   position: absolute;
   right: 0;
-  z-index: 2;
+  z-index: 1000;
 
 }
 
@@ -339,7 +339,7 @@ textarea:-ms-input-placeholder {
   left: 0;
   height: 0;
   width: 100%;
-  z-index: 1;
+  z-index: 1000;
 }
 .drawer-wrapper {
   position: inherit;
