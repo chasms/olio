@@ -157,7 +157,7 @@ button:focus {outline:0;}
   color: darkgrey;
   text-align: center;
   cursor: pointer;
-   
+
 }
 .closeModal:hover {
   color: dimgrey;
@@ -431,4 +431,26 @@ textarea:-ms-input-placeholder {
   margin-right: auto;
   height: 400px;
   width: 600px;
+}
+
+/*  Creations
+==================================================*/
+.creations-overlay {
+  display: none;
+}
+.creations-bar {
+  background-color: rgba(245, 245, 245, 0.6) !important;
+}
+.creation {
+  width: 200px;
+  height: 100px;
+  padding: 10px;
+  background-color: azure;
+  margin: 25px;
+  border-radius: 5px;
+  border: 1px solid silver;
+}
+.creation span {
+  margin: auto;
+  font-family: monospace;
 }
