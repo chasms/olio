@@ -5,6 +5,9 @@ import { bindActionCreators } from 'redux'
 
 // node_modules imports
 import Modal from 'react-modal';
+import { OrderedSet } from 'immutable';
+import { NotificationStack } from 'react-notification';
+
 
 // app imports
 import { addAddon, deleteAllAddons } from '../actions/addons'
@@ -19,6 +22,8 @@ class NavBar extends Component {
 	constructor(props){
 		super(props)
 		this.state = {
+			notifications: OrderedSet(),
+			count: 0,
 			webcamActive: false,
 			signupModalOpen: false,
 			loginModalOpen: false
@@ -31,7 +36,33 @@ class NavBar extends Component {
 		this.closeModal = this.closeModal.bind(this)
 		this.handleText = this.handleText.bind(this)
 		this.handleKeyDown = this.handleKeyDown.bind(this)
+		this.addNotification = this.addNotification.bind(this)
+		this.removeNotification = this.removeNotification.bind(this)
 	}
+
+	addNotification(message) {
+		const { notifications, count } = this.state;
+		const id = notifications.size + 1;
+		const newCount = count + 1;
+		return this.setState({
+			count: newCount,
+			notifications: notifications.add({
+				message: message,
+				key: newCount,
+				action: 'Dismiss',
+				dismissAfter: 3400,
+				onClick: () => this.removeNotification(newCount),
+			})
+		});
+	}
+
+	removeNotification (count) {
+		const { notifications } = this.state;
+		this.setState({
+			notifications: notifications.filter(n => n.key !== count)
+		})
+	}
+
 
 	renderSaveButton() {
 		return this.props.token ? <button className="btn" onClick={this.handleSave}>Save Creation</button> : null
@@ -55,6 +86,7 @@ class NavBar extends Component {
 
 	handleSave() {
 		this.props.saveCreation(this.props.usedAddons, this.props.token)
+		this.addNotification('Creation Saved!')
 	}
 
 
@@ -115,7 +147,7 @@ class NavBar extends Component {
 			this.handleText()
 		} else if (e.ctrlKey & e.which === 83) {
 			this.handleSave()
-			
+
 		}
 	}
 
@@ -152,30 +184,30 @@ class NavBar extends Component {
 			)
 		}
 
-	renderLoginModal() {
+		renderLoginModal() {
 
-		let customStyles = {
-			content : {
-				top                   : '50%',
-				left                  : '50%',
-				right                 : 'auto',
-				bottom                : 'auto',
-				marginRight           : '-50%',
-				transform             : 'translate(-50%, -50%)',
-				backgroundColor       : 'whitesmoke'
-			},
-			overlay : {
-				zIndex	 			  : '10000'
+			let customStyles = {
+				content : {
+					top                   : '50%',
+					left                  : '50%',
+					right                 : 'auto',
+					bottom                : 'auto',
+					marginRight           : '-50%',
+					transform             : 'translate(-50%, -50%)',
+					backgroundColor       : 'whitesmoke'
+				},
+				overlay : {
+					zIndex	 			  : '10000'
+				}
 			}
-		}
-		if (!this.props.token)
-		return (
+			if (!this.props.token)
+			return (
 				<Modal
 					isOpen={this.state.loginModalOpen}
 					contentLabel="Sign Up"
 					style={customStyles}>
-						<Login closeModal={this.closeModal} />
-						<button className="closeModal" onClick={this.closeModal}>close</button>
+					<Login closeModal={this.closeModal} />
+					<button className="closeModal" onClick={this.closeModal}>close</button>
 				</Modal>
 			)
 		}
@@ -184,15 +216,21 @@ class NavBar extends Component {
 			return(
 				<div>
 					<div className="btn-bar">
+						<NotificationStack
+							notifications={this.state.notifications.toArray()}
+							onDismiss={notification => this.setState({
+								notifications: this.state.notifications.delete(notification)
+							})}
+						/>
 						<Tooltip />
 						<p className="toolTipInfoText">⬅ hover over the keyboard</p>
-							{this.renderSaveButton()}
-							<button className="btn" onClick={this.toggleWebcam}>WEBCAM {this.state.webcamActive ? 'OFF' : 'ON' }</button>
-							<button className="btn" onClick={this.handleText}>Add Text</button>
-							{this.renderSignup()}
-							{this.renderLogin()}
-							{this.renderRestore()}
-							{this.renderLogout()}
+						{this.renderSaveButton()}
+						<button className="btn" onClick={this.toggleWebcam}>WEBCAM {this.state.webcamActive ? 'OFF' : 'ON' }</button>
+						<button className="btn" onClick={this.handleText}>Add Text</button>
+						{this.renderSignup()}
+						{this.renderLogin()}
+						{this.renderRestore()}
+						{this.renderLogout()}
 						{this.state.webcamActive ? <Photo handleToggle={this.toggleWebcam} /> : null}
 					</div>
 					{this.renderSignupModal()}
