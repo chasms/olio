@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux'
 // node_modules imports
 import Sidebar from 'react-sidebar'
 
+
 // app imports
 import { addAddon, getAddons, deleteAllAddons } from './actions/addons'
 import { saveCreation, restoreCreation, getCreations, deleteCreation } from './actions/creations'
