@@ -50,7 +50,7 @@ class NavBar extends Component {
 				message: message,
 				key: newCount,
 				action: 'Dismiss',
-				dismissAfter: 3400,
+				dismissAfter: 20000,
 				onClick: () => this.removeNotification(newCount),
 			})
 		});
@@ -213,10 +213,14 @@ class NavBar extends Component {
 		}
 
 		render(){
+			const baseStyle = {
+      zIndex: 10000
+		}
 			return(
 				<div>
 					<div className="btn-bar">
 						<NotificationStack
+							style={baseStyle}
 							notifications={this.state.notifications.toArray()}
 							onDismiss={notification => this.setState({
 								notifications: this.state.notifications.delete(notification)
