@@ -1,8 +1,11 @@
+// std library imports
 import React from 'react'
-import Webcam from 'react-webcam';
 import { addAddon } from '../actions/addons'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+
+// node_modules imports
+import Webcam from 'react-webcam';
 
 class Photo extends React.Component {
   constructor() {
@@ -15,7 +18,7 @@ class Photo extends React.Component {
   }
 
   handleScreenshot() {
-
+    document.getElementsByClassName("workspace")[0].focus()
     this.props.addAddon({
       url: this.refs.webcam.getScreenshot(),
       initial_height: 300,
@@ -27,13 +30,18 @@ class Photo extends React.Component {
   }
 
   handleKeyDown(e){
-    if (e.which == 32) {
+    if (e.which === 32) {
+      e.preventDefault()
       this.handleScreenshot()
     }
   }
 
   componentWillMount(){
-    document.addEventListener("keydown", this.handleKeyDown.bind(this));
+    document.addEventListener("keydown", this.handleKeyDown);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("keydown", this.handleKeyDown);
   }
 
 
@@ -42,8 +50,8 @@ class Photo extends React.Component {
     return (
       <div>
         <div className="photobox">
-          <h3>Press the space bar to take a picture</h3>
-          <Webcam ref="webcam" height={"400"} width={"400"}/>
+          <Webcam className="webcam" ref="webcam" width={"400"} height={"400"} audio={false}/>
+          <p>Hit the spacebar to take a picture</p>
         </div>
       </div>
 

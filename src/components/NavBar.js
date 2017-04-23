@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux'
 import Modal from 'react-modal';
 
 // app imports
-import { addAddon } from '../actions/addons'
+import { addAddon, deleteAllAddons } from '../actions/addons'
 import { saveCreation, restoreCreation } from '../actions/creations'
 import { logout } from '../actions/accounts'
 import Photo from './Photo'
@@ -58,9 +58,11 @@ class NavBar extends Component {
 		this.props.saveCreation(this.props.usedAddons, this.props.token)
 	}
 
+
 	closeSignupModal() {
 		this.setState({
-			signupModalOpen: false
+			signupModalOpen: false,
+			loginModalOpen: false
 		})
 	}
 
@@ -110,13 +112,13 @@ class NavBar extends Component {
 	}
 
 	handleKeyDown(e) {
-		console.log(e)
 		if (e.ctrlKey && e.which === 87) {
 			this.toggleWebcam()
 		} else if (e.ctrlKey && e.which === 84) {
 			this.handleText()
 		} else if (e.ctrlKey & e.which === 83) {
 			this.handleSave()
+
 		}
 	}
 
@@ -135,6 +137,9 @@ class NavBar extends Component {
 				marginRight           : '-50%',
 				transform             : 'translate(-50%, -50%)',
 				backgroundColor       : 'whitesmoke'
+			},
+			overlay : {
+				zIndex	 			  : '10000'
 			}
 		}
 		if (!this.props.token)
@@ -145,47 +150,52 @@ class NavBar extends Component {
 				style={customStyles}
 				>
 					<Signup closeModal={this.closeSignupModal} />
+					<button className="closeModal" onClick={this.closeSignupModal}>close</button>
 				</Modal>
 			)
 		}
 
-		renderLoginModal() {
+	renderLoginModal() {
 
-			let customStyles = {
-				content : {
-					top                   : '50%',
-					left                  : '50%',
-					right                 : 'auto',
-					bottom                : 'auto',
-					marginRight           : '-50%',
-					transform             : 'translate(-50%, -50%)',
-					backgroundColor       : 'whitesmoke'
-				}
+		let customStyles = {
+			content : {
+				top                   : '50%',
+				left                  : '50%',
+				right                 : 'auto',
+				bottom                : 'auto',
+				marginRight           : '-50%',
+				transform             : 'translate(-50%, -50%)',
+				backgroundColor       : 'whitesmoke'
+			},
+			overlay : {
+				zIndex	 			  : '10000'
 			}
-			if (!this.props.token)
-			return (
+		}
+		if (!this.props.token)
+		return (
 				<Modal
 					isOpen={this.state.loginModalOpen}
 					contentLabel="Sign Up"
-					style={customStyles}
-					>
+					style={customStyles}>
 						<Login closeModal={this.closeLoginModal} />
-					</Modal>
-				)
-			}
+						<button className="closeModal" onClick={this.closeLoginModal}>close</button>
+				</Modal>
+			)
+		}
 
 		render(){
 			return(
 				<div>
 					<div className="btn-bar">
 						<Tooltip />
-						{this.renderSaveButton()}
-						<button className="btn" onClick={this.toggleWebcam}>WEBCAM {this.state.webcamActive ? 'OFF' : 'ON' }</button>
-						<button className="btn" onClick={this.handleText}>Add Text</button>
-						{this.renderSignup()}
-						{this.renderLogin()}
-						{this.renderRestore()}
-						{this.renderLogout()}
+						<p className="toolTipInfoText">⬅ hover over the keyboard</p>
+							{this.renderSaveButton()}
+							<button className="btn" onClick={this.toggleWebcam}>WEBCAM {this.state.webcamActive ? 'OFF' : 'ON' }</button>
+							<button className="btn" onClick={this.handleText}>Add Text</button>
+							{this.renderSignup()}
+							{this.renderLogin()}
+							{this.renderRestore()}
+							{this.renderLogout()}
 						{this.state.webcamActive ? <Photo handleToggle={this.toggleWebcam} /> : null}
 					</div>
 					{this.renderSignupModal()}
@@ -196,13 +206,15 @@ class NavBar extends Component {
 	}
 	const mapStateToProps = (state) => {
 		return {
-			token: state.Accounts.token
+			token: state.Accounts.token,
+			usedAddons: state.Addon
 		}
 	}
 
 
 	const mapDispatchToProps = (dispatch) => {
 		return bindActionCreators({
+			deleteAllAddons: deleteAllAddons,
 			logout: logout,
 			saveCreation: saveCreation,
 			addAddon: addAddon,

@@ -3,7 +3,7 @@ var cuid = require('cuid');
 export default function Addon(state = [], action){
   switch (action.type) {
     case 'ADD_ADDON':
-      return [...state, {x: 0, y: 0, h: action.payload.initial_height, w: action.payload.initial_width, url: action.payload.url, category: action.payload.category, id: cuid() }]
+      return [...state, {x: 50, y: 100, h: action.payload.initial_height, w: action.payload.initial_width, url: action.payload.url, category: action.payload.category, id: cuid() }]
     case 'REMOVE_ADDON':
       return state.filter((a) => {
         return a.id !== action.payload.id
@@ -24,7 +24,7 @@ export default function Addon(state = [], action){
           : (action.payload.coordinates.width),
         category: found.category,
       }
-      newLocation.category === 'text' ? newLocation.value = action.payload.value : null
+      if (newLocation.category === 'text') { newLocation.value = action.payload.value }
       return [...rest, newLocation]
     case 'DELETE_ADDONS':
       return []

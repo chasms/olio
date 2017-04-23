@@ -1,7 +1,9 @@
+// std library imports
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
+// app imports
 import { addAddon } from '../actions/addons'
 
 class DrawerItem extends React.Component {
@@ -20,7 +22,9 @@ class DrawerItem extends React.Component {
       <div className="drawer-item">
         <img onClick={this.handleClick}
           data-id={this.props.item.id}
-          src={this.props.item.url}/>
+          src={this.props.item.url}
+          alt=''
+        />
       </div>
     )
   }

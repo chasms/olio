@@ -1,6 +1,9 @@
+// std library imports
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+
+// app imports
 import { signup } from '../actions/accounts'
 
 class Signup extends React.Component {

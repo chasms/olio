@@ -20,7 +20,6 @@ class CurrentAddons extends Component {
     this.handleDelete = this.handleDelete.bind(this)
     this.handleMouseUp = this.handleMouseUp.bind(this)
     this.handleActive = this.handleActive.bind(this)
-    this.handleBlur = this.handleBlur.bind(this)
     this.handleKeyDown = this.handleKeyDown.bind(this)
 
   }
@@ -36,21 +35,20 @@ class CurrentAddons extends Component {
   }
 
   handleActive(id, event) {
-    this.setState({
-      activeId: id
-    })
-  }
-
-  handleBlur(event) {
-    this.setState({
-      activeId: null
-    })
+    if (this.state.activeId === id) {
+      this.setState({
+        activeId: null
+      })
+    } else {
+      this.setState({
+        activeId: id
+      })
+    }
   }
 
   handleKeyDown(e){
-    if (e.ctrlKey && e.which == 68) {
+    if (e.ctrlKey && e.which === 68) {
       this.handleDelete(this.state.activeId)
-      alert('delete')
     }
   }
 
@@ -63,7 +61,9 @@ class CurrentAddons extends Component {
       <img
         id={addon.id}
         className={addon.category === 'photo' ? 'non-selectable screenshot' : 'non-selectable img-addon'}
-        src={addon.url}>
+        src={addon.url}
+        alt={'img' + addon.id}
+        >
       </img>
     )
   }
@@ -110,7 +110,6 @@ class CurrentAddons extends Component {
 
 
       renderAddons() {
-
         return this.props.usedAddons.map((addon, index) => {
 
           return (
@@ -139,27 +138,27 @@ class CurrentAddons extends Component {
 
           render() {
             return (
-              <div className="workspace" onDoubleClick={this.handleBlur} onKeyDown={this.handleKeyDown}>
+              <div className="workspace" onKeyDown={this.handleKeyDown}>
                 {this.renderAddons()}
               </div>
             )
           }
         }
 
-  const mapStateToProps = (state) => {
-    return {
-      usedAddons: state.Addon,
-      allAddons: state.AddonLibrary
-    }
-  }
+        const mapStateToProps = (state) => {
+          return {
+            usedAddons: state.Addon,
+            allAddons: state.AddonLibrary
+          }
+        }
 
-  const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({
-      addAddon: addAddon,
-      getAddons: getAddons,
-      removeAddon: removeAddon,
-      saveAddonLocation: saveAddonLocation,
-    }, dispatch);
-  };
+        const mapDispatchToProps = (dispatch) => {
+          return bindActionCreators({
+            addAddon: addAddon,
+            getAddons: getAddons,
+            removeAddon: removeAddon,
+            saveAddonLocation: saveAddonLocation,
+          }, dispatch);
+        };
 
-  export default connect(mapStateToProps, mapDispatchToProps)(CurrentAddons)
+        export default connect(mapStateToProps, mapDispatchToProps)(CurrentAddons)
