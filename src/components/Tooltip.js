@@ -16,8 +16,9 @@ export default class Tooltip extends Component {
 						<p>Webcam: ctrl + w</p>
 						<p>Take picture: space</p>
 						<p>Add text: ctrl + t</p>
-						<p>Save: ctrl + s</p>
 						<p>Delete: ctrl + d</p>
+						<p>Save: ctrl + s</p>
+						<p>(if you are logged-in)</p>
 					</ReactTooltip>
 			</div>
 		)
