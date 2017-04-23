@@ -33,7 +33,8 @@ class NavBar extends Component {
 		this.toggleSignupModal = this.toggleSignupModal.bind(this)
 		this.toggleLoginModal = this.toggleLoginModal.bind(this)
 		this.handleLogout = this.handleLogout.bind(this)
-		this.closeModal = this.closeModal.bind(this)
+		this.closeSignupModal = this.closeSignupModal.bind(this)
+		this.closeLoginModal = this.closeLoginModal.bind(this)
 		this.handleText = this.handleText.bind(this)
 		this.handleKeyDown = this.handleKeyDown.bind(this)
 		this.addNotification = this.addNotification.bind(this)
@@ -90,9 +91,15 @@ class NavBar extends Component {
 	}
 
 
-	closeModal() {
+	closeSignupModal() {
 		this.setState({
 			signupModalOpen: false,
+			loginModalOpen: false
+		})
+	}
+
+	closeLoginModal() {
+		this.setState({
 			loginModalOpen: false
 		})
 	}
@@ -106,9 +113,7 @@ class NavBar extends Component {
 
 	toggleSignupModal(){
 		if (this.state.loginModalOpen) {
-			this.setState({
-				loginModalOpen: false
-			})
+			this.closeLoginModal()
 		}
 		this.setState({
 			signupModalOpen: !this.state.signupModalOpen
@@ -117,9 +122,7 @@ class NavBar extends Component {
 
 	toggleLoginModal(){
 		if (this.state.signupModalOpen) {
-			this.setState({
-				signupModalOpen: false
-			})
+			this.closeSignupModal()
 		}
 		this.setState({
 			loginModalOpen: !this.state.loginModalOpen
@@ -178,8 +181,8 @@ class NavBar extends Component {
 				contentLabel="Sign Up"
 				style={customStyles}
 				>
-					<Signup closeModal={this.closeModal} />
-					<button className="closeModal" onClick={this.closeModal}>close</button>
+					<Signup closeModal={this.closeSignupModal} />
+					<button className="closeModal" onClick={this.closeSignupModal}>close</button>
 				</Modal>
 			)
 		}
@@ -208,6 +211,7 @@ class NavBar extends Component {
 					style={customStyles}>
 					<Login closeModal={this.closeModal} />
 					<button className="closeModal" onClick={this.closeModal}>close</button>
+
 				</Modal>
 			)
 		}

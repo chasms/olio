@@ -24,7 +24,7 @@ export default function Addon(state = [], action){
           : (action.payload.coordinates.width),
         category: found.category,
       }
-      newLocation.category === 'text' ? newLocation.value = action.payload.value : null
+      if (newLocation.category === 'text') { newLocation.value = action.payload.value }
       return [...rest, newLocation]
     case 'DELETE_ADDONS':
       return []
