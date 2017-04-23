@@ -135,6 +135,9 @@ class NavBar extends Component {
 				marginRight           : '-50%',
 				transform             : 'translate(-50%, -50%)',
 				backgroundColor       : 'whitesmoke'
+			},
+			overlay : {
+				zIndex	 			  : '10000'
 			}
 		}
 		if (!this.props.token)
@@ -149,30 +152,33 @@ class NavBar extends Component {
 			)
 		}
 
-		renderLoginModal() {
+	renderLoginModal() {
 
-			let customStyles = {
-				content : {
-					top                   : '50%',
-					left                  : '50%',
-					right                 : 'auto',
-					bottom                : 'auto',
-					marginRight           : '-50%',
-					transform             : 'translate(-50%, -50%)',
-					backgroundColor       : 'whitesmoke'
-				}
+		let customStyles = {
+			content : {
+				top                   : '50%',
+				left                  : '50%',
+				right                 : 'auto',
+				bottom                : 'auto',
+				marginRight           : '-50%',
+				transform             : 'translate(-50%, -50%)',
+				backgroundColor       : 'whitesmoke'
+			},
+			overlay : {
+				zIndex	 			  : '10000'
 			}
-			if (!this.props.token)
-			return (
-				<Modal
-					isOpen={this.state.loginModalOpen}
-					contentLabel="Sign Up"
-					style={customStyles}
-					>
-						<Login closeModal={this.closeModal} />
-					</Modal>
-				)
-			}
+		}
+		if (!this.props.token)
+		return (
+			<Modal
+				isOpen={this.state.loginModalOpen}
+				contentLabel="Sign Up"
+				style={customStyles}
+				>
+					<Login closeModal={this.closeModal} />
+				</Modal>
+			)
+		}
 
 		render(){
 			return(
