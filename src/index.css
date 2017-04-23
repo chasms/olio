@@ -139,12 +139,16 @@ button:focus {outline:0;}
 }
 
 .closeModal {
-  display: inline-block;
+  display: block;
+  margin-left: 100px;
   background-color: transparent;
+  border: 1px solid silver;
+  border-style: solid;
+  border-width: thin;
+  border-radius: 5px;
   color: darkgrey;
   text-align: center;
-  cursor: pointer;
-  margin: 25px;
+  cursor: pointer; 
 }
 .closeModal:hover {
   color: dimgrey;
