@@ -39,10 +39,13 @@ class App extends React.Component {
     // this.props.restoreCreation(this.state.restoreId, this.props.token)
   }
   renderCreationList() {
+    const deleteStyle = {
+      cursor: 'pointer'
+    }
     return this.props.creations.map((creation) => {
       return (
         <p key={creation.id}>
-          <span onClick={this.props.deleteCreation.bind(null, creation.id, this.props.token)}>
+          <span onClick={this.props.deleteCreation.bind(null, creation.id, this.props.token)} style={deleteStyle}>
             [x]
           </span>
           <span onClick={this.handleRestoreCreation.bind(null, creation.id, this.props.token)} >
