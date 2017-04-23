@@ -9,6 +9,8 @@ import Rnd from 'react-rnd';
 // app imports
 import { addAddon, getAddons, removeAddon, saveAddonLocation } from '../actions/addons'
 import Delete from './Delete'
+import Image from './Image'
+import Text from './Text'
 
 class CurrentAddons extends Component {
 
@@ -56,109 +58,86 @@ class CurrentAddons extends Component {
     document.addEventListener("keydown", this.handleKeyDown.bind(this))
   }
 
-  renderImg(addon) {
+  renderMask(addon) {
+    let active = this.isActive(addon)
+    if (addon.category !== 'text') {
+      return (
+        <div
+          id={addon.id}
+          className={addon.category === 'photo' ? "screenshot-mask non-selectable " + active : "img-mask non-selectable " + active}>
+        </div>
+      )
+    } else {
+      return
+    }
+  }
+
+  isActive(addon) {
+    return this.state.activeId === addon.id ? 'active-addon' : ''
+  }
+
+  renderDelete(addon) {
+    return this.state.activeId === addon.id ?(
+      <Delete
+        addon={addon}
+        onClick={this.handleDelete.bind(null, addon.id)}
+      />)
+      : null
+  }
+
+
+  renderAddons() {
+    return this.props.usedAddons.map((addon, index) => {
+
+      return (
+        <Rnd
+          key={addon.id}
+          id={addon.id}
+          ref={c => { this.rnd = c; }}
+          initial={{x: addon.x, y: addon.y, width: addon.w, height: addon.h}}
+          className='rnd'
+          bounds={'parent'}
+          zIndex={addon.category === "photo" ? 2 : 100}
+          >
+            {this.renderDelete(addon)}
+            <span className="box"
+              onMouseDown={this.handleActive.bind(null, addon.id)}
+              onMouseOut={this.handleMouseUp.bind(null, addon.id)}
+              >
+                {this.renderMask(addon)}
+                {addon.category === 'text' ?
+                (<Text addon={addon} active={this.isActive(addon)}/>)
+                : (<Image addon={addon}/>) }
+            </span>
+        </Rnd>
+      )
+    })
+  }
+
+  render() {
     return (
-      <img
-        id={addon.id}
-        className={addon.category === 'photo' ? 'non-selectable screenshot' : 'non-selectable img-addon'}
-        src={addon.url}
-        alt={'img' + addon.id}
-        >
-      </img>
+      <div className="workspace" onKeyDown={this.handleKeyDown}>
+        {this.renderAddons()}
+      </div>
     )
   }
 
-  renderText(addon) {
-    let active = this.isActive(addon)
-    return (
-      <textarea
-        id={addon.id}
-        className={'text-addon non-selectable ' + active}
-        placeholder="Drag Me Anywhere!"
-        defaultValue={addon.value}
-        >
-        </textarea>
-      )
-    }
+}
 
-    renderMask(addon) {
-      let active = this.isActive(addon)
-      if (addon.category !== 'text') {
-        return (
-          <div
-            id={addon.id}
-            className={addon.category === 'photo' ? "screenshot-mask non-selectable " + active : "img-mask non-selectable " + active}>
-          </div>
-        )
-      } else {
-        return
-      }
-    }
-
-    isActive(addon) {
-      return this.state.activeId === addon.id ? 'active-addon' : ''
-    }
-
-    renderDelete(addon) {
-      return this.state.activeId === addon.id ?(
-        <Delete
-          addon={addon}
-          onClick={this.handleDelete.bind(null, addon.id)}
-        />)
-        : null
+      const mapStateToProps = (state) => {
+        return {
+          usedAddons: state.Addon,
+          allAddons: state.AddonLibrary
+        }
       }
 
+      const mapDispatchToProps = (dispatch) => {
+        return bindActionCreators({
+          addAddon: addAddon,
+          getAddons: getAddons,
+          removeAddon: removeAddon,
+          saveAddonLocation: saveAddonLocation,
+        }, dispatch);
+      };
 
-      renderAddons() {
-        return this.props.usedAddons.map((addon, index) => {
-
-          return (
-            <Rnd
-              key={addon.id}
-              id={addon.id}
-              ref={c => { this.rnd = c; }}
-              initial={{x: addon.x, y: addon.y, width: addon.w, height: addon.h}}
-              className='rnd'
-              bounds={'parent'}
-              zIndex={addon.category === "photo" ? 2 : 100}
-              >
-                {this.renderDelete(addon)}
-                <span className="box"
-                  onMouseDown={this.handleActive.bind(null, addon.id)}
-                  onMouseOut={this.handleMouseUp.bind(null, addon.id)}
-                  >
-                    {this.renderMask(addon)}
-                    {addon.category === 'text' ?
-                    (this.renderText(addon)) : (this.renderImg(addon)) }
-                  </span>
-                </Rnd>
-              )
-            })
-          }
-
-          render() {
-            return (
-              <div className="workspace" onKeyDown={this.handleKeyDown}>
-                {this.renderAddons()}
-              </div>
-            )
-          }
-        }
-
-        const mapStateToProps = (state) => {
-          return {
-            usedAddons: state.Addon,
-            allAddons: state.AddonLibrary
-          }
-        }
-
-        const mapDispatchToProps = (dispatch) => {
-          return bindActionCreators({
-            addAddon: addAddon,
-            getAddons: getAddons,
-            removeAddon: removeAddon,
-            saveAddonLocation: saveAddonLocation,
-          }, dispatch);
-        };
-
-        export default connect(mapStateToProps, mapDispatchToProps)(CurrentAddons)
+      export default connect(mapStateToProps, mapDispatchToProps)(CurrentAddons)

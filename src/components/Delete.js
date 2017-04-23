@@ -1,7 +1,8 @@
 // std library imports
-import React, { Component } from 'react';
+import React from 'react';
+import { connect } from 'react-redux'
 
-export default class CurrentAddons extends Component {
+class Delete extends React.Component {
 
   render() {
     return (
@@ -13,3 +14,5 @@ export default class CurrentAddons extends Component {
   }
 
 }
+
+export default connect()(Delete)

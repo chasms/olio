@@ -1,13 +1,16 @@
 // std library imports
 import React from 'react'
-import { addAddon } from '../actions/addons'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 // node_modules imports
 import Webcam from 'react-webcam';
 
+// app imports
+import { addAddon } from '../actions/addons'
+
 class Photo extends React.Component {
+
   constructor() {
     super()
     this.state = {
@@ -44,8 +47,6 @@ class Photo extends React.Component {
     document.removeEventListener("keydown", this.handleKeyDown);
   }
 
-
-
   render() {
     return (
       <div>
@@ -58,7 +59,6 @@ class Photo extends React.Component {
     )
   }
 }
-
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({

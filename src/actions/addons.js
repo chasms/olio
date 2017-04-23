@@ -30,3 +30,17 @@ export const saveAddonLocation = (id, coordinates, value) => ({
   type: 'STORE_LOCATION',
   payload: { id, coordinates, value }
 })
+
+export const getFonts = (name, url, style, weight) => {
+  var font = new FontFace(name, `url(${url})`, {
+    style: style, unicodeRange: 'U+000-5FF', weight: weight
+  });
+
+  // don't wait for the render tree, initiate an immediate fetch!
+  font.load().then(function() {
+    // apply the font (which may re-render text and cause a page reflow)
+    // after the font has finished downloading
+    document.fonts.add(font);
+    document.body.style.fontFamily = name;
+  })
+}
