@@ -71,6 +71,11 @@ button:focus {outline:0;}
   float: left;
   margin-left: 35px;
 }
+.toolTipInfoText {
+  float: left;
+  margin: 15px;
+
+}
 
 /*	Signup/Login
 ==================================================*/
