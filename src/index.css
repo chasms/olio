@@ -49,15 +49,18 @@ p {
 button:focus {outline:0;}
 
 .btn {
-
   float: right;
   margin: 10px;
   font-family: monospace;
-  background-color: #E1E0E1;
+  background-color: transparent;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.75);
   border-radius: 15px;
   display: inline-block;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+}
+.btn:hover {
+  color: dimgrey;
 }
 .keyboard-img {
   height: 45px;
@@ -133,6 +136,17 @@ button:focus {outline:0;}
 }
 :-ms-input-placeholder { /* Internet Explorer 10-11 */
   color:    silver;
+}
+
+.closeModal {
+  display: inline-block;
+  background-color: transparent;
+  color: darkgrey;
+  text-align: center;
+  cursor: pointer;
+}
+.closeModal:hover {
+  color: dimgrey;
 }
 
 /*	Rnd Containers

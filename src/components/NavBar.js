@@ -148,6 +148,7 @@ class NavBar extends Component {
 				style={customStyles}
 				>
 					<Signup closeModal={this.closeModal} />
+					<button className="closeModal" onClick={this.closeModal}>close</button>
 				</Modal>
 			)
 		}
@@ -170,12 +171,12 @@ class NavBar extends Component {
 		}
 		if (!this.props.token)
 		return (
-			<Modal
-				isOpen={this.state.loginModalOpen}
-				contentLabel="Sign Up"
-				style={customStyles}
-				>
-					<Login closeModal={this.closeModal} />
+				<Modal
+					isOpen={this.state.loginModalOpen}
+					contentLabel="Sign Up"
+					style={customStyles}>
+						<Login closeModal={this.closeModal} />
+						<button className="closeModal" onClick={this.closeModal}>close</button>
 				</Modal>
 			)
 		}
