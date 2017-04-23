@@ -144,6 +144,7 @@ button:focus {outline:0;}
   color: darkgrey;
   text-align: center;
   cursor: pointer;
+  margin: 25px;
 }
 .closeModal:hover {
   color: dimgrey;
