@@ -115,6 +115,7 @@ class NavBar extends Component {
 			this.handleText()
 		} else if (e.ctrlKey & e.which === 83) {
 			this.handleSave()
+			
 		}
 	}
 
