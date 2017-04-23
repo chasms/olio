@@ -53,10 +53,12 @@ button:focus {outline:0;}
   margin: 10px;
   font-family: monospace;
   background-color: transparent;
+  border: 1px solid silver;
+  border-style: solid;
+  border-width: thin;
+  border-radius: 5px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.75);
-  border-radius: 15px;
   display: inline-block;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
   cursor: pointer;
 }
 .btn:hover {
@@ -148,7 +150,8 @@ button:focus {outline:0;}
   border-radius: 5px;
   color: darkgrey;
   text-align: center;
-  cursor: pointer; 
+  cursor: pointer;
+   
 }
 .closeModal:hover {
   color: dimgrey;
