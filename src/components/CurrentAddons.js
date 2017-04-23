@@ -119,7 +119,7 @@ class CurrentAddons extends Component {
               ref={c => { this.rnd = c; }}
               initial={{x: addon.x, y: addon.y, width: addon.w, height: addon.h}}
               className='rnd'
-              bounds={'parent'}
+              bounds={'.workspace'}
               zIndex={addon.category === "photo" ? 2 : 100}
               >
                 {this.renderDelete(addon)}
