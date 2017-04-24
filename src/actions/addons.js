@@ -5,7 +5,7 @@ export const getAddons = () => {
   return (dispatch) => {
     axios({
       method:'get',
-      url: api() + '/addons/'
+      url: api + '/addons/'
     }).then(resp => {
       dispatch({type: 'GET_ADDONS', payload: resp.data})
     })

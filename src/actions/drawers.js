@@ -5,7 +5,7 @@ export const getDrawers = () => {
   return (dispatch) => {
     axios({
       method:'get',
-      url: api() + '/categories/'
+      url: api + '/categories/'
     }).then(resp => {
       dispatch({type: 'GET_DRAWERS', payload: resp.data})
     })

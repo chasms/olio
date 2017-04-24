@@ -6,7 +6,7 @@ import { signupError, loginError, logoutAlert, signupSuccess, loginSuccess } fro
 
 export const signup = (details) => {
   return (dispatch) => {
-    axios.post(api() + '/signup/', details)
+    axios.post(api + '/signup/', details)
     .then(resp => {
       localStorage.setItem('token', resp.data.token)
       dispatch({type: 'SET_TOKEN', payload: resp.data})
@@ -20,7 +20,7 @@ export const signup = (details) => {
 
 export const login = (details) => {
   return (dispatch) => {
-    axios.post(api() + '/login/', details)
+    axios.post(api + '/login/', details)
     .then(resp => {
       localStorage.setItem('token', resp.data.token)
       dispatch({type: 'SET_TOKEN', payload: resp.data})

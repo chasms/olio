@@ -5,7 +5,7 @@ import { saveSuccess } from './consts'
 export const saveCreation = (addons, token) => {
   return (dispatch) => {
     axios({
-      url: api() + '/creations/',
+      url: api + '/creations/',
       method: 'post',
       headers: { 'AUTHORIZATION': `Bearer ${token}`},
       data: { addons: addons }
@@ -20,7 +20,7 @@ export const deleteCreation = (id, token) => {
   return (dispatch) => {
 
     axios({
-      url: api() + '/creations/' + id,
+      url: api + '/creations/' + id,
       method: 'delete',
       headers: { 'AUTHORIZATION': `Bearer ${token}`},
     }).then(resp => {
@@ -33,7 +33,7 @@ export const restoreCreation = (id, token) => {
   return (dispatch) => {
 
     axios({
-      url: api() + '/creations/' + id,
+      url: api + '/creations/' + id,
       method: 'get',
       headers: { 'AUTHORIZATION': `Bearer ${token}`},
     }).then(resp => {
@@ -48,7 +48,7 @@ export const getCreations = (token) => {
   return (dispatch) => {
 
     axios({
-      url: api() + '/creations/',
+      url: api + '/creations/',
       method: 'get',
       headers: { 'AUTHORIZATION': `Bearer ${token}`},
     }).then(resp => {
