@@ -235,6 +235,7 @@ class NavBar extends Component {
 	}
 	const mapStateToProps = (state) => {
 		return {
+			currentCreation: state.CurrentCreation,
 			notifications: state.Notifications,
 			token: state.Accounts.token,
 			usedAddons: state.Addon

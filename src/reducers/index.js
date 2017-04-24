@@ -5,6 +5,7 @@ import Drawers from './DrawersReducer'
 import Accounts from './AccountReducer'
 import Creations from './CreationReducer'
 import Loading from './LoadingReducer'
+import CurrentCreation from './CurrentCreationReducer'
 import {reducer as Notifications} from 'react-notification-system-redux';
 
 
@@ -15,5 +16,6 @@ export default combineReducers({
   Accounts,
   Creations,
   Notifications,
-  Loading
+  Loading,
+  CurrentCreation
 })
