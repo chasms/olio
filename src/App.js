@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux'
 // node_modules imports
 import Sidebar from 'react-sidebar'
 import Modal from 'react-modal'
+var Spinner = require('react-spinkit')
 
 
 // app imports
@@ -49,6 +50,7 @@ class App extends React.Component {
     // this.props.restoreCreation(this.state.restoreId, this.props.token)
   }
 
+
   renderWelcomeModal() {
 
       let customStyles = {
@@ -67,10 +69,11 @@ class App extends React.Component {
       }
       return (
         <Modal
-          isOpen={this.props.loading}
+          isOpen={this.state.welcomeModalOpen}
           contentLabel="Welcome"
           style={customStyles}>
           <Welcome />
+            {this.props.loading ? <div className="ride-spinners"><Spinner spinnerName='double-bounce' /></div> : <button className="closeModal" onClick={this.toggleWelcomeModal}>close</button>}
         </Modal>
       )
     }

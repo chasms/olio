@@ -156,7 +156,8 @@ button:focus {
 
 .closeModal {
   display: block;
-  margin-left: 100px;
+  margin-left: auto;
+  margin-right: auto;
   background-color: transparent;
   border: 1px solid silver;
   border-style: solid;
@@ -167,6 +168,7 @@ button:focus {
   cursor: pointer;
 
 }
+
 .closeModal:hover {
   color: dimgrey;
 }
@@ -174,6 +176,10 @@ button:focus {
 .welcome {
   text-align: center;
   font-family: monospace;
+}
+.sk-spinner {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /*	Rnd Containers
