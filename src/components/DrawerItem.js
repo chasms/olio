@@ -39,17 +39,15 @@ class DrawerItem extends React.Component {
   }
 
   renderText() {
+    let fontFamily = this.extractFontName(this.props.item.url)
     return (
       <div>
         <p
           className="text-template"
           onClick={this.handleText}
-          style={{
-            fontFamily: this.extractFontName(this.props.item.url)
-            
-          }}
+          style={{ fontFamily: fontFamily }}
         >
-          {this.extractFontName(this.props.item.url)}
+          {fontFamily}
         </p>
         <link href={this.props.item.url} rel="stylesheet"/>
       </div>
@@ -58,7 +56,7 @@ class DrawerItem extends React.Component {
 
   render() {
     return (
-      <div className="drawer-item">
+      <div className={"drawer-item" + (this.props.type === 'text' ? ' text-drawer-item' : '')}>
         {this.props.type === 'text'? this.renderText() : this.renderImg()}
       </div>
     )

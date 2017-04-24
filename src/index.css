@@ -427,9 +427,17 @@ textarea:-ms-input-placeholder {
   height: 75px;
   width: 75px;
 }
+.text-drawer-item {
+  width: 125px;
+  padding: 10px;
+}
 .drawer-item img {
   height: 100%;
   width: 100%;
+}
+.text-template {
+  width: auto !important;
+  /*font-size: 12px;*/
 }
 .keyboard-img {
   height: 45px;
