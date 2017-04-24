@@ -14,6 +14,10 @@ class DrawerItem extends React.Component {
     this.handleText = this.handleText.bind(this)
   }
 
+  componentDidMount() {
+    this.props.loading()
+  }
+
   handleImg() {
     this.props.addAddon(this.props.item)
   }
