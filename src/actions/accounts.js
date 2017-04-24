@@ -13,7 +13,10 @@ export const signup = (details) => {
       dispatch(success(signupSuccess))
     })
     .catch((e) => {
-      dispatch(error(signupError))
+      dispatch({type: 'REMOVE_TOKEN'})
+      e.response.data.errors.forEach((errorMsg) => {
+        dispatch(error(signupError(errorMsg)))
+      })
     })
   }
 }
@@ -27,6 +30,7 @@ export const login = (details) => {
       dispatch(success(loginSuccess))
     })
     .catch((e) => {
+      dispatch({type: 'REMOVE_TOKEN'})
       dispatch(error(loginError))
     })
   }

@@ -2,13 +2,16 @@ import axios from 'axios'
 import { api } from './api'
 import { success, error } from './notifications'
 import { saveSuccess, deleteSuccess } from './consts'
-export const saveCreation = (addons, token) => {
+export const saveCreation = (addons, title, token) => {
   return (dispatch) => {
     axios({
       url: api + '/creations/',
       method: 'post',
       headers: { 'AUTHORIZATION': `Bearer ${token}`},
-      data: { addons: addons }
+      data: {
+        addons: addons,
+        title: title
+      }
     }).then(resp => {
       dispatch(success(saveSuccess))
       dispatch({type: 'GET_CREATIONS', payload: resp.data})
@@ -53,7 +56,6 @@ export const getCreations = (token) => {
       method: 'get',
       headers: { 'AUTHORIZATION': `Bearer ${token}`},
     }).then(resp => {
-
       dispatch({type: 'GET_CREATIONS', payload: resp.data})
     })
   }
