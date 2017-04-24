@@ -80,6 +80,8 @@ class CurrentAddons extends Component {
     return this.state.activeId === addon.id ?(
       <Delete
         addon={addon}
+        className='addon-delete'
+        flashClass='addon-flash'
         onClick={this.handleDelete.bind(null, addon.id)}
       />)
       : null

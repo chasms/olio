@@ -41,11 +41,17 @@ class App extends React.Component {
   renderCreationList() {
     return this.props.creations.map((creation) => {
       return (
-        <div className="creation" key={creation.id}>
-          <Delete onClick={this.props.deleteCreation.bind(null, creation.id, this.props.token)}/>
-          <span onClick={this.handleRestoreCreation.bind(null, creation.id, this.props.token)} >
-            Creation #{creation.id}
-          </span>
+        <div
+          className="creation"
+          onClick={this.handleRestoreCreation.bind(null, creation.id, this.props.token)}
+          key={creation.id}
+        >
+          <Delete
+            onClick={this.props.deleteCreation.bind(null, creation.id, this.props.token)}
+            className="creation-delete"
+            flashClass="creation-flash"
+          />
+          <h3>Creation #{creation.id}</h3>
         </div>
       )
     })

@@ -49,10 +49,7 @@ p {
   z-index: 1000;
 
 }
-
 button:focus {outline:0;}
-
-
 .notification-bar {
   position: relative;
   z-index: 10000 !important;
@@ -194,14 +191,13 @@ button:focus {outline:0;}
 
 /*	Delete Button
 ==================================================*/
+.delete {
+  margin-bottom:50px;
+}
 .delete-button {
   font-family: helvetica;
   font-weight: 300;
   font-size: 10px;
-  z-index: 102;
-  left: 0px;
-  top: -20px;
-  position: absolute;
   align-content: center;
   cursor: pointer !important;
   display: inline-block;
@@ -211,18 +207,13 @@ button:focus {outline:0;}
   height: 5px;
   line-height: 3px;
   border-radius: 10px;
-  overflow: hidden;
   padding: 5px;
   border: 1px solid black;
 }
 .flash-hover:before {
   content: "";
-  position: absolute;
-  top: -30px;
-  left: -80px;
   height: 100px;
   width: 70px;
-  background: rgba(255, 255, 255, .9);
   transform: rotate(20deg);
 }
 .flash-hover:hover:before {
@@ -233,8 +224,30 @@ button:focus {outline:0;}
   -o-transition: all .75s;
   -ms-transition: all .75s;
 }
-.delete {
-  margin-bottom:50px;
+.addon-delete {
+  position: absolute;
+  z-index: 102;
+  left: -9px;
+  top: -12px;
+  overflow: hidden !important;
+}
+.addon-flash:before {
+  position: absolute;
+  top: -30px;
+  left: -80px;
+  background: rgba(255, 255, 255, .9);
+}
+.creation-delete {
+  position: relative;
+  float: right;
+  right: -9px;
+  top: -12px;
+  overflow: hidden !important;
+}
+.creation-flash:before {
+  top: -30px;
+  left: -80px;
+  background: rgba(255, 255, 255, .9);
 }
 
 /*	Addons
@@ -448,6 +461,7 @@ textarea:-ms-input-placeholder {
 }
 .creations-bar {
   margin-top: 50px;
+  padding-bottom: 25px;
   background-color: rgba(245, 245, 245, 0.6) !important;
 }
 .creation {
@@ -456,10 +470,14 @@ textarea:-ms-input-placeholder {
   padding: 10px;
   background-color: azure;
   margin: 25px;
-  border-radius: 5px;
+  border-radius: 10px;
   border: 1px solid silver;
+  text-align: justify;
 }
-.creation span {
+.creation-spacer {
+  height: 50px;
+}
+.creation h3 {
   margin: auto;
   font-family: monospace;
 }
