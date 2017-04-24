@@ -463,12 +463,13 @@ textarea:-ms-input-placeholder {
   margin-top: 50px;
   padding-bottom: 25px;
   background-color: rgba(245, 245, 245, 0.6) !important;
+  z-index: 900 !important;
 }
 .creation {
   width: 200px;
   height: 100px;
   padding: 10px;
-  background-color: azure;
+  background-color: white;
   margin: 25px;
   border-radius: 10px;
   border: 1px solid silver;
