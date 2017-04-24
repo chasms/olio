@@ -67,7 +67,7 @@ class App extends React.Component {
       }
       return (
         <Modal
-          isOpen={this.state.welcomeModalOpen}
+          isOpen={this.props.loading}
           contentLabel="Welcome"
           style={customStyles}>
           <Welcome />
