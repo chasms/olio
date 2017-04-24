@@ -28,20 +28,20 @@ class App extends React.Component {
       sidebarOpen: false,
       welcomeModalOpen: true
     };
-    this.handleRestoreCreation = this.handleRestoreCreation.bind(this)
     this.props.getDrawers()
     this.props.getAddons()
     this.props.checkIfLoggedIn()
     this.props.token ? this.props.getCreations(this.props.token) : null
     this.handleSidebar = this.handleSidebar.bind(this)
     this.toggleWelcomeModal = this.toggleWelcomeModal.bind(this)
+    this.handleRestoreCreation = this.handleRestoreCreation.bind(this)
   }
 
   toggleWelcomeModal() {
     this.setState ({
-    welcomeModalOpen: false
-  })
-}
+      welcomeModalOpen: false
+    })
+  }
 
   handleSidebar() {
     this.setState({
@@ -111,7 +111,7 @@ class App extends React.Component {
     return (
       <div className="app" onKeyDown={this.handleKeyDown}>
         <NavBar handleSidebar={this.handleSidebar}/>
-        <Drawers loading={this.toggleWelcomeModal}/>
+        <Drawers />
         <CurrentAddons />
         <Sidebar sidebar={this.renderCreationList()}
           open={this.state.sidebarOpen}
@@ -148,7 +148,7 @@ class App extends React.Component {
       addAddon: addAddon,
       getAddons: getAddons,
       getDrawers: getDrawers,
-      restoreCreation: restoreCreation
+      restoreCreation: restoreCreation,
     }, dispatch);
   }
 
