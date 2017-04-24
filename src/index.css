@@ -429,6 +429,7 @@ textarea:-ms-input-placeholder {
 }
 .text-drawer-item {
   width: 125px;
+  height: 25px;
   padding: 10px;
 }
 .drawer-item img {
@@ -437,7 +438,7 @@ textarea:-ms-input-placeholder {
 }
 .text-template {
   width: auto !important;
-  /*font-size: 12px;*/
+  font-size: 18px;
 }
 .keyboard-img {
   height: 45px;
