@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { api } from './api'
-import { success } from './notifications'
-import { saveSuccess } from './consts'
+import { success, error } from './notifications'
+import { saveSuccess, deleteSuccess } from './consts'
 export const saveCreation = (addons, token) => {
   return (dispatch) => {
     axios({
@@ -25,6 +25,7 @@ export const deleteCreation = (id, token) => {
       headers: { 'AUTHORIZATION': `Bearer ${token}`},
     }).then(resp => {
       dispatch({type: 'GET_CREATIONS', payload: resp.data})
+      dispatch(error(deleteSuccess(id)))
     })
   }
 }
