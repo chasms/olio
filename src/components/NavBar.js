@@ -17,6 +17,7 @@ import Photo from './Photo'
 import Tooltip from './Tooltip'
 import Signup from './Signup'
 import Login from './Login'
+import Save from './Save'
 
 
 class NavBar extends Component {
@@ -25,44 +26,23 @@ class NavBar extends Component {
 		this.state = {
 			webcamActive: false,
 			signupModalOpen: false,
-			loginModalOpen: false
+			loginModalOpen: false,
+			saveModalOpen: false
 		}
 
 		this.toggleWebcam = this.toggleWebcam.bind(this)
 		this.handleSave = this.handleSave.bind(this)
 		this.toggleSignupModal = this.toggleSignupModal.bind(this)
 		this.toggleLoginModal = this.toggleLoginModal.bind(this)
+		this.toggleSaveModal = this.toggleSaveModal.bind(this)
 		this.handleLogout = this.handleLogout.bind(this)
 		this.closeModal = this.closeModal.bind(this)
 		this.handleText = this.handleText.bind(this)
 		this.handleKeyDown = this.handleKeyDown.bind(this)
 	}
 
-	addNotification(message) {
-		let { notifications, count } = this.state;
-		let id = notifications.size + 1;
-		let newCount = count + 1;
-		return this.setState({
-			count: newCount,
-			notifications: notifications.add({
-				message: message,
-				key: newCount,
-				action: 'Dismiss',
-				dismissAfter: 20000,
-				onClick: () => this.removeNotification(newCount),
-			})
-		});
-	}
-
-	removeNotification (count) {
-		let { notifications } = this.state;
-		this.setState({
-			notifications: notifications.filter(n => n.key !== count)
-		})
-	}
-
 	renderSaveButton() {
-		return this.props.token ? <button className="btn" onClick={this.handleSave}>Save Creation</button> : null
+		return this.props.token ? <button className="btn" onClick={this.toggleSaveModal}>Save Creation</button> : null
 	}
 
 	renderRestore() {
@@ -82,13 +62,21 @@ class NavBar extends Component {
 	}
 
 	handleSave() {
+		this.closeModal()
 		this.props.saveCreation(this.props.usedAddons, this.props.token)
+	}
+
+	toggleSaveModal() {
+		this.setState({
+			saveModalOpen: !this.state.saveModalOpen
+		})
 	}
 
 	closeModal() {
 		this.setState({
 			signupModalOpen: false,
-			loginModalOpen: false
+			loginModalOpen: false,
+			saveModalOpen: false
 		})
 	}
 
@@ -148,6 +136,35 @@ class NavBar extends Component {
 	componentWillMount(){
 		document.addEventListener("keydown", this.handleKeyDown.bind(this));
 	}
+
+	renderSaveModal() {
+
+		let customStyles = {
+			content : {
+				top                   : '50%',
+				left                  : '50%',
+				right                 : 'auto',
+				bottom                : 'auto',
+				marginRight           : '-50%',
+				transform             : 'translate(-50%, -50%)',
+				backgroundColor       : 'whitesmoke'
+			},
+			overlay : {
+				zIndex	 			  : '10000'
+			}
+		}
+		if (this.props.token)
+		return (
+			<Modal
+				isOpen={this.state.saveModalOpen}
+				contentLabel="Save"
+				style={customStyles}
+				>
+					<Save closeModal={this.closeModal} />
+					<button className="closeModal" onClick={this.closeModal}>close</button>
+				</Modal>
+			)
+		}
 
 	renderSignupModal() {
 
@@ -209,10 +226,6 @@ class NavBar extends Component {
 
 		render(){
 
-
-			//Optional styling
-
-
 			return(
 				<div>
 					<div className="btn-bar">
@@ -230,6 +243,7 @@ class NavBar extends Component {
 						{this.renderLogout()}
 						{this.state.webcamActive ? <Photo handleToggle={this.toggleWebcam} /> : null}
 					</div>
+					{this.renderSaveModal()}
 					{this.renderSignupModal()}
 					{this.renderLoginModal()}
 				</div>
