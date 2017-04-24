@@ -41,7 +41,7 @@ class Drawers extends React.Component {
         <div
           key={drawer.id}
           style={{width: width}}
-          className={"drawer-handles " + (this.state.activeId === drawer.id ? 'active-drawer-handle' : '')}
+          className={"drawer-handles " + (this.state.activeId === drawer.id && this.state.isActive ? 'active-drawer-handle' : '')}
           onClick={this.handleDrawer.bind(null, drawer.id)}>
             {drawer.name}
         </div>
