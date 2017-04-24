@@ -25,7 +25,9 @@ export const login = (details) => {
   return (dispatch) => {
     axios.post(api + '/login/', details)
     .then(resp => {
-      localStorage.setItem('token', resp.data.token)
+      setTimeout(() => {
+        localStorage.setItem('token', resp.data.token)
+      }, 5000 )
       dispatch({type: 'SET_TOKEN', payload: resp.data})
       dispatch(success(loginSuccess))
     })
