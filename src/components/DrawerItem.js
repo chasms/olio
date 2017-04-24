@@ -19,7 +19,7 @@ class DrawerItem extends React.Component {
   }
 
   handleText() {
-    this.props.addAddon({...this.props.item, category: 'text'})
+    this.props.addAddon({...this.props.item, category: 'text', fontFamily: this.extractFontName(this.props.item.url)})
   }
 
   renderImg() {
@@ -34,7 +34,7 @@ class DrawerItem extends React.Component {
 
   extractFontName(url) {
     let raw = url.split('=').pop()
-    let fontFamily = raw.trim().replace('+', ' ')
+    let fontFamily = raw.trim().split('+').join(' ')
     return fontFamily
   }
 
@@ -44,7 +44,10 @@ class DrawerItem extends React.Component {
         <p
           className="text-template"
           onClick={this.handleText}
-          style={{fontFamily: this.extractFontName(this.props.item.url)}}
+          style={{
+            fontFamily: this.extractFontName(this.props.item.url)
+            
+          }}
         >
           {this.extractFontName(this.props.item.url)}
         </p>

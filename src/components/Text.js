@@ -11,6 +11,7 @@ class Text extends React.Component {
         className={'text-addon non-selectable ' + this.props.active}
         placeholder="Drag Me Anywhere!"
         defaultValue={this.props.addon.value}
+        style={{fontFamily: this.props.addon.fontFamily}}
         >
         </textarea>
     )

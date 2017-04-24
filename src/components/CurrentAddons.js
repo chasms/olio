@@ -33,7 +33,8 @@ class CurrentAddons extends Component {
   handleMouseUp(id) {
     let coordinates = document.getElementById(id).getBoundingClientRect();
     let value = document.getElementById(id).value
-    this.props.saveAddonLocation(id, coordinates, value)
+    let fontFamily = document.getElementById(id).fontFamily
+    this.props.saveAddonLocation(id, coordinates, value, fontFamily)
   }
 
   handleActive(id, event) {
