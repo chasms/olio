@@ -27,10 +27,23 @@ class DrawerItem extends React.Component {
     )
   }
 
+  extractFontName(url) {
+    let raw = url.split('=').pop()
+    let fontFamily = raw.trim().replace('+', ' ')
+    return fontFamily
+  }
+
+  renderText() {
+    // debugger
+    return (
+      <p className="text-template">{this.extractFontName(this.props.item.url)}</p>
+    )
+  }
+
   render() {
     return (
       <div className="drawer-item">
-        this.props.item
+        {this.props.type === 'text'? this.renderText() : this.renderImg()}
       </div>
     )
   }

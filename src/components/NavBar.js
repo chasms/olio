@@ -86,7 +86,6 @@ class NavBar extends Component {
 
 	}
 
-
 	closeModal() {
 		this.setState({
 			signupModalOpen: false,

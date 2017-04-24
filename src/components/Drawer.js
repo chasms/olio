@@ -12,7 +12,7 @@ class Drawer extends React.Component {
       return <p className={"loading"}>Loading...</p>
     } else {
       return this.props.library[this.props.drawer.id - 1].addons.map(item => {
-        return <DrawerItem key={item.id} item={item}/>
+        return <DrawerItem key={item.id} item={item} type={this.props.drawer.name}/>
       })
     }
   }
