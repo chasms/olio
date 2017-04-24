@@ -8,6 +8,7 @@ export const getAddons = () => {
       url: api + '/addons/'
     }).then(resp => {
       dispatch({type: 'GET_ADDONS', payload: resp.data})
+      dispatch({type: 'FINISHED_LOADING'})
     })
   }
 }
