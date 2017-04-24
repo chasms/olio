@@ -42,8 +42,7 @@ class App extends React.Component {
     return this.props.creations.map((creation) => {
       return (
         <div
-          className="creation"
-          onClick={this.handleRestoreCreation.bind(null, creation.id, this.props.token)}
+          className="creation non-selectable"
           key={creation.id}
         >
           <Delete
@@ -51,6 +50,10 @@ class App extends React.Component {
             className="creation-delete"
             flashClass="creation-flash"
           />
+          <span
+            className='creation-restore'
+            onClick={this.handleRestoreCreation.bind(null, creation.id, this.props.token)}
+          >restore</span>
           <h3>Creation #{creation.id}</h3>
         </div>
       )

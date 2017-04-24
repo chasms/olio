@@ -17,14 +17,20 @@ class DrawerItem extends React.Component {
     this.props.addAddon(this.props.item)
   }
 
+  renderImg() {
+    return (
+      <img onClick={this.handleClick}
+        data-id={this.props.item.id}
+        src={this.props.item.url}
+        alt=''
+      />
+    )
+  }
+
   render() {
     return (
       <div className="drawer-item">
-        <img onClick={this.handleClick}
-          data-id={this.props.item.id}
-          src={this.props.item.url}
-          alt=''
-        />
+        this.props.item
       </div>
     )
   }
