@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux'
 
 // node_modules imports
 import Sidebar from 'react-sidebar'
+import Modal from 'react-modal'
 
 
 // app imports
@@ -22,7 +23,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      sidebarOpen: false
+      sidebarOpen: false,
+      welcomeModalOpen: true
     };
     this.handleRestoreCreation = this.handleRestoreCreation.bind(this)
     this.props.getDrawers()
@@ -30,7 +32,14 @@ class App extends React.Component {
     this.props.checkIfLoggedIn()
     this.props.token ? this.props.getCreations(this.props.token) : null
     this.handleSidebar = this.handleSidebar.bind(this)
+    this.toggleWelcomeModal = this.toggleWelcomeModal.bind(this)
   }
+
+  toggleWelcomeModal() {
+    this.setState ({
+    welcomeModalOpen: false
+  })
+}
 
   handleSidebar() {
     this.setState({
@@ -38,6 +47,33 @@ class App extends React.Component {
     })
     // this.props.restoreCreation(this.state.restoreId, this.props.token)
   }
+
+  renderWelcomeModal() {
+
+      let customStyles = {
+        content : {
+          top                   : '75%',
+          left                  : '75%',
+          right                 : 'auto',
+          bottom                : 'auto',
+          marginRight           : '-50%',
+          backgroundColor       : 'whitesmoke'
+        },
+        overlay : {
+          zIndex          : '10000'
+        }
+      }
+      return (
+        <Modal
+          isOpen={this.state.welcomeModalOpen}
+          contentLabel="Welcome"
+          style={customStyles}>
+        </Modal>
+      )
+    }
+
+
+
   renderCreationList() {
     return this.props.creations.map((creation) => {
       return (
@@ -67,11 +103,10 @@ class App extends React.Component {
     this.props.restoreCreation(id, token)
   }
   render() {
-
     return (
       <div className="app" onKeyDown={this.handleKeyDown}>
         <NavBar handleSidebar={this.handleSidebar}/>
-        <Drawers />
+        <Drawers loading={this.toggleWelcomeModal}/>
         <CurrentAddons />
         <Sidebar sidebar={this.renderCreationList()}
           open={this.state.sidebarOpen}
@@ -81,6 +116,7 @@ class App extends React.Component {
           overlayClassName='creations-overlay'
           sidebarClassName='creations-bar'
         />
+        {this.renderWelcomeModal}
         </div>
       );
     }
