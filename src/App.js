@@ -54,7 +54,9 @@ class App extends React.Component {
             className='creation-restore'
             onClick={this.handleRestoreCreation.bind(null, creation.id, this.props.token)}
           >restore</span>
-          <h3>Creation #{creation.id}</h3>
+          <h3>
+          {creation.title ? creation.title : 'Creation #' + creation.id}
+          </h3>
         </div>
       )
     })
