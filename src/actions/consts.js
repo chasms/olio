@@ -27,8 +27,8 @@ export const signupSuccess = {
 };
 
 export const loginSuccess = {
-  title: 'Log In Sucessful!',
-  message: 'You have logged in to Olio',
+  title: 'Log In Successful',
+  message: 'You have logged in to Olio!',
   position: 'tl',
   autoDismiss: 3
 };
