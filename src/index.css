@@ -424,6 +424,10 @@ textarea:-ms-input-placeholder {
   margin-left: 75px;
 }
 
+.notifications-wrapper {
+  font-family: monospace;
+}
+
 /*  Webcam
 ==================================================*/
 .photobox {
