@@ -28,7 +28,7 @@ class App extends React.Component {
     this.props.getDrawers()
     this.props.getAddons()
     this.props.checkIfLoggedIn()
-    if (this.props.token) { this.props.getCreations(this.props.token) }
+    this.props.token ? this.props.getCreations(this.props.token) : null
     this.handleSidebar = this.handleSidebar.bind(this)
   }
 
