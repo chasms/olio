@@ -85,7 +85,7 @@ button:focus {
 
 }
 
-/*	Signup/Login
+/*	Modals
 ==================================================*/
 .signup {
   width: 100%;
@@ -169,6 +169,11 @@ button:focus {
 }
 .closeModal:hover {
   color: dimgrey;
+}
+
+.welcome {
+  text-align: center;
+  font-family: monospace;
 }
 
 /*	Rnd Containers
