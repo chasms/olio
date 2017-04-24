@@ -13,12 +13,14 @@ import { saveCreation, restoreCreation } from '../actions/creations'
 import { logout } from '../actions/accounts'
 import { success, show, error } from '../actions/notifications'
 import Photo from './Photo'
+import WebcamButton from './WebcamButton'
 import Tooltip from './Tooltip'
 import Signup from './Signup'
 import Login from './Login'
 import Save from './Save'
 
 class NavBar extends Component {
+
 	constructor(props){
 		super(props)
 		this.state = {
@@ -43,7 +45,7 @@ class NavBar extends Component {
 	}
 
 	renderRestore() {
-		return this.props.token ? <button className="btn" onClick={this.props.handleSidebar}>Restore</button> : null
+		return this.props.token ? <button className="btn" >Restore</button> : null
 	}
 
 	renderLogout() {
@@ -197,31 +199,24 @@ class NavBar extends Component {
 			}
 		}
 
-		renderWebcamButton() {
-			return (
-				<button
-					className="btn"
-					onClick={this.toggleWebcamModal}
-				>
-					WEBCAM {this.state.webcamActive ? 'OFF' : 'ON' }
-				</button>
-			)
-		}
-
 		render(){
 			let customStyles = this.modalStyles()
 			return(
-				<div>
-					<div className="btn-bar">
-						<Notifications notifications={this.props.notifications} />
-						<Tooltip />
-						{this.renderSaveButton()}
-						{this.renderWebcamButton()}
-						{this.renderSignup()}
-						{this.renderLogin()}
-						{this.renderLogout()}
-						{this.renderRestore()}
-					</div>
+				<div className='nav'>
+					<Notifications notifications={this.props.notifications} />
+					<Tooltip />
+					<WebcamButton
+						toggleWebcamModal={this.toggleWebcamModal}
+						webcamActive={this.state.webcamActive}/>
+					{this.renderSaveButton()}
+					{this.renderSignup()}
+					{this.renderLogin()}
+					{this.renderLogout()}
+					{this.renderRestore()}
+					<div
+						className="sidebar-handle"
+
+					>
 					{this.renderWebcamModal(customStyles)}
 					{this.renderSaveModal(customStyles)}
 					{this.renderSignupModal(customStyles)}
