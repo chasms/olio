@@ -65,7 +65,7 @@ class App extends React.Component {
       }
       return (
         <Modal
-          isOpen={this.state.welcomeModalOpen}
+          isOpen={this.props.loading}
           contentLabel="Welcome"
           style={customStyles}>
         </Modal>
@@ -116,7 +116,7 @@ class App extends React.Component {
           overlayClassName='creations-overlay'
           sidebarClassName='creations-bar'
         />
-        {this.renderWelcomeModal}
+        {this.renderWelcomeModal()}
         </div>
       );
     }
@@ -124,6 +124,7 @@ class App extends React.Component {
 
   const mapStateToProps = (state) => {
     return {
+      loading: state.Loading,
       token: state.Accounts.token,
       usedAddons: state.Addon,
       addonLibrary: state.AddonLibrary,

@@ -14,5 +14,6 @@ export default combineReducers({
   Drawers,
   Accounts,
   Creations,
-  Notifications
+  Notifications,
+  Loading
 })
