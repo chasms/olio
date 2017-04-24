@@ -10,16 +10,21 @@ class DrawerItem extends React.Component {
 
   constructor() {
     super()
-    this.handleClick = this.handleClick.bind(this)
+    this.handleImg = this.handleImg.bind(this)
+    this.handleText = this.handleText.bind(this)
   }
 
-  handleClick() {
+  handleImg() {
     this.props.addAddon(this.props.item)
+  }
+
+  handleText() {
+    this.props.addAddon({...this.props.item, category: 'text'})
   }
 
   renderImg() {
     return (
-      <img onClick={this.handleClick}
+      <img onClick={this.handleImg}
         data-id={this.props.item.id}
         src={this.props.item.url}
         alt=''
@@ -34,9 +39,17 @@ class DrawerItem extends React.Component {
   }
 
   renderText() {
-    // debugger
     return (
-      <p className="text-template">{this.extractFontName(this.props.item.url)}</p>
+      <div>
+        <p
+          className="text-template"
+          onClick={this.handleText}
+          style={{fontFamily: this.extractFontName(this.props.item.url)}}
+        >
+          {this.extractFontName(this.props.item.url)}
+        </p>
+        <link href={this.props.item.url} rel="stylesheet"/>
+      </div>
     )
   }
 

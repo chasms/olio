@@ -83,7 +83,6 @@ class NavBar extends Component {
 
 	handleSave() {
 		this.props.saveCreation(this.props.usedAddons, this.props.token)
-
 	}
 
 	closeModal() {
