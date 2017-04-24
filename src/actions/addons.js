@@ -3,12 +3,17 @@ import { api } from './api'
 
 export const getAddons = () => {
   return (dispatch) => {
-    axios({
-      method:'get',
-      url: api + '/addons/'
-    }).then(resp => {
-      dispatch({type: 'GET_ADDONS', payload: resp.data})
-    })
+    if (!sessionStorage.getItem('addons')) {
+      axios({
+        method:'get',
+        url: api + '/addons/'
+      }).then(resp => {
+        sessionStorage.setItem('addons', JSON.stringify(resp.data))
+        dispatch({type: 'GET_ADDONS', payload: resp.data})
+      })
+    } else {
+      dispatch({type: 'GET_ADDONS', payload: JSON.parse(sessionStorage.getItem('addons'))})
+    }
   }
 }
 
