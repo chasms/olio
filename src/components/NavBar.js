@@ -5,7 +5,6 @@ import { bindActionCreators } from 'redux'
 
 // node_modules imports
 import Modal from 'react-modal';
-import { OrderedSet } from 'immutable';
 import Notifications from 'react-notification-system-redux';
 
 
@@ -19,13 +18,6 @@ import Tooltip from './Tooltip'
 import Signup from './Signup'
 import Login from './Login'
 
-const saveNotification= {
-  // uid: 'once-please', // you can specify your own uid if required
-  title: 'Saved!',
-  message: 'You saved your creation!',
-  position: 'tl',
-  autoDismiss: 3
-};
 
 class NavBar extends Component {
 	constructor(props){
@@ -72,7 +64,6 @@ class NavBar extends Component {
 	handleSave() {
 		this.props.saveCreation(this.props.usedAddons, this.props.token)
 
-		this.props.success(saveNotification)
 	}
 
 
@@ -115,7 +106,6 @@ class NavBar extends Component {
 	handleLogout() {
 		this.props.logout()
 		this.props.deleteAllAddons()
-		this.props.error('Logged Out')
 	}
 
 	handleText() {
