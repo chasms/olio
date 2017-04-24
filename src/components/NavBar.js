@@ -224,7 +224,6 @@ class NavBar extends Component {
 						<p className="toolTipInfoText">⬅ hover over the keyboard</p>
 						{this.renderSaveButton()}
 						<button className="btn" onClick={this.toggleWebcam}>WEBCAM {this.state.webcamActive ? 'OFF' : 'ON' }</button>
-						<button className="btn" onClick={this.handleText}>Add Text</button>
 						{this.renderSignup()}
 						{this.renderLogin()}
 						{this.renderRestore()}
