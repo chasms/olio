@@ -4,6 +4,7 @@ import AddonLibrary from './AddonLibraryReducer'
 import Drawers from './DrawersReducer'
 import Accounts from './AccountReducer'
 import Creations from './CreationReducer'
+import {reducer as Notifications} from 'react-notification-system-redux';
 
 
 export default combineReducers({
@@ -11,5 +12,6 @@ export default combineReducers({
   AddonLibrary,
   Drawers,
   Accounts,
-  Creations
+  Creations,
+  Notifications
 })
