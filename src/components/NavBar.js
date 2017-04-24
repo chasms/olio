@@ -6,28 +6,36 @@ import { bindActionCreators } from 'redux'
 // node_modules imports
 import Modal from 'react-modal';
 import { OrderedSet } from 'immutable';
-import { NotificationStack } from 'react-notification';
+import Notifications from 'react-notification-system-redux';
 
 
 // app imports
 import { addAddon, deleteAllAddons } from '../actions/addons'
 import { saveCreation, restoreCreation } from '../actions/creations'
 import { logout } from '../actions/accounts'
+import { success, show, error } from '../actions/notifications'
 import Photo from './Photo'
 import Tooltip from './Tooltip'
 import Signup from './Signup'
 import Login from './Login'
 
+const saveNotification= {
+  // uid: 'once-please', // you can specify your own uid if required
+  title: 'Saved!',
+  message: 'You saved your creation!',
+  position: 'tl',
+  autoDismiss: 3
+};
+
 class NavBar extends Component {
 	constructor(props){
 		super(props)
 		this.state = {
-			notifications: OrderedSet(),
-			count: 0,
 			webcamActive: false,
 			signupModalOpen: false,
 			loginModalOpen: false
-		};
+		}
+
 		this.toggleWebcam = this.toggleWebcam.bind(this)
 		this.handleSave = this.handleSave.bind(this)
 		this.toggleSignupModal = this.toggleSignupModal.bind(this)
@@ -36,8 +44,6 @@ class NavBar extends Component {
 		this.closeModal = this.closeModal.bind(this)
 		this.handleText = this.handleText.bind(this)
 		this.handleKeyDown = this.handleKeyDown.bind(this)
-		this.addNotification = this.addNotification.bind(this)
-		this.removeNotification = this.removeNotification.bind(this)
 	}
 
 	addNotification(message) {
@@ -63,7 +69,6 @@ class NavBar extends Component {
 		})
 	}
 
-
 	renderSaveButton() {
 		return this.props.token ? <button className="btn" onClick={this.handleSave}>Save Creation</button> : null
 	}
@@ -86,7 +91,8 @@ class NavBar extends Component {
 
 	handleSave() {
 		this.props.saveCreation(this.props.usedAddons, this.props.token)
-		this.addNotification('Creation Saved!')
+
+		this.props.success(saveNotification)
 	}
 
 
@@ -97,7 +103,6 @@ class NavBar extends Component {
 		})
 	}
 
-
 	toggleWebcam(){
 		this.setState({
 			webcamActive: !this.state.webcamActive,
@@ -107,7 +112,9 @@ class NavBar extends Component {
 
 	toggleSignupModal(){
 		if (this.state.loginModalOpen) {
-			this.closeLoginModal()
+			this.setState({
+				loginModalOpen: false
+			})
 		}
 		this.setState({
 			signupModalOpen: !this.state.signupModalOpen
@@ -116,7 +123,9 @@ class NavBar extends Component {
 
 	toggleLoginModal(){
 		if (this.state.signupModalOpen) {
-			this.closeSignupModal()
+			this.setState({
+				signupModalOpen: false
+			})
 		}
 		this.setState({
 			loginModalOpen: !this.state.loginModalOpen
@@ -126,6 +135,7 @@ class NavBar extends Component {
 	handleLogout() {
 		this.props.logout()
 		this.props.deleteAllAddons()
+		this.props.error('Logged Out')
 	}
 
 	handleText() {
@@ -144,7 +154,6 @@ class NavBar extends Component {
 			this.handleText()
 		} else if (e.ctrlKey & e.which === 83) {
 			this.handleSave()
-
 		}
 	}
 
@@ -175,7 +184,7 @@ class NavBar extends Component {
 				contentLabel="Sign Up"
 				style={customStyles}
 				>
-					<Signup closeModal={this.closeSignupModal} />
+					<Signup closeModal={this.closeModal} />
 					<button className="closeModal" onClick={this.closeModal}>close</button>
 				</Modal>
 			)
@@ -205,24 +214,23 @@ class NavBar extends Component {
 					style={customStyles}>
 					<Login closeModal={this.closeModal} />
 					<button className="closeModal" onClick={this.closeModal}>close</button>
-
 				</Modal>
 			)
 		}
 
+
 		render(){
-			const baseStyle = {
-      zIndex: 10000
-		}
+
+
+			//Optional styling
+
+
 			return(
 				<div>
 					<div className="btn-bar">
-						<NotificationStack
-							style={baseStyle}
-							notifications={this.state.notifications.toArray()}
-							onDismiss={notification => this.setState({
-								notifications: this.state.notifications.delete(notification)
-							})}
+
+						<Notifications
+							notifications={this.props.notifications}
 						/>
 						<Tooltip />
 						<p className="toolTipInfoText">⬅ hover over the keyboard</p>
@@ -243,6 +251,7 @@ class NavBar extends Component {
 	}
 	const mapStateToProps = (state) => {
 		return {
+			notifications: state.Notifications,
 			token: state.Accounts.token,
 			usedAddons: state.Addon
 		}
@@ -251,6 +260,8 @@ class NavBar extends Component {
 
 	const mapDispatchToProps = (dispatch) => {
 		return bindActionCreators({
+			success: success,
+			error: error,
 			deleteAllAddons: deleteAllAddons,
 			logout: logout,
 			saveCreation: saveCreation,
