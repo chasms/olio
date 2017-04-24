@@ -17,6 +17,7 @@ import CurrentAddons from './components/CurrentAddons'
 import Drawers from './components/Drawers'
 import NavBar from './components/NavBar'
 import Delete from './components/Delete'
+import Welcome from './components/Welcome'
 
 class App extends React.Component {
 
@@ -52,11 +53,12 @@ class App extends React.Component {
 
       let customStyles = {
         content : {
-          top                   : '75%',
-          left                  : '75%',
+          top                   : '50%',
+          left                  : '50%',
           right                 : 'auto',
           bottom                : 'auto',
           marginRight           : '-50%',
+          transform             : 'translate(-50%, -50%)',
           backgroundColor       : 'whitesmoke'
         },
         overlay : {
@@ -65,13 +67,13 @@ class App extends React.Component {
       }
       return (
         <Modal
-          isOpen={this.props.loading}
+          isOpen={this.state.welcomeModalOpen}
           contentLabel="Welcome"
           style={customStyles}>
+          <Welcome />
         </Modal>
       )
     }
-
 
 
   renderCreationList() {
