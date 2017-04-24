@@ -49,6 +49,9 @@ p {
   height: 0px;
   padding-left: 25px;
 }
+.modals {
+  z-index: 0;
+}
 .nav-button {
   position: inherit;
   height: 40px;
@@ -60,10 +63,22 @@ p {
 .nav-button img {
   height:100%;
   width: 100%;
+  z-index: 1000;
 }
 .toolTipInfoText {
   float: left;
   margin: 15px;
+}
+.sidebar-handle {
+  float: right;
+  height: 10px;
+  width: 20px;
+  margin-right: 50px;
+  margin-top: 35px;
+  border-top: 3px solid black;
+  border-bottom: 3px solid black;
+  /*background-color: red;*/
+  cursor: pointer;
 }
 
 /*	Modals

@@ -214,13 +214,15 @@ class NavBar extends Component {
 					{this.renderLogout()}
 					{this.renderRestore()}
 					<div
-						className="sidebar-handle"
-
-					>
-					{this.renderWebcamModal(customStyles)}
-					{this.renderSaveModal(customStyles)}
-					{this.renderSignupModal(customStyles)}
-					{this.renderLoginModal(customStyles)}
+						className="nav-button sidebar-handle"
+						onClick={this.props.handleSidebar}
+					/>
+					<div className='modals'>
+						{this.renderWebcamModal(customStyles)}
+						{this.renderSaveModal(customStyles)}
+						{this.renderSignupModal(customStyles)}
+						{this.renderLoginModal(customStyles)}
+					</div>
 				</div>
 			)
 		}

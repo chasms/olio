@@ -64,7 +64,7 @@ class App extends React.Component {
           backgroundColor       : 'whitesmoke'
         },
         overlay : {
-          zIndex          : '10000'
+          display          : 'none'
         }
       }
       return (
