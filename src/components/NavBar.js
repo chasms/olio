@@ -30,14 +30,13 @@ class NavBar extends Component {
 			saveModalOpen: false
 		}
 
-		this.toggleWebcam = this.toggleWebcam.bind(this)
+		this.toggleWebcamModal = this.toggleWebcamModal.bind(this)
 		this.handleSave = this.handleSave.bind(this)
 		this.toggleSignupModal = this.toggleSignupModal.bind(this)
 		this.toggleLoginModal = this.toggleLoginModal.bind(this)
 		this.toggleSaveModal = this.toggleSaveModal.bind(this)
 		this.handleLogout = this.handleLogout.bind(this)
 		this.closeModal = this.closeModal.bind(this)
-		this.handleText = this.handleText.bind(this)
 		this.handleKeyDown = this.handleKeyDown.bind(this)
 	}
 
@@ -76,14 +75,14 @@ class NavBar extends Component {
 		this.setState({
 			signupModalOpen: false,
 			loginModalOpen: false,
-			saveModalOpen: false
+			saveModalOpen: false,
+			webcamActive: false
 		})
 	}
 
-	toggleWebcam(){
+	toggleWebcamModal(){
 		this.setState({
-			webcamActive: !this.state.webcamActive,
-			signupModalOpen: false
+			webcamActive: !this.state.webcamActive
 		})
 	}
 
@@ -114,18 +113,9 @@ class NavBar extends Component {
 		this.props.deleteAllAddons()
 	}
 
-	handleText() {
-		this.props.addAddon({
-			initial_height: 100,
-			initial_width: 200,
-			url: "https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-ultralight-webfont.woff",
-			category: 'text'
-		})
-	}
-
 	handleKeyDown(e) {
 		if (e.ctrlKey && e.which === 87) {
-			this.toggleWebcam()
+			this.toggleWebcamModal()
 		} else if (e.ctrlKey & e.which === 83) {
 			this.handleSave()
 		}
@@ -135,67 +125,64 @@ class NavBar extends Component {
 		document.addEventListener("keydown", this.handleKeyDown.bind(this));
 	}
 
-	renderSaveModal() {
-
-		let customStyles = {
-			content : {
-				top                   : '50%',
-				left                  : '50%',
-				right                 : 'auto',
-				bottom                : 'auto',
-				marginRight           : '-50%',
-				transform             : 'translate(-50%, -50%)',
-				backgroundColor       : 'whitesmoke'
-			},
-			overlay : {
-				zIndex	 			  : '10000'
-			}
-		}
+	renderSaveModal(customStyles) {
 		if (this.props.token)
 		return (
 			<Modal
 				isOpen={this.state.saveModalOpen}
 				contentLabel="Save"
 				style={customStyles}
-				>
-					<Save closeModal={this.closeModal} />
-					<button className="closeModal" onClick={this.closeModal}>close</button>
-				</Modal>
+			>
+				<Save closeModal={this.closeModal} />
+				<button className="closeModal" onClick={this.closeModal}>close</button>
+			</Modal>
 			)
 		}
 
-	renderSignupModal() {
-
-		let customStyles = {
-			content : {
-				top                   : '50%',
-				left                  : '50%',
-				right                 : 'auto',
-				bottom                : 'auto',
-				marginRight           : '-50%',
-				transform             : 'translate(-50%, -50%)',
-				backgroundColor       : 'whitesmoke'
-			},
-			overlay : {
-				zIndex	 			  : '10000'
-			}
-		}
+	renderSignupModal(customStyles) {
 		if (!this.props.token)
 		return (
 			<Modal
 				isOpen={this.state.signupModalOpen}
 				contentLabel="Sign Up"
 				style={customStyles}
+			>
+				<Signup closeModal={this.closeModal} />
+				<button className="closeModal" onClick={this.closeModal}>close</button>
+			</Modal>
+			)
+		}
+
+		renderLoginModal(customStyles) {
+			if (!this.props.token)
+			return (
+				<Modal
+					isOpen={this.state.loginModalOpen}
+					contentLabel="Sign Up"
+					style={customStyles}
 				>
-					<Signup closeModal={this.closeModal} />
+					<Login closeModal={this.closeModal} />
 					<button className="closeModal" onClick={this.closeModal}>close</button>
 				</Modal>
 			)
 		}
 
-		renderLoginModal() {
+		renderWebcamModal(customStyles) {
+			return (
+				<Modal
+					isOpen={this.state.webcamActive}
+					contentLabel="Sign Up"
+					style={customStyles}
+				>
+					<Photo handleToggle={this.toggleWebcamModal} />
+					<p>~ hit the spacebar to take a picture! ~</p>
+					<button className="closeModal" onClick={this.closeModal}>close</button>
+				</Modal>
+			)
+		}
 
-			let customStyles = {
+		modalStyles() {
+			return {
 				content : {
 					top                   : '50%',
 					left                  : '50%',
@@ -203,47 +190,45 @@ class NavBar extends Component {
 					bottom                : 'auto',
 					marginRight           : '-50%',
 					transform             : 'translate(-50%, -50%)',
-					backgroundColor       : 'whitesmoke'
+					backgroundColor       : 'whitesmoke',
+					textAlign							: 'center'
 				},
 				overlay : {
 					zIndex	 			  : '10000'
 				}
 			}
-			if (!this.props.token)
+		}
+
+		renderWebcamButton() {
 			return (
-				<Modal
-					isOpen={this.state.loginModalOpen}
-					contentLabel="Sign Up"
-					style={customStyles}>
-					<Login closeModal={this.closeModal} />
-					<button className="closeModal" onClick={this.closeModal}>close</button>
-				</Modal>
+				<button
+					className="btn"
+					onClick={this.toggleWebcamModal}
+				>
+					WEBCAM {this.state.webcamActive ? 'OFF' : 'ON' }
+				</button>
 			)
 		}
 
 
 		render(){
-
+			let customStyles = this.modalStyles()
 			return(
 				<div>
 					<div className="btn-bar">
-
-						<Notifications
-							notifications={this.props.notifications}
-						/>
+						<Notifications notifications={this.props.notifications} />
 						<Tooltip />
-						<p className="toolTipInfoText">⬅ hover over the keyboard</p>
 						{this.renderSaveButton()}
-						<button className="btn" onClick={this.toggleWebcam}>WEBCAM {this.state.webcamActive ? 'OFF' : 'ON' }</button>
+						{this.renderWebcamButton()}
 						{this.renderSignup()}
 						{this.renderLogin()}
-						{this.renderRestore()}
 						{this.renderLogout()}
-						{this.state.webcamActive ? <Photo handleToggle={this.toggleWebcam} /> : null}
+						{this.renderRestore()}
 					</div>
-					{this.renderSaveModal()}
-					{this.renderSignupModal()}
-					{this.renderLoginModal()}
+					{this.renderWebcamModal(customStyles)}
+					{this.renderSaveModal(customStyles)}
+					{this.renderSignupModal(customStyles)}
+					{this.renderLoginModal(customStyles)}
 				</div>
 			)
 		}

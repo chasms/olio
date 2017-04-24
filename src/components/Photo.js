@@ -49,13 +49,9 @@ class Photo extends React.Component {
 
   render() {
     return (
-      <div>
-        <div className="photobox">
-          <Webcam className="webcam" ref="webcam" width={"400"} height={"400"} audio={false}/>
-          <p>Hit the spacebar to take a picture</p>
-        </div>
+      <div className="photobox">
+        <Webcam className="webcam" ref="webcam" width={"640"} height={"480"} audio={false}/>
       </div>
-
     )
   }
 }

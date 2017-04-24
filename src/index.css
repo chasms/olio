@@ -313,12 +313,6 @@ button:focus {
   height: 100%;
   width: 100%;
 }
-.photobox {
-  position: fixed;
-  top: 20px;
-  left: 300px;
-  z-index: 1;
-}
 .photo {
   z-index: -1;
   border: 3px;
@@ -466,19 +460,19 @@ textarea:-ms-input-placeholder {
 /*  Webcam
 ==================================================*/
 .photobox {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
-  padding-top: 100px;
-}
-.webcam {
   margin-left: auto;
   margin-right: auto;
-  height: 400px;
-  width: 600px;
+  /*background-color: red;*/
+  height: 480px;
+  width: 640px;
+  overflow: hidden;
+  border-radius: 5px;
+  border: 2px solid black;
+  margin-bottom: 25px;
 }
+/*.webcam {
+
+}*/
 
 /*  Creations
 ==================================================*/
