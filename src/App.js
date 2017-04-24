@@ -15,6 +15,7 @@ import { checkIfLoggedIn, logout } from './actions/accounts'
 import CurrentAddons from './components/CurrentAddons'
 import Drawers from './components/Drawers'
 import NavBar from './components/NavBar'
+import Delete from './components/Delete'
 
 class App extends React.Component {
 
@@ -38,19 +39,14 @@ class App extends React.Component {
     // this.props.restoreCreation(this.state.restoreId, this.props.token)
   }
   renderCreationList() {
-    const deleteStyle = {
-      cursor: 'pointer'
-    }
     return this.props.creations.map((creation) => {
       return (
-        <p key={creation.id}>
-          <span onClick={this.props.deleteCreation.bind(null, creation.id, this.props.token)} style={deleteStyle}>
-            [x]
-          </span>
+        <div className="creation" key={creation.id}>
+          <Delete onClick={this.props.deleteCreation.bind(null, creation.id, this.props.token)}/>
           <span onClick={this.handleRestoreCreation.bind(null, creation.id, this.props.token)} >
             Creation #{creation.id}
           </span>
-        </p>
+        </div>
       )
     })
   }
@@ -71,10 +67,9 @@ class App extends React.Component {
           onSetOpen={this.onSetSidebarOpen}
           children=''
           pullRight
-          overlayClassName=''
-          >
-            {}
-          </Sidebar>
+          overlayClassName='creations-overlay'
+          sidebarClassName='creations-bar'
+        />
         </div>
       );
     }

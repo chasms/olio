@@ -41,9 +41,9 @@ class NavBar extends Component {
 	}
 
 	addNotification(message) {
-		const { notifications, count } = this.state;
-		const id = notifications.size + 1;
-		const newCount = count + 1;
+		let { notifications, count } = this.state;
+		let id = notifications.size + 1;
+		let newCount = count + 1;
 		return this.setState({
 			count: newCount,
 			notifications: notifications.add({
@@ -57,7 +57,7 @@ class NavBar extends Component {
 	}
 
 	removeNotification (count) {
-		const { notifications } = this.state;
+		let { notifications } = this.state;
 		this.setState({
 			notifications: notifications.filter(n => n.key !== count)
 		})

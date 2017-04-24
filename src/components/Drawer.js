@@ -19,7 +19,8 @@ class Drawer extends React.Component {
 
   render() {
     return (
-      <div className={"drawer drawer-" + this.props.drawer.id + ' ' + this.props.active}>
+      <div
+        className={"drawer drawer-" + this.props.drawer.id + ' ' + this.props.active}>
         {this.renderDrawerItems()}
       </div>
     )

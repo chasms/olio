@@ -356,6 +356,7 @@ textarea:-ms-input-placeholder {
 .active-drawer-wrapper{
   bottom: 25px !important;
 }
+
 .drawer-handles-wrapper {
   /*background-color: lightgrey;*/
   position: absolute;
@@ -364,15 +365,10 @@ textarea:-ms-input-placeholder {
   bottom: 0;
   left: 0;
 }
-.active-drawer-handle {
-  background-color: transparent;
-}
 .drawer-handles {
   background-color: lightgrey;
   font-family: monospace;
   cursor: pointer;
-  width: 150px;
-
   height: 25px;
   padding-top: 5px;
   text-align: center;
@@ -384,12 +380,13 @@ textarea:-ms-input-placeholder {
   -o-transition: background-color .25s ease-in-out;
   -ms-transition: background-color .25s ease-in-out;
   transition: background-color .25s ease-in-out;
-  /*border-top-left-radius: 50px;*/
-  /*border-top-right-radius: 50px;*/
-  /*border: 2px solid black;*/
 }
 .drawer-handles:hover {
   background-color: silver;
+}
+.active-drawer-handle {
+  background-color: transparent !important;
+  font-weight: bold;
 }
 .drawer {
   background-color: whitesmoke;
@@ -442,4 +439,26 @@ textarea:-ms-input-placeholder {
   margin-right: auto;
   height: 400px;
   width: 600px;
+}
+
+/*  Creations
+==================================================*/
+.creations-overlay {
+  display: none;
+}
+.creations-bar {
+  background-color: rgba(245, 245, 245, 0.6) !important;
+}
+.creation {
+  width: 200px;
+  height: 100px;
+  padding: 10px;
+  background-color: azure;
+  margin: 25px;
+  border-radius: 5px;
+  border: 1px solid silver;
+}
+.creation span {
+  margin: auto;
+  font-family: monospace;
 }

@@ -35,10 +35,12 @@ class Drawers extends React.Component {
   }
 
   renderDrawerHandles() {
+    let width = `${100 / this.props.drawers.length}%`
     return this.props.drawers.map( drawer => {
       return (
         <div
           key={drawer.id}
+          style={{width: width}}
           className={"drawer-handles " + (this.state.activeId === drawer.id ? 'active-drawer-handle' : '')}
           onClick={this.handleDrawer.bind(null, drawer.id)}>
             {drawer.name}
@@ -51,9 +53,9 @@ class Drawers extends React.Component {
     return this.props.drawers.map( drawer => {
       return (
         <Drawer
-          active={this.state.activeId === drawer.id ? 'active-drawer' : 'inactive-drawer'}
           key={drawer.id}
           drawer={drawer}
+          active={this.state.activeId === drawer.id ? 'active-drawer' : 'inactive-drawer'}
         />
       )
     })
