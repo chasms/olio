@@ -7,7 +7,6 @@ import { bindActionCreators } from 'redux'
 import Modal from 'react-modal';
 import Notifications from 'react-notification-system-redux';
 
-
 // app imports
 import { addAddon, deleteAllAddons } from '../actions/addons'
 import { saveCreation, restoreCreation } from '../actions/creations'
@@ -18,7 +17,6 @@ import Tooltip from './Tooltip'
 import Signup from './Signup'
 import Login from './Login'
 import Save from './Save'
-
 
 class NavBar extends Component {
 	constructor(props){
@@ -210,7 +208,6 @@ class NavBar extends Component {
 			)
 		}
 
-
 		render(){
 			let customStyles = this.modalStyles()
 			return(
@@ -233,6 +230,7 @@ class NavBar extends Component {
 			)
 		}
 	}
+
 	const mapStateToProps = (state) => {
 		return {
 			currentCreation: state.CurrentCreation,
@@ -241,7 +239,6 @@ class NavBar extends Component {
 			usedAddons: state.Addon
 		}
 	}
-
 
 	const mapDispatchToProps = (dispatch) => {
 		return bindActionCreators({
@@ -254,6 +251,5 @@ class NavBar extends Component {
 			restoreCreation: restoreCreation
 		}, dispatch);
 	}
-
 
 	export default connect(mapStateToProps, mapDispatchToProps)(NavBar)
