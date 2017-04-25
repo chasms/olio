@@ -11,7 +11,7 @@ import { success, error } from './actions/notifications'
 import { saveCreation, restoreCreation, getCreations, deleteCreation } from './actions/creations'
 import { getDrawers } from './actions/drawers'
 import { checkIfLoggedIn, logout } from './actions/accounts'
-import { toggleWebcamModal } from './actions/modals'
+import { toggleWebcamModal, openSaveModal } from './actions/modals'
 import CurrentAddons from './components/CurrentAddons'
 import Drawers from './components/Drawers'
 import NavBar from './components/NavBar'
@@ -50,7 +50,7 @@ class App extends React.Component {
     if (e.ctrlKey && e.which === 87) {
       this.props.toggleWebcamModal()
     } else if (e.ctrlKey & e.which === 83) {
-      this.toggleSaveModal()
+      this.props.openSaveModal()
     }
   }
 
@@ -114,6 +114,7 @@ class App extends React.Component {
       deleteCreation: deleteCreation,
       restoreCreation: restoreCreation,
       toggleWebcamModal: toggleWebcamModal,
+      openSaveModal: openSaveModal,
       addAddon: addAddon,
       getAddons: getAddons,
       deleteAllAddons: deleteAllAddons,
