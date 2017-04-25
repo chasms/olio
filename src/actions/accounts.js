@@ -2,6 +2,7 @@ import axios from 'axios'
 import { api } from './api'
 import { error, success } from './notifications'
 import { signupError, loginError, logoutAlert, signupSuccess, loginSuccess } from './consts'
+import { getCreations } from './creations'
 
 
 export const signup = (details) => {
@@ -25,10 +26,9 @@ export const login = (details) => {
   return (dispatch) => {
     axios.post(api + '/login/', details)
     .then(resp => {
-      setTimeout(() => {
-        localStorage.setItem('token', resp.data.token)
-      }, 5000 )
+      localStorage.setItem('token', resp.data.token)      
       dispatch({type: 'SET_TOKEN', payload: resp.data})
+      dispatch({type: 'GET_CREATIONS', payload: resp.data.creations})
       dispatch(success(loginSuccess))
     })
     .catch((e) => {
@@ -41,6 +41,7 @@ export const login = (details) => {
 export const logout = () => {
   return (dispatch) => {
     dispatch({type: 'REMOVE_TOKEN'})
+    dispatch({type: 'CLEAR_CREATIONS'})
     dispatch(error(logoutAlert))
   }
 }

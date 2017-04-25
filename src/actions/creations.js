@@ -56,7 +56,7 @@ export const getCreations = (token) => {
       url: api + '/creations/',
       method: 'get',
       headers: { 'AUTHORIZATION': `Bearer ${token}`},
-    }).then(resp => {
+    }).then(resp => {å
       dispatch({type: 'GET_CREATIONS', payload: resp.data})
     })
   }

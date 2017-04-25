@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux'
 
 // app imports
 import { saveCreation } from '../actions/creations'
-
+import { closeAllModals } from '../actions/modals'
 class Save extends React.Component {
 
   constructor() {
@@ -53,6 +53,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
+    closeModal: closeAllModals,
     saveCreation: saveCreation
   }, dispatch);
 }
