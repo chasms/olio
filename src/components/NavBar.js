@@ -10,7 +10,7 @@ import Notifications from 'react-notification-system-redux';
 import { addAddon, deleteAllAddons } from '../actions/addons'
 import { saveCreation, restoreCreation } from '../actions/creations'
 import { logout } from '../actions/accounts'
-import { success, error } from '../actions/notifications'
+import { toggleSidebar } from '../actions/modals'
 import WebcamButton from './WebcamButton'
 import Tooltip from './Tooltip'
 
@@ -24,7 +24,7 @@ class NavBar extends Component {
 				<Tooltip />
 				<div
 					className={'nav-button sidebar-handle' + (this.props.sidebarOpen ? ' open-sidebar-handle' : '')}
-					onClick={this.props.handleSidebar} >
+					onClick={this.props.toggleSidebar} >
 				</div>
 			</div>
 		)
@@ -33,6 +33,7 @@ class NavBar extends Component {
 
 const mapStateToProps = (state) => {
 	return {
+		sidebarOpen: state.Modals.sidebar,
 		currentCreation: state.CurrentCreation,
 		notifications: state.Notifications,
 		token: state.Accounts.token,
@@ -42,8 +43,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({
-		success: success,
-		error: error,
+		toggleSidebar: toggleSidebar,
 		deleteAllAddons: deleteAllAddons,
 		logout: logout,
 		addAddon: addAddon,

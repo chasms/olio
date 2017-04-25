@@ -1,8 +1,9 @@
+// std library imports
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { openWebcamModal } from '../actions/modals'
+import { toggleWebcamModal, closeAllModals } from '../actions/modals'
 
 class WebcamButton extends React.Component{
 
@@ -15,7 +16,7 @@ class WebcamButton extends React.Component{
           y="0px"
           viewBox="0 0 347.846 347.846"
           className={'nav-svg webcam-button' + (this.props.webcamActive ? ' webcam-active' : '') }
-          onClick={this.props.openWebcamModal}>
+          onClick={this.props.toggleWebcamModal}>
         <g>
           <g>
             <g>
@@ -32,25 +33,26 @@ class WebcamButton extends React.Component{
               <g>
                 <path d="M173.923,191.379c23.431,0,42.502-19.068,42.502-42.496c0-23.424-19.071-42.493-42.502-42.493
                   c-23.428,0-42.484,19.068-42.484,42.493C131.438,172.311,150.495,191.379,173.923,191.379z"/>
-                </g>
               </g>
             </g>
-          </svg>
-        </div>
-      )
-    }
+          </g>
+        </svg>
+      </div>
+    )
   }
+}
 
-  const mapStateToProps = (state) => {
-    return {
-      webcamActive: state.Modals.webcam
-    }
+const mapStateToProps = (state) => {
+  return {
+    webcamActive: state.Modals.webcam
   }
+}
 
-  const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({
-      openWebcamModal: openWebcamModal
-    }, dispatch);
-  }
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    toggleWebcamModal: toggleWebcamModal,
+    closeAllModals: closeAllModals
+  }, dispatch);
+}
 
-  export default connect(mapStateToProps, mapDispatchToProps)(WebcamButton)
+export default connect(mapStateToProps, mapDispatchToProps)(WebcamButton)

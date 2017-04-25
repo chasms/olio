@@ -11,6 +11,7 @@ import { success, error } from './actions/notifications'
 import { saveCreation, restoreCreation, getCreations, deleteCreation } from './actions/creations'
 import { getDrawers } from './actions/drawers'
 import { checkIfLoggedIn, logout } from './actions/accounts'
+import { toggleWebcamModal, openSaveModal } from './actions/modals'
 import CurrentAddons from './components/CurrentAddons'
 import Drawers from './components/Drawers'
 import NavBar from './components/NavBar'
@@ -22,14 +23,10 @@ class App extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      welcomeModalOpen: true,
-    };
     this.props.getDrawers()
     this.props.getAddons()
     this.props.checkIfLoggedIn()
     if (this.props.token) { this.props.getCreations(this.props.token) }
-    this.handleSidebar = this.handleSidebar.bind(this)
     this.handleSave = this.handleSave.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
     this.handleKeyDown = this.handleKeyDown.bind(this)
@@ -52,15 +49,8 @@ class App extends React.Component {
     if (e.ctrlKey && e.which === 87) {
       this.props.toggleWebcamModal()
     } else if (e.ctrlKey & e.which === 83) {
-      this.toggleSaveModal()
+      this.props.openSaveModal()
     }
-  }
-
-  handleSidebar() {
-    this.setState({
-      sidebarOpen: !this.state.sidebarOpen
-    })
-    // this.props.restoreCreation(this.state.restoreId, this.props.token)
   }
 
   renderCreationList() {
@@ -88,7 +78,6 @@ class App extends React.Component {
     return (
       <div className="app" onKeyDown={this.handleKeyDown}>
         <NavBar
-          sidebarOpen={this.state.sidebarOpen}
           handleSidebar={this.handleSidebar}
           handleSave={this.handleSave}
           handleLogout={this.handleLogout} />
@@ -99,7 +88,6 @@ class App extends React.Component {
         <Drawers loading={this.toggleWelcomeModal}/>
         <CurrentAddons />
         <Sidebar
-          sidebarOpen={this.state.sidebarOpen}
           handleLogout={this.handleLogout}
         />
         </div>
@@ -123,6 +111,8 @@ class App extends React.Component {
       saveCreation: saveCreation,
       deleteCreation: deleteCreation,
       restoreCreation: restoreCreation,
+      toggleWebcamModal: toggleWebcamModal,
+      openSaveModal: openSaveModal,
       addAddon: addAddon,
       getAddons: getAddons,
       deleteAllAddons: deleteAllAddons,
