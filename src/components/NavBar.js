@@ -20,9 +20,7 @@ class NavBar extends Component {
 		return(
 			<div className="nav">
 				<Notifications notifications={this.props.notifications} />
-				<WebcamButton
-					toggleWebcamModal={this.props.toggleWebcamModal}
-					webcamActive={this.props.webcamActive} />
+				<WebcamButton />
 				<Tooltip />
 				<div
 					className={'nav-button sidebar-handle' + (this.props.sidebarOpen ? ' open-sidebar-handle' : '')}
@@ -33,25 +31,25 @@ class NavBar extends Component {
 	}
 }
 
-			const mapStateToProps = (state) => {
-				return {
-					currentCreation: state.CurrentCreation,
-					notifications: state.Notifications,
-					token: state.Accounts.token,
-					usedAddons: state.Addon
-				}
-			}
+const mapStateToProps = (state) => {
+	return {
+		currentCreation: state.CurrentCreation,
+		notifications: state.Notifications,
+		token: state.Accounts.token,
+		usedAddons: state.Addon
+	}
+}
 
-			const mapDispatchToProps = (dispatch) => {
-				return bindActionCreators({
-					success: success,
-					error: error,
-					deleteAllAddons: deleteAllAddons,
-					logout: logout,
-					addAddon: addAddon,
-					restoreCreation: restoreCreation,
-					saveCreation: saveCreation,
-				}, dispatch);
-			}
+const mapDispatchToProps = (dispatch) => {
+	return bindActionCreators({
+		success: success,
+		error: error,
+		deleteAllAddons: deleteAllAddons,
+		logout: logout,
+		addAddon: addAddon,
+		restoreCreation: restoreCreation,
+		saveCreation: saveCreation,
+	}, dispatch);
+}
 
-			export default connect(mapStateToProps, mapDispatchToProps)(NavBar)
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar)

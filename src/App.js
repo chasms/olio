@@ -11,7 +11,6 @@ import { success, error } from './actions/notifications'
 import { saveCreation, restoreCreation, getCreations, deleteCreation } from './actions/creations'
 import { getDrawers } from './actions/drawers'
 import { checkIfLoggedIn, logout } from './actions/accounts'
-import { toggleWebcamModal } from './actions/modals'
 import CurrentAddons from './components/CurrentAddons'
 import Drawers from './components/Drawers'
 import NavBar from './components/NavBar'
@@ -44,7 +43,6 @@ class App extends React.Component {
     this.props.saveCreation(this.props.usedAddons, this.props.token)
   }
 
-
   handleLogout() {
     this.props.logout()
     this.props.deleteAllAddons()
@@ -58,30 +56,12 @@ class App extends React.Component {
     }
   }
 
-
   handleSidebar() {
     this.setState({
       sidebarOpen: !this.state.sidebarOpen
     })
     // this.props.restoreCreation(this.state.restoreId, this.props.token)
   }
-
-  renderSaveButton() {
-		return this.props.token ? <button className="btn" onClick={this.toggleSaveModal}>Save Creation</button> : null
-	}
-
-	renderLogout() {
-		return this.props.token ? <button className="btn" onClick={this.handleLogout}>Log Out</button> : null
-	}
-
-	renderSignup() {
-		return !this.props.token ? <button className="btn" onClick={this.toggleSignupModal}>Sign Up</button> : null
-	}
-
-	renderLogin() {
-		return !this.props.token ? <button className="btn" onClick={this.toggleLoginModal}>Login</button> : null
-	}
-
 
   renderCreationList() {
     return this.props.creations.map((creation) => {
@@ -143,7 +123,6 @@ class App extends React.Component {
       saveCreation: saveCreation,
       deleteCreation: deleteCreation,
       restoreCreation: restoreCreation,
-      toggleWebcamModal: toggleWebcamModal,
       addAddon: addAddon,
       getAddons: getAddons,
       deleteAllAddons: deleteAllAddons,
