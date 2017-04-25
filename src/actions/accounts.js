@@ -1,9 +1,12 @@
 import axios from 'axios'
 import { api } from './api'
 import { error, success } from './notifications'
-import { signupError, loginError, logoutAlert, signupSuccess, loginSuccess } from './consts'
-import { getCreations } from './creations'
-
+import {
+  signupError,
+  loginError,
+  logoutAlert,
+  signupSuccess,
+  loginSuccess } from './consts'
 
 export const signup = (details) => {
   return (dispatch) => {
@@ -26,7 +29,7 @@ export const login = (details) => {
   return (dispatch) => {
     axios.post(api + '/login/', details)
     .then(resp => {
-      localStorage.setItem('token', resp.data.token)      
+      localStorage.setItem('token', resp.data.token)
       dispatch({type: 'SET_TOKEN', payload: resp.data})
       dispatch({type: 'GET_CREATIONS', payload: resp.data.creations})
       dispatch(success(loginSuccess))

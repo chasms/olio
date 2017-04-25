@@ -12,7 +12,7 @@ import { saveCreation, restoreCreation } from '../actions/creations'
 import { logout } from '../actions/accounts'
 import { toggleSidebar } from '../actions/modals'
 import WebcamButton from './WebcamButton'
-import Tooltip from './Tooltip'
+import Keyboard from './Keyboard'
 
 class NavBar extends Component {
 
@@ -21,7 +21,7 @@ class NavBar extends Component {
 			<div className="nav">
 				<Notifications notifications={this.props.notifications} />
 				<WebcamButton />
-				<Tooltip />
+				<Keyboard />
 				<div
 					className={'nav-button sidebar-handle' + (this.props.sidebarOpen ? ' open-sidebar-handle' : '')}
 					onClick={this.props.toggleSidebar} >

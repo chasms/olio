@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import ReactTooltip from 'react-tooltip'
 
 
-class Tooltip extends Component {
+class Keyboard extends Component {
 
 	renderKeyboard() {
 		return (
@@ -281,4 +281,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(Tooltip)
+export default connect(mapStateToProps)(Keyboard)
