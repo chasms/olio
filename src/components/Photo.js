@@ -28,7 +28,7 @@ class Photo extends React.Component {
       initial_width: 400,
       category: 'photo'
     })
-    this.props.handleToggle()
+    this.props.closeModal()
 
   }
 
@@ -36,6 +36,7 @@ class Photo extends React.Component {
     if (e.which === 32) {
       e.preventDefault()
       this.handleScreenshot()
+
     }
   }
 

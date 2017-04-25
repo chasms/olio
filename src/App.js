@@ -7,10 +7,11 @@ import { bindActionCreators } from 'redux'
 import Sidebar from 'react-sidebar'
 import Modal from 'react-modal'
 var Spinner = require('react-spinkit')
-
+import Notifications from 'react-notification-system-redux';
 
 // app imports
 import { addAddon, getAddons, deleteAllAddons } from './actions/addons'
+import { success, show, error } from './actions/notifications'
 import { saveCreation, restoreCreation, getCreations, deleteCreation } from './actions/creations'
 import { getDrawers } from './actions/drawers'
 import { checkIfLoggedIn, logout } from './actions/accounts'
@@ -19,6 +20,10 @@ import Drawers from './components/Drawers'
 import NavBar from './components/NavBar'
 import Delete from './components/Delete'
 import Welcome from './components/Welcome'
+import Photo from './components/Photo'
+import SignUp from './components/Signup'
+import Login from './components/Login'
+import AppModal from './components/AppModal'
 
 class App extends React.Component {
 
@@ -26,7 +31,11 @@ class App extends React.Component {
     super(props);
     this.state = {
       sidebarOpen: false,
-      welcomeModalOpen: true
+      welcomeModalOpen: true,
+      webcamActive: false,
+			signupModalOpen: false,
+			loginModalOpen: false,
+			saveModalOpen: false
     };
     this.props.getDrawers()
     this.props.getAddons()
@@ -35,6 +44,79 @@ class App extends React.Component {
     this.handleSidebar = this.handleSidebar.bind(this)
     this.toggleWelcomeModal = this.toggleWelcomeModal.bind(this)
     this.handleRestoreCreation = this.handleRestoreCreation.bind(this)
+    this.toggleWebcamModal = this.toggleWebcamModal.bind(this)
+    this.handleSave = this.handleSave.bind(this)
+    this.toggleSignupModal = this.toggleSignupModal.bind(this)
+    this.toggleLoginModal = this.toggleLoginModal.bind(this)
+    this.toggleSaveModal = this.toggleSaveModal.bind(this)
+    this.handleLogout = this.handleLogout.bind(this)
+    this.closeModal = this.closeModal.bind(this)
+    this.handleKeyDown = this.handleKeyDown.bind(this)
+  }
+  componentWillMount(){
+    document.addEventListener("keydown", this.handleKeyDown.bind(this));
+  }
+
+  handleSave() {
+    this.closeModal()
+    this.props.saveCreation(this.props.usedAddons, this.props.token)
+  }
+
+  toggleSaveModal() {
+    this.setState({
+      saveModalOpen: !this.state.saveModalOpen
+    })
+  }
+
+  closeModal() {
+    this.setState({
+      signupModalOpen: false,
+      loginModalOpen: false,
+      saveModalOpen: false,
+      webcamActive: false
+    })
+  }
+
+  toggleWebcamModal(){
+    this.setState({
+      webcamActive: !this.state.webcamActive
+    })
+  }
+
+  toggleSignupModal(){
+    if (this.state.loginModalOpen) {
+      this.setState({
+        loginModalOpen: false
+      })
+    }
+    this.setState({
+      signupModalOpen: !this.state.signupModalOpen
+    })
+  }
+
+  toggleLoginModal(){
+    if (this.state.signupModalOpen) {
+      this.setState({
+        signupModalOpen: false
+      })
+    }
+    this.setState({
+      loginModalOpen: !this.state.loginModalOpen
+    })
+  }
+
+  handleLogout() {
+    this.props.logout()
+    this.props.deleteAllAddons()
+  }
+
+  handleKeyDown(e) {
+    if (e.ctrlKey && e.which === 87) {
+      this.toggleWebcamModal()
+    } else if (e.ctrlKey & e.which === 83) {
+      this.toggleSaveModal()
+    }
+
   }
 
   toggleWelcomeModal() {
@@ -110,8 +192,15 @@ class App extends React.Component {
   render() {
     return (
       <div className="app" onKeyDown={this.handleKeyDown}>
+
+
+        <NavBar handleSidebar={this.handleSidebar} handleSave={this.handleSave} toggleLoginModal={this.toggleLoginModal} toggleSaveModal={this.toggleSaveModal} toggleSignupModal={this.toggleSignupModal} handleLogout={this.handleLogout} toggleWebcamModal={this.toggleWebcamModal} webcamActive={this.state.webcamActive} toggleLoginModal={this.toggleLoginModal} />
+        <AppModal handleSave={this.handleSave} webcamActive={this.state.webcamActive} loginModalOpen={this.state.loginModalOpen} signupModalOpen={this.state.signupModalOpen} saveModalOpen={this.state.saveModalOpen} handleSave={this.handleSave} closeModal={this.closeModal} handleLogout={this.handleLogout} handleKeyDown={this.handleKeyDown} />
+        <Drawers loading={this.toggleWelcomeModal}/>
+=======
         <NavBar handleSidebar={this.handleSidebar}/>
         <Drawers />
+
         <CurrentAddons />
         <Sidebar sidebar={this.renderCreationList()}
           open={this.state.sidebarOpen}
@@ -149,6 +238,9 @@ class App extends React.Component {
       getAddons: getAddons,
       getDrawers: getDrawers,
       restoreCreation: restoreCreation,
+
+      success: success,
+			error: error
     }, dispatch);
   }
 
