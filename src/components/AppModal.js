@@ -71,7 +71,7 @@ class AppModal extends Component {
                   closeModal={this.props.closeModal}
                 />
                 <p>~ hit the spacebar to take a picture! ~</p>
-                <button className="closeModal" onClick={this.props.closeModal}>close</button>
+                <button className="closeModal" onClick={this.props.closeModal}>cancel</button>
               </Modal>
             )
           }

@@ -172,7 +172,7 @@ class App extends React.Component {
               <button
                 className="closeModal"
                 onClick={this.toggleWelcomeModal}>
-                close
+                start!
               </button> )
             }
         </Modal>

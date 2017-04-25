@@ -167,6 +167,9 @@ p {
 }
 .closeModal {
   display: block;
+  width: 75px;
+  height: 25px;
+  font-family: monospace;
   margin-left: auto;
   margin-right: auto;
   background-color: transparent;
