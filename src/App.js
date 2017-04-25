@@ -4,8 +4,6 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 // node_modules imports
-import Modal from 'react-modal'
-var Spinner = require('react-spinkit')
 
 // app imports
 import { addAddon, getAddons, deleteAllAddons } from './actions/addons'
@@ -19,7 +17,6 @@ import Drawers from './components/Drawers'
 import NavBar from './components/NavBar'
 import Sidebar from './components/Sidebar'
 import Delete from './components/Delete'
-import Welcome from './components/Welcome'
 import AppModal from './components/AppModal'
 
 class App extends React.Component {
@@ -34,7 +31,6 @@ class App extends React.Component {
     this.props.checkIfLoggedIn()
     if (this.props.token) { this.props.getCreations(this.props.token) }
     this.handleSidebar = this.handleSidebar.bind(this)
-    this.toggleWelcomeModal = this.toggleWelcomeModal.bind(this)
     this.handleSave = this.handleSave.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
     this.handleKeyDown = this.handleKeyDown.bind(this)
@@ -62,11 +58,6 @@ class App extends React.Component {
     }
   }
 
-  toggleWelcomeModal() {
-    this.setState ({
-      welcomeModalOpen: false
-    })
-  }
 
   handleSidebar() {
     this.setState({
@@ -90,43 +81,6 @@ class App extends React.Component {
 	renderLogin() {
 		return !this.props.token ? <button className="btn" onClick={this.toggleLoginModal}>Login</button> : null
 	}
-
-  renderWelcomeModal() {
-
-      let customStyles = {
-        content : {
-          top                   : '50%',
-          left                  : '50%',
-          right                 : 'auto',
-          bottom                : 'auto',
-          marginRight           : '-50%',
-          transform             : 'translate(-50%, -50%)',
-          backgroundColor       : 'whitesmoke'
-        },
-        overlay : {
-          zIndex          : '1000px'
-        }
-      }
-      return (
-        <Modal
-          isOpen={this.state.welcomeModalOpen}
-          contentLabel="Welcome"
-          style={customStyles}>
-          <Welcome />
-            {this.props.loading ? (
-              <div className="ride-spinners">
-                <Spinner spinnerName='double-bounce' />
-              </div> )
-              : (
-              <button
-                className="closeModal"
-                onClick={this.toggleWelcomeModal}>
-                start!
-              </button> )
-            }
-        </Modal>
-      )
-    }
 
 
   renderCreationList() {
@@ -168,7 +122,6 @@ class App extends React.Component {
           sidebarOpen={this.state.sidebarOpen}
           handleLogout={this.handleLogout}
         />
-        {this.renderWelcomeModal()}
         </div>
       );
     }
