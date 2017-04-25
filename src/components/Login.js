@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 // app imports
+import { closeAllModals } from '../actions/modals'
 import { login } from '../actions/accounts'
 
 class Login extends React.Component {
@@ -27,7 +28,7 @@ class Login extends React.Component {
   handleSubmit(e) {
     e.preventDefault()
     this.props.login(this.state)
-    this.props.closeModal()
+    this.props.closeAllModals()
   }
   render() {
 
@@ -44,8 +45,10 @@ class Login extends React.Component {
 }
 
 
+
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
+    closeAllModals: closeAllModals,
     login: login
   }, dispatch);
 }

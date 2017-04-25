@@ -9,11 +9,22 @@ import Modal from 'react-modal';
 // app imports
 import { logout } from '../actions/accounts'
 import { saveCreation } from '../actions/creations'
+import { success, show, error } from '../actions/notifications'
 import { finishedLoading } from '../actions/loading'
+import {
+
+  openSaveModal,
+  toggleWebcamModal,
+  openSignupModal,
+  openLoginModal,
+  closeAllModals
+
+} from '../actions/modals'
 import Signup from './Signup'
 import Login from './Login'
 import Save from './Save'
 import Photo from './Photo'
+import App from '../App'
 
 class AppModal extends Component {
 
@@ -25,8 +36,8 @@ class AppModal extends Component {
         contentLabel="Save"
         style={customStyles}
         >
-          <Save closeModal={this.props.closeModal} />
-          <button className="closeModal" onClick={this.props.closeModal}>close</button>
+          <Save />
+          <button className="closeModal" onClick={this.props.closeAllModals}>close</button>
         </Modal>
       )
     }
@@ -39,8 +50,8 @@ class AppModal extends Component {
           contentLabel="Sign Up"
           style={customStyles}
           >
-            <Signup closeModal={this.props.closeModal} />
-            <button className="closeModal" onClick={this.props.closeModal}>close</button>
+            <Signup />
+            <button className="closeModal" onClick={this.props.closeAllModals}>close</button>
           </Modal>
         )
       }
@@ -53,8 +64,8 @@ class AppModal extends Component {
             contentLabel="Sign Up"
             style={customStyles}
             >
-              <Login closeModal={this.props.closeModal} />
-              <button className="closeModal" onClick={this.props.closeModal}>close</button>
+              <Login />
+              <button className="closeModal" onClick={this.props.closeAllModals}>close</button>
             </Modal>
           )
         }
@@ -67,11 +78,9 @@ class AppModal extends Component {
               contentLabel="Webcam"
               style={customStyles}
               >
-                <Photo handleToggle={this.props.toggleWebcamModal}
-                  closeModal={this.props.closeModal}
-                />
+                <Photo />
                 <p>~ hit the spacebar to take a picture! ~</p>
-                <button className="closeModal" onClick={this.props.closeModal}>close</button>
+                <button className="closeModal" onClick={this.props.closeAllModals}>close</button>
               </Modal>
             )
           }
@@ -110,6 +119,10 @@ class AppModal extends Component {
         }
         const mapStateToProps = (state) => {
           return {
+            saveModalOpen: state.Modals.save,
+            webcamActive: state.Modals.webcam,
+            loginModalOpen: state.Modals.login,
+            signupModalOpen: state.Modals.signup,
             currentCreation: state.CurrentCreation,
             token: state.Accounts.token,
           }
@@ -118,6 +131,11 @@ class AppModal extends Component {
 
         const mapDispatchToProps = (dispatch) => {
           return bindActionCreators({
+            openSaveModal: openSaveModal,
+            openLoginModal: openLoginModal,
+            openSignupModal: openSignupModal,
+            openWebcamModal: toggleWebcamModal,
+            closeAllModals: closeAllModals,
             finishedLoading: finishedLoading,
             logout: logout,
             saveCreation: saveCreation

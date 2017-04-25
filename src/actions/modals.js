@@ -1,5 +1,5 @@
-export const openWebcamModal = () => ({
-  type: 'OPEN_WEBCAM'
+export const toggleWebcamModal = () => ({
+  type: 'TOGGLE_WEBCAM'
 })
 
 export const openSaveModal = () => ({
@@ -14,6 +14,6 @@ export const openSignupModal = () => ({
   type: 'OPEN_SIGNUP'
 })
 
-export const closeAllModoal = () => ({
+export const closeAllModals = () => ({
   type: 'CLOSE_ALL'
 })

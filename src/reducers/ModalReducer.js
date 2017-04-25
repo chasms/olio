@@ -1,7 +1,7 @@
 export default function Modals(state = { welcome: true, login: false, signup: false, webcam: false, save: false }, action){
   switch (action.type) {
-    case 'OPEN_WEBCAM':
-      return { welcome: false, login: false, signup: false, webcam: true, save: false }
+    case 'TOGGLE_WEBCAM':
+      return { welcome: false, login: false, signup: false, webcam: !state.webcam, save: false }
     case 'OPEN_LOGIN':
       return { welcome: false, login: true, signup: false, webcam: false, save: false }
     case 'OPEN_SIGNUP':
