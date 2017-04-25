@@ -8,7 +8,6 @@ import Sidebar from 'react-sidebar'
 import Modal from 'react-modal'
 var Spinner = require('react-spinkit')
 
-
 // app imports
 import { addAddon, getAddons, deleteAllAddons } from './actions/addons'
 import { saveCreation, restoreCreation, getCreations, deleteCreation } from './actions/creations'
@@ -19,6 +18,10 @@ import Drawers from './components/Drawers'
 import NavBar from './components/NavBar'
 import Delete from './components/Delete'
 import Welcome from './components/Welcome'
+import Photo from './components/Photo'
+import SignUp from './components/Signup'
+import Login from './components/Login'
+import AppModal from './components/AppModal'
 
 class App extends React.Component {
 
@@ -26,7 +29,11 @@ class App extends React.Component {
     super(props);
     this.state = {
       sidebarOpen: false,
-      welcomeModalOpen: true
+      welcomeModalOpen: true,
+      webcamActive: false,
+			signupModalOpen: false,
+			loginModalOpen: false,
+			saveModalOpen: false
     };
     this.handleRestoreCreation = this.handleRestoreCreation.bind(this)
     this.props.getDrawers()
@@ -35,6 +42,85 @@ class App extends React.Component {
     this.props.token ? this.props.getCreations(this.props.token) : null
     this.handleSidebar = this.handleSidebar.bind(this)
     this.toggleWelcomeModal = this.toggleWelcomeModal.bind(this)
+    this.toggleWebcamModal = this.toggleWebcamModal.bind(this)
+    this.handleSave = this.handleSave.bind(this)
+    this.toggleSignupModal = this.toggleSignupModal.bind(this)
+    this.toggleLoginModal = this.toggleLoginModal.bind(this)
+    this.toggleSaveModal = this.toggleSaveModal.bind(this)
+    this.handleLogout = this.handleLogout.bind(this)
+    this.closeModal = this.closeModal.bind(this)
+    this.handleKeyDown = this.handleKeyDown.bind(this)
+  }
+
+  handleSave() {
+    this.closeModal()
+    this.props.saveCreation(this.props.usedAddons, this.props.token)
+  }
+
+  toggleSaveModal() {
+    this.setState({
+      saveModalOpen: !this.state.saveModalOpen
+    })
+  }
+
+  closeModal() {
+    this.setState({
+      signupModalOpen: false,
+      loginModalOpen: false,
+      saveModalOpen: false,
+      webcamActive: false
+    })
+  }
+
+  toggleWebcamModal(){
+    this.setState({
+      webcamActive: !this.state.webcamActive
+    })
+  }
+  renderWebcamButton() {
+    return (
+      <button
+        className="btn"
+        onClick={this.toggleWebcamModal}
+      >
+        WEBCAM {this.state.webcamActive ? 'OFF' : 'ON' }
+      </button>
+    )
+  }
+
+  toggleSignupModal(){
+    if (this.state.loginModalOpen) {
+      this.setState({
+        loginModalOpen: false
+      })
+    }
+    this.setState({
+      signupModalOpen: !this.state.signupModalOpen
+    })
+  }
+
+  toggleLoginModal(){
+    if (this.state.signupModalOpen) {
+      this.setState({
+        signupModalOpen: false
+      })
+    }
+    this.setState({
+      loginModalOpen: !this.state.loginModalOpen
+    })
+  }
+
+  handleLogout() {
+    this.props.logout()
+    this.props.deleteAllAddons()
+  }
+
+  handleKeyDown(e) {
+    if (e.ctrlKey && e.which === 87) {
+      this.toggleWebcamModal()
+    } else if (e.ctrlKey & e.which === 83) {
+      this.handleSave()
+    }
   }
 
   toggleWelcomeModal() {
@@ -110,7 +196,8 @@ class App extends React.Component {
   render() {
     return (
       <div className="app" onKeyDown={this.handleKeyDown}>
-        <NavBar handleSidebar={this.handleSidebar}/>
+        <NavBar handleSidebar={this.handleSidebar} toggleSaveModal={this.toggleSaveModal} toggleSignupModal={this.toggleSignupModal} handleLogout={this.props.handleLogout} toggleLoginModal={this.toggleLoginModal} />
+        <AppModal handleSave={this.handleSave} handleLogout={this.handleLogout} handleKeyDown={this.handleKeyDown} />
         <Drawers loading={this.toggleWelcomeModal}/>
         <CurrentAddons />
         <Sidebar sidebar={this.renderCreationList()}
@@ -122,6 +209,7 @@ class App extends React.Component {
           sidebarClassName='creations-bar'
         />
         {this.renderWelcomeModal()}
+        {this.renderWebcamButton()}
         </div>
       );
     }

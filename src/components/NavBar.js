@@ -18,30 +18,13 @@ import Tooltip from './Tooltip'
 import Signup from './Signup'
 import Login from './Login'
 import Save from './Save'
+import AppModal from './AppModal'
 
 
 class NavBar extends Component {
-	constructor(props){
-		super(props)
-		this.state = {
-			webcamActive: false,
-			signupModalOpen: false,
-			loginModalOpen: false,
-			saveModalOpen: false
-		}
-
-		this.toggleWebcamModal = this.toggleWebcamModal.bind(this)
-		this.handleSave = this.handleSave.bind(this)
-		this.toggleSignupModal = this.toggleSignupModal.bind(this)
-		this.toggleLoginModal = this.toggleLoginModal.bind(this)
-		this.toggleSaveModal = this.toggleSaveModal.bind(this)
-		this.handleLogout = this.handleLogout.bind(this)
-		this.closeModal = this.closeModal.bind(this)
-		this.handleKeyDown = this.handleKeyDown.bind(this)
-	}
 
 	renderSaveButton() {
-		return this.props.token ? <button className="btn" onClick={this.toggleSaveModal}>Save Creation</button> : null
+		return this.props.token ? <button className="btn" onClick={this.props.toggleSaveModal}>Save Creation</button> : null
 	}
 
 	renderRestore() {
@@ -49,187 +32,28 @@ class NavBar extends Component {
 	}
 
 	renderLogout() {
-		return this.props.token ? <button className="btn" onClick={this.handleLogout}>Log Out</button> : null
+		return this.props.token ? <button className="btn" onClick={this.props.handleLogout}>Log Out</button> : null
 	}
 
 	renderSignup() {
-		return !this.props.token ? <button className="btn" onClick={this.toggleSignupModal}>Sign Up</button> : null
+		return !this.props.token ? <button className="btn" onClick={this.props.toggleSignupModal}>Sign Up</button> : null
 	}
 
 	renderLogin() {
-		return !this.props.token ? <button className="btn" onClick={this.toggleLoginModal}>Login</button> : null
+		return !this.props.token ? <button className="btn" onClick={this.props.toggleLoginModal}>Login</button> : null
 	}
-
-	handleSave() {
-		this.closeModal()
-		this.props.saveCreation(this.props.usedAddons, this.props.token)
-	}
-
-	toggleSaveModal() {
-		this.setState({
-			saveModalOpen: !this.state.saveModalOpen
-		})
-	}
-
-	closeModal() {
-		this.setState({
-			signupModalOpen: false,
-			loginModalOpen: false,
-			saveModalOpen: false,
-			webcamActive: false
-		})
-	}
-
-	toggleWebcamModal(){
-		this.setState({
-			webcamActive: !this.state.webcamActive
-		})
-	}
-
-	toggleSignupModal(){
-		if (this.state.loginModalOpen) {
-			this.setState({
-				loginModalOpen: false
-			})
-		}
-		this.setState({
-			signupModalOpen: !this.state.signupModalOpen
-		})
-	}
-
-	toggleLoginModal(){
-		if (this.state.signupModalOpen) {
-			this.setState({
-				signupModalOpen: false
-			})
-		}
-		this.setState({
-			loginModalOpen: !this.state.loginModalOpen
-		})
-	}
-
-	handleLogout() {
-		this.props.logout()
-		this.props.deleteAllAddons()
-	}
-
-	handleKeyDown(e) {
-		if (e.ctrlKey && e.which === 87) {
-			this.toggleWebcamModal()
-		} else if (e.ctrlKey & e.which === 83) {
-			this.handleSave()
-		}
-	}
-
-	componentWillMount(){
-		document.addEventListener("keydown", this.handleKeyDown.bind(this));
-	}
-
-	renderSaveModal(customStyles) {
-		if (this.props.token)
-		return (
-			<Modal
-				isOpen={this.state.saveModalOpen}
-				contentLabel="Save"
-				style={customStyles}
-			>
-				<Save closeModal={this.closeModal} />
-				<button className="closeModal" onClick={this.closeModal}>close</button>
-			</Modal>
-			)
-		}
-
-	renderSignupModal(customStyles) {
-		if (!this.props.token)
-		return (
-			<Modal
-				isOpen={this.state.signupModalOpen}
-				contentLabel="Sign Up"
-				style={customStyles}
-			>
-				<Signup closeModal={this.closeModal} />
-				<button className="closeModal" onClick={this.closeModal}>close</button>
-			</Modal>
-			)
-		}
-
-		renderLoginModal(customStyles) {
-			if (!this.props.token)
-			return (
-				<Modal
-					isOpen={this.state.loginModalOpen}
-					contentLabel="Sign Up"
-					style={customStyles}
-				>
-					<Login closeModal={this.closeModal} />
-					<button className="closeModal" onClick={this.closeModal}>close</button>
-				</Modal>
-			)
-		}
-
-		renderWebcamModal(customStyles) {
-			return (
-				<Modal
-					isOpen={this.state.webcamActive}
-					contentLabel="Sign Up"
-					style={customStyles}
-				>
-					<Photo handleToggle={this.toggleWebcamModal} />
-					<p>~ hit the spacebar to take a picture! ~</p>
-					<button className="closeModal" onClick={this.closeModal}>close</button>
-				</Modal>
-			)
-		}
-
-		modalStyles() {
-			return {
-				content : {
-					top                   : '50%',
-					left                  : '50%',
-					right                 : 'auto',
-					bottom                : 'auto',
-					marginRight           : '-50%',
-					transform             : 'translate(-50%, -50%)',
-					backgroundColor       : 'whitesmoke',
-					textAlign							: 'center'
-				},
-				overlay : {
-					zIndex	 			  : '10000'
-				}
-			}
-		}
-
-		renderWebcamButton() {
-			return (
-				<button
-					className="btn"
-					onClick={this.toggleWebcamModal}
-				>
-					WEBCAM {this.state.webcamActive ? 'OFF' : 'ON' }
-				</button>
-			)
-		}
-
 
 		render(){
-			let customStyles = this.modalStyles()
 			return(
-				<div>
 					<div className="btn-bar">
 						<Notifications notifications={this.props.notifications} />
 						<Tooltip />
 						{this.renderSaveButton()}
-						{this.renderWebcamButton()}
 						{this.renderSignup()}
 						{this.renderLogin()}
 						{this.renderLogout()}
 						{this.renderRestore()}
 					</div>
-					{this.renderWebcamModal(customStyles)}
-					{this.renderSaveModal(customStyles)}
-					{this.renderSignupModal(customStyles)}
-					{this.renderLoginModal(customStyles)}
-				</div>
 			)
 		}
 	}
