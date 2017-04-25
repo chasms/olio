@@ -37,12 +37,8 @@ p {
   user-select: none;
 }
 
-/*	Button Bar
+/*	Nav
 ==================================================*/
-.notification-bar {
-  position: relative;
-  z-index: 10000 !important;
-}
 .nav {
   top: 0;
   width: 100%;
@@ -61,6 +57,7 @@ p {
   margin-left: 10px;
   margin-top: 25px;
   z-index: 10000;
+  cursor: pointer;
 }
 .nav-button img {
   height:100%;
@@ -87,6 +84,13 @@ p {
 }
 .open-sidebar-handle {
   margin-right: 325px !important;
+}
+
+/*	Notifications
+==================================================*/
+.notification-bar {
+  position: relative;
+  z-index: 10000 !important;
 }
 
 /*	Modals

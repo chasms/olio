@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux'
 
 // app imports
 import { addAddon } from '../actions/addons'
+import { finishedLoading } from '../actions/loading'
 
 class DrawerItem extends React.Component {
 
@@ -55,6 +56,15 @@ class DrawerItem extends React.Component {
     )
   }
 
+  componentWillMount() {
+
+    let finalDrawer = this.props.library[this.props.library.length - 1]
+    let finalItem = finalDrawer.addons[finalDrawer.addons.length - 1]
+    if (this.props.item.id === finalItem.id) {
+      this.props.finishedLoading()
+    }
+  }
+
   render() {
     return (
       <div className={"drawer-item" + (this.props.type === 'text' ? ' text-drawer-item' : '')}>
@@ -64,10 +74,17 @@ class DrawerItem extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    library: state.AddonLibrary
+  }
+}
+
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    addAddon: addAddon,
+    finishedLoading: finishedLoading,
+    addAddon: addAddon
   }, dispatch);
 };
 
-export default connect(null, mapDispatchToProps)(DrawerItem)
+export default connect(mapStateToProps, mapDispatchToProps)(DrawerItem)
