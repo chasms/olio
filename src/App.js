@@ -7,9 +7,11 @@ import { bindActionCreators } from 'redux'
 import Sidebar from 'react-sidebar'
 import Modal from 'react-modal'
 var Spinner = require('react-spinkit')
+import Notifications from 'react-notification-system-redux';
 
 // app imports
 import { addAddon, getAddons, deleteAllAddons } from './actions/addons'
+import { success, show, error } from './actions/notifications'
 import { saveCreation, restoreCreation, getCreations, deleteCreation } from './actions/creations'
 import { getDrawers } from './actions/drawers'
 import { checkIfLoggedIn, logout } from './actions/accounts'
@@ -51,6 +53,9 @@ class App extends React.Component {
     this.closeModal = this.closeModal.bind(this)
     this.handleKeyDown = this.handleKeyDown.bind(this)
   }
+  componentWillMount(){
+    document.addEventListener("keydown", this.handleKeyDown.bind(this));
+  }
 
   handleSave() {
     this.closeModal()
@@ -76,16 +81,6 @@ class App extends React.Component {
     this.setState({
       webcamActive: !this.state.webcamActive
     })
-  }
-  renderWebcamButton() {
-    return (
-      <button
-        className="btn"
-        onClick={this.toggleWebcamModal}
-      >
-        WEBCAM {this.state.webcamActive ? 'OFF' : 'ON' }
-      </button>
-    )
   }
 
   toggleSignupModal(){
@@ -196,8 +191,8 @@ class App extends React.Component {
   render() {
     return (
       <div className="app" onKeyDown={this.handleKeyDown}>
-        <NavBar handleSidebar={this.handleSidebar} toggleSaveModal={this.toggleSaveModal} toggleSignupModal={this.toggleSignupModal} handleLogout={this.props.handleLogout} toggleLoginModal={this.toggleLoginModal} />
-        <AppModal handleSave={this.handleSave} handleLogout={this.handleLogout} handleKeyDown={this.handleKeyDown} />
+        <NavBar handleSidebar={this.handleSidebar} handleSave={this.handleSave} toggleLoginModal={this.toggleLoginModal} toggleSaveModal={this.toggleSaveModal} toggleSignupModal={this.toggleSignupModal} handleLogout={this.handleLogout} toggleWebcamModal={this.toggleWebcamModal} webcamActive={this.state.webcamActive} toggleLoginModal={this.toggleLoginModal} />
+        <AppModal handleSave={this.handleSave} webcamActive={this.state.webcamActive} loginModalOpen={this.state.loginModalOpen} signupModalOpen={this.state.signupModalOpen} saveModalOpen={this.state.saveModalOpen} handleSave={this.handleSave} closeModal={this.closeModal} handleLogout={this.handleLogout} handleKeyDown={this.handleKeyDown} />
         <Drawers loading={this.toggleWelcomeModal}/>
         <CurrentAddons />
         <Sidebar sidebar={this.renderCreationList()}
@@ -209,7 +204,6 @@ class App extends React.Component {
           sidebarClassName='creations-bar'
         />
         {this.renderWelcomeModal()}
-        {this.renderWebcamButton()}
         </div>
       );
     }
@@ -236,7 +230,9 @@ class App extends React.Component {
       addAddon: addAddon,
       getAddons: getAddons,
       getDrawers: getDrawers,
-      restoreCreation: restoreCreation
+      restoreCreation: restoreCreation,
+      success: success,
+			error: error
     }, dispatch);
   }
 

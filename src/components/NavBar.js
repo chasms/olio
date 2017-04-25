@@ -42,12 +42,23 @@ class NavBar extends Component {
 	renderLogin() {
 		return !this.props.token ? <button className="btn" onClick={this.props.toggleLoginModal}>Login</button> : null
 	}
+	renderWebcamButton() {
+		return (
+			<button
+				className="btn"
+				onClick={this.props.toggleWebcamModal}
+			>
+				WEBCAM {this.props.webcamActive ? 'OFF' : 'ON' }
+			</button>
+		)
+	}
 
 		render(){
 			return(
 					<div className="btn-bar">
 						<Notifications notifications={this.props.notifications} />
 						<Tooltip />
+						{this.renderWebcamButton()}
 						{this.renderSaveButton()}
 						{this.renderSignup()}
 						{this.renderLogin()}
@@ -75,7 +86,8 @@ class NavBar extends Component {
 			logout: logout,
 			saveCreation: saveCreation,
 			addAddon: addAddon,
-			restoreCreation: restoreCreation
+			restoreCreation: restoreCreation,
+			saveCreation: saveCreation,
 		}, dispatch);
 	}
 
