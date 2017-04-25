@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux'
 
 // app imports
 import { signup } from '../actions/accounts'
+import { closeAllModals } from '../actions/modals'
 
 class Signup extends React.Component {
 
@@ -29,7 +30,7 @@ class Signup extends React.Component {
   handleSubmit(e) {
     e.preventDefault()
     this.props.signup(this.state)
-    this.props.closeModal()
+    this.props.closeAllModals()
   }
   render() {
 
@@ -50,6 +51,7 @@ class Signup extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
+    closeAllModals: closeAllModals,
     signup: signup
   }, dispatch);
 }
