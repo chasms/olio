@@ -9,13 +9,11 @@ import Modal from 'react-modal';
 // app imports
 import { logout } from '../actions/accounts'
 import { saveCreation } from '../actions/creations'
-import { success, show, error } from '../actions/notifications'
 import { finishedLoading } from '../actions/loading'
 import Signup from './Signup'
 import Login from './Login'
 import Save from './Save'
 import Photo from './Photo'
-import App from '../App'
 
 class AppModal extends Component {
 

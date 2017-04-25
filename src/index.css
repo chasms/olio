@@ -37,52 +37,60 @@ p {
   user-select: none;
 }
 
-/*	Button Bar
+/*	Nav
 ==================================================*/
-.btn-bar {
+.nav {
+  top: 0;
   width: 100%;
-  padding-right: 10px;
-  background-color: lightgrey;
-  text-align: center;
-  position: absolute;
-  right: 0;
-  z-index: 1000;
-
+  height: 0px;
+  padding-left: 25px;
+  z-index: 10000;
 }
-button:focus {
-  outline:0;
+.modals {
+  z-index: 0;
 }
-.notification-bar {
-  position: relative;
-  z-index: 10000 !important;
-}
-.btn {
-  float: right;
-  margin: 10px;
-  font-family: monospace;
-  background-color: transparent;
-  border: 1px solid silver;
-  border-style: solid;
-  border-width: thin;
-  border-radius: 5px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.75);
+.nav-button {
+  position: inherit;
+  height: 40px;
+  width: 80px;
   display: inline-block;
+  margin-left: 10px;
+  margin-top: 25px;
+  z-index: 10000;
   cursor: pointer;
 }
-.btn:hover {
-  color: dimgrey;
-}
-.keyboard-img {
-  height: 45px;
-  width: 55px;
-  display: inline-block;
-  float: left;
-  margin-left: 35px;
+.nav-button img {
+  height:100%;
+  width: 100%;
 }
 .toolTipInfoText {
   float: left;
   margin: 15px;
+}
+.sidebar-handle {
+  float: right;
+  height: 10px;
+  width: 20px;
+  margin-right: 50px;
+  margin-top: 35px;
+  border-top: 3px solid black;
+  border-bottom: 3px solid black;
+  cursor: pointer;
+  -webkit-transition: all .5s ease-in-out;
+  -moz-transition: all .5s ease-in-out;
+  -o-transition: all .5s ease-in-out;
+  -ms-transition: all .5s ease-in-out;
+  transition: all .5s ease-in-out;
+}
+.open-sidebar-handle {
+  margin-right: 325px !important;
+}
 
+/*	Notifications
+==================================================*/
+.notification-bar {
+  position: relative;
+  z-index: 10000 !important;
 }
 
 /*	Modals
@@ -153,7 +161,6 @@ button:focus {
 :-ms-input-placeholder { /* Internet Explorer 10-11 */
   color:    silver;
 }
-
 .closeModal {
   display: block;
   margin-left: auto;
@@ -166,13 +173,10 @@ button:focus {
   color: darkgrey;
   text-align: center;
   cursor: pointer;
-
 }
-
 .closeModal:hover {
   color: dimgrey;
 }
-
 .welcome {
   text-align: center;
   font-family: monospace;
@@ -376,7 +380,6 @@ textarea:-ms-input-placeholder {
 .active-drawer-wrapper{
   bottom: 25px !important;
 }
-
 .drawer-handles-wrapper {
   /*background-color: lightgrey;*/
   position: absolute;
@@ -438,6 +441,7 @@ textarea:-ms-input-placeholder {
   padding: 10px;
 }
 .drawer-item img {
+  position: inherit;
   height: 100%;
   width: 100%;
 }
@@ -445,14 +449,6 @@ textarea:-ms-input-placeholder {
   width: auto !important;
   font-size: 18px;
 }
-.keyboard-img {
-  height: 45px;
-  width: 55px;
-  display: inline-block;
-  float: left;
-  margin-left: 75px;
-}
-
 .notifications-wrapper {
   font-family: monospace;
 }
@@ -470,20 +466,27 @@ textarea:-ms-input-placeholder {
   border: 2px solid black;
   margin-bottom: 25px;
 }
-/*.webcam {
-
-}*/
 
 /*  Creations
 ==================================================*/
-.creations-overlay {
-  display: none;
-}
 .creations-bar {
-  margin-top: 50px;
+  position: fixed;
   padding-bottom: 25px;
   background-color: rgba(245, 245, 245, 0.6) !important;
-  z-index: 900 !important;
+  border-left: 1px solid black;
+  z-index: 100;
+  width: 275px;
+  height: 100%;
+  right: -276px;
+  top: 0;
+  -webkit-transition: right .5s ease-in-out;
+  -moz-transition: right .5s ease-in-out;
+  -o-transition: right .5s ease-in-out;
+  -ms-transition: right .5s ease-in-out;
+  transition: right .5s ease-in-out;
+}
+.open-sidebar {
+  right: 0px;
 }
 .creation {
   width: 200px;
