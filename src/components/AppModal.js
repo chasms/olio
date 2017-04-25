@@ -103,7 +103,7 @@ class AppModal extends Component {
             }
             return (
               <Modal
-                isOpen={false}
+                isOpen={this.props.welcomeModalOpen}
                 contentLabel="Welcome"
                 style={customStyles}>
                 <Welcome />

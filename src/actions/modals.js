@@ -14,6 +14,6 @@ export const openSignupModal = () => ({
   type: 'OPEN_SIGNUP'
 })
 
-export const closeAllModoal = () => ({
+export const closeAllModals = () => ({
   type: 'CLOSE_ALL'
 })
