@@ -10,7 +10,6 @@ var Spinner = require('react-spinkit')
 // app imports
 import { logout } from '../actions/accounts'
 import { saveCreation } from '../actions/creations'
-import { success, show, error } from '../actions/notifications'
 import { finishedLoading } from '../actions/loading'
 import {
   openSaveModal,
@@ -24,7 +23,6 @@ import Login from './Login'
 import Save from './Save'
 import Photo from './Photo'
 import Welcome from './Welcome'
-import App from '../App'
 
 class AppModal extends Component {
 

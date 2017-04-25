@@ -4,8 +4,6 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 // node_modules imports
-import Modal from 'react-modal'
-var Spinner = require('react-spinkit')
 
 // app imports
 import { addAddon, getAddons, deleteAllAddons } from './actions/addons'
@@ -19,7 +17,6 @@ import Drawers from './components/Drawers'
 import NavBar from './components/NavBar'
 import Sidebar from './components/Sidebar'
 import Delete from './components/Delete'
-import Welcome from './components/Welcome'
 import AppModal from './components/AppModal'
 
 class App extends React.Component {
