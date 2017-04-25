@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 // app imports
-import { openLoginModal, openSignupModal, openSaveModal } from '../actions/modals'
+import { openLoginModal, openSignupModal, openSaveModal, toggleSidebar } from '../actions/modals'
 import { saveCreation, restoreCreation, deleteCreation } from '../actions/creations'
 import { checkIfLoggedIn, logout } from '../actions/accounts'
 import Delete from './Delete'
@@ -18,7 +18,7 @@ class Sidebar extends React.Component {
   }
 
   handleRestoreCreation(id, token) {
-    this.props.handleSidebar()
+    this.props.toggleSidebar()
     this.props.restoreCreation(id, token)
   }
 
@@ -77,6 +77,7 @@ const mapDispatchToProps = (dispatch) => {
     openSaveModal: openSaveModal,
     openLoginModal: openLoginModal,
     openSignupModal: openSignupModal,
+    toggleSidebar: toggleSidebar,
     deleteCreation: deleteCreation,
     checkIfLoggedIn: checkIfLoggedIn,
     logout: logout,
