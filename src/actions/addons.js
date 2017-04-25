@@ -8,13 +8,16 @@ export const getAddons = () => {
         method:'get',
         url: api + '/addons/'
       }).then(resp => {
-        sessionStorage.setItem('addons', JSON.stringify(resp.data))
-        dispatch({type: 'GET_ADDONS', payload: resp.data})
-      })
-    } else {
-      dispatch({type: 'GET_ADDONS', payload: JSON.parse(sessionStorage.getItem('addons'))})
-    }
+        setTimeout(() => {
+          sessionStorage.setItem('addons', JSON.stringify(resp.data))
+          dispatch({type: 'GET_ADDONS', payload: resp.data})
+        }, 0,
+      )
+    })
+  } else {
+    dispatch({type: 'GET_ADDONS', payload: JSON.parse(sessionStorage.getItem('addons'))})
   }
+}
 }
 
 export const addAddon = (addon) => ({

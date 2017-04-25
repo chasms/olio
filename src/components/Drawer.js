@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 // app imports
-import { finishedLoading } from '../actions/loading'
+
 import DrawerItem from './DrawerItem'
 
 class Drawer extends React.Component {
@@ -33,7 +33,6 @@ class Drawer extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    finishedLoading: finishedLoading
   }, dispatch);
 }
 
