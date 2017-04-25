@@ -26,11 +26,12 @@ class DrawerItem extends React.Component {
 
   renderImg() {
     return (
-      <img onClick={this.handleImg}
-        data-id={this.props.item.id}
-        src={this.props.item.url}
-        alt=''
-      />
+      <div className={"drawer-item"}>
+        <img onClick={this.handleImg}
+          data-id={this.props.item.id}
+          src={this.props.item.url}
+          alt='' />
+      </div>
     )
   }
 
@@ -43,12 +44,11 @@ class DrawerItem extends React.Component {
   renderText() {
     let fontFamily = this.extractFontName(this.props.item.url)
     return (
-      <div>
+      <div className={'drawer-item text-drawer-item'}>
         <p
           className="text-template"
           onClick={this.handleText}
-          style={{ fontFamily: fontFamily }}
-        >
+          style={{ fontFamily: fontFamily }} >
           {fontFamily}
         </p>
         <link href={this.props.item.url} rel="stylesheet"/>
@@ -66,11 +66,7 @@ class DrawerItem extends React.Component {
   }
 
   render() {
-    return (
-      <div className={"drawer-item" + (this.props.type === 'text' ? ' text-drawer-item' : '')}>
-        {this.props.type === 'text'? this.renderText() : this.renderImg()}
-      </div>
-    )
+    return this.props.type === 'text' ? this.renderText() : this.renderImg()
   }
 }
 

@@ -82,6 +82,10 @@ p {
   -ms-transition: all .5s ease-in-out;
   transition: all .5s ease-in-out;
 }
+.sidebar-handle:hover {
+  border-top: 3px solid skyblue;
+  border-bottom: 3px solid skyblue;
+}
 .open-sidebar-handle {
   margin-right: 325px !important;
 }
@@ -166,16 +170,22 @@ p {
   margin-left: auto;
   margin-right: auto;
   background-color: transparent;
-  border: 1px solid silver;
+  border-color: silver;
   border-style: solid;
   border-width: thin;
   border-radius: 5px;
   color: darkgrey;
   text-align: center;
   cursor: pointer;
+  -webkit-transition: all .5s ease-in-out;
+  -moz-transition: all .5s ease-in-out;
+  -o-transition: all .5s ease-in-out;
+  -ms-transition: all .5s ease-in-out;
+  transition: all .5s ease-in-out;
 }
 .closeModal:hover {
-  color: dimgrey;
+  color: skyblue;
+  border-color: skyblue;
 }
 .welcome {
   text-align: center;
@@ -389,8 +399,9 @@ textarea:-ms-input-placeholder {
   left: 0;
 }
 .drawer-handles {
-  background-color: lightgrey;
+  background-color: black;
   font-family: monospace;
+  color: white;
   cursor: pointer;
   height: 25px;
   padding-top: 5px;
@@ -405,20 +416,21 @@ textarea:-ms-input-placeholder {
   transition: all .5s ease-in-out;
 }
 .drawer-handles:hover {
-  background-color: silver;
+  background-color: skyblue;
 }
 .active-drawer-handle {
   background-color: transparent !important;
   font-weight: bold;
+  color: skyblue;
 }
 .drawer {
   background-color: whitesmoke;
   border-top: 1px solid lightgrey;
   position: absolute;
-
   height: 250px;
   width: 100%;
   padding: 15px;
+  margin-bottom: 50px;
   overflow-y: scroll;
   z-index: 999;
 }
@@ -431,14 +443,32 @@ textarea:-ms-input-placeholder {
 .drawer-item {
   display: inline-grid;
   cursor: pointer;
-  margin: 15px;
   height: 75px;
   width: 75px;
+  padding: 5px;
+  margin: 10px;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  -webkit-transition: all .5s ease-in-out;
+  -moz-transition: all .5s ease-in-out;
+  -o-transition: all .5s ease-in-out;
+  -ms-transition: all .5s ease-in-out;
+  transition: all .5s ease-in-out;
+}
+.drawer-item:hover {
+  border: 1px solid skyblue;
+  color: skyblue;
+}
+.text-item-container {
+  height: inherit;
+  width: inherit;
 }
 .text-drawer-item {
-  width: 125px;
-  height: 25px;
-  padding: 10px;
+  width: auto;
+  text-align: center;
+  height: auto;
+  padding-right: 10px;
+  padding-left: 10px;
 }
 .drawer-item img {
   position: inherit;
@@ -448,6 +478,8 @@ textarea:-ms-input-placeholder {
 .text-template {
   width: auto !important;
   font-size: 18px;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 .notifications-wrapper {
   font-family: monospace;

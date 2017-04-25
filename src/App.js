@@ -164,7 +164,17 @@ class App extends React.Component {
           contentLabel="Welcome"
           style={customStyles}>
           <Welcome />
-            {this.props.loading ? <div className="ride-spinners"><Spinner spinnerName='double-bounce' /></div> : <button className="closeModal" onClick={this.toggleWelcomeModal}>close</button>}
+            {this.props.loading ? (
+              <div className="ride-spinners">
+                <Spinner spinnerName='double-bounce' />
+              </div> )
+              : (
+              <button
+                className="closeModal"
+                onClick={this.toggleWelcomeModal}>
+                close
+              </button> )
+            }
         </Modal>
       )
     }
