@@ -37,13 +37,13 @@ class App extends React.Component {
 			loginModalOpen: false,
 			saveModalOpen: false
     };
-    this.handleRestoreCreation = this.handleRestoreCreation.bind(this)
     this.props.getDrawers()
     this.props.getAddons()
     this.props.checkIfLoggedIn()
     this.props.token ? this.props.getCreations(this.props.token) : null
     this.handleSidebar = this.handleSidebar.bind(this)
     this.toggleWelcomeModal = this.toggleWelcomeModal.bind(this)
+    this.handleRestoreCreation = this.handleRestoreCreation.bind(this)
     this.toggleWebcamModal = this.toggleWebcamModal.bind(this)
     this.handleSave = this.handleSave.bind(this)
     this.toggleSignupModal = this.toggleSignupModal.bind(this)
@@ -114,15 +114,15 @@ class App extends React.Component {
     if (e.ctrlKey && e.which === 87) {
       this.toggleWebcamModal()
     } else if (e.ctrlKey & e.which === 83) {
-      this.handleSave()
+      this.toggleSaveModal()
     }
   }
 
   toggleWelcomeModal() {
     this.setState ({
-    welcomeModalOpen: false
-  })
-}
+      welcomeModalOpen: false
+    })
+  }
 
   handleSidebar() {
     this.setState({
@@ -191,6 +191,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="app" onKeyDown={this.handleKeyDown}>
+
         <NavBar handleSidebar={this.handleSidebar} handleSave={this.handleSave} toggleLoginModal={this.toggleLoginModal} toggleSaveModal={this.toggleSaveModal} toggleSignupModal={this.toggleSignupModal} handleLogout={this.handleLogout} toggleWebcamModal={this.toggleWebcamModal} webcamActive={this.state.webcamActive} toggleLoginModal={this.toggleLoginModal} />
         <AppModal handleSave={this.handleSave} webcamActive={this.state.webcamActive} loginModalOpen={this.state.loginModalOpen} signupModalOpen={this.state.signupModalOpen} saveModalOpen={this.state.saveModalOpen} handleSave={this.handleSave} closeModal={this.closeModal} handleLogout={this.handleLogout} handleKeyDown={this.handleKeyDown} />
         <Drawers loading={this.toggleWelcomeModal}/>
