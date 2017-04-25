@@ -44,10 +44,6 @@ class NavBar extends Component {
 		return this.props.token ? <button className="btn" onClick={this.toggleSaveModal}>Save Creation</button> : null
 	}
 
-	renderRestore() {
-		return this.props.token ? <button className="btn" >Restore</button> : null
-	}
-
 	renderLogout() {
 		return this.props.token ? <button className="btn" onClick={this.handleLogout}>Log Out</button> : null
 	}
@@ -212,9 +208,8 @@ class NavBar extends Component {
 					{this.renderSignup()}
 					{this.renderLogin()}
 					{this.renderLogout()}
-					{this.renderRestore()}
 					<div
-						className="nav-button sidebar-handle"
+						className={'nav-button sidebar-handle' + (this.props.sidebarOpen ? ' open-sidebar-handle' : '')}
 						onClick={this.props.handleSidebar}
 					/>
 					<div className='modals'>

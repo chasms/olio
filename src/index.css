@@ -48,6 +48,7 @@ p {
   width: 100%;
   height: 0px;
   padding-left: 25px;
+  z-index: 10000;
 }
 .modals {
   z-index: 0;
@@ -59,11 +60,11 @@ p {
   display: inline-block;
   margin-left: 10px;
   margin-top: 25px;
+  z-index: 10000;
 }
 .nav-button img {
   height:100%;
   width: 100%;
-  z-index: 1000;
 }
 .toolTipInfoText {
   float: left;
@@ -77,8 +78,15 @@ p {
   margin-top: 35px;
   border-top: 3px solid black;
   border-bottom: 3px solid black;
-  /*background-color: red;*/
   cursor: pointer;
+  -webkit-transition: all .5s ease-in-out;
+  -moz-transition: all .5s ease-in-out;
+  -o-transition: all .5s ease-in-out;
+  -ms-transition: all .5s ease-in-out;
+  transition: all .5s ease-in-out;
+}
+.open-sidebar-handle {
+  margin-right: 325px !important;
 }
 
 /*	Modals
@@ -161,12 +169,10 @@ p {
   color: darkgrey;
   text-align: center;
   cursor: pointer;
-
 }
 .closeModal:hover {
   color: dimgrey;
 }
-
 .welcome {
   text-align: center;
   font-family: monospace;
@@ -370,7 +376,6 @@ textarea:-ms-input-placeholder {
 .active-drawer-wrapper{
   bottom: 25px !important;
 }
-
 .drawer-handles-wrapper {
   /*background-color: lightgrey;*/
   position: absolute;
@@ -460,14 +465,24 @@ textarea:-ms-input-placeholder {
 
 /*  Creations
 ==================================================*/
-.creations-overlay {
-  display: none;
-}
 .creations-bar {
-  margin-top: 50px;
+  position: fixed;
   padding-bottom: 25px;
   background-color: rgba(245, 245, 245, 0.6) !important;
-  z-index: 900 !important;
+  border-left: 1px solid black;
+  z-index: 100;
+  width: 275px;
+  height: 100%;
+  right: -276px;
+  top: 0;
+  -webkit-transition: right .5s ease-in-out;
+  -moz-transition: right .5s ease-in-out;
+  -o-transition: right .5s ease-in-out;
+  -ms-transition: right .5s ease-in-out;
+  transition: right .5s ease-in-out;
+}
+.open-sidebar {
+  right: 0px;
 }
 .creation {
   width: 200px;

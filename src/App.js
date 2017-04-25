@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 // node_modules imports
-import Sidebar from 'react-sidebar'
 import Modal from 'react-modal'
 var Spinner = require('react-spinkit')
 
@@ -64,7 +63,7 @@ class App extends React.Component {
           backgroundColor       : 'whitesmoke'
         },
         overlay : {
-          display          : 'none'
+          zIndex          : '1000px'
         }
       }
       return (
@@ -110,17 +109,14 @@ class App extends React.Component {
   render() {
     return (
       <div className="app" onKeyDown={this.handleKeyDown}>
-        <NavBar handleSidebar={this.handleSidebar}/>
+        <NavBar handleSidebar={this.handleSidebar} sidebarOpen={this.state.sidebarOpen}/>
         <Drawers />
         <CurrentAddons />
-        <Sidebar sidebar={this.renderCreationList()}
-          open={this.state.sidebarOpen}
-          onSetOpen={this.onSetSidebarOpen}
-          children=''
-          pullRight
-          overlayClassName='creations-overlay'
-          sidebarClassName='creations-bar'
-        />
+        <div
+          className={'creations-bar' + (this.state.sidebarOpen ? ' open-sidebar' : '')}
+        >
+          {this.renderCreationList()}
+        </div>
         {this.renderWelcomeModal()}
         </div>
       );
