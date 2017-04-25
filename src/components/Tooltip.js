@@ -25,15 +25,21 @@ renderToolTip() {
 
 }
 
-	render(){
+	render() {
 		return(
-			<div className="tooltip">
-				<img data-tip className="keyboard-img" src="http://chas.ms/olio/keyboard.png" alt='keyboard shortcuts' />
+			<div className="nav-button">
+				<img
+					data-tip
+					className="keyboard-img"
+					src="http://chas.ms/olio/keyboard.svg"
+					alt='keyboard shortcuts'
+				/>
 				{this.renderToolTip()}
 			</div>
 		)
 	}
 }
+
 const mapStateToProps = (state) => {
     return {
       token: state.Accounts.token
