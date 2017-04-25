@@ -9,13 +9,14 @@ var Spinner = require('react-spinkit')
 
 // app imports
 import { addAddon, getAddons, deleteAllAddons } from './actions/addons'
-import { success, show, error } from './actions/notifications'
+import { success, error } from './actions/notifications'
 import { saveCreation, restoreCreation, getCreations, deleteCreation } from './actions/creations'
 import { getDrawers } from './actions/drawers'
 import { checkIfLoggedIn, logout } from './actions/accounts'
 import CurrentAddons from './components/CurrentAddons'
 import Drawers from './components/Drawers'
 import NavBar from './components/NavBar'
+import Sidebar from './components/Sidebar'
 import Delete from './components/Delete'
 import Welcome from './components/Welcome'
 import AppModal from './components/AppModal'
@@ -38,7 +39,6 @@ class App extends React.Component {
     if (this.props.token) { this.props.getCreations(this.props.token) }
     this.handleSidebar = this.handleSidebar.bind(this)
     this.toggleWelcomeModal = this.toggleWelcomeModal.bind(this)
-    this.handleRestoreCreation = this.handleRestoreCreation.bind(this)
     this.toggleWebcamModal = this.toggleWebcamModal.bind(this)
     this.handleSave = this.handleSave.bind(this)
     this.toggleSignupModal = this.toggleSignupModal.bind(this)
@@ -201,17 +201,15 @@ class App extends React.Component {
           toggleLoginModal={this.toggleLoginModal}
           toggleSaveModal={this.toggleSaveModal}
           toggleSignupModal={this.toggleSignupModal}
-          handleLogout={this.handleLogout}
           toggleWebcamModal={this.toggleWebcamModal}
           webcamActive={this.state.webcamActive}
-          toggleLoginModal={this.toggleLoginModal} />
+          handleLogout={this.handleLogout} />
         <AppModal
           handleSave={this.handleSave}
           webcamActive={this.state.webcamActive}
           loginModalOpen={this.state.loginModalOpen}
           signupModalOpen={this.state.signupModalOpen}
           saveModalOpen={this.state.saveModalOpen}
-          handleSave={this.handleSave}
           closeModal={this.closeModal}
           handleLogout={this.handleLogout}
           handleKeyDown={this.handleKeyDown} />
@@ -221,24 +219,9 @@ class App extends React.Component {
           sidebarOpen={this.state.sidebarOpen}
           toggleSaveModal={this.toggleSaveModal}
           toggleSignupModal={this.toggleSignupModal}
+          toggleLoginModal={this.toggleLoginModal}
           handleLogout={this.handleLogout}
         />
-        {/* <div
-          className={'creations-bar' + (this.state.sidebarOpen ? ' open-sidebar' : '')}
-        >
-          {this.props.token ? (
-            <div className='sidebar-buttons'>
-              <button className="btn" onClick={this.toggleSaveModal}>Save Creation</button>
-              <button className="btn" onClick={this.handleLogout}>Log Out</button>
-            </div> )
-              : (
-            <div className='sidebar-buttons'>
-              <button className="btn" onClick={this.toggleSignupModal}>Sign Up</button>
-              <button className="btn" onClick={this.toggleLoginModal}>Login</button>
-            </div> )
-          }
-          {this.renderCreationList()}
-        </div> */}
         {this.renderWelcomeModal()}
         </div>
       );
@@ -258,15 +241,15 @@ class App extends React.Component {
   const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
       getCreations: getCreations,
-      deleteCreation: deleteCreation,
-      deleteAllAddons: deleteAllAddons,
-      checkIfLoggedIn: checkIfLoggedIn,
-      logout: logout,
       saveCreation: saveCreation,
+      deleteCreation: deleteCreation,
+      restoreCreation: restoreCreation,
       addAddon: addAddon,
       getAddons: getAddons,
+      deleteAllAddons: deleteAllAddons,
       getDrawers: getDrawers,
-      restoreCreation: restoreCreation,
+      checkIfLoggedIn: checkIfLoggedIn,
+      logout: logout,
       success: success,
 			error: error
     }, dispatch);

@@ -3,11 +3,21 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
+// app imports
+import { saveCreation, restoreCreation, deleteCreation } from '../actions/creations'
+import { checkIfLoggedIn, logout } from '../actions/accounts'
+import Delete from './Delete'
 
 class Sidebar extends React.Component {
 
+  constructor() {
+    super()
+    this.handleRestoreCreation = this.handleRestoreCreation.bind(this)
+
+  }
+
   handleRestoreCreation(id, token) {
-    this.handleSidebar()
+    this.props.handleSidebar()
     this.props.restoreCreation(id, token)
   }
 
@@ -35,16 +45,16 @@ class Sidebar extends React.Component {
   render() {
     return (
       <div
-        className={'creations-bar' + (this.state.sidebarOpen ? ' open-sidebar' : '')} >
+        className={'creations-bar' + (this.props.sidebarOpen ? ' open-sidebar' : '')} >
         {this.props.token ? (
           <div className='sidebar-buttons'>
-            <button className="btn" onClick={this.toggleSaveModal}>Save Creation</button>
-            <button className="btn" onClick={this.handleLogout}>Log Out</button>
+            <button className="btn" onClick={this.props.toggleSaveModal}>Save Creation</button>
+            <button className="btn" onClick={this.props.handleLogout}>Log Out</button>
           </div> )
             : (
           <div className='sidebar-buttons'>
-            <button className="btn" onClick={this.toggleSignupModal}>Sign Up</button>
-            <button className="btn" onClick={this.toggleLoginModal}>Login</button>
+            <button className="btn" onClick={this.props.toggleSignupModal}>Sign Up</button>
+            <button className="btn" onClick={this.props.toggleLoginModal}>Login</button>
           </div> )
         }
         {this.renderCreationList()}
@@ -66,9 +76,6 @@ const mapDispatchToProps = (dispatch) => {
     checkIfLoggedIn: checkIfLoggedIn,
     logout: logout,
     saveCreation: saveCreation,
-    addAddon: addAddon,
-    getAddons: getAddons,
-    getDrawers: getDrawers,
     restoreCreation: restoreCreation,
   }, dispatch);
 }
