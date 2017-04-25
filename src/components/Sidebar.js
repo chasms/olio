@@ -66,6 +66,7 @@ class Sidebar extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
+    sidebarOpen: state.Modals.sidebar,
     token: state.Accounts.token,
     creations: state.Creations
   }

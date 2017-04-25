@@ -23,14 +23,10 @@ class App extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      welcomeModalOpen: true,
-    };
     this.props.getDrawers()
     this.props.getAddons()
     this.props.checkIfLoggedIn()
     if (this.props.token) { this.props.getCreations(this.props.token) }
-    this.handleSidebar = this.handleSidebar.bind(this)
     this.handleSave = this.handleSave.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
     this.handleKeyDown = this.handleKeyDown.bind(this)
@@ -59,30 +55,6 @@ class App extends React.Component {
   }
 
 
-  handleSidebar() {
-    this.setState({
-      sidebarOpen: !this.state.sidebarOpen
-    })
-    // this.props.restoreCreation(this.state.restoreId, this.props.token)
-  }
-
-  renderSaveButton() {
-		return this.props.token ? <button className="btn" onClick={this.toggleSaveModal}>Save Creation</button> : null
-	}
-
-	renderLogout() {
-		return this.props.token ? <button className="btn" onClick={this.handleLogout}>Log Out</button> : null
-	}
-
-	renderSignup() {
-		return !this.props.token ? <button className="btn" onClick={this.toggleSignupModal}>Sign Up</button> : null
-	}
-
-	renderLogin() {
-		return !this.props.token ? <button className="btn" onClick={this.toggleLoginModal}>Login</button> : null
-	}
-
-
   renderCreationList() {
     return this.props.creations.map((creation) => {
       return (
@@ -108,7 +80,6 @@ class App extends React.Component {
     return (
       <div className="app" onKeyDown={this.handleKeyDown}>
         <NavBar
-          sidebarOpen={this.state.sidebarOpen}
           handleSidebar={this.handleSidebar}
           handleSave={this.handleSave}
           handleLogout={this.handleLogout} />
@@ -119,7 +90,6 @@ class App extends React.Component {
         <Drawers loading={this.toggleWelcomeModal}/>
         <CurrentAddons />
         <Sidebar
-          sidebarOpen={this.state.sidebarOpen}
           handleLogout={this.handleLogout}
         />
         </div>

@@ -17,3 +17,7 @@ export const openSignupModal = () => ({
 export const closeAllModals = () => ({
   type: 'CLOSE_ALL'
 })
+
+export const toggleSidebar = () => ({
+  type: 'TOGGLE_SIDEBAR'
+})
