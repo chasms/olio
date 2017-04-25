@@ -45,25 +45,20 @@ class NavBar extends Component {
 			<button
 				className="btn"
 				onClick={this.props.toggleWebcamModal}
-			>
+				>
 
-				WEBCAM {this.props.webcamActive ? 'OFF' : 'ON' }
-			</button>
+					WEBCAM {this.props.webcamActive ? 'OFF' : 'ON' }
+				</button>
 		)
 	}
-				<Signup closeModal={this.closeModal} />
-				<button className="closeModal" onClick={this.closeModal}>close</button>
-			</Modal>
-			)
-		}
 
-		renderLoginModal(customStyles) {
-			if (!this.props.token)
-			return (
-				<Modal
-					isOpen={this.state.loginModalOpen}
-					contentLabel="Sign Up"
-					style={customStyles}
+	renderLoginModal(customStyles) {
+		if (!this.props.token)
+		return (
+			<Modal
+				isOpen={this.state.loginModalOpen}
+				contentLabel="Sign Up"
+				style={customStyles}
 				>
 					<Login closeModal={this.closeModal} />
 					<button className="closeModal" onClick={this.closeModal}>close</button>
@@ -77,79 +72,79 @@ class NavBar extends Component {
 					isOpen={this.state.webcamActive}
 					contentLabel="Sign Up"
 					style={customStyles}
-				>
-					<Photo handleToggle={this.toggleWebcamModal} />
-					<p>~ hit the spacebar to take a picture! ~</p>
-					<button className="closeModal" onClick={this.closeModal}>close</button>
-				</Modal>
-			)
-		}
+					>
+						<Photo handleToggle={this.toggleWebcamModal} />
+						<p>~ hit the spacebar to take a picture! ~</p>
+						<button className="closeModal" onClick={this.closeModal}>close</button>
+					</Modal>
+				)
+			}
 
-		modalStyles() {
-			return {
-				content : {
-					top                   : '50%',
-					left                  : '50%',
-					right                 : 'auto',
-					bottom                : 'auto',
-					marginRight           : '-50%',
-					transform             : 'translate(-50%, -50%)',
-					backgroundColor       : 'whitesmoke',
-					textAlign							: 'center'
-				},
-				overlay : {
-					zIndex	 			  : '10000'
+			modalStyles() {
+				return {
+					content : {
+						top                   : '50%',
+						left                  : '50%',
+						right                 : 'auto',
+						bottom                : 'auto',
+						marginRight           : '-50%',
+						transform             : 'translate(-50%, -50%)',
+						backgroundColor       : 'whitesmoke',
+						textAlign							: 'center'
+					},
+					overlay : {
+						zIndex	 			  : '10000'
+					}
 				}
 			}
-		}
 
-		renderWebcamButton() {
-			return (
-				<button
-					className="btn"
-					onClick={this.toggleWebcamModal}
-				>
-					WEBCAM {this.state.webcamActive ? 'OFF' : 'ON' }
-				</button>
-			)
-		}
+			renderWebcamButton() {
+				return (
+					<button
+						className="btn"
+						onClick={this.toggleWebcamModal}
+						>
+							WEBCAM {this.props.webcamActive ? 'OFF' : 'ON' }
+						</button>
+					)
+				}
 
-		render(){
-			return(
-					<div className="btn-bar">
-						<Notifications notifications={this.props.notifications} />
-						<Tooltip />
-						{this.renderWebcamButton()}
-						{this.renderSaveButton()}
-						{this.renderSignup()}
-						{this.renderLogin()}
-						{this.renderLogout()}
-						{this.renderRestore()}
-					</div>
-			)
-		}
-	}
+				render(){
+					return(
+						<div className="btn-bar">
+							<Notifications notifications={this.props.notifications} />
+							<Tooltip />
+							{this.renderWebcamButton()}
+							{this.renderSaveButton()}
+							{this.renderSignup()}
+							{this.renderLogin()}
+							{this.renderLogout()}
+							{this.renderRestore()}
+						</div>
+					)
+				}
+			}
 
-	const mapStateToProps = (state) => {
-		return {
-			currentCreation: state.CurrentCreation,
-			notifications: state.Notifications,
-			token: state.Accounts.token,
-			usedAddons: state.Addon
-		}
-	}
+			const mapStateToProps = (state) => {
+				return {
+					currentCreation: state.CurrentCreation,
+					notifications: state.Notifications,
+					token: state.Accounts.token,
+					usedAddons: state.Addon
+				}
+			}
 
-	const mapDispatchToProps = (dispatch) => {
-		return bindActionCreators({
-			success: success,
-			error: error,
-			deleteAllAddons: deleteAllAddons,
-			logout: logout,
-			saveCreation: saveCreation,
-			addAddon: addAddon,
-			restoreCreation: restoreCreation,
-			saveCreation: saveCreation,
-		}, dispatch);
-	}
+			const mapDispatchToProps = (dispatch) => {
+				return bindActionCreators({
+					success: success,
+					error: error,
+					deleteAllAddons: deleteAllAddons,
+					logout: logout,
+					saveCreation: saveCreation,
+					addAddon: addAddon,
+					restoreCreation: restoreCreation,
+					saveCreation: saveCreation,
+				}, dispatch);
+			}
 
-	export default connect(mapStateToProps, mapDispatchToProps)(NavBar)
+			export default connect(mapStateToProps, mapDispatchToProps)(NavBar)

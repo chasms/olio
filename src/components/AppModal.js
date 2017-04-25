@@ -10,6 +10,7 @@ import Modal from 'react-modal';
 import { logout } from '../actions/accounts'
 import { saveCreation } from '../actions/creations'
 import { success, show, error } from '../actions/notifications'
+import { finishedLoading } from '../actions/loading'
 import Signup from './Signup'
 import Login from './Login'
 import Save from './Save'
@@ -61,10 +62,9 @@ class AppModal extends Component {
         }
 
         renderWebcamModal(customStyles) {
-          debugger
+
           return (
             <Modal
-
               isOpen={this.props.webcamActive}
               contentLabel="Webcam"
               style={customStyles}
@@ -120,6 +120,7 @@ class AppModal extends Component {
 
         const mapDispatchToProps = (dispatch) => {
           return bindActionCreators({
+            finishedLoading: finishedLoading,
             logout: logout,
             saveCreation: saveCreation
           }, dispatch);

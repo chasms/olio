@@ -116,7 +116,6 @@ class App extends React.Component {
     } else if (e.ctrlKey & e.which === 83) {
       this.toggleSaveModal()
     }
-
   }
 
   toggleWelcomeModal() {
@@ -193,14 +192,9 @@ class App extends React.Component {
     return (
       <div className="app" onKeyDown={this.handleKeyDown}>
 
-
         <NavBar handleSidebar={this.handleSidebar} handleSave={this.handleSave} toggleLoginModal={this.toggleLoginModal} toggleSaveModal={this.toggleSaveModal} toggleSignupModal={this.toggleSignupModal} handleLogout={this.handleLogout} toggleWebcamModal={this.toggleWebcamModal} webcamActive={this.state.webcamActive} toggleLoginModal={this.toggleLoginModal} />
         <AppModal handleSave={this.handleSave} webcamActive={this.state.webcamActive} loginModalOpen={this.state.loginModalOpen} signupModalOpen={this.state.signupModalOpen} saveModalOpen={this.state.saveModalOpen} handleSave={this.handleSave} closeModal={this.closeModal} handleLogout={this.handleLogout} handleKeyDown={this.handleKeyDown} />
         <Drawers loading={this.toggleWelcomeModal}/>
-=======
-        <NavBar handleSidebar={this.handleSidebar}/>
-        <Drawers />
-
         <CurrentAddons />
         <Sidebar sidebar={this.renderCreationList()}
           open={this.state.sidebarOpen}
@@ -238,7 +232,6 @@ class App extends React.Component {
       getAddons: getAddons,
       getDrawers: getDrawers,
       restoreCreation: restoreCreation,
-
       success: success,
 			error: error
     }, dispatch);
