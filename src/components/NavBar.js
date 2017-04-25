@@ -20,9 +20,7 @@ class NavBar extends Component {
 		return(
 			<div className="nav">
 				<Notifications notifications={this.props.notifications} />
-				<WebcamButton
-					toggleWebcamModal={this.props.toggleWebcamModal}
-					webcamActive={this.props.webcamActive} />
+				<WebcamButton />
 				<Tooltip />
 				<div
 					className={'nav-button sidebar-handle' + (this.props.sidebarOpen ? ' open-sidebar-handle' : '')}

@@ -1,5 +1,5 @@
-export const openWebcamModal = () => ({
-  type: 'OPEN_WEBCAM'
+export const toggleWebcamModal = () => ({
+  type: 'TOGGLE_WEBCAM'
 })
 
 export const openSaveModal = () => ({
