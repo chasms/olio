@@ -4,9 +4,10 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 // app imports
-import { openLoginModal, openSignupModal, openSaveModal, toggleSidebar } from '../actions/modals'
+import { toggleSidebar } from '../actions/modals'
 import { saveCreation, restoreCreation, deleteCreation } from '../actions/creations'
 import { checkIfLoggedIn, logout } from '../actions/accounts'
+import { switchForm } from '../actions/forms'
 import Delete from './Delete'
 import Signup from './Signup'
 import Login from './Login'
@@ -45,7 +46,26 @@ class Sidebar extends React.Component {
   }
 
   renderLoginSignup() {
+    return (
+      <div className='registration-forms'>
+        { this.props.loginForm ?
+          <Login />
+          :
+          <Signup />
+        }
+      </div>
+    )
+  }
 
+  renderSignedIn() {
+    return (
+      <div className="signed-in">
+        <div className='sidebar-buttons'>
+          <button className="btn" onClick={this.props.handleLogout}>Log Out</button>
+        </div>
+        { this.renderCreationList() }
+      </div>
+    )
   }
 
   render() {
@@ -53,17 +73,7 @@ class Sidebar extends React.Component {
       <div
         className={'sidebar' + (this.props.sidebarOpen ? ' open-sidebar' : '')} >
         <h1>Olio</h1>
-        {this.props.token ? (
-          <div className='sidebar-buttons'>
-            <button className="btn" onClick={this.props.handleLogout}>Log Out</button>
-          </div> )
-            : (
-          <div className='sidebar-buttons'>
-            <Signup />
-            <Login />
-          </div> )
-        }
-        {this.renderCreationList()}
+        { this.props.token ? this.renderSignedIn() : this.renderLoginSignup() }
       </div>
     )
   }
@@ -83,6 +93,7 @@ const mapDispatchToProps = (dispatch) => {
     toggleSidebar: toggleSidebar,
     deleteCreation: deleteCreation,
     checkIfLoggedIn: checkIfLoggedIn,
+    switchForm: switchForm,
     logout: logout,
     saveCreation: saveCreation,
     restoreCreation: restoreCreation,

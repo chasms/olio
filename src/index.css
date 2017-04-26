@@ -19,6 +19,9 @@ h1 {
   font-family: monospace;
   text-decoration: underline;
 }
+h3 {
+  font-family: monospace;
+}
 .app {
   height: 100%;
   width: 100%;
@@ -135,6 +138,7 @@ ReactTooltip {
 }
 .form-item {
   margin: 15px;
+  font-family: monospace;
   display: block;
   height: 25px;
   width: 200px;
@@ -148,13 +152,13 @@ ReactTooltip {
   border: none;
   border-bottom: 1px solid silver;
   outline: none;
-  background-color: whitesmoke;
+  background-color: transparent;
 }
 .form-input:hover {
   border: none;
   border-bottom: 1px solid black;
 }
-.form-input:active {
+.form-input:focus {
   border: none;
   border-bottom: 1px solid black;
 }
