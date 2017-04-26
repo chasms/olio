@@ -46,7 +46,8 @@ class Sidebar extends React.Component {
   render() {
     return (
       <div
-        className={'creations-bar' + (this.props.sidebarOpen ? ' open-sidebar' : '')} >
+        className={'sidebar' + (this.props.sidebarOpen ? ' open-sidebar' : '')} >
+        <h1>Olio</h1>
         {this.props.token ? (
           <div className='sidebar-buttons'>
             <button className="btn" onClick={this.props.handleLogout}>Log Out</button>

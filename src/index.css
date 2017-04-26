@@ -15,6 +15,10 @@ body {
 p {
   font-family: monospace;
 }
+h1 {
+  font-family: monospace;
+  text-decoration: underline;
+}
 .app {
   height: 100%;
   width: 100%;
@@ -66,7 +70,6 @@ p {
 ReactTooltip {
   text-align: center;
 }
-
 .sidebar-handle {
   float: right;
   height: 10px;
@@ -108,7 +111,7 @@ ReactTooltip {
   fill: skyblue;
 }
 .save-button {
-  
+
 }
 
 /*	Notifications
@@ -525,7 +528,8 @@ textarea:-ms-input-placeholder {
 
 /*  Creations
 ==================================================*/
-.creations-bar {
+.sidebar {
+  text-align: center;
   position: fixed;
   padding-bottom: 25px;
   background-color: rgba(245, 245, 245, 0.6) !important;
