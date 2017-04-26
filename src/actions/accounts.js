@@ -44,13 +44,13 @@ export const login = (details) => {
 export const logout = () => {
   return (dispatch) => {
     dispatch({type: 'REMOVE_TOKEN'})
+    dispatch({type: 'RESET_LOGIN_FORM'})
     dispatch({type: 'CLEAR_CREATIONS'})
     dispatch(error(logoutAlert))
   }
 }
 
 export const checkIfLoggedIn = () => {
-
   return {
     type: 'SET_TOKEN',
     payload: {token: localStorage.getItem('token')}

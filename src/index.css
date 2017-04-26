@@ -19,6 +19,22 @@ h1 {
   font-family: monospace;
   text-decoration: underline;
 }
+h3 {
+  font-family: monospace;
+}
+a {
+  font-family: monospace;
+  text-decoration: none;
+  color: skyblue;
+  transition: color .5s ease-in-out;
+  -webkit-transition: color .5s ease-in-out;
+  -moz-transition: color .5s ease-in-out;
+  -o-transition: color .5s ease-in-out;
+  -ms-transition: color .5s ease-in-out;
+}
+a:hover {
+  color: purple;
+}
 .app {
   height: 100%;
   width: 100%;
@@ -26,10 +42,9 @@ h1 {
 }
 .workspace {
   /*position: relative;*/
-  height: 96%;
+  height: 100%;
   width: 100%;
-  padding-top: 50px;
-  padding-bottom: 4%;
+  padding-bottom: 25px;
   display: block;
   z-index: -40;
   -webkit-user-select: none; /* Chrome/Safari */
@@ -111,7 +126,6 @@ h1 {
   fill: skyblue;
 }
 .save-button {
-
 }
 
 /*	Notifications
@@ -137,6 +151,7 @@ h1 {
 }
 .form-item {
   margin: 15px;
+  font-family: monospace;
   display: block;
   height: 25px;
   width: 200px;
@@ -150,13 +165,13 @@ h1 {
   border: none;
   border-bottom: 1px solid silver;
   outline: none;
-  background-color: whitesmoke;
+  background-color: transparent;
 }
 .form-input:hover {
   border: none;
   border-bottom: 1px solid black;
 }
-.form-input:active {
+.form-input:focus {
   border: none;
   border-bottom: 1px solid black;
 }

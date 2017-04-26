@@ -6,7 +6,8 @@ import Accounts from './AccountReducer'
 import Creations from './CreationReducer'
 import Loading from './LoadingReducer'
 import CurrentCreation from './CurrentCreationReducer'
-import Modals from './ModalReducer'
+import Modals from './ModalsReducer'
+import Forms from './FormsReducer'
 import {reducer as Notifications} from 'react-notification-system-redux';
 
 
@@ -19,5 +20,6 @@ export default combineReducers({
   Notifications,
   Loading,
   CurrentCreation,
-  Modals
+  Modals,
+  Forms
 })

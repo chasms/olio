@@ -4,17 +4,18 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 // app imports
-import { openLoginModal, openSignupModal, openSaveModal, toggleSidebar } from '../actions/modals'
+import { toggleSidebar } from '../actions/modals'
 import { saveCreation, restoreCreation, deleteCreation } from '../actions/creations'
 import { checkIfLoggedIn, logout } from '../actions/accounts'
 import Delete from './Delete'
+import Signup from './Signup'
+import Login from './Login'
 
 class Sidebar extends React.Component {
 
   constructor() {
     super()
     this.handleRestoreCreation = this.handleRestoreCreation.bind(this)
-
   }
 
   handleRestoreCreation(id, token) {
@@ -43,22 +44,35 @@ class Sidebar extends React.Component {
     })
   }
 
+  renderLoginSignup() {
+    return (
+      <div className='registration-forms'>
+        { this.props.loginForm ?
+          <Login />
+          :
+          <Signup />
+        }
+      </div>
+    )
+  }
+
+  renderSignedIn() {
+    return (
+      <div className="signed-in">
+        <div className='sidebar-buttons'>
+          <button className="btn" onClick={this.props.handleLogout}>Log Out</button>
+        </div>
+        { this.renderCreationList() }
+      </div>
+    )
+  }
+
   render() {
     return (
       <div
         className={'sidebar' + (this.props.sidebarOpen ? ' open-sidebar' : '')} >
         <h1>Olio</h1>
-        {this.props.token ? (
-          <div className='sidebar-buttons'>
-            <button className="btn" onClick={this.props.handleLogout}>Log Out</button>
-          </div> )
-            : (
-          <div className='sidebar-buttons'>
-            <button className="btn" onClick={this.props.openSignupModal}>Sign Up</button>
-            <button className="btn" onClick={this.props.openLoginModal}>Login</button>
-          </div> )
-        }
-        {this.renderCreationList()}
+        { this.props.token ? this.renderSignedIn() : this.renderLoginSignup() }
       </div>
     )
   }
@@ -66,17 +80,15 @@ class Sidebar extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    sidebarOpen: state.Modals.sidebar,
+    loginForm: state.Forms.loginForm,
     token: state.Accounts.token,
+    sidebarOpen: state.Modals.sidebar,
     creations: state.Creations
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    openSaveModal: openSaveModal,
-    openLoginModal: openLoginModal,
-    openSignupModal: openSignupModal,
     toggleSidebar: toggleSidebar,
     deleteCreation: deleteCreation,
     checkIfLoggedIn: checkIfLoggedIn,

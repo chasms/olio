@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux'
 
 // app imports
 import { login } from '../actions/accounts'
+import { switchForm } from '../actions/forms'
 import { closeAllModals } from '../actions/modals'
 
 class Login extends React.Component {
@@ -17,6 +18,7 @@ class Login extends React.Component {
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleFormSwitch = this.handleFormSwitch.bind(this)
   }
 
   handleChange(e) {
@@ -30,15 +32,36 @@ class Login extends React.Component {
     this.props.login(this.state)
     this.props.closeAllModals()
   }
-  render() {
 
+  handleFormSwitch(e) {
+    e.preventDefault()
+    this.props.switchForm()
+  }
+
+  render() {
     return (
       <div className="login">
         <form onSubmit={this.handleSubmit}>
-          <input className="form-input form-item" placeholder="Username" type='text' onChange={this.handleChange} name='username' />
-          <input className="form-input form-item" placeholder="Password" type='password' onChange={this.handleChange} name='password' />
-          <input className="form-submit form-item" type='submit' value="Login to Your Account" />
+          <h3>Login!</h3>
+          <input
+            className="form-input form-item"
+            placeholder="Username"
+            type='text'
+            onChange={this.handleChange}
+            name='username' />
+          <input
+            className="form-input form-item"
+            placeholder="Password"
+            type='password'
+            onChange={this.handleChange}
+            name='password' />
+          <input
+            className="form-submit form-item"
+            type='submit'
+            value="Login to Your Account" />
         </form>
+        <p>Don't have an Olio account?</p>
+        <a href='#' onClick={this.handleFormSwitch}>Signup!</a>
       </div>
     )
   }
@@ -48,7 +71,8 @@ class Login extends React.Component {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     closeAllModals: closeAllModals,
-    login: login
+    login: login,
+    switchForm: switchForm
   }, dispatch);
 }
 
