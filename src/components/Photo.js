@@ -7,6 +7,7 @@ import { bindActionCreators } from 'redux'
 import Webcam from 'react-webcam';
 
 // app imports
+import { closeAllModals } from '../actions/modals'
 import { addAddon } from '../actions/addons'
 
 class Photo extends React.Component {
@@ -28,7 +29,7 @@ class Photo extends React.Component {
       initial_width: 400,
       category: 'photo'
     })
-    this.props.closeModal()
+
 
   }
 
@@ -36,6 +37,7 @@ class Photo extends React.Component {
     if (e.which === 32) {
       e.preventDefault()
       this.handleScreenshot()
+      this.props.closeAllModals()
 
     }
   }
@@ -59,6 +61,7 @@ class Photo extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
+    closeAllModals: closeAllModals,
     addAddon: addAddon
   }, dispatch);
 }
