@@ -7,7 +7,6 @@ import { bindActionCreators } from 'redux'
 import { toggleSidebar } from '../actions/modals'
 import { saveCreation, restoreCreation, deleteCreation } from '../actions/creations'
 import { checkIfLoggedIn, logout } from '../actions/accounts'
-import { switchForm } from '../actions/forms'
 import Delete from './Delete'
 import Signup from './Signup'
 import Login from './Login'
@@ -81,7 +80,7 @@ class Sidebar extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    loginForm: state.Accounts.loginForm,
+    loginForm: state.Forms.loginForm,
     token: state.Accounts.token,
     sidebarOpen: state.Modals.sidebar,
     creations: state.Creations
@@ -93,7 +92,6 @@ const mapDispatchToProps = (dispatch) => {
     toggleSidebar: toggleSidebar,
     deleteCreation: deleteCreation,
     checkIfLoggedIn: checkIfLoggedIn,
-    switchForm: switchForm,
     logout: logout,
     saveCreation: saveCreation,
     restoreCreation: restoreCreation,

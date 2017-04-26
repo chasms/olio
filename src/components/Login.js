@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux'
 
 // app imports
 import { login } from '../actions/accounts'
+import { switchForm } from '../actions/forms'
 import { closeAllModals } from '../actions/modals'
 
 class Login extends React.Component {
@@ -53,6 +54,8 @@ class Login extends React.Component {
             type='submit'
             value="Login to Your Account" />
         </form>
+        <p>Don't have an Olio account?</p>
+        <a href='#' onClick={this.handleFormSwitch}>Signup!</a>
       </div>
     )
   }
@@ -62,7 +65,8 @@ class Login extends React.Component {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     closeAllModals: closeAllModals,
-    login: login
+    login: login,
+    switchForm: switchForm
   }, dispatch);
 }
 
