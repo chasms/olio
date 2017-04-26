@@ -8,7 +8,6 @@ export default function Account(state = {
       localStorage.removeItem('token')
       return {}
     case 'SET_ACCOUNT_DETAILS':
-    debugger
       return Object.assign({}, state, action.payload )
     default:
       return state
