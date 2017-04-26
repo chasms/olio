@@ -250,18 +250,16 @@ class Keyboard extends Component {
 	}
 
 	renderToolTip() {
-		return ( !this.props.token ? (
-			<ReactTooltip place="bottom" type="dark" effect="float">
+		return (
+			<ReactTooltip
+				className="tooltip"
+				place="bottom"
+				type="dark"
+				effect="float">
 				<p>Webcam: ctrl + w</p>
 				<p>Delete: ctrl + d</p>
-				<p>SignUp or Login to save!</p>
-			</ReactTooltip> )
-			: (
-			<ReactTooltip place="bottom" type="dark" effect="float">
-				<p>Webcam: ctrl + w</p>
-				<p>Delete: ctrl + d</p>
-				<p>Save: ctrl + s</p>
-			</ReactTooltip> )
+				{!this.props.token ? <p>SignUp or Login to save!</p> : <p>Save: ctrl + s</p> }
+			</ReactTooltip>
 		)
 	}
 
