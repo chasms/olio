@@ -8,6 +8,10 @@ import {
   signupSuccess,
   loginSuccess } from './consts'
 
+export const switchForm = () => ({
+  type: 'SWITCH_FORM'
+})
+
 export const signup = (details) => {
   return (dispatch) => {
     axios.post(api + '/signup/', details)
@@ -44,6 +48,7 @@ export const login = (details) => {
 export const logout = () => {
   return (dispatch) => {
     dispatch({type: 'REMOVE_TOKEN'})
+    dispatch({type: 'RESET_LOGIN_FORM'})
     dispatch({type: 'CLEAR_CREATIONS'})
     dispatch(error(logoutAlert))
   }

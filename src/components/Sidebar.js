@@ -8,13 +8,14 @@ import { openLoginModal, openSignupModal, openSaveModal, toggleSidebar } from '.
 import { saveCreation, restoreCreation, deleteCreation } from '../actions/creations'
 import { checkIfLoggedIn, logout } from '../actions/accounts'
 import Delete from './Delete'
+import Signup from './Signup'
+import Login from './Login'
 
 class Sidebar extends React.Component {
 
   constructor() {
     super()
     this.handleRestoreCreation = this.handleRestoreCreation.bind(this)
-
   }
 
   handleRestoreCreation(id, token) {
@@ -43,6 +44,10 @@ class Sidebar extends React.Component {
     })
   }
 
+  renderLoginSignup() {
+
+  }
+
   render() {
     return (
       <div
@@ -54,8 +59,8 @@ class Sidebar extends React.Component {
           </div> )
             : (
           <div className='sidebar-buttons'>
-            <button className="btn" onClick={this.props.openSignupModal}>Sign Up</button>
-            <button className="btn" onClick={this.props.openLoginModal}>Login</button>
+            <Signup />
+            <Login />
           </div> )
         }
         {this.renderCreationList()}
@@ -66,17 +71,15 @@ class Sidebar extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    sidebarOpen: state.Modals.sidebar,
+    loginForm: state.Accounts.loginForm,
     token: state.Accounts.token,
+    sidebarOpen: state.Modals.sidebar,
     creations: state.Creations
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    openSaveModal: openSaveModal,
-    openLoginModal: openLoginModal,
-    openSignupModal: openSignupModal,
     toggleSidebar: toggleSidebar,
     deleteCreation: deleteCreation,
     checkIfLoggedIn: checkIfLoggedIn,
