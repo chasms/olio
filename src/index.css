@@ -186,9 +186,12 @@ a:hover {
   color: silver;
   outline: none;
 }
+.full-form-submit {
+
+}
 .form-submit:hover {
-  border-color: black;
-  color: dimgrey;
+  border-color: skyblue;
+  color: skyblue;
 }
 ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
   color:    silver;
