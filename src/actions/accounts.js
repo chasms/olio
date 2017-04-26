@@ -8,10 +8,6 @@ import {
   signupSuccess,
   loginSuccess } from './consts'
 
-export const switchForm = () => ({
-  type: 'SWITCH_FORM'
-})
-
 export const signup = (details) => {
   return (dispatch) => {
     axios.post(api + '/signup/', details)
@@ -55,7 +51,6 @@ export const logout = () => {
 }
 
 export const checkIfLoggedIn = () => {
-
   return {
     type: 'SET_TOKEN',
     payload: {token: localStorage.getItem('token')}

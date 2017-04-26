@@ -1,6 +1,5 @@
 export default function Account(state = {
-  token: localStorage.getItem('token'),
-  loginForm: true,
+  token: localStorage.getItem('token')
 }, action){
   switch (action.type) {
     case 'SET_TOKEN':
