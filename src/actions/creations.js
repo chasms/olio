@@ -32,6 +32,7 @@ export const updateCreation = (addons, title, id, token) => {
       }
     }).then(resp => {
       dispatch(success(saveSuccess))
+      dispatch({type: 'SET_CURRENT_CREATION', payload: {id: resp.data[resp.data.length-1].id, title: resp.data[resp.data.length-1].title}})
       dispatch({type: 'GET_CREATIONS', payload: resp.data})
     })
   }
