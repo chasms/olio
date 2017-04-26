@@ -63,10 +63,10 @@ p {
   height:100%;
   width: 100%;
 }
-.toolTipInfoText {
-  float: left;
-  margin: 15px;
+ReactTooltip {
+  text-align: center;
 }
+
 .sidebar-handle {
   float: right;
   height: 10px;
