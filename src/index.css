@@ -67,7 +67,7 @@ h1 {
   height:100%;
   width: 100%;
 }
-ReactTooltip {
+.tooltip {
   text-align: center;
 }
 .sidebar-handle {
