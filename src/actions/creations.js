@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { api } from './api'
 import { success, error } from './notifications'
-import { saveSuccess, deleteSuccess } from './consts'
+import { saveSuccess, deleteSuccess, updateSuccess } from './consts'
 export const saveCreation = (addons, title, token) => {
   return (dispatch) => {
     axios({
@@ -31,7 +31,7 @@ export const updateCreation = (addons, title, id, token) => {
         title: title
       }
     }).then(resp => {
-      dispatch(success(saveSuccess))
+      dispatch(success(updateSuccess))
       dispatch({type: 'SET_CURRENT_CREATION', payload: {id: resp.data[resp.data.length-1].id, title: resp.data[resp.data.length-1].title}})
       dispatch({type: 'GET_CREATIONS', payload: resp.data})
     })

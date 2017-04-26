@@ -72,7 +72,7 @@ class Sidebar extends React.Component {
       <div
         className={'sidebar' + (this.props.sidebarOpen ? ' open-sidebar' : '')} >
         <h1>Olio</h1>
-        { this.props.token ? <h4>{this.props.username}</h4> : null }
+        { this.props.token ? <h4> {this.props.username}</h4> : null }
         { this.props.token ? this.renderSignedIn() : this.renderLoginSignup() }
       </div>
     )
