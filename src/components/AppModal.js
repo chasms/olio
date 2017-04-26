@@ -88,8 +88,6 @@ class AppModal extends Component {
               {this.renderWelcomeModal(customStyles)}
               {this.renderWebcamModal(customStyles)}
               {this.renderSaveModal(customStyles)}
-              {this.renderSignupModal(customStyles)}
-              {this.renderLoginModal(customStyles)}
             </div>
           </div>
         )
