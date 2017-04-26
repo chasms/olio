@@ -4,17 +4,18 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 // app imports
-import { saveCreation } from '../actions/creations'
+import { saveCreation, updateCreation } from '../actions/creations'
 import { closeAllModals } from '../actions/modals'
 class Save extends React.Component {
 
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
-      title: '',
+      title: this.props.currentCreation ? this.props.currentCreation.title : '',
     }
     this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleSaveClick = this.handleSaveClick.bind(this)
+    this.handleUpdateClick = this.handleUpdateClick.bind(this)
   }
 
   handleChange(e) {
@@ -23,19 +24,23 @@ class Save extends React.Component {
     })
   }
 
-  handleSubmit(e) {
+  handleSaveClick(e) {
     e.preventDefault()
     this.props.saveCreation(this.props.usedAddons, this.state.title, this.props.token)
+    this.props.closeModal()
+  }
+  handleUpdateClick(e) {
+    e.preventDefault()
+    this.props.updateCreation(this.props.usedAddons, this.state.title, this.props.currentCreation.id, this.props.token)
     this.props.closeModal()
   }
   render() {
 
     return (
       <div className="save">
-        <form onSubmit={this.handleSubmit}>
-          <input className="form-input form-item" placeholder="Give your creation a title" type='text' onChange={this.handleChange} name='title' />
-          <input className="form-submit form-item" type='submit' value="Save Creation" />
-        </form>
+        <input className="form-input form-item" placeholder="Give your creation a title" type='text' onChange={this.handleChange} name='title' value={this.state.title} />
+        {this.props.currentCreation ? <input className="form-submit form-item" type='submit' value="Update your Creation" onClick={this.handleUpdateClick} /> : null}
+        <input className="form-submit form-item" type='submit' value="Save as a New Creation" onClick={this.handleSaveClick} />
       </div>
     )
   }
@@ -45,7 +50,8 @@ class Save extends React.Component {
 const mapStateToProps = (state) => {
   return {
     token: state.Accounts.token,
-    usedAddons: state.Addon
+    usedAddons: state.Addon,
+    currentCreation: state.CurrentCreation
   }
 }
 
@@ -54,7 +60,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     closeModal: closeAllModals,
-    saveCreation: saveCreation
+    saveCreation: saveCreation,
+    updateCreation: updateCreation
   }, dispatch);
 }
 
