@@ -49,7 +49,6 @@ class Sidebar extends React.Component {
         className={'creations-bar' + (this.props.sidebarOpen ? ' open-sidebar' : '')} >
         {this.props.token ? (
           <div className='sidebar-buttons'>
-            <button className="btn" onClick={this.props.openSaveModal}>Save Creation</button>
             <button className="btn" onClick={this.props.handleLogout}>Log Out</button>
           </div> )
             : (

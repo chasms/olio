@@ -96,18 +96,19 @@ p {
   -o-transition: all .25s ease-in-out;
   -ms-transition: all .25s ease-in-out;
   transition: all .25s ease-in-out;
-}
-.nav-svg:hover {
-  fill: skyblue;
-}
-.webcam-button {
   position: inherit;
   height: 100%;
   width: 100%;
   fill: black;
 }
-.webcam-active {
+.nav-svg:hover {
   fill: skyblue;
+}
+.svg-active {
+  fill: skyblue;
+}
+.save-button {
+  
 }
 
 /*	Notifications

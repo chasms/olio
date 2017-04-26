@@ -3,7 +3,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { toggleWebcamModal, closeAllModals } from '../actions/modals'
+import { toggleWebcamModal } from '../actions/modals'
 
 class WebcamButton extends React.Component{
 
@@ -15,7 +15,7 @@ class WebcamButton extends React.Component{
           x="0px"
           y="0px"
           viewBox="0 0 347.846 347.846"
-          className={'nav-svg webcam-button' + (this.props.webcamActive ? ' webcam-active' : '') }
+          className={'nav-svg webcam-button' + (this.props.webcamActive ? ' svg-active' : '') }
           onClick={this.props.toggleWebcamModal}>
           <g>
             <g>
@@ -50,8 +50,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    toggleWebcamModal: toggleWebcamModal,
-    closeAllModals: closeAllModals
+    toggleWebcamModal: toggleWebcamModal
   }, dispatch);
 }
 
