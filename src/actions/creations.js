@@ -38,7 +38,7 @@ export const updateCreation = (addons, title, id, token) => {
   }
 }
 
-export const deleteCreation = (id, token) => {
+export const deleteCreation = (id, title, token) => {
   return (dispatch) => {
 
     axios({
@@ -47,7 +47,7 @@ export const deleteCreation = (id, token) => {
       headers: { 'AUTHORIZATION': `Bearer ${token}`},
     }).then(resp => {
       dispatch({type: 'GET_CREATIONS', payload: resp.data})
-      dispatch(error(deleteSuccess(id)))
+      dispatch(error(deleteSuccess(title)))
     })
   }
 }

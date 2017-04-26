@@ -10,7 +10,7 @@ import { addAddon, getAddons, deleteAllAddons } from './actions/addons'
 import { success, error } from './actions/notifications'
 import { saveCreation, restoreCreation, getCreations, deleteCreation } from './actions/creations'
 import { getDrawers } from './actions/drawers'
-import { checkIfLoggedIn, logout } from './actions/accounts'
+import { checkIfLoggedIn, logout, getAccountDetails } from './actions/accounts'
 import { toggleWebcamModal, openSaveModal } from './actions/modals'
 import CurrentAddons from './components/CurrentAddons'
 import Drawers from './components/Drawers'
@@ -26,7 +26,10 @@ class App extends React.Component {
     this.props.getDrawers()
     this.props.getAddons()
     this.props.checkIfLoggedIn()
-    if (this.props.token) { this.props.getCreations(this.props.token) }
+    if (this.props.token) {
+      this.props.getAccountDetails(this.props.token)
+      this.props.getCreations(this.props.token)
+    }
     this.handleSave = this.handleSave.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
     this.handleKeyDown = this.handleKeyDown.bind(this)
@@ -107,6 +110,7 @@ class App extends React.Component {
 
   const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
+      getAccountDetails: getAccountDetails,
       getCreations: getCreations,
       saveCreation: saveCreation,
       deleteCreation: deleteCreation,
