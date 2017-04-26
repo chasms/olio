@@ -23,7 +23,17 @@ h3 {
   font-family: monospace;
 }
 a {
-  
+  font-family: monospace;
+  text-decoration: none;
+  color: skyblue;
+  transition: color .5s ease-in-out;
+  -webkit-transition: color .5s ease-in-out;
+  -moz-transition: color .5s ease-in-out;
+  -o-transition: color .5s ease-in-out;
+  -ms-transition: color .5s ease-in-out;
+}
+a:hover {
+  color: purple;
 }
 .app {
   height: 100%;

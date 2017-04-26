@@ -3,7 +3,7 @@ export default function Forms(state = {
 }, action){
   switch (action.type) {
     case 'SWITCH_FORM':
-      return { loginForm: !this.state.Account.loginForm }
+      return { loginForm: !state.loginForm }
     case 'RESET_LOGIN_FORM':
       return { loginForm: true }
     default:

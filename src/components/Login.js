@@ -18,6 +18,7 @@ class Login extends React.Component {
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleFormSwitch = this.handleFormSwitch.bind(this)
   }
 
   handleChange(e) {
@@ -31,8 +32,13 @@ class Login extends React.Component {
     this.props.login(this.state)
     this.props.closeAllModals()
   }
-  render() {
 
+  handleFormSwitch(e) {
+    e.preventDefault()
+    this.props.switchForm()
+  }
+
+  render() {
     return (
       <div className="login">
         <form onSubmit={this.handleSubmit}>
