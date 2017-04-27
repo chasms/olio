@@ -72,5 +72,9 @@ import {
       .then((resp) => {
         dispatch({type: 'SET_ACCOUNT_DETAILS', payload: resp.data})
       })
+      .catch(e) {
+        dispatch({type: 'REMOVE_TOKEN'})
+        localStorage.removeItem('token')
+      }
     }
   }
