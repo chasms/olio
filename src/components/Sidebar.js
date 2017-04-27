@@ -60,8 +60,13 @@ class Sidebar extends React.Component {
     return (
       <div className="signed-in">
         <div className='sidebar-buttons'>
-          <button className="btn" onClick={this.props.handleLogout}>Log Out</button>
+          <button
+            className="btn logout-btn"
+            onClick={this.props.handleLogout}>
+            Log Out
+          </button>
         </div>
+        <h3>Your Creations:</h3>
         { this.renderCreationList() }
       </div>
     )
