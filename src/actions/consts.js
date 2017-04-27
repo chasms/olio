@@ -49,7 +49,7 @@ export const updateSuccess = {
 
 export const deleteSuccess = (title) => ({
   title: 'Deleted Creation!',
-  message: 'You have deleted' + title,
+  message: 'You have deleted ' + title,
   position: 'tc',
   autoDismiss: 3
 })
