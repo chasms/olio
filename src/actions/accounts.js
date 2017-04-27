@@ -15,6 +15,7 @@ import {
         localStorage.setItem('token', resp.data.token)
         dispatch({type: 'SET_TOKEN', payload: resp.data})
         dispatch({type: 'SET_ACCOUNT_DETAILS', payload: { username: resp.data.account }})
+        dispatch({type: 'GET_CREATIONS', payload: resp.data.creations })
         dispatch(success(signupSuccess))
         debugger
       })

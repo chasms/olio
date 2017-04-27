@@ -103,7 +103,7 @@ class CurrentAddons extends Component {
             {this.renderDelete(addon)}
             <span className="box"
               onMouseDown={this.handleActive.bind(null, addon.id)}
-              onMouseOut={this.handleMouseUp.bind(null, addon.id)}
+              onMouseUp={this.handleMouseUp.bind(null, addon.id)}
             >
                 {this.renderMask(addon)}
                 {addon.category === 'text' ?
