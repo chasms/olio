@@ -55,7 +55,7 @@ class Save extends React.Component {
             onClick={this.handleUpdateClick} />
             : null }
         <input
-          className="form-submit form-item"
+          className="btn form-submit form-item"
           type='submit'
           value="Save as a New Creation"
           onClick={this.handleSaveClick} />
