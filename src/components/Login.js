@@ -56,7 +56,7 @@ class Login extends React.Component {
             onChange={this.handleChange}
             name='password' />
           <input
-            className="form-submit form-item"
+            className="form-submit form-item btn"
             type='submit'
             value="Login to Your Account" />
         </form>
