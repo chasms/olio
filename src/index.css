@@ -509,6 +509,20 @@ textarea:-ms-input-placeholder {
   -ms-transition: all .5s ease-in-out;
   transition: all .5s ease-in-out;
 }
+.emoji {
+  display: inline-grid;
+  cursor: pointer;
+  height: 40px;
+  width: 40px;
+  margin: 10px;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  -webkit-transition: all .5s ease-in-out;
+  -moz-transition: all .5s ease-in-out;
+  -o-transition: all .5s ease-in-out;
+  -ms-transition: all .5s ease-in-out;
+  transition: all .5s ease-in-out;
+}
 .drawer-item:hover {
   border: 1px solid skyblue;
   color: skyblue;
@@ -525,6 +539,11 @@ textarea:-ms-input-placeholder {
   padding-left: 10px;
 }
 .drawer-item img {
+  position: inherit;
+  height: 100%;
+  width: 100%;
+}
+.emoji img {
   position: inherit;
   height: 100%;
   width: 100%;
