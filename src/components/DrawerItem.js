@@ -25,8 +25,12 @@ class DrawerItem extends React.Component {
   }
 
   renderImg() {
+    let divClass = "drawer-item"
+    if (this.props.drawerId === 2) {
+      divClass = "emoji"
+    }
     return (
-      <div className={"drawer-item"}>
+       <div className={divClass}>
         <img onClick={this.handleImg}
           data-id={this.props.item.id}
           src={this.props.item.url}
