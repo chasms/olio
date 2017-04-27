@@ -38,6 +38,20 @@ a {
 a:hover {
   color: purple;
 }
+.btn {
+  background-color: transparent;
+  border: 1px solid silver;
+  border-style: solid;
+  border-width: thin;
+  border-radius: 5px;
+  cursor: pointer;
+  color: silver;
+  outline: none;
+}
+.btn:hover {
+  color: skyblue;
+  border-color: skyblue;
+}
 .app {
   height: 100%;
   width: 100%;
@@ -158,17 +172,17 @@ a:hover {
   display: block;
   height: 25px;
   width: 200px;
-  transition: all .5s;
-  -webkit-transition: all .5s;
-  -moz-transition: all .5s;
-  -o-transition: all .5s;
-  -ms-transition: all .5s;
 }
 .form-input {
   border: none;
   border-bottom: 1px solid silver;
   outline: none;
   background-color: transparent;
+  transition: all .5s;
+  -webkit-transition: all .5s;
+  -moz-transition: all .5s;
+  -o-transition: all .5s;
+  -ms-transition: all .5s;
 }
 .form-input:hover {
   border: none;
@@ -179,15 +193,7 @@ a:hover {
   border-bottom: 1px solid black;
 }
 .form-submit {
-  background-color: transparent;
-  border: 1px solid silver;
-  border-style: solid;
-  border-width: thin;
-  border-radius: 5px;
   margin-top: 25px;
-  cursor: pointer;
-  color: silver;
-  outline: none;
 }
 .full-form-submit {
 
