@@ -40,9 +40,16 @@ export const saveSuccess = {
   autoDismiss: 3
 }
 
-export const deleteSuccess = (id) => ({
+export const updateSuccess = {
+  title: 'Creation Saved!',
+  message: 'You have updated your creation!',
+  position: 'tc',
+  autoDismiss: 3
+}
+
+export const deleteSuccess = (title) => ({
   title: 'Deleted Creation!',
-  message: 'You have deleted creation #' + id,
+  message: 'You have deleted' + title,
   position: 'tc',
   autoDismiss: 3
 })

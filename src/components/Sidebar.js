@@ -30,7 +30,7 @@ class Sidebar extends React.Component {
           className="creation non-selectable"
           key={creation.id} >
           <Delete
-            onClick={this.props.deleteCreation.bind(null, creation.id, this.props.token)}
+            onClick={this.props.deleteCreation.bind(null, creation.id, creation.title, this.props.token)}
             className="creation-delete"
             flashClass="creation-flash" />
           <span
@@ -77,6 +77,7 @@ class Sidebar extends React.Component {
       <div
         className={'sidebar' + (this.props.sidebarOpen ? ' open-sidebar' : '')} >
         <h1>Olio</h1>
+        { this.props.token ? <h4> {this.props.username}</h4> : null }
         { this.props.token ? this.renderSignedIn() : this.renderLoginSignup() }
       </div>
     )
@@ -85,6 +86,7 @@ class Sidebar extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
+    username: state.Accounts.username,
     loginForm: state.Forms.loginForm,
     token: state.Accounts.token,
     sidebarOpen: state.Modals.sidebar,
