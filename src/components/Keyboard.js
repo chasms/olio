@@ -258,6 +258,7 @@ class Keyboard extends Component {
 				effect="float">
 				<p>Webcam: ctrl + w</p>
 				<p>Delete: ctrl + d</p>
+				<p>Delete All: ctrl + shift + d</p>
 				{!this.props.token ? <p>SignUp or Login to save!</p> : <p>Save: ctrl + s</p> }
 			</ReactTooltip>
 		)

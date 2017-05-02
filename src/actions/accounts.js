@@ -16,10 +16,8 @@ import {
         dispatch({type: 'SET_TOKEN', payload: resp.data})
         dispatch({type: 'SET_ACCOUNT_DETAILS', payload: { username: resp.data.account }})
         dispatch(success(signupSuccess))
-        debugger
       })
       .catch((e) => {
-        debugger
         dispatch({type: 'REMOVE_TOKEN'})
         e.response.data.errors.forEach((errorMsg) => {
           dispatch(error(signupError(errorMsg)))

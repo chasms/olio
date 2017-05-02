@@ -33,9 +33,14 @@ class App extends React.Component {
     this.handleSave = this.handleSave.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
     this.handleKeyDown = this.handleKeyDown.bind(this)
+    this.handleClear = this.handleClear.bind(this)
   }
   componentWillMount(){
     document.addEventListener("keydown", this.handleKeyDown.bind(this));
+  }
+
+  handleClear() {
+    this.props.deleteAllAddons()
   }
 
   handleSave() {
@@ -53,6 +58,8 @@ class App extends React.Component {
       this.props.toggleWebcamModal()
     } else if (e.ctrlKey & e.which === 83) {
       this.props.openSaveModal()
+    } else if (e.ctrlKey && e.shiftKey && e.which ===  68) {
+      this.handleClear()
     }
   }
 
@@ -83,7 +90,8 @@ class App extends React.Component {
         <NavBar
           handleSidebar={this.handleSidebar}
           handleSave={this.handleSave}
-          handleLogout={this.handleLogout} />
+          handleLogout={this.handleLogout}
+          />
         <AppModal
           handleSave={this.handleSave}
           handleLogout={this.handleLogout}
