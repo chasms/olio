@@ -586,6 +586,7 @@ textarea:-ms-input-placeholder {
   width: 275px;
   height: 100%;
   right: -276px;
+  overflow-y: scroll;
   top: 0;
   -webkit-transition: right .5s ease-in-out;
   -moz-transition: right .5s ease-in-out;
