@@ -320,9 +320,6 @@ position: absolute;
 .flash-hover:hover:before {
   left: 150px;
 }*/
-.addon-delete {
-
-}
 .creation-delete {
   position: relative;
   float: right;
@@ -330,11 +327,11 @@ position: absolute;
   top: -12px;
   overflow: hidden !important;
 }
-.creation-flash:before {
+/*.creation-flash:before {
   top: -30px;
   left: -80px;
   background: rgba(255, 255, 255, .9);
-}
+}*/
 
 /*	Addons
 ==================================================*/

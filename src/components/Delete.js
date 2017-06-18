@@ -6,9 +6,9 @@ class Delete extends React.Component {
 
   render() {
     return (
-      <span className={"delete"}
+      <span className={"delete " + this.props.className}
         onClick={this.props.onClick}>
-        <div className={"delete-button"}>x</div>
+        <div className={"delete-button " + this.props.flashClass}>x</div>
       </span>
     )
   }
