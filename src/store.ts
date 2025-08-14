@@ -1,9 +1,11 @@
 import { applyMiddleware, compose, createStore } from 'redux';
 import * as thunkModule from 'redux-thunk';
+
+import rootReducer from './reducers';
+
 // Support both CJS and ESM default export shapes
 const thunkMiddleware: any =
   (thunkModule as any).default || (thunkModule as any).thunk || thunkModule;
-import rootReducer from './reducers';
 
 export type RootState = ReturnType<typeof rootReducer>;
 const composeEnhancers =

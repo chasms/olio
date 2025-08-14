@@ -1,19 +1,19 @@
 import axios from 'axios';
 import type { Dispatch } from 'redux';
 
+import {
+  ActionTypes,
+  type ClearCreationsAction,
+  type Creation,
+  type GetCreationsAction,
+  type RemoveTokenAction,
+  type ResetLoginFormAction,
+  type SetAccountDetailsAction,
+  type SetTokenAction,
+} from '../types/actions';
 import { api } from './api';
 import { loginError, loginSuccess, logoutAlert, signupError, signupSuccess } from './consts';
 import { error, success } from './notifications';
-import {
-  ActionTypes,
-  type SetTokenAction,
-  type SetAccountDetailsAction,
-  type GetCreationsAction,
-  type RemoveTokenAction,
-  type ClearCreationsAction,
-  type ResetLoginFormAction,
-  type Creation,
-} from '../types/actions';
 
 // Shape of credentials / signup details we expect (best-effort; adjust as backend evolves)
 export interface AuthDetails {
@@ -48,7 +48,9 @@ type AccountsActions =
   | ResetLoginFormAction;
 
 export const signup = (details: AuthDetails) => {
-  return (dispatch: Dispatch<AccountsActions | ReturnType<typeof success> | ReturnType<typeof error>>) => {
+  return (
+    dispatch: Dispatch<AccountsActions | ReturnType<typeof success> | ReturnType<typeof error>>
+  ) => {
     axios
       .post<AuthResponse>(api + '/signup/', details)
       .then((resp) => {
@@ -56,7 +58,10 @@ export const signup = (details: AuthDetails) => {
           localStorage.setItem('token', resp.data.token);
         }
         dispatch({ type: ActionTypes.SET_TOKEN, payload: { token: resp.data.token } });
-        dispatch({ type: ActionTypes.SET_ACCOUNT_DETAILS, payload: { username: resp.data.account } });
+        dispatch({
+          type: ActionTypes.SET_ACCOUNT_DETAILS,
+          payload: { username: resp.data.account },
+        });
         dispatch({ type: ActionTypes.GET_CREATIONS, payload: resp.data.creations });
         dispatch(success(signupSuccess));
       })
@@ -69,7 +74,9 @@ export const signup = (details: AuthDetails) => {
 };
 
 export const login = (details: AuthDetails) => {
-  return (dispatch: Dispatch<AccountsActions | ReturnType<typeof success> | ReturnType<typeof error>>) => {
+  return (
+    dispatch: Dispatch<AccountsActions | ReturnType<typeof success> | ReturnType<typeof error>>
+  ) => {
     axios
       .post<AuthResponse>(api + '/login/', details)
       .then((resp) => {
@@ -78,7 +85,10 @@ export const login = (details: AuthDetails) => {
         }
         dispatch({ type: ActionTypes.SET_TOKEN, payload: { token: resp.data.token } });
         dispatch({ type: ActionTypes.GET_CREATIONS, payload: resp.data.creations });
-        dispatch({ type: ActionTypes.SET_ACCOUNT_DETAILS, payload: { username: resp.data.account } });
+        dispatch({
+          type: ActionTypes.SET_ACCOUNT_DETAILS,
+          payload: { username: resp.data.account },
+        });
         dispatch(success(loginSuccess));
       })
       .catch(() => {
