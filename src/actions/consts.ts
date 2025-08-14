@@ -1,4 +1,4 @@
-export const signupError = (error) => ({
+export const signupError = (error: string) => ({
   title: 'Error Signing Up',
   message: error,
   position: 'tc',
@@ -47,7 +47,7 @@ export const updateSuccess = {
   autoDismiss: 3,
 };
 
-export const deleteSuccess = (title) => ({
+export const deleteSuccess = (title: string) => ({
   title: 'Deleted Creation!',
   message: 'You have deleted ' + title,
   position: 'tc',

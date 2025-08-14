@@ -76,11 +76,7 @@ class App extends React.Component<any> {
     return (
       <div className="app" onKeyDown={this.handleKeyDown}>
         <NavBar handleSave={this.handleSave} handleLogout={this.handleLogout} />
-        <AppModal
-          handleSave={this.handleSave}
-          handleLogout={this.handleLogout}
-          handleKeyDown={this.handleKeyDown}
-        />
+        <AppModal />
         <Drawers />
         <CurrentAddons />
         <Sidebar handleLogout={this.handleLogout} />
