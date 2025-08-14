@@ -8,7 +8,7 @@ export default function CurrentCreation(
   action: CurrentCreationActions
 ) {
   switch (action.type) {
-  case ActionTypes.SET_CURRENT_CREATION:
+    case ActionTypes.SET_CURRENT_CREATION:
       return { id: action.payload.id, title: action.payload.title };
     default:
       return state;

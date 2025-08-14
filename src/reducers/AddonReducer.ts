@@ -1,5 +1,6 @@
 import cuid from 'cuid';
-import type { AddonItem, AddonActions } from '../types/actions';
+
+import type { AddonActions, AddonItem } from '../types/actions';
 import { ActionTypes } from '../types/actions';
 
 export type AddonState = AddonItem[];

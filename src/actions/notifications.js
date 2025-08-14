@@ -1,11 +1,11 @@
-var cuid = require('cuid')
+var cuid = require('cuid');
 
 export function show(opts = {}, level = 'success') {
   return {
     type: 'RNS_SHOW_NOTIFICATION',
     ...opts,
     uid: cuid(),
-    level
+    level,
   };
 }
 

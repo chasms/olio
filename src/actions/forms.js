@@ -1,3 +1,3 @@
 export const switchForm = () => ({
-  type: 'SWITCH_FORM'
-})
+  type: 'SWITCH_FORM',
+});

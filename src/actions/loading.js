@@ -1,3 +1,3 @@
 export const finishedLoading = () => ({
-  type: 'FINISHED_LOADING'
-})
+  type: 'FINISHED_LOADING',
+});

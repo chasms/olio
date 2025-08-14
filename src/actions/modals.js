@@ -1,15 +1,15 @@
 export const toggleWebcamModal = () => ({
-  type: 'TOGGLE_WEBCAM'
-})
+  type: 'TOGGLE_WEBCAM',
+});
 
 export const openSaveModal = () => ({
-  type: 'OPEN_SAVE'
-})
+  type: 'OPEN_SAVE',
+});
 
 export const closeAllModals = () => ({
-  type: 'CLOSE_ALL'
-})
+  type: 'CLOSE_ALL',
+});
 
 export const toggleSidebar = () => ({
-  type: 'TOGGLE_SIDEBAR'
-})
+  type: 'TOGGLE_SIDEBAR',
+});

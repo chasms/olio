@@ -7,7 +7,6 @@ export interface AccountState {
   [key: string]: unknown;
 }
 
-
 const initial: AccountState = {
   token: typeof localStorage !== 'undefined' ? localStorage.getItem('token') : null,
 };
@@ -17,12 +16,12 @@ export default function Account(
   action: AccountActions
 ): AccountState {
   switch (action.type) {
-  case ActionTypes.SET_TOKEN:
+    case ActionTypes.SET_TOKEN:
       return { token: action.payload.token };
-  case ActionTypes.REMOVE_TOKEN:
+    case ActionTypes.REMOVE_TOKEN:
       if (typeof localStorage !== 'undefined') localStorage.removeItem('token');
       return {};
-  case ActionTypes.SET_ACCOUNT_DETAILS:
+    case ActionTypes.SET_ACCOUNT_DETAILS:
       return { ...state, ...action.payload };
     default:
       return state;

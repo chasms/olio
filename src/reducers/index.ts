@@ -1,14 +1,15 @@
+import { reducer as Notifications } from 'react-notification-system-redux';
 import { combineReducers } from 'redux';
-import Addon from './AddonReducer';
-import AddonLibrary from './AddonLibraryReducer';
-import Drawers from './DrawersReducer';
+
 import Accounts from './AccountReducer';
+import AddonLibrary from './AddonLibraryReducer';
+import Addon from './AddonReducer';
 import Creations from './CreationReducer';
-import Loading from './LoadingReducer';
 import CurrentCreation from './CurrentCreationReducer';
-import Modals from './ModalsReducer';
+import Drawers from './DrawersReducer';
 import Forms from './FormsReducer';
-import { reducer as Notifications} from 'react-notification-system-redux';
+import Loading from './LoadingReducer';
+import Modals from './ModalsReducer';
 
 const rootReducer = combineReducers({
   Addon,

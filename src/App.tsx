@@ -1,18 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, type Dispatch } from 'redux';
-import { addAddon, getAddons, deleteAllAddons } from './actions/addons';
-import { success, error } from './actions/notifications';
-import { saveCreation, restoreCreation, getCreations, deleteCreation } from './actions/creations';
+
+import { checkIfLoggedIn, getAccountDetails, logout } from './actions/accounts';
+import { addAddon, deleteAllAddons, getAddons } from './actions/addons';
+import { deleteCreation, getCreations, restoreCreation, saveCreation } from './actions/creations';
 import { getDrawers } from './actions/drawers';
-import { checkIfLoggedIn, logout, getAccountDetails } from './actions/accounts';
-import { toggleWebcamModal, openSaveModal } from './actions/modals';
+import { openSaveModal, toggleWebcamModal } from './actions/modals';
+import { error, success } from './actions/notifications';
+import AppModal from './components/AppModal';
 import CurrentAddons from './components/CurrentAddons';
+import Delete from './components/Delete';
 import Drawers from './components/Drawers';
 import NavBar from './components/NavBar';
 import Sidebar from './components/Sidebar';
-import Delete from './components/Delete';
-import AppModal from './components/AppModal';
 
 class App extends React.Component<any> {
   constructor(props) {
@@ -45,7 +46,7 @@ class App extends React.Component<any> {
   handleKeyDown(e) {
     if (e.ctrlKey && e.which === 87) {
       this.props.toggleWebcamModal();
-  } else if (e.ctrlKey && e.which === 83) {
+    } else if (e.ctrlKey && e.which === 83) {
       this.props.openSaveModal();
     } else if (e.ctrlKey && e.shiftKey && e.which === 68) {
       this.handleClear();
@@ -75,7 +76,11 @@ class App extends React.Component<any> {
     return (
       <div className="app" onKeyDown={this.handleKeyDown}>
         <NavBar handleSave={this.handleSave} handleLogout={this.handleLogout} />
-        <AppModal handleSave={this.handleSave} handleLogout={this.handleLogout} handleKeyDown={this.handleKeyDown} />
+        <AppModal
+          handleSave={this.handleSave}
+          handleLogout={this.handleLogout}
+          handleKeyDown={this.handleKeyDown}
+        />
         <Drawers />
         <CurrentAddons />
         <Sidebar handleLogout={this.handleLogout} />

@@ -1,9 +1,7 @@
-import React from 'react'
+import React from 'react';
 
-export default class Welcome extends React.Component{
-
+export default class Welcome extends React.Component {
   render() {
-
     return (
       <div className="welcome">
         <h3>Welcome To Olio!</h3>
@@ -12,9 +10,8 @@ export default class Welcome extends React.Component{
         <p>~ check out the keyboard in the nav for shortcuts ~</p>
         <p>~ click again on an object to get rid of the border ~</p>
         <p>~ login to save and manage your creations ~</p>
-
         <h4>~ Have fun! ~</h4>
       </div>
-    )
+    );
   }
 }

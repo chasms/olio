@@ -1,8 +1,15 @@
 import axios from 'axios';
-import { api } from './api';
-import { type AddonItem, type DeleteAddonsAction, type GetAddonsAction, type RemoveAddonAction, type StoreLocationAction } from '../types/actions';
-import { ActionTypes } from '../types/actions';
 import { type Dispatch } from 'redux';
+
+import {
+  type AddonItem,
+  type DeleteAddonsAction,
+  type GetAddonsAction,
+  type RemoveAddonAction,
+  type StoreLocationAction,
+} from '../types/actions';
+import { ActionTypes } from '../types/actions';
+import { api } from './api';
 
 export const getAddons = () => {
   return (dispatch: Dispatch<GetAddonsAction>) => {

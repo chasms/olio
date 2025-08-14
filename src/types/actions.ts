@@ -1,6 +1,6 @@
 // Central shared action & state type definitions
 
-import type { AccountState } from "../reducers/AccountReducer";
+import type { AccountState } from '../reducers/AccountReducer';
 
 // Domain model types
 export interface AddonItem {
@@ -57,54 +57,122 @@ export enum ActionTypes {
 
 // Action interfaces (discriminated by `type`)
 // ADDON
-export interface AddAddonAction { type: ActionTypes.ADD_ADDON; payload: {
-  initial_height: number; initial_width: number; url: string; category: string; fontFamily?: string; value?: string;
-} }
-export interface RemoveAddonAction { type: ActionTypes.REMOVE_ADDON; payload: { id: string } }
-export interface StoreLocationAction { type: ActionTypes.STORE_LOCATION; payload: { id: string; coordinates: { top: number; left: number; height: number; width: number }; value?: string } }
-export interface DeleteAddonsAction { type: ActionTypes.DELETE_ADDONS }
-export interface RestoreCreationAction { type: ActionTypes.RESTORE_CREATION; payload: { composition: AddonItem[] } }
+export interface AddAddonAction {
+  type: ActionTypes.ADD_ADDON;
+  payload: {
+    initial_height: number;
+    initial_width: number;
+    url: string;
+    category: string;
+    fontFamily?: string;
+    value?: string;
+  };
+}
+export interface RemoveAddonAction {
+  type: ActionTypes.REMOVE_ADDON;
+  payload: { id: string };
+}
+export interface StoreLocationAction {
+  type: ActionTypes.STORE_LOCATION;
+  payload: {
+    id: string;
+    coordinates: { top: number; left: number; height: number; width: number };
+    value?: string;
+  };
+}
+export interface DeleteAddonsAction {
+  type: ActionTypes.DELETE_ADDONS;
+}
+export interface RestoreCreationAction {
+  type: ActionTypes.RESTORE_CREATION;
+  payload: { composition: AddonItem[] };
+}
 
 // ADDON LIBRARY
-export interface GetAddonsAction { type: ActionTypes.GET_ADDONS; payload: AddonLibraryItem[] }
+export interface GetAddonsAction {
+  type: ActionTypes.GET_ADDONS;
+  payload: AddonLibraryItem[];
+}
 
 // DRAWER
-export interface GetDrawersAction { type: ActionTypes.GET_DRAWERS; payload: unknown[] }
+export interface GetDrawersAction {
+  type: ActionTypes.GET_DRAWERS;
+  payload: unknown[];
+}
 
 // ACCOUNT
-export interface SetTokenAction { type: ActionTypes.SET_TOKEN; payload: { token: string } }
-export interface RemoveTokenAction { type: ActionTypes.REMOVE_TOKEN }
-export interface SetAccountDetailsAction { type: ActionTypes.SET_ACCOUNT_DETAILS; payload: Partial<AccountState> }
+export interface SetTokenAction {
+  type: ActionTypes.SET_TOKEN;
+  payload: { token: string };
+}
+export interface RemoveTokenAction {
+  type: ActionTypes.REMOVE_TOKEN;
+}
+export interface SetAccountDetailsAction {
+  type: ActionTypes.SET_ACCOUNT_DETAILS;
+  payload: Partial<AccountState>;
+}
 
 // CREATION
-export interface GetCreationsAction { type: ActionTypes.GET_CREATIONS; payload: Creation[] }
-export interface ClearCreationsAction { type: ActionTypes.CLEAR_CREATIONS }
+export interface GetCreationsAction {
+  type: ActionTypes.GET_CREATIONS;
+  payload: Creation[];
+}
+export interface ClearCreationsAction {
+  type: ActionTypes.CLEAR_CREATIONS;
+}
 
 // CURRENT CREATION
-export interface SetCurrentCreationAction { type: ActionTypes.SET_CURRENT_CREATION; payload: { id: string; title?: string } }
+export interface SetCurrentCreationAction {
+  type: ActionTypes.SET_CURRENT_CREATION;
+  payload: { id: string; title?: string };
+}
 
 // LOADING
-export interface FinishedLoadingAction { type: ActionTypes.FINISHED_LOADING }
+export interface FinishedLoadingAction {
+  type: ActionTypes.FINISHED_LOADING;
+}
 
 // MODALS
-export interface ToggleWebcamAction { type: ActionTypes.TOGGLE_WEBCAM }
-export interface OpenSaveAction { type: ActionTypes.OPEN_SAVE }
-export interface ToggleSidebarAction { type: ActionTypes.TOGGLE_SIDEBAR }
-export interface CloseAllModalsAction { type: ActionTypes.CLOSE_ALL }
+export interface ToggleWebcamAction {
+  type: ActionTypes.TOGGLE_WEBCAM;
+}
+export interface OpenSaveAction {
+  type: ActionTypes.OPEN_SAVE;
+}
+export interface ToggleSidebarAction {
+  type: ActionTypes.TOGGLE_SIDEBAR;
+}
+export interface CloseAllModalsAction {
+  type: ActionTypes.CLOSE_ALL;
+}
 
 // FORMS
-export interface SwitchFormAction { type: ActionTypes.SWITCH_FORM }
-export interface ResetLoginFormAction { type: ActionTypes.RESET_LOGIN_FORM }
+export interface SwitchFormAction {
+  type: ActionTypes.SWITCH_FORM;
+}
+export interface ResetLoginFormAction {
+  type: ActionTypes.RESET_LOGIN_FORM;
+}
 
 // Union by feature
-export type AddonActions = AddAddonAction | RemoveAddonAction | StoreLocationAction | DeleteAddonsAction | RestoreCreationAction;
+export type AddonActions =
+  | AddAddonAction
+  | RemoveAddonAction
+  | StoreLocationAction
+  | DeleteAddonsAction
+  | RestoreCreationAction;
 export type AddonLibraryActions = GetAddonsAction;
 export type DrawerActions = GetDrawersAction;
 export type AccountActions = SetTokenAction | RemoveTokenAction | SetAccountDetailsAction;
 export type CreationActions = GetCreationsAction | ClearCreationsAction;
 export type CurrentCreationActions = SetCurrentCreationAction;
 export type LoadingActions = FinishedLoadingAction;
-export type ModalsActions = ToggleWebcamAction | OpenSaveAction | ToggleSidebarAction | CloseAllModalsAction;
+export type ModalsActions =
+  | ToggleWebcamAction
+  | OpenSaveAction
+  | ToggleSidebarAction
+  | CloseAllModalsAction;
 export type FormsActions = SwitchFormAction | ResetLoginFormAction;
 
 // Aggregate app action

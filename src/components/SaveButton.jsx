@@ -1,12 +1,11 @@
 // std library imports
-import React from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-import { openSaveModal } from '../actions/modals'
+import { openSaveModal } from '../actions/modals';
 
-class WebcamButton extends React.Component{
-
+class WebcamButton extends React.Component {
   render() {
     return (
       <div className="nav-button">
@@ -16,9 +15,11 @@ class WebcamButton extends React.Component{
           y="0px"
           viewBox="0 0 457 457"
           className={'nav-svg save-button' + (this.props.saveModalOpen ? ' svg-active' : '')}
-          onClick={this.props.openSaveModal} >
+          onClick={this.props.openSaveModal}
+        >
           <g>
-          	<path d="M228.004,455.996c-65.769,0-131.544,0-197.313,0
+            <path
+              d="M228.004,455.996c-65.769,0-131.544,0-197.313,0
           		c-10.533,0-19.009-4.113-25.229-12.656c-3.333-4.573-5.027-9.764-5.39-15.402c-0.061-0.932-0.067-1.863-0.067-2.795
           		c0-131.442,0-262.877-0.006-394.312C0,20.297,4.054,11.803,12.572,5.554c4.568-3.346,9.759-5.058,15.397-5.445
           		c1.077-0.073,2.166-0.073,3.249-0.073c108.004,0,216.001,0.012,324.005-0.036c3.933,0,7.019,1.271,9.789,4.042
@@ -34,28 +35,34 @@ class WebcamButton extends React.Component{
           		c0.006,2.039,0.285,4.138,0.835,6.098c2.444,8.67,10.194,14.236,19.663,14.236C137.57,168.552,175.303,168.545,213.037,168.545z
           		 M39.724,406.326c6.637,0,13.159,0,19.632,0c0-6.631,0-13.141,0-19.625c-6.601,0-13.086,0-19.632,0
           		C39.724,393.259,39.724,399.732,39.724,406.326z M416.255,386.701c-6.655,0-13.141,0-19.662,0c0,6.594,0,13.104,0,19.625
-          		c6.606,0,13.128,0,19.662,0C416.255,399.744,416.255,393.259,416.255,386.701z"/>
-          	<path d="M317.193,94.282c0,14.399,0,28.798,0,43.197
+          		c6.606,0,13.128,0,19.662,0C416.255,399.744,416.255,393.259,416.255,386.701z"
+            />
+            <path
+              d="M317.193,94.282c0,14.399,0,28.798,0,43.197
           		c0,7.248-3.957,11.241-11.156,11.241c-9.135,0-18.271,0.006-27.406,0c-6.921-0.006-10.987-4.042-10.987-10.932
           		c-0.012-29.058-0.012-58.116,0-87.174c0-6.891,4.066-10.926,10.999-10.926c9.184-0.006,18.368-0.006,27.563,0
-          		c6.921,0,10.987,4.042,10.987,10.932C317.205,65.176,317.193,79.726,317.193,94.282z"/>
+          		c6.921,0,10.987,4.042,10.987,10.932C317.205,65.176,317.193,79.726,317.193,94.282z"
+            />
           </g>
         </svg>
       </div>
-    )
+    );
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    saveModalOpen: state.Modals.save
-  }
-}
+    saveModalOpen: state.Modals.save,
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({
-    openSaveModal: openSaveModal
-  }, dispatch);
-}
+  return bindActionCreators(
+    {
+      openSaveModal: openSaveModal,
+    },
+    dispatch
+  );
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(WebcamButton)
+export default connect(mapStateToProps, mapDispatchToProps)(WebcamButton);
