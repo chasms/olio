@@ -1,4 +1,3 @@
-// std library imports
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -14,7 +13,6 @@ class Image extends React.Component {
         alt={'img' + this.props.addon.id}
       />
       )
-    )
   }
 }
 
