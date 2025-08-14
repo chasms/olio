@@ -1,16 +1,15 @@
-// Converted to TypeScript (rename to .tsx separately)
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { connect } from 'react-redux';
-import type { RootState } from '../reducers';
 import { Tooltip } from 'react-tooltip';
+import type { RootState } from '../reducers';
 
-interface StateProps { token?: string | null }
-interface OwnProps {}
-interface LocalState {}
+interface StateProps {
+  token?: string | null;
+}
 
-type Props = StateProps & OwnProps;
+type Props = StateProps;
 
-class Keyboard extends Component<Props, LocalState> {
+class Keyboard extends Component<Props> {
   renderKeyboard() {
     return (
       <svg
@@ -49,6 +48,8 @@ class Keyboard extends Component<Props, LocalState> {
   }
 }
 
-const mapStateToProps = (state: RootState): StateProps => ({ token: (state.Accounts as any).token });
+const mapStateToProps = (state: RootState): StateProps => ({
+  token: state.Accounts.token,
+});
 
 export default connect(mapStateToProps)(Keyboard);

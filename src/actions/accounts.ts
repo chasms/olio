@@ -38,7 +38,7 @@ interface AccountDetailsResponse {
 }
 
 // Union of internal actions we dispatch here (excluding external notification actions which come from another lib)
-// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
+
 type AccountsActions =
   | SetTokenAction
   | SetAccountDetailsAction

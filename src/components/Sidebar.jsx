@@ -1,11 +1,9 @@
-// std library imports
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { checkIfLoggedIn, logout } from '../actions/accounts';
 import { deleteCreation, restoreCreation, saveCreation } from '../actions/creations';
-// app imports
 import { toggleSidebar } from '../actions/modals';
 import Delete from './Delete';
 import Login from './Login';

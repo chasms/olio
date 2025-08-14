@@ -1,4 +1,10 @@
-import { ActionTypes, type CloseAllModalsAction, type OpenSaveAction, type ToggleSidebarAction, type ToggleWebcamAction } from "../types/actions";
+import {
+  ActionTypes,
+  type CloseAllModalsAction,
+  type OpenSaveAction,
+  type ToggleSidebarAction,
+  type ToggleWebcamAction,
+} from '../types/actions';
 
 export const toggleWebcamModal = (): ToggleWebcamAction => ({
   type: ActionTypes.TOGGLE_WEBCAM,

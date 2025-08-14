@@ -23,7 +23,9 @@ type CreationActions =
 
 // Helpers for axios response typing
 type CreationsResponse = Creation[];
-interface CreationResponse extends Creation { composition?: AddonItem[] }
+interface CreationResponse extends Creation {
+  composition?: AddonItem[];
+}
 
 export const saveCreation = (addons: AddonItem[], title: string, token: string) => {
   return (dispatch: Dispatch) => {
@@ -98,7 +100,10 @@ export const restoreCreation = (id: string | number, token: string) => {
       });
       typed({ type: ActionTypes.DELETE_ADDONS });
       // Assuming backend returns full creation object including composition
-      typed({ type: ActionTypes.RESTORE_CREATION, payload: { composition: resp.data.composition || [] } });
+      typed({
+        type: ActionTypes.RESTORE_CREATION,
+        payload: { composition: resp.data.composition || [] },
+      });
     });
   };
 };

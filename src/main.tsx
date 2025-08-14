@@ -1,7 +1,7 @@
 import './index.css';
 
 import React from 'react';
-// eslint-disable-next-line react/no-deprecated
+
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 
