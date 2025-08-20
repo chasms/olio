@@ -10,40 +10,40 @@ interface StateProps {
 type Props = StateProps;
 
 class Keyboard extends Component<Props> {
-  renderKeyboard() {
-    return (
-      <svg
-        data-tip
-        className="nav-svg keyboard-img"
-        version="1.1"
-        x="0px"
-        y="0px"
-        viewBox="0 0 502.512 241"
-        role="img"
-        aria-label="Keyboard shortcuts"
-      >
-        <KeyboardSVGPaths />
-      </svg>
-    );
-  }
-
-  renderToolTip() {
-    return (
-      <Tooltip className="tooltip" place="bottom" variant="dark" float={true}>
-        <p>Webcam: ctrl + w</p>
-        <p>Delete: ctrl + d</p>
-        <p>Delete All: ctrl + shift + d</p>
-        {!this.props.token ? <p>SignUp or Login to save!</p> : <p>Save: ctrl + s</p>}
-      </Tooltip>
-    );
-  }
-
   render() {
     return (
-      <div className="nav-button">
-        {this.renderKeyboard()}
-        {this.renderToolTip()}
-      </div>
+      <>
+        <div className="nav-button">
+          <svg
+            data-tip
+            className="nav-svg keyboard-img"
+            version="1.1"
+            x="0px"
+            y="0px"
+            viewBox="0 0 502.512 241"
+            role="img"
+            aria-label="Keyboard shortcuts"
+          >
+            <KeyboardSVGPaths />
+          </svg>
+        </div>
+        <Tooltip
+          anchorSelect=".keyboard-img"
+          className="tooltip"
+          place="bottom"
+          variant="dark"
+          float={true}
+        >
+          <p>Webcam: ctrl + w</p>
+          <p>Delete: ctrl + d</p>
+          <p>Delete All: ctrl + shift + d</p>
+          {!this.props.token ? (
+            <p>Sign up or login to save your creations!</p>
+          ) : (
+            <p>Save: ctrl + s</p>
+          )}
+        </Tooltip>
+      </>
     );
   }
 }
