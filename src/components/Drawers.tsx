@@ -2,12 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import type { RootState } from '../reducers';
+import type { AddonLibraryItem } from '../types/actions';
 import Drawer from './Drawer';
 
 interface DrawerModel {
   id: number;
   name: string;
-  addons: any[];
+  addons: AddonLibraryItem[];
 }
 interface StateProps {
   drawers: DrawerModel[];

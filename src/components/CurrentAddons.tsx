@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators, type Dispatch } from 'redux';
 import { Rnd } from 'react-rnd';
+import { bindActionCreators, type Dispatch } from 'redux';
 
 import { removeAddon, saveAddonLocation } from '../actions/addons';
+import type { RootState } from '../reducers';
+import type { AddonItem, AddonLibraryItem } from '../types/actions';
 import Delete from './Delete';
 import Image from './Image';
 import Text from './Text';
-import type { AddonItem, AddonLibraryItem } from '../types/actions';
-import type { RootState } from '../reducers';
 
 // Props derived from Redux state
 interface StateProps {
@@ -26,17 +26,15 @@ interface DispatchProps {
   ) => void;
 }
 
-interface OwnProps {}
-
 interface LocalState {
   activeId: string | null;
 }
 
-type Props = StateProps & DispatchProps & OwnProps;
+type Props = StateProps & DispatchProps;
 
 class CurrentAddons extends Component<Props, LocalState> {
   // Reference to the last interacted Rnd instance (not otherwise used)
-  private rndRef: unknown;
+  private rndRef: Rnd | undefined;
 
   state: LocalState = { activeId: null };
 
@@ -62,12 +60,16 @@ class CurrentAddons extends Component<Props, LocalState> {
   }
 
   handleMouseUp(id: string): void {
-    const el = document.getElementById(id);
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
+    const element = document.getElementById(id);
+
+    if (!element) return;
+
+    const rect = element.getBoundingClientRect();
+
     let value: string | undefined;
-    if (el instanceof HTMLTextAreaElement) {
-      value = el.value;
+
+    if (element instanceof HTMLTextAreaElement) {
+      value = element.value;
     }
     // fontFamily ignored because saveAddonLocation action does not accept it (kept behavior parity)
     this.props.saveAddonLocation(
@@ -120,8 +122,8 @@ class CurrentAddons extends Component<Props, LocalState> {
       <Rnd
         key={addon.id}
         id={addon.id}
-        ref={(c: any) => {
-          this.rndRef = c as unknown; // retained for possible future use
+        ref={(component) => {
+          this.rndRef = component;
         }}
         initial={{ x: addon.x, y: addon.y, width: addon.w, height: addon.h }}
         className="rnd"

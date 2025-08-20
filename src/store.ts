@@ -1,19 +1,13 @@
 import { applyMiddleware, compose, createStore } from 'redux';
-import * as thunkModule from 'redux-thunk';
+import thunk from 'redux-thunk';
 
 import rootReducer from './reducers';
 
-// Support both CJS and ESM default export shapes
-const thunkMiddleware: any =
-  (thunkModule as any).default || (thunkModule as any).thunk || thunkModule;
-
-export type RootState = ReturnType<typeof rootReducer>;
 const composeEnhancers =
-  (typeof window !== 'undefined' && (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
-  compose;
+  (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
 export function configureStore() {
-  return createStore(rootReducer, composeEnhancers(applyMiddleware(thunkMiddleware as any)));
+  return createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
 }
 
 export const store = configureStore();

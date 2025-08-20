@@ -1,20 +1,28 @@
 // std library imports
-import React, { Component } from 'react';
+import { Component } from 'react';
 // node_modules imports
 import Notifications from 'react-notification-system-redux';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { logout } from '../actions/accounts';
-// app imports
-import { addAddon, deleteAllAddons } from '../actions/addons';
-import { restoreCreation, saveCreation } from '../actions/creations';
+// (Removed unused action imports after typing cleanup)
 import { toggleSidebar } from '../actions/modals';
 import Keyboard from './Keyboard';
 import SaveButton from './SaveButton';
 import WebcamButton from './WebcamButton';
 
-class NavBar extends Component {
+import type { RootState } from '../reducers';
+interface StateProps {
+  sidebarOpen: boolean;
+  notifications: unknown;
+  token?: string | null;
+}
+interface DispatchProps {
+  toggleSidebar: () => void;
+}
+type Props = StateProps & DispatchProps;
+
+class NavBar extends Component<Props> {
   render() {
     return (
       <div className="nav">
@@ -33,28 +41,18 @@ class NavBar extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+interface AccountsSlice {
+  token?: string | null;
+}
+const mapStateToProps = (state: RootState): StateProps => {
+  const accounts = state.Accounts as unknown as AccountsSlice;
   return {
     sidebarOpen: state.Modals.sidebar,
-    currentCreation: state.CurrentCreation,
     notifications: state.Notifications,
-    token: state.Accounts.token,
-    usedAddons: state.Addon,
+    token: accounts?.token,
   };
 };
-
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(
-    {
-      toggleSidebar: toggleSidebar,
-      deleteAllAddons: deleteAllAddons,
-      logout: logout,
-      addAddon: addAddon,
-      restoreCreation: restoreCreation,
-      saveCreation: saveCreation,
-    },
-    dispatch
-  );
-};
-
+import type { Dispatch } from 'redux';
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps =>
+  bindActionCreators({ toggleSidebar }, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar);

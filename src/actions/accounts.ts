@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import type { Dispatch } from 'redux';
 
 import {
@@ -20,6 +20,7 @@ export interface AuthDetails {
   username: string;
   password: string;
   email?: string;
+  password_confirmation?: string; // included for signup form; backend may ignore
   [key: string]: unknown; // allow extra backend-accepted fields without widening everywhere
 }
 
@@ -47,6 +48,7 @@ type AccountsActions =
   | ClearCreationsAction
   | ResetLoginFormAction;
 
+type AxiosErrorsType = AxiosError<{ errors?: unknown }>;
 export const signup = (details: AuthDetails) => {
   return (
     dispatch: Dispatch<AccountsActions | ReturnType<typeof success> | ReturnType<typeof error>>
@@ -65,9 +67,13 @@ export const signup = (details: AuthDetails) => {
         dispatch({ type: ActionTypes.GET_CREATIONS, payload: resp.data.creations });
         dispatch(success(signupSuccess));
       })
-      .catch((e: any) => {
+      .catch((e: AxiosErrorsType) => {
         dispatch({ type: ActionTypes.REMOVE_TOKEN });
-        const errors: string[] = e?.response?.data?.errors || ['Unknown signup error'];
+
+        const rawErrors = e.response?.data?.errors;
+        const errors: string[] = Array.isArray(rawErrors)
+          ? (rawErrors.filter((x) => typeof x === 'string') as string[])
+          : ['Unknown signup error'];
         errors.forEach((msg) => dispatch(error(signupError(msg))));
       });
   };

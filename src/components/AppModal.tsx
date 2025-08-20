@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import Modal from 'react-modal';
 import { connect } from 'react-redux';
-import { bindActionCreators, type Dispatch } from 'redux';
 import Spinner from 'react-spinkit';
+import { bindActionCreators, type Dispatch } from 'redux';
 
 import { closeAllModals } from '../actions/modals';
+import type { RootState } from '../reducers';
 import Photo from './Photo';
 import Save from './Save';
 import Welcome from './Welcome';
-import type { RootState } from '../reducers';
 
 interface StateProps {
   welcomeModalOpen: boolean;
@@ -19,18 +19,15 @@ interface StateProps {
 interface DispatchProps {
   closeAllModals: () => void;
 }
-interface OwnProps {}
-
-interface LocalState {}
 
 interface ModalStyles {
   content: React.CSSProperties;
   overlay: React.CSSProperties;
 }
 
-type Props = StateProps & DispatchProps & OwnProps;
+type Props = StateProps & DispatchProps;
 
-class AppModal extends Component<Props, LocalState> {
+class AppModal extends Component<Props> {
   modalStyles(): ModalStyles {
     return {
       content: {

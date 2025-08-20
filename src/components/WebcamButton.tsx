@@ -1,11 +1,19 @@
 // std library imports
 import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { bindActionCreators, type Dispatch } from 'redux';
 
 import { toggleWebcamModal } from '../actions/modals';
+import type { RootState } from '../reducers';
 
-class WebcamButton extends React.Component {
+interface StateProps {
+  webcamActive: boolean;
+}
+interface DispatchProps {
+  toggleWebcamModal: () => void;
+}
+type Props = StateProps & DispatchProps;
+class WebcamButton extends React.Component<Props> {
   render() {
     return (
       <div className="nav-button">
@@ -46,19 +54,7 @@ class WebcamButton extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    webcamActive: state.Modals.webcam,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(
-    {
-      toggleWebcamModal: toggleWebcamModal,
-    },
-    dispatch
-  );
-};
-
+const mapStateToProps = (state: RootState): StateProps => ({ webcamActive: state.Modals.webcam });
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps =>
+  bindActionCreators({ toggleWebcamModal }, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(WebcamButton);

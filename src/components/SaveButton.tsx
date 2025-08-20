@@ -1,10 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { bindActionCreators, type Dispatch } from 'redux';
 
 import { openSaveModal } from '../actions/modals';
+import type { RootState } from '../reducers';
 
-class WebcamButton extends React.Component {
+interface StateProps {
+  saveModalOpen: boolean;
+}
+interface DispatchProps {
+  openSaveModal: () => void;
+}
+type Props = StateProps & DispatchProps;
+
+class SaveButton extends React.Component<Props> {
   render() {
     return (
       <div className="nav-button">
@@ -49,19 +58,8 @@ class WebcamButton extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    saveModalOpen: state.Modals.save,
-  };
-};
+const mapStateToProps = (state: RootState): StateProps => ({ saveModalOpen: state.Modals.save });
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps =>
+  bindActionCreators({ openSaveModal }, dispatch);
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(
-    {
-      openSaveModal: openSaveModal,
-    },
-    dispatch
-  );
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(WebcamButton);
+export default connect(mapStateToProps, mapDispatchToProps)(SaveButton);
